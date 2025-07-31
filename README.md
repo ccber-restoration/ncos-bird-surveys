@@ -21,6 +21,7 @@
 ## Santa Barbara County Breeding Bird Study
 
 - Main website of the SBCBSS: https://santabarbaraaudubon.org/santa-barbara-county-breeding-bird-study/
+- Shiny app developed by Linus Blomqvist: https://linusblomqvist.shinyapps.io/sb_bbs/
 
 ## eBird data
 - See this page on best practices for using eBird data: https://ebird.github.io/ebird-best-practices/
