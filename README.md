@@ -1,5 +1,11 @@
 # North Campus Open Space Monthly Bird Survey Analysis
 
+# Methods and prior results
+
+- See prior results in NCOS monitoring reports (years 1-7): https://www.ncos.ccber.ucsb.edu/reports
+
+# Survey data
+
 - Aggregated data for 2017-2023 are in a Dryad repository: https://datadryad.org/dataset/doi:10.5061/dryad.bvq83bkhz
 - See eScholarship data description here: https://escholarship.org/uc/item/47q7s0gb 
 - Individual data files are saved to ArcGIS Online: https://ucsb.maps.arcgis.com/home/group.html?id=5196673ce5ea4d68882435ddc2f8ae3f#overview
