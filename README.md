@@ -1,8 +1,6 @@
 # North Campus Open Space Monthly Bird Survey Analysis
 
 # Methods and prior results
-- **Important:** The NCOS monitoring "survey year" runs from September to August, which is distinct from calendar year (Jan-Dec) or California water year (Oct-Sep) 
-
 - Methods and prior results are presented in NCOS monitoring reports (years 1-7): https://www.ncos.ccber.ucsb.edu/reports
 - From year 7 report:
   - "The Cheadle Center has conducted monthly bird surveys at the project site since September 2017. The surveys are conducted in the
@@ -23,6 +21,9 @@ beginning and end of the survey.
   - After the survey is completed, the total count of each species observed is reviewed and revised if needed by the expert birder and
 each team leader. Lastly, the final, reviewed list and count of species observed for each survey, excluding repeat observations, is
 uploaded to the Cornell Lab of Ornithology’s eBird repository." 
+
+- **Important:** The NCOS monitoring "survey year" runs from September to August, which is distinct from calendar year (Jan-Dec) or California water year (Oct-Sep) 
+
 
 # Survey data
 
