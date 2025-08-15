@@ -42,7 +42,10 @@ uploaded to the Cornell Lab of Ornithology’s eBird repository."
 
 ## Taxonomy/nomenclature
 
-- Two options are the AOS checklist of North American birds and the eBird/Clements checklist
+- Options are:
+  -  AOS checklist of North American birds
+  -   eBird/Clements checklist
+  -   AviList https://www.avilist.org/checklist/v2025/
   
 ## Santa Barbara County Breeding Bird Study
 
