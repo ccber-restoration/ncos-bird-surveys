@@ -7,6 +7,64 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
-sxdfcgvh
+```{r}
+
+birdsurveys <- read.csv("https://raw.githubusercontent.com/ccber-restoration/ncos-bird-surveys/refs/heads/main/data/aggregated/dryad_2017-2023/doi_10_5061_dryad_bvq83bkhz__v20240617/NCOS_Monthly_Bird_Surveys_2017-2023.csv")
+
+summary(birdsurveys) # checking for data errors
+# Count has 6 na's
+# slough water elevation has 2703 na's
+# all variables appear to have correct data type
+# no extreme outliers for numeric data
+
+```
+
+```{r}
+
+# determining the number of observations per year
+# all years have similar numbers of observations (mean ~ 1827) except for 2017, which only has ~400
+
+yearrange <- unique(birdsurveys$Year)
+obsperyear <- data.frame(year = yearrange,count = NA*7)
+
+for(i in 1:7){obsperyear$count[i] <- length(which(birdsurveys$Year == yearrange[i]))}
+
+obsperyearno2017 <- obsperyear %>% filter(count > 500)
+mean(obsperyearno2017$count) # mean number of observations per year excluding 2017
+
+# visualizing the distribution of bird count per year
+# appears to be identical for every year?
+
+birdsurveys$Year <- as.factor(birdsurveys$Year)
+
+countbox <- ggplot(data = birdsurveys,aes(x = Year,y = Count,fill = Year))+
+  geom_boxplot(alpha = 0.9,outliers = F)+
+  geom_jitter(alpha = 0.1,color = "grey")+
+  ylim(c(0,5))
+
+plot(countbox)
+
+```
+
+```{r}
+
+length(unique(birdsurveys$Species)) # 169 different species
+
+length(unique(birdsurveys$General.Type)) # 13 different general types
+
+# visualization of counts of the different general types
+# terrestrial insectivores have highest count by far
+# cormorants and kingfishers have lowest counts - most specific general type?
+
+typebar <- ggplot(data = birdsurveys,aes(x = General.Type,fill = General.Type))+
+  geom_bar(alpha = 0.9)+
+  theme(axis.title.x = element_blank(),axis.text.x = element_blank(),axis.ticks.x = element_blank(),
+        legend.title = element_text(face = "bold"))+
+  labs(y = "Count",fill = "General Type")
+plot(typebar)
+
+```
+
