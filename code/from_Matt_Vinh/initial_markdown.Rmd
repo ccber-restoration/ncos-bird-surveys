@@ -23,7 +23,7 @@ summary(birdsurveys) # checking for data errors
 
 ```
 
-```{r}
+```{r,warning = F}
 
 # determining the number of observations per year
 # all years have similar numbers of observations (mean ~ 1827) except for 2017, which only has ~400
@@ -41,12 +41,45 @@ mean(obsperyearno2017$count) # mean number of observations per year excluding 20
 
 birdsurveys$Year <- as.factor(birdsurveys$Year)
 
-countbox <- ggplot(data = birdsurveys,aes(x = Year,y = Count,fill = Year))+
+ggplot(data = birdsurveys,aes(x = Year,y = Count,fill = Year))+
   geom_boxplot(alpha = 0.9,outliers = F)+
   geom_jitter(alpha = 0.1,color = "grey")+
   ylim(c(0,5))
 
-plot(countbox)
+```
+
+```{r}
+
+# determining number of survey dates per year
+# does each individual observation date signify an individual survey, or are there sometimes multiple surveys per date?
+
+length(unique(birdsurveys$Observation.Date)) # 885 total surveys across 2017-2023
+
+# number of unique observation dates per year
+# 2021 and 2022 have totals in the 100s, but the other 5 years have only a handful of unique observation dates - seems incorrect
+
+#surveys_per_year <- data.frame(year = yearrange,count = NA*length(yearrange))
+#for(i in 1:7){
+#  tempdf <- birdsurveys %>% filter(Year == yearrange[i])
+#  surveys_per_year$count[i] <- length(unique(tempdf$Observation.Date))
+#}
+
+# manual verification of information determined by previous data frame
+# determined that high number of total unique observation dates is result of reporting time of day in addition to date
+
+testdf <- birdsurveys %>% filter(Year == 2021)
+unique(testdf$Observation.Date)
+
+# removing time of day from observation date variable in new data frame
+# correct determination of the number of observation dates, or unique surveys, per year
+
+birdsurv_justdates <- birdsurveys
+birdsurv_justdates$Observation.Date <- substr(birdsurv_justdates$Observation.Date,1,10)
+surveys_per_year_correct <- data.frame(year = yearrange,count = NA*length(yearrange))
+for(i in 1:7){
+  tempdf <- birdsurv_justdates %>% filter(Year == yearrange[i])
+  surveys_per_year_correct$count[i] <- length(unique(tempdf$Observation.Date))
+}
 
 ```
 
@@ -61,12 +94,11 @@ length(unique(birdsurveys$General.Type)) # 13 different general types
 # cormorants and kingfishers have lowest counts - most specific general type?
 # hard to tell colors apart
 
-typebar <- ggplot(data = birdsurveys,aes(x = General.Type,fill = General.Type))+
+ggplot(data = birdsurveys,aes(x = General.Type,fill = General.Type))+
   geom_bar(alpha = 0.9)+
   theme(axis.title.x = element_blank(),axis.text.x = element_blank(),axis.ticks.x = element_blank(),
         legend.title = element_text(face = "bold"))+
   labs(y = "Count",fill = "General Type")
-plot(typebar)
 
 ```
 
@@ -86,38 +118,76 @@ tinsect_substrate <- birdsurveys %>% filter(General.Type == "Insectivores - Terr
 # four most common substrates, each <= 25%: bare ground and the three vegetation types
 
 numsubs <- length(unique(tinsect_substrate$Substrate))
-col <- primary.colors(numsubs)
+col <- primary.colors(numsubs) # primary colors easier to distinguish
 
-subs <- ggplot(data = tinsect_substrate,aes(x = "",y = Count,fill = Substrate))+
+ggplot(data = tinsect_substrate,aes(x = "",y = Count,fill = Substrate))+
   geom_bar(stat = "identity")+
   coord_polar(theta = "y")+
   scale_fill_manual(values = col)+
   theme_void()
-plot(subs)
 
 # per survey visualization of terrestrial insect observation count per top 5 most inhabited substrate
 
 top5 <- c("Bare ground","Fence","Vegetation - Herbaceous","Vegetation - Shrub","Vegetation - Tree")
 
-facet <- tinsect_substrate %>% filter(Substrate == top5 & Year != 2017) %>% 
+tinsect_substrate %>% filter(Substrate == top5 & Year != 2017) %>% 
   ggplot(aes(x = Substrate,y = Count,size = Count,color = Substrate))+
   geom_point(alpha = 0.8)+
   facet_wrap(~ Year)+
   theme(axis.title.x = element_blank(),axis.text.x = element_blank(),axis.ticks.x = element_blank(),
         legend.title = element_text(face = "bold"))
-plot(facet)
 
 # visualization of terrestrial insect count per top 5 substrate distributions
 
-violin <- tinsect_substrate %>% filter(Substrate == top5 & Year != 2017) %>% 
+tinsect_substrate %>% filter(Substrate == top5 & Year != 2017) %>% 
   ggplot(aes(x = Substrate,y = Count,size = Count,fill = Substrate,color = Substrate))+
   geom_violin(alpha = 0.8)+
   facet_wrap(~ Year)+
   theme(axis.title.x = element_blank(),axis.text.x = element_blank(),axis.ticks.x = element_blank(),
         legend.title = element_text(face = "bold"))
-plot(violin)
 
 # 2017 excluded because of lower total observations
+
+```
+
+```{r}
+
+# substrate analysis
+
+allsub <- birdsurveys %>% filter(Substrate != "")
+
+num_all_sub <- length(unique(allsub$Substrate))
+col2 <- primary.colors(num_all_sub)
+
+# pie chart of all substrate types
+
+ggplot(data = allsub,aes(x = "",y = Count,fill = Substrate))+
+  geom_bar(stat = "identity")+
+  coord_polar(theta = "y")+
+  scale_fill_manual(values = col2)+
+  theme_void()
+
+# vegetation - tree substrate general species type analysis per year
+
+allsub %>% filter(Substrate == "Vegetation - Tree" & Year != 2017) %>% 
+  ggplot(aes(x = General.Type,fill = General.Type))+
+  geom_bar(alpha = 0.8)+
+  facet_wrap(~ Year)+
+  theme_light()+
+  theme(axis.text.x = element_blank(),axis.ticks.x = element_blank(),legend.title = 
+          element_text(face = "bold"))+
+  labs(y = "Count",x = "General Type",fill = "General Type Key")
+
+```
+
+$$
+H = - \sum_{i=1}^{S} p_i \, \ln(p_i)
+\newline Shannon \, \, Diversity \, \, Index
+$$
+
+```{r}
+
+
 
 ```
 
