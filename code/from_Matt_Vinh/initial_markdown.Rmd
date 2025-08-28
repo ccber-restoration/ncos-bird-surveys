@@ -154,14 +154,19 @@ tinsect_substrate %>% filter(Substrate == top5 & Year != 2017) %>%
 
 # substrate analysis
 
-allsub <- birdsurveys %>% filter(Substrate != "")
+#length(unique(birdsurveys$Substrate) 
+# baseline 24 substrates - remove "", "<Null>", combine the two other's
+# modification should result in 21 substrates
+
+submod <- birdsurveys %>% filter(Substrate != "" & Substrate != "<Null>")
+submod$Substrate[submod$Substrate == "Other (Enter in Observation Notes)"] <- "Other"
 
 num_all_sub <- length(unique(allsub$Substrate))
 col2 <- primary.colors(num_all_sub)
 
 # pie chart of all substrate types
 
-ggplot(data = allsub,aes(x = "",y = Count,fill = Substrate))+
+ggplot(data = submod,aes(x = "",y = Count,fill = Substrate))+
   geom_bar(stat = "identity")+
   coord_polar(theta = "y")+
   scale_fill_manual(values = col2)+
@@ -169,7 +174,7 @@ ggplot(data = allsub,aes(x = "",y = Count,fill = Substrate))+
 
 # vegetation - tree substrate general species type analysis per year
 
-allsub %>% filter(Substrate == "Vegetation - Tree" & Year != 2017) %>% 
+submod %>% filter(Substrate == "Vegetation - Tree" & Year != 2017) %>% 
   ggplot(aes(x = General.Type,fill = General.Type))+
   geom_bar(alpha = 0.8)+
   facet_wrap(~ Year)+
@@ -181,12 +186,22 @@ allsub %>% filter(Substrate == "Vegetation - Tree" & Year != 2017) %>%
 ```
 
 $$
-H = - \sum_{i=1}^{S} p_i \, \ln(p_i)
+H = - \sum_{i=1}^{S} p_i \ln(p_i)
 \newline Shannon \, \, Diversity \, \, Index
 $$
 
 ```{r}
 
+# shannon diversity and evenness indices analysis
+
+shannondf <- data.frame(year = rep(unique(birdsurveys$Year),each = 21),
+                        substrate = rep(unique(submod$Substrate),times = 7),
+                        diversity = NaN*147,evenness = NaN*147)
+
+unique(submod$Count) # NA values present
+submod <- submod[!is.na(submod$Count),] # remove NA's
+
+total <- sum(submod$Count)
 
 
 ```
