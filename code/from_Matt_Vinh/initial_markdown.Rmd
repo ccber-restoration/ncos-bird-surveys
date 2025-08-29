@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(colorRamps)
+library(SciViews)
 ```
 
 ```{r}
@@ -161,7 +162,7 @@ tinsect_substrate %>% filter(Substrate == top5 & Year != 2017) %>%
 submod <- birdsurveys %>% filter(Substrate != "" & Substrate != "<Null>")
 submod$Substrate[submod$Substrate == "Other (Enter in Observation Notes)"] <- "Other"
 
-num_all_sub <- length(unique(allsub$Substrate))
+num_all_sub <- length(unique(submod$Substrate))
 col2 <- primary.colors(num_all_sub)
 
 # pie chart of all substrate types
@@ -194,15 +195,43 @@ $$
 
 # shannon diversity and evenness indices analysis
 
-shannondf <- data.frame(year = rep(unique(birdsurveys$Year),each = 21),
-                        substrate = rep(unique(submod$Substrate),times = 7),
-                        diversity = NaN*147,evenness = NaN*147)
-
 unique(submod$Count) # NA values present
 submod <- submod[!is.na(submod$Count),] # remove NA's
 
-total <- sum(submod$Count)
+yearrange <- unique(birdsurveys$Year)
+yearrange <- sort(yearrange)
 
+a <- submod %>% filter(Year == 2017) %>% select(c(Year,eBird.Group,Count,Substrate))
+b <- submod %>% filter(Year == 2018) %>% select(c(Year,eBird.Group,Count,Substrate))
+c <- submod %>% filter(Year == 2019) %>% select(c(Year,eBird.Group,Count,Substrate))
+d <- submod %>% filter(Year == 2020) %>% select(c(Year,eBird.Group,Count,Substrate))
+e <- submod %>% filter(Year == 2021) %>% select(c(Year,eBird.Group,Count,Substrate))
+f <- submod %>% filter(Year == 2022) %>% select(c(Year,eBird.Group,Count,Substrate))
+g <- submod %>% filter(Year == 2023) %>% select(c(Year,eBird.Group,Count,Substrate))
+dflist <- list(shannon2017 = a,shannon2018 = b,shannon2019 = c,shannon2020 = d,shannon2021 = e,
+               shannon2022 = f,shannon2023 = g)
+
+compiled_dflist <- list()
+sub_totals_per_year <- list()
+joined <- list()
+shannon <- list()
+
+for(i in 1:7){
+  compiled_dflist[[i]] <- dflist[[i]] %>% group_by(Substrate,eBird.Group) %>% 
+    summarise(count = sum(Count))
+  names(compiled_dflist) <- paste0("compiled_",yearrange[i])
+  compiled_dflist[[i]]$year <- rep(yearrange[i],nrow(compiled_dflist[[i]]))
+  sub_totals_per_year[[i]] <- compiled_dflist[[i]] %>% group_by(Substrate) %>% 
+    summarise(total = sum(count))
+  names(sub_totals_per_year) <- paste0("sub_totals_",yearrange[i])
+  joined[[i]] <- compiled_dflist[[i]] %>% inner_join(sub_totals_per_year[[i]],by = "Substrate")
+  joined[[i]] <- joined[[i]] %>% mutate(proportion = count / total)
+  shannon[[i]] <- joined[[i]] %>% group_by(Substrate) %>% 
+    mutate(diversity = -1 * sum(proportion * ln(proportion))) %>% 
+    mutate(evenness = diversity / ln())
+}
+
+dflist[[1]] %>% group_by(Substrate) %>% summarise(total = sum(ount))
 
 ```
 
