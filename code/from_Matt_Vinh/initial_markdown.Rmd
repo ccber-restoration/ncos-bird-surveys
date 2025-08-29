@@ -190,6 +190,10 @@ $$
 H = - \sum_{i=1}^{S} p_i \ln(p_i)
 \newline Shannon \, \, Diversity \, \, Index
 $$
+$$
+E_H = H / ln(S)
+\newline Shannon \, \, Evenness \, \, Index
+$$
 
 ```{r}
 
