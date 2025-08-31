@@ -1,0 +1,92 @@
+---
+title: "Shannon_Diversity_Evenness"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(colorRamps)
+library(SciViews)
+library(Polychrome)
+
+birdsurveys <- read.csv("https://raw.githubusercontent.com/ccber-restoration/ncos-bird-surveys/refs/heads/main/data/aggregated/dryad_2017-2023/doi_10_5061_dryad_bvq83bkhz__v20240617/NCOS_Monthly_Bird_Surveys_2017-2023.csv")
+```
+
+$$
+H = - \sum_{i=1}^{S} p_i \ln(p_i)
+\newline Shannon \, \, Diversity \, \, Index
+$$
+$$
+E_H = H / ln(S)
+\newline Shannon \, \, Evenness \, \, Index
+$$
+
+```{r}
+
+# shannon diversity and evenness indices analysis
+
+submod <- birdsurveys %>% filter(Substrate != "" & Substrate != "<Null>")
+submod$Substrate[submod$Substrate == "Other (Enter in Observation Notes)"] <- "Other"
+submod$Substrate[submod$Substrate == "rocks"] <- "Rock"
+
+unique(submod$Count) # NA values present
+submod <- submod[!is.na(submod$Count),] # remove NA's
+
+yearrange <- unique(birdsurveys$Year)
+yearrange <- sort(yearrange)
+
+a <- submod %>% filter(Year == 2017) %>% select(c(Year,eBird.Group,Count,Substrate))
+b <- submod %>% filter(Year == 2018) %>% select(c(Year,eBird.Group,Count,Substrate))
+c <- submod %>% filter(Year == 2019) %>% select(c(Year,eBird.Group,Count,Substrate))
+d <- submod %>% filter(Year == 2020) %>% select(c(Year,eBird.Group,Count,Substrate))
+e <- submod %>% filter(Year == 2021) %>% select(c(Year,eBird.Group,Count,Substrate))
+f <- submod %>% filter(Year == 2022) %>% select(c(Year,eBird.Group,Count,Substrate))
+g <- submod %>% filter(Year == 2023) %>% select(c(Year,eBird.Group,Count,Substrate))
+dflist <- list(shannon2017 = a,shannon2018 = b,shannon2019 = c,shannon2020 = d,shannon2021 = e,
+               shannon2022 = f,shannon2023 = g)
+
+# initialization
+compiled_dflist <- list()
+sub_totals_per_year <- list()
+joined <- list()
+shannon <- list()
+compiled_shannon <- data.frame()
+
+for(i in 1:7){
+  compiled_dflist[[i]] <- dflist[[i]] %>% group_by(Substrate,eBird.Group) %>% 
+    summarise(count = sum(Count))
+  compiled_dflist[[i]]$year <- rep(yearrange[i],nrow(compiled_dflist[[i]]))
+  sub_totals_per_year[[i]] <- compiled_dflist[[i]] %>% group_by(Substrate) %>% 
+    summarise(total = sum(count))
+  joined[[i]] <- compiled_dflist[[i]] %>% inner_join(sub_totals_per_year[[i]],by = "Substrate")
+  joined[[i]] <- joined[[i]] %>% mutate(proportion = count / total)
+  shannon[[i]] <- joined[[i]] %>% group_by(Substrate) %>% # shannon diversity index per substrate
+    mutate(diversity = -1 * sum(proportion * ln(proportion)))
+  compiled_shannon <- rbind(compiled_shannon,shannon[[i]])
+}
+
+names(compiled_dflist) <- paste0("compiled_",yearrange)
+names(sub_totals_per_year) <- paste0("sub_totals_",yearrange)
+
+View(shannon[[3]])
+
+```
+
+```{r}
+
+num_col <- length(unique(submod$Substrate)) # 20 substrates
+colors <- kelly.colors(num_col)
+names(colors) <- unique(submod$Substrate)
+colors2 <- primary.colors(num_col)
+
+compiled_shannon %>% ggplot(aes(x = year,y = diversity,color = Substrate))+
+  geom_point(alpha = 0.9)+
+  geom_line(aes(group = Substrate))+
+  scale_color_manual(values = colors2)+
+  labs(x = "Year",y = "Shannon Diversity Index")+
+  theme_light()+
+  theme(legend.position = "top",legend.title = element_blank(),legend.text = element_text(size = 7))
+
+```
+
