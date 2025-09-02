@@ -20,6 +20,7 @@ library(here)
 
 #TODO- create properly formatted date column, using lubridate functions
 #TODO- create a column for "survey year"
+#TODO- start saving most relevant graphs to their own files
 
 birdsurveys <- read.csv("https://raw.githubusercontent.com/ccber-restoration/ncos-bird-surveys/refs/heads/main/data/aggregated/dryad_2017-2023/doi_10_5061_dryad_bvq83bkhz__v20240617/NCOS_Monthly_Bird_Surveys_2017-2023.csv") %>% 
   #create column for date
@@ -109,13 +110,25 @@ length(unique(birdsurveys$General.Type)) # 13 different general types
 
 # TODO- check out this book section : https://clauswilke.com/dataviz/color-pitfalls.html! 
 
-ggplot(data = birdsurveys,aes(x = General.Type,fill = General.Type))+
+fig_gen_type_count <- ggplot(data = birdsurveys,aes(x = General.Type,fill = General.Type))+
   geom_bar(alpha = 0.9)+
   theme(axis.title.x = element_blank(),axis.text.x = element_blank(),axis.ticks.x = element_blank(),
         legend.title = element_text(face = "bold"))+
   labs(y = "Count",fill = "General Type")
 
 # TODO what are the top 5 terrestrial insectivores with the most detections (sum of count)?
+
+#demo of ggsave... 
+fig_gen_type_count
+
+ggsave(filename = paste0("fig_general_type_count_",
+                         format(Sys.Date(), "%Y-%m-%d"),
+                         ".pdf"),
+       fig_gen_type_count,
+       width = 190,
+       height = 155,
+       units = "mm")
+
 
 ```
 
