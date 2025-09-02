@@ -10,17 +10,29 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(colorRamps)
 library(SciViews)
+library(here)
 ```
 
 ```{r}
 
-birdsurveys <- read.csv("https://raw.githubusercontent.com/ccber-restoration/ncos-bird-surveys/refs/heads/main/data/aggregated/dryad_2017-2023/doi_10_5061_dryad_bvq83bkhz__v20240617/NCOS_Monthly_Bird_Surveys_2017-2023.csv")
+#TODO- read in using file path, not URL; check here documentation
+#suggest using read_csv() rather than read.csv
+
+#TODO- create properly formatted date column, using lubridate functions
+#TODO- create a column for "survey year"
+
+birdsurveys <- read.csv("https://raw.githubusercontent.com/ccber-restoration/ncos-bird-surveys/refs/heads/main/data/aggregated/dryad_2017-2023/doi_10_5061_dryad_bvq83bkhz__v20240617/NCOS_Monthly_Bird_Surveys_2017-2023.csv") %>% 
+  #create column for date
+  mutate(survey_date = parse_date_time(Observation.Date, "%y%m%d"))
+
 
 summary(birdsurveys) # checking for data errors
 # Count has 6 na's
 # slough water elevation has 2703 na's
 # all variables appear to have correct data type
 # no extreme outliers for numeric data
+
+
 
 ```
 
@@ -95,11 +107,15 @@ length(unique(birdsurveys$General.Type)) # 13 different general types
 # cormorants and kingfishers have lowest counts - most specific general type?
 # hard to tell colors apart
 
+# TODO- check out this book section : https://clauswilke.com/dataviz/color-pitfalls.html! 
+
 ggplot(data = birdsurveys,aes(x = General.Type,fill = General.Type))+
   geom_bar(alpha = 0.9)+
   theme(axis.title.x = element_blank(),axis.text.x = element_blank(),axis.ticks.x = element_blank(),
         legend.title = element_text(face = "bold"))+
   labs(y = "Count",fill = "General Type")
+
+# TODO what are the top 5 terrestrial insectivores with the most detections (sum of count)?
 
 ```
 
@@ -189,8 +205,7 @@ submod %>% filter(Substrate == "Vegetation - Tree" & Year != 2017) %>%
 $$
 H = - \sum_{i=1}^{S} p_i \ln(p_i)
 \newline Shannon \, \, Diversity \, \, Index
-$$
-$$
+$$ $$
 E_H = H / ln(S)
 \newline Shannon \, \, Evenness \, \, Index
 $$
@@ -238,4 +253,3 @@ for(i in 1:7){
 dflist[[1]] %>% group_by(Substrate) %>% summarise(total = sum(ount))
 
 ```
-
