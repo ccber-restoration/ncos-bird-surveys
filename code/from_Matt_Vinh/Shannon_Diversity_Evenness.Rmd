@@ -8,9 +8,25 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(colorRamps)
 library(SciViews)
-library(Polychrome)
+#library(Polychrome)
 
 birdsurveys <- read.csv("https://raw.githubusercontent.com/ccber-restoration/ncos-bird-surveys/refs/heads/main/data/aggregated/dryad_2017-2023/doi_10_5061_dryad_bvq83bkhz__v20240617/NCOS_Monthly_Bird_Surveys_2017-2023.csv")
+
+
+#Notes from FHJ 2025-09-02:
+# check out vegan package
+#https://www.rpubs.com/an-bui/vegan-cheat-sheet
+
+#also check out "Hill Numbers" for "effective number of species": https://esajournals.onlinelibrary.wiley.com/doi/10.1890/13-0133.1
+
+# Response variables other than Shannon based on ebird categories:
+# Shannon (or exponentiated Shannon) for species or for families
+# species richness
+# count for particular groups or species
+
+#join aos_checklist (NACC_list_species_2024_65th.csv) by common name, in order to analyze data by family or order
+
+
 ```
 
 $$
@@ -25,6 +41,8 @@ $$
 ```{r}
 
 # shannon diversity and evenness indices analysis
+# 
+
 
 submod <- birdsurveys %>% filter(Substrate != "" & Substrate != "<Null>")
 submod$Substrate[submod$Substrate == "Other (Enter in Observation Notes)"] <- "Other"
