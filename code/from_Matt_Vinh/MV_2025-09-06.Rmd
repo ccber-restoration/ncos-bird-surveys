@@ -1,0 +1,106 @@
+---
+title: "MV_2025-09-06"
+output: html_document
+---
+
+```{r setup, include=FALSE,warning = F}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+
+# establishing ncos bird surveys .csv filepath using here package
+# removing unnecessary variables
+birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023","doi_10_5061_dryad_bvq83bkhz__v20240617","NCOS_Monthly_Bird_Surveys_2017-2023.csv")
+birdsurveys <- read_csv(birdsurveyfilepath)
+birdsurveys_filtered <- birdsurveys %>% select(-c(Repeat.Observation:Slough.Water.Elevation..ft.))
+
+# establishing aos checklist nacc species list .csv using here package
+# removing unnecessary variables
+naccfilepath <- here("data","aos_checklist","NACC_list_species_2024_65th.csv")
+nacc <- read_csv(naccfilepath)
+nacc_filtered <- nacc %>% select(-c(french_name,annotation:status_misplaced))
+
+# creating date variable with correct data type with lubridate package (tidyverse)
+# removing NA dates
+birdsurveys_filtered$obs_date2 <- substr(birdsurveys$Observation.Date,1,10)
+birdsurveys_filtered <- birdsurveys_filtered %>% 
+  mutate(obs_date3 = parse_date_time(obs_date2,orders = c("mdy","ymd"))) %>% 
+  filter(!is.na(obs_date3))
+
+# creating variable for survey year as opposed to calendar year
+date_borders <- ymd(c("2017-09-01","2018-09-01","2019-09-01","2020-09-01","2021-09-01",
+                      "2022-09-01","2023-09-01","2024-09-01"))
+survey_years <- c("2017-2018","2018-2019","2019-2020","2020-2021","2021-2022","2022-2023")
+for (i in 1:nrow(birdsurveys_filtered)){
+  for (j in 1:length(unique(birdsurveys_filtered$Year))){
+    if (birdsurveys_filtered$obs_date3[i] >= date_borders[j] & 
+       birdsurveys_filtered$obs_date3[i] < date_borders[j + 1]){
+      birdsurveys_filtered$survey_year[i] = survey_years[j]
+    }
+  }
+}
+
+# creating variable for season of date
+winter = list(c(1,2,12))
+spring = list(c(3:5))
+summer = list(c(6:8))
+fall = list(c(9:11))
+season_borders = c(winter,spring,summer,fall)
+seasons <- c("Winter","Spring","Summer","Fall")
+for (i in 1:nrow(birdsurveys_filtered)){
+  for (j in 1:length(season_borders)){
+    if (month(birdsurveys_filtered$obs_date3[i]) %in% season_borders[[j]]){
+      birdsurveys_filtered$season[i] = seasons[j]
+    }
+  }
+}
+
+# joining aoc checklist with bird survey data and organizing variables
+joined <- inner_join(birdsurveys_filtered,nacc_filtered,by = c("Species" = "common_name"))
+joined <- joined %>% select(Year,obs_date3,survey_year,season,
+                            everything(),
+                            -Observation.Date,-obs_date2)
+
+```
+
+```{r}
+
+#Notes from FHJ 2025-09-02:
+
+# check out vegan package
+#https://www.rpubs.com/an-bui/vegan-cheat-sheet
+
+#also check out "Hill Numbers" for "effective number of species": https://esajournals.onlinelibrary.wiley.com/doi/10.1890/13-0133.1
+
+#check out this book section:
+#https://clauswilke.com/dataviz/color-pitfalls.html! 
+
+# Response variables other than Shannon based on ebird categories:
+# Shannon (or exponentiated Shannon) for species or for families
+# species richness
+# count for particular groups or species
+
+#TODO what are the top 5 terrestrial insectivores with the most detections (sum of count)?
+#TODO- start saving most relevant graphs to their own files
+
+### completed
+#TODO- read in using file path, not URL; check here documentation
+#suggest using read_csv() rather than read.csv
+#TODO join aos_checklist (NACC_list_species_2024_65th.csv) by common name, in order to analyze data by family or order
+#TODO- create properly formatted date column, using lubridate functions
+#TODO- create a column for "survey year"
+
+
+#demo of ggsave... 
+fig_gen_type_count
+
+ggsave(filename = paste0("fig_general_type_count_",
+                         format(Sys.Date(), "%Y-%m-%d"),
+                         ".pdf"),
+       fig_gen_type_count,
+       width = 190,
+       height = 155,
+       units = "mm")
+
+```
+
