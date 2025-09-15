@@ -12,7 +12,12 @@ library(here)
 # removing unnecessary variables
 birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023","doi_10_5061_dryad_bvq83bkhz__v20240617","NCOS_Monthly_Bird_Surveys_2017-2023.csv")
 birdsurveys <- read_csv(birdsurveyfilepath)
-birdsurveys_filtered <- birdsurveys %>% select(-c(Repeat.Observation:Slough.Water.Elevation..ft.))
+birdsurveys_filtered <- birdsurveys %>%
+  select(-c(Repeat.Observation:Slough.Water.Elevation..ft.)) %>% 
+  filter(Substrate != "<Null>")
+birdsurveys_filtered$Substrate[birdsurveys_filtered$Substrate == "rocks"] <- "Rock"
+birdsurveys_filtered$Substrate[birdsurveys_filtered$Substrate == 
+                                 "Other (Enter in Observation Notes)"] <- "Other"
 
 # establishing aos checklist nacc species list .csv using here package
 # removing unnecessary variables
@@ -22,7 +27,7 @@ nacc_filtered <- nacc %>% select(-c(french_name,annotation:status_misplaced))
 
 # creating date variable with correct data type with lubridate package (tidyverse)
 # removing NA dates
-birdsurveys_filtered$obs_date2 <- substr(birdsurveys$Observation.Date,1,10)
+birdsurveys_filtered$obs_date2 <- substr(birdsurveys_filtered$Observation.Date,1,10)
 birdsurveys_filtered <- birdsurveys_filtered %>% 
   mutate(obs_date3 = parse_date_time(obs_date2,orders = c("mdy","ymd"))) %>% 
   filter(!is.na(obs_date3))
@@ -60,6 +65,10 @@ joined <- inner_join(birdsurveys_filtered,nacc_filtered,by = c("Species" = "comm
 joined <- joined %>% select(Year,obs_date3,survey_year,season,
                             everything(),
                             -Observation.Date,-obs_date2)
+
+# 2021 hibernacula camera observations dataset
+hibernaculapath <- here("data","hibernacula_camera_trapping_sp_list.csv")
+hibernacula <- read_csv(hibernaculapath)
 
 ```
 
@@ -101,6 +110,21 @@ ggsave(filename = paste0("fig_general_type_count_",
        width = 190,
        height = 155,
        units = "mm")
+
+```
+
+```{r}
+
+hibernacula$`Common Name` <- factor(hibernacula$`Common Name`,
+                                       levels = hibernacula$`Common Name`)
+hibernacula <- hibernacula %>% arrange(Detections)
+hibernacula %>% ggplot(aes(x = `Common Name`,y = Detections,fill = `Common Name`))+
+  geom_col(alpha = 0.9)+
+  ggtitle("2021 Hibernacula Substrate Species Observations")+
+  theme_light()+
+  theme(axis.ticks.x = element_blank(),axis.text.x = element_blank(),
+        legend.title = element_blank(),legend.text = element_text(size = 8),
+        plot.title = element_text(hjust = 0.5))
 
 ```
 
