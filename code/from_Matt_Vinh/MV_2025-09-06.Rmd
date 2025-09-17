@@ -1,9 +1,12 @@
 ---
 title: "MV_2025-09-06"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
 ---
 
-```{r setup, include=FALSE,warning = F}
+```{r setup, include = F,warning = F}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(here)
@@ -14,7 +17,7 @@ birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023","doi_10_5061_dr
 birdsurveys <- read_csv(birdsurveyfilepath)
 birdsurveys_filtered <- birdsurveys %>%
   select(-c(Repeat.Observation:Slough.Water.Elevation..ft.)) %>% 
-  filter(Substrate != "<Null>")
+  filter(Substrate != "<Null>" & !is.na(Count))
 birdsurveys_filtered$Substrate[birdsurveys_filtered$Substrate == "rocks"] <- "Rock"
 birdsurveys_filtered$Substrate[birdsurveys_filtered$Substrate == 
                                  "Other (Enter in Observation Notes)"] <- "Other"
@@ -72,7 +75,7 @@ hibernacula <- read_csv(hibernaculapath)
 
 ```
 
-```{r}
+```{r,include = F}
 
 #Notes from FHJ 2025-09-02:
 
@@ -90,7 +93,6 @@ hibernacula <- read_csv(hibernaculapath)
 # count for particular groups or species
 
 #TODO what are the top 5 terrestrial insectivores with the most detections (sum of count)?
-#TODO- start saving most relevant graphs to their own files
 
 ### completed
 #TODO- read in using file path, not URL; check here documentation
@@ -98,33 +100,115 @@ hibernacula <- read_csv(hibernaculapath)
 #TODO join aos_checklist (NACC_list_species_2024_65th.csv) by common name, in order to analyze data by family or order
 #TODO- create properly formatted date column, using lubridate functions
 #TODO- create a column for "survey year"
+#TODO- start saving most relevant graphs to their own files
 
 
 #demo of ggsave... 
-fig_gen_type_count
+#fig_gen_type_count
 
-ggsave(filename = paste0("fig_general_type_count_",
-                         format(Sys.Date(), "%Y-%m-%d"),
-                         ".pdf"),
-       fig_gen_type_count,
-       width = 190,
-       height = 155,
-       units = "mm")
+#ggsave(filename = paste0("fig_general_type_count_",
+#                         format(Sys.Date(), "%Y-%m-%d"),
+#                         ".pdf"),
+#       fig_gen_type_count,
+#       width = 190,
+#       height = 155,
+#       units = "mm")
 
 ```
 
 ```{r}
 
+# plot of species counts for hibernacula substrate based on most recent .csv, hibernacula_camera_trapping_sp_list.csv
+
 hibernacula$`Common Name` <- factor(hibernacula$`Common Name`,
                                        levels = hibernacula$`Common Name`)
 hibernacula <- hibernacula %>% arrange(Detections)
-hibernacula %>% ggplot(aes(x = `Common Name`,y = Detections,fill = `Common Name`))+
+cthibernacula2021 <- hibernacula %>% 
+  ggplot(aes(x = `Common Name`,y = Detections,fill = `Common Name`))+
   geom_col(alpha = 0.9)+
   ggtitle("2021 Hibernacula Substrate Species Observations")+
   theme_light()+
   theme(axis.ticks.x = element_blank(),axis.text.x = element_blank(),
         legend.title = element_blank(),legend.text = element_text(size = 8),
         plot.title = element_text(hjust = 0.5))
+
+# top 5 species utilizing hibernacula:
+# 1. Western Meadowlark
+# 2. American Crow
+# 3. Killdeer
+# 4. Burrowing Owl
+# 5. Canada Goose
+
+#ggsave(filename = paste0("Camera_Trapping_Hibernacula_Composition_2021_",
+#                         format(Sys.Date(),"%Y-%m-%d"),".pdf"),
+#       cthibernacula2021,width = 200,height = 140,units = "mm")
+
+plot(cthibernacula2021)
+
+```
+
+```{r}
+
+mbshibernacula <- joined %>% filter(Substrate == "Habitat Feature - Hibernacula") %>%
+  ggplot(aes(x = Species,y = Count,fill = Species)) +
+  geom_col(alpha = 0.9) +
+  ggtitle("Species Composition for Hibernacula by Survey Year") +
+  theme_light() +
+  theme(axis.ticks.x = element_blank(),axis.text.x = element_blank(),
+        axis.title.x = element_blank(),legend.title = element_text(face = "bold"),
+        legend.text = element_text(size = 10),plot.title = element_text(hjust = 0.5)) +
+  facet_wrap(~ survey_year)
+
+# surprised that there were so few detections for hibernacula, so manually verifying by restricting dataframe below - verified correct
+
+# joined_hibernacula <- joined %>% filter(survey_year == "2020-2021" & Substrate == "Habitat Feature - Hibernacula")
+# bshibernacula <- birdsurveys %>% filter(Year == 2020 & Substrate == "Habitat Feature - Hibernacula")
+
+#ggsave(filename = paste0("Monthly_Bird_Survey_Hibernacula_Composition_",
+#                         format(Sys.Date(),"%Y-%m-%d"),".pdf"),
+#       mbshibernacula,width = 200,height = 140,units = "mm")
+
+plot(mbshibernacula)
+
+```
+
+```{r,warning = F}
+
+totals <- joined %>% group_by(survey_year,General.Type) %>% summarise(total_count = sum(Count))
+
+totals %>% ggplot(aes(x = survey_year,y = total_count,fill = General.Type)) +
+  geom_col(show.legend = F) +
+  labs(x = "Survey Year",y = "Count",
+       title = "Observation of General Types per Survey Year Across All Substrates") +
+  facet_wrap(~ General.Type) +
+  theme_light() +
+  theme(axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5),
+        plot.title = element_text(hjust = 0.5))
+
+```
+
+```{r,warning = F}
+
+# number of observed species per survey year
+
+total_species <- joined %>% group_by(survey_year,Species) %>% summarise(total_count = sum(Count))
+
+# dataframe for count of unique species per survey year
+
+richness <- data.frame(survey_year = unique(joined$survey_year),num_species = NA*6)
+richness <- richness %>% arrange(survey_year)
+
+for(i in 1:length(unique(total_species$survey_year))){
+  temp <- total_species %>% filter(survey_year == unique(total_species$survey_year)[i])
+  richness$num_species[i] <- length(unique(temp$Species))
+}
+
+richness %>% ggplot(aes(x = survey_year,y = num_species)) +
+  geom_col(alpha = 0.9,fill = "seagreen3") +
+  labs(x = "Survey Year",y = "Number of Species",
+       title = "Total Number of Observed Species per Survey Year") +
+  theme_light() +
+  theme(plot.title = element_text(hjust = 0.45))
 
 ```
 
