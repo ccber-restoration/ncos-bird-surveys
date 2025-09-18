@@ -1,12 +1,12 @@
 ---
 title: "MV_2025-09-06"
 output:
-  pdf_document: default
   html_document: default
   word_document: default
+  pdf_document: default
 ---
 
-```{r setup, include = F,warning = F}
+```{r setup,warning = F}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(here)
@@ -124,13 +124,11 @@ hibernacula$`Common Name` <- factor(hibernacula$`Common Name`,
                                        levels = hibernacula$`Common Name`)
 hibernacula <- hibernacula %>% arrange(Detections)
 cthibernacula2021 <- hibernacula %>% 
-  ggplot(aes(x = `Common Name`,y = Detections,fill = `Common Name`))+
-  geom_col(alpha = 0.9)+
-  ggtitle("2021 Hibernacula Substrate Species Observations")+
+  ggplot(aes(y = `Common Name`,x = Detections))+
+  geom_col(fill = "mediumpurple",alpha = 0.75,show.legend = F)+
+  ggtitle("2021 Camera Trapping Hibernacula Observations")+
   theme_light()+
-  theme(axis.ticks.x = element_blank(),axis.text.x = element_blank(),
-        legend.title = element_blank(),legend.text = element_text(size = 8),
-        plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5))
 
 # top 5 species utilizing hibernacula:
 # 1. Western Meadowlark
@@ -149,15 +147,25 @@ plot(cthibernacula2021)
 
 ```{r}
 
+# plot of spcies counts for hibernacula substrate using bird survey data
+
 mbshibernacula <- joined %>% filter(Substrate == "Habitat Feature - Hibernacula") %>%
-  ggplot(aes(x = Species,y = Count,fill = Species)) +
-  geom_col(alpha = 0.9) +
-  ggtitle("Species Composition for Hibernacula by Survey Year") +
+  ggplot(aes(y = Species,x = Count)) +
+  geom_col(fill = "mediumpurple",alpha = 0.75,show.legend = F) +
+  ggtitle("Hibernacula Species Composition by Bird Survey Year") +
   theme_light() +
-  theme(axis.ticks.x = element_blank(),axis.text.x = element_blank(),
-        axis.title.x = element_blank(),legend.title = element_text(face = "bold"),
-        legend.text = element_text(size = 10),plot.title = element_text(hjust = 0.5)) +
+  theme(plot.title = element_text(hjust = 0.5)) +
   facet_wrap(~ survey_year)
+
+# only ten total species observed for hibernacula
+# slight drop off of usage from 2017-2018 to 2022-2023 - 5 species down to 1
+# overlapping species from camera trapping data:
+# 1. Western Meadowlark
+# 2. American Crow
+# 3. Burrowing Owl
+# 4. Lark Sparrow
+# 5. American Pipit
+# does Bush Wren = Wren?
 
 # surprised that there were so few detections for hibernacula, so manually verifying by restricting dataframe below - verified correct
 
@@ -209,6 +217,22 @@ richness %>% ggplot(aes(x = survey_year,y = num_species)) +
        title = "Total Number of Observed Species per Survey Year") +
   theme_light() +
   theme(plot.title = element_text(hjust = 0.45))
+
+```
+
+```{r}
+
+# plot of count vs season by species for hibernacula substrate, visualizing which seasons relevant species appear
+# would like to be able to include survey year in visualization but am not sure how
+
+joined %>% filter(Substrate == "Habitat Feature - Hibernacula") %>% 
+  ggplot(aes(y = Count,x = season)) +
+  geom_col(fill = "darkorange",alpha = 0.75,show.legend = F) +
+  labs(x = "Season",title = "Count of Hibernacula Species by Season") +
+  theme_light() +
+  theme(axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5),
+        plot.title = element_text(hjust = 0.5)) +
+  facet_wrap(~ Species)
 
 ```
 
