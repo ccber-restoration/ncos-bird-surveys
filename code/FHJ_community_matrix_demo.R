@@ -7,6 +7,13 @@ birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023","doi_10_5061_dr
 
 birdsurveys <- read_csv(birdsurveyfilepath)
 
+#check what species are in the omnivore category
+omnivores <- birdsurveys %>% 
+  filter(General.Type == "Omnivores")
+
+unique(omnivores$Species)  
+
+
 n_distinct(birdsurveys$Substrate)
 
 unique(birdsurveys$Substrate)
