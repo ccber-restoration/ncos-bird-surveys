@@ -1,6 +1,6 @@
 # CCBER North Campus Open Space Bird Survey Data Exploration and Analysis by Matt Vinh
 
-## File contents:
+## Folder contents:
 
 ### Current work
 MV_2025-09-19 R script
