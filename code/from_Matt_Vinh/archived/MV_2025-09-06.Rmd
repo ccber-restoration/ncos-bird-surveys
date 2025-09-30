@@ -188,7 +188,7 @@ totals %>% ggplot(aes(x = survey_year,y = total_count,fill = General.Type)) +
   geom_col(show.legend = F) +
   labs(x = "Survey Year",y = "Count",
        title = "Observation of General Types per Survey Year Across All Substrates") +
-  facet_wrap(~ General.Type) +
+  facet_wrap(~ General.Type,scales = "free_y") +
   theme_light() +
   theme(axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5),
         plot.title = element_text(hjust = 0.5))
