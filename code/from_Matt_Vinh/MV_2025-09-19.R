@@ -48,10 +48,15 @@ newaggregate <- rbind(intermediate,df25) %>% mutate(
   Year = year(Observation.Date),
   Observation.Date = as.Date(Observation.Date),
   survey_year = case_when(
-    Observation.Date >= as.Date("2023-09-01") & Observation.Date <= as.Date("2024-08-31") ~ "7",
-    Observation.Date >= as.Date("2024-09-01") & Observation.Date <= as.Date("2025-08-31") ~ "8"),
+    Observation.Date >= as.Date("2023-09-01") & Observation.Date <= as.Date("2024-08-31") ~ 7,
+    Observation.Date >= as.Date("2024-09-01") & Observation.Date <= as.Date("2025-08-31") ~ 8),
   season = case_when(
     month(Observation.Date) %in% c(1,2,12) ~ "Winter",
     month(Observation.Date) %in% c(3:5) ~ "Spring",
     month(Observation.Date) %in% c(6:8) ~ "Summer",
     month(Observation.Date) %in% c(9:11) ~ "Fall"))
+
+# cleaning resulting aggregated data frame
+newaggregate$Count <- as.integer(newaggregate$Count)
+newaggregate <- newaggregate %>% filter(!is.na(newaggregate$Count))
+newaggregate <- newaggregate[!is.na(newaggregate$Species),]
