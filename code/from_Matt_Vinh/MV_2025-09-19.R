@@ -31,6 +31,8 @@ birdsurveys_filtered <- birdsurveys_filtered %>%
            month(Observation_Date) %in% c(9:11) ~ "Fall")) %>% 
   filter(!is.na(Observation_Date))
 
+
+
 # file paths to folders organized by year containing bird survey data
 csvpath23 <- here("data","2023")
 csvpath24 <- here("data","2024")
@@ -91,15 +93,20 @@ newaggregate$Count <- as.integer(newaggregate$Count)
 newaggregate <- newaggregate %>% filter(!is.na(newaggregate$Count))
 newaggregate <- newaggregate[!is.na(newaggregate$Species),]
 
+
+
+# reading eBird .csv, joining with new aggregated dataframe
 ebirdpath <- here("data","ebird_clements_checklist",
                   "ebird-Clements-v2018-integrated-checklist-August-2018.csv")
 ebird <- read_csv(ebirdpath)
 newAndEbird <- left_join(newaggregate,ebird,by = c("Species" = "English name")) # left join doesnt seem to work as the documentation suggests? keeping all varibles from both dataframes
 
+# using existing general type designations to apply to new aggregated dataframe
 species <- birdsurveys_filtered %>% select(c("Species","General.Type"))
 species_unique <- species %>% distinct()
 newjoined <- inner_join(newAndEbird,species_unique,by = "Species")
 
+# selectinig and ordering variables
 newjoined_select <- newjoined %>% select(c("Species","General.Type","eBird species group",
                                            "Count","Substrate","Observation_Date","Year","Survey_Year",
                                            "Season")) %>% 
@@ -108,3 +115,8 @@ birdsurveys_select <- birdsurveys_filtered %>% select(c("Species","General.Type"
                                                         "Count","Substrate","Observation_Date","Year",
                                                         "Survey_Year","Season")) %>% 
   rename(General_Type = General.Type,eBird_Group = eBird.Group)
+
+# combining old and new aggregated dataframes
+updated_aggregated_survey_data <- rbind(newjoined_select,birdsurveys_select)
+
+#TODO check that in aggregation of data that information was not lost
