@@ -1,0 +1,28 @@
+---
+title: "MV_2025-10-26"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(here)
+
+MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
+aggregated <- read_csv(MVaggregatedpath)
+```
+
+```{r}
+
+relative_proportions <- aggregated %>% group_by(Survey_Year,Substrate) %>%
+  summarize(substrate_count = sum(Count)) %>% 
+  mutate(total = sum(substrate_count)) %>% 
+  mutate(proportion = substrate_count / total)
+
+relative_proportions %>% filter(Substrate == "Habitat Feature - Hibernacula") %>% ggplot(aes(x = Survey_Year,y = proportion)) + 
+  geom_line() + theme_light() +
+  labs(title = "Hibernacula Substrate Relative Usage Over Time",x = "Survey Year",
+       y = "Proportion (per Year)") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+

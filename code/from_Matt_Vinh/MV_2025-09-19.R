@@ -103,10 +103,10 @@ newAndEbird <- left_join(newaggregate,ebird,by = c("Species" = "English name")) 
 
 # using existing general type designations to apply to new aggregated dataframe
 species <- birdsurveys_filtered %>% select(c("Species","General.Type"))
-species_unique <- species %>% distinct()
+species_unique <- species %>% distinct() # reduces data size from 10634 to 164
 newjoined <- inner_join(newAndEbird,species_unique,by = "Species")
 
-# selectinig and ordering variables
+# selecting and ordering variables
 newjoined_select <- newjoined %>% select(c("Species","General.Type","eBird species group",
                                            "Count","Substrate","Observation_Date","Year","Survey_Year",
                                            "Season")) %>% 
@@ -116,7 +116,14 @@ birdsurveys_select <- birdsurveys_filtered %>% select(c("Species","General.Type"
                                                         "Survey_Year","Season")) %>% 
   rename(General_Type = General.Type,eBird_Group = eBird.Group)
 
-# combining old and new aggregated dataframes
-updated_aggregated_survey_data <- rbind(newjoined_select,birdsurveys_select)
 
-#TODO check that in aggregation of data that information was not lost
+
+# combining old and new aggregated data
+updated_aggregated_survey_data <- rbind(newjoined_select,birdsurveys_select)
+# seems to not have lost any data along the way
+
+
+
+# writing .csv
+csvpath <- here("data","aggregated","MV_aggregated.csv")
+write_csv(updated_aggregated_survey_data,csvpath)
