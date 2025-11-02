@@ -6,6 +6,7 @@ output: html_document
 ```{r}
 library(tidyverse)
 library(here)
+library(ggVennDiagram)
 
 MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
 aggregated <- read_csv(MVaggregatedpath)
@@ -18,11 +19,45 @@ relative_proportions <- aggregated %>% group_by(Survey_Year,Substrate) %>%
   mutate(total = sum(substrate_count)) %>% 
   mutate(proportion = substrate_count / total)
 
-relative_proportions %>% filter(Substrate == "Habitat Feature - Hibernacula") %>% ggplot(aes(x = Survey_Year,y = proportion)) + 
+# test of concept
+relative_proportions %>% filter(Substrate == "Habitat Feature - Hibernacula") %>% 
+  ggplot(aes(x = Survey_Year,y = proportion)) + 
   geom_line() + theme_light() +
   labs(title = "Hibernacula Substrate Relative Usage Over Time",x = "Survey Year",
        y = "Proportion (per Year)") +
   theme(plot.title = element_text(hjust = 0.5))
+
+# all substrates relative proportion of observations over time
+relative_proportions %>% ggplot(aes(x = Survey_Year,y = proportion)) +
+  geom_line() + theme_light() +
+  facet_wrap(~ Substrate,scale = "free_y") +
+  labs(x = "Survey Year",y = "Proportion (per Year)",title = "Relative Usage over Time by Substrate") +
+  theme(plot.title = element_text(hjust = 0.5))
+# substrates not generating graph:
+# air/flyover
+# rock
+# telephone wire
+# vernal pool
+
+```
+
+```{r}
+
+# proof of concept venn diagram
+hibernacula_only <- aggregated %>% filter(Substrate == "Habitat Feature - Hibernacula")
+hibernacula_venn <- split(hibernacula_only$Count,hibernacula_only$Survey_Year)
+HV1 <- hibernacula_venn[1:4]
+HV2 <- hibernacula_venn[3:6]
+HV3 <- hibernacula_venn[5:8]
+ggVennDiagram(HV1)
+# minimal overlap between species observed at hibernacula substrate over survey years 1 to 4
+#TODO manual verification of venn diagram for understanding
+
+```
+
+```{r}
+
+
 
 ```
 

@@ -17,11 +17,9 @@ Great Blue Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,Water - Wad
 Western Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",1,Mud,2023-09-15,2023,7,Fall
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",4,Mud,2023-09-15,2023,7,Fall
 Killdeer,Shorebirds,Shorebirds,2,Mud,2023-09-15,2023,7,Fall
-Western Sandpiper,Shorebirds,Shorebirds,6,NA,2023-09-15,2023,7,Fall
 Semipalmated Plover,Shorebirds,Shorebirds,4,Mud,2023-09-15,2023,7,Fall
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Mud,2023-09-15,2023,7,Fall
 Killdeer,Shorebirds,Shorebirds,2,Mud,2023-09-15,2023,7,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2023-09-15,2023,7,Fall
 Western Sandpiper,Shorebirds,Shorebirds,14,Mud,2023-09-15,2023,7,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,2023-09-15,2023,7,Fall
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2023-09-15,2023,7,Fall
@@ -109,7 +107,6 @@ Belted Kingfisher,Kingfishers,Kingfishers,2,Air,2023-09-15,2023,7,Fall
 California Scrub-Jay,Omnivores,"Jays, Magpies, Crows, and Ravens",2,Vegetation - Tree,2023-09-15,2023,7,Fall
 California Thrasher,Insectivores - Terrestrial,"Catbirds, Mockingbirds, and Thrashers",3,Bare ground,2023-09-15,2023,7,Fall
 Spotted Towhee,Omnivores,New World Sparrows,1,Vegetation - Tree,2023-09-15,2023,7,Fall
-California Thrasher,Insectivores - Terrestrial,"Catbirds, Mockingbirds, and Thrashers",2,NA,2023-09-15,2023,7,Fall
 Bewick's Wren,Insectivores - Terrestrial,Wrens,1,Vegetation - Tree,2023-09-15,2023,7,Fall
 California Towhee,Omnivores,New World Sparrows,2,Vegetation - Tree,2023-09-15,2023,7,Fall
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2023-09-15,2023,7,Fall
@@ -118,19 +115,13 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2023-09-15,2023,7,Fall
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2023-09-15,2023,7,Fall
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Fence,2023-09-15,2023,7,Fall
-Western Bluebird,Insectivores - Terrestrial,Thrushes,2,NA,2023-09-15,2023,7,Fall
 Western Bluebird,Insectivores - Terrestrial,Thrushes,1,Vegetation - Shrub,2023-09-15,2023,7,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2023-09-15,2023,7,Fall
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2023-09-15,2023,7,Fall
-Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,NA,2023-09-15,2023,7,Fall
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Herbaceous,2023-09-15,2023,7,Fall
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2023-09-15,2023,7,Fall
 California Thrasher,Insectivores - Terrestrial,"Catbirds, Mockingbirds, and Thrashers",1,Vegetation - Shrub,2023-09-15,2023,7,Fall
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2023-09-15,2023,7,Fall
 Mourning Dove,Seed & Fruit Eaters,Pigeons and Doves,1,Bare ground,2023-09-15,2023,7,Fall
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2023-09-15,2023,7,Fall
-California Towhee,Omnivores,New World Sparrows,1,NA,2023-09-15,2023,7,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2023-09-15,2023,7,Fall
 House Wren,Insectivores - Terrestrial,Wrens,1,Vegetation - Tree,2023-09-15,2023,7,Fall
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,7,Vegetation - Tree,2023-09-15,2023,7,Fall
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2023-09-15,2023,7,Fall
@@ -153,7 +144,6 @@ Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Tree,2023-09-15,2023,7
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2023-09-15,2023,7,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2023-09-15,2023,7,Fall
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,2,Vegetation - Tree,2023-09-15,2023,7,Fall
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2023-09-15,2023,7,Fall
 Merlin,Raptors,Falcons and Caracaras,1,Vegetation - Tree,2023-09-15,2023,7,Fall
 Red-breasted Nuthatch,Insectivores - Terrestrial,Nuthatches,1,Vegetation - Tree,2023-09-15,2023,7,Fall
 White-breasted Nuthatch,Insectivores - Terrestrial,Nuthatches,1,Vegetation - Tree,2023-09-15,2023,7,Fall
@@ -163,7 +153,6 @@ White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Tree,2023-09-15,2023,7,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,2023-09-15,2023,7,Fall
 Nuttall's Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Vegetation - Tree,2023-09-15,2023,7,Fall
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2023-09-15,2023,7,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2023-09-15,2023,7,Fall
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2023-09-15,2023,7,Fall
 California Towhee,Omnivores,New World Sparrows,2,Building,2023-09-15,2023,7,Fall
@@ -363,7 +352,6 @@ Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and A
 Killdeer,Shorebirds,Shorebirds,4,Bare ground,2023-11-15,2023,7,Fall
 Yellow-rumped Warbler,Warblers,Wood-Warblers,10,Vegetation - Shrub,2023-11-15,2023,7,Fall
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2023-11-15,2023,7,Fall
-Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2023-11-15,2023,7,Fall
 Killdeer,Shorebirds,Shorebirds,2,Bare ground,2023-11-15,2023,7,Fall
 Western Bluebird,Insectivores - Terrestrial,Thrushes,3,Vegetation - Shrub,2023-11-15,2023,7,Fall
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Shrub,2023-11-15,2023,7,Fall
@@ -444,15 +432,11 @@ White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation
 Oak Titmouse,Insectivores - Terrestrial,"Tits, Chickadees, and Titmice",1,Vegetation - Tree,2023-11-15,2023,7,Fall
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Bare ground,2023-11-15,2023,7,Fall
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,6,Vegetation - Herbaceous,2023-11-15,2023,7,Fall
-Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,4,NA,2023-11-15,2023,7,Fall
 Selasphorus sp.,Hummingbirds,Hummingbirds,1,Vegetation - Herbaceous,2023-11-15,2023,7,Fall
-Sora,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,NA,2023-11-15,2023,7,Fall
 Common Yellowthroat,Warblers,Wood-Warblers,1,Bare ground,2023-11-15,2023,7,Fall
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2023-11-15,2023,7,Fall
 Tropical Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Tree,2023-11-15,2023,7,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2023-11-15,2023,7,Fall
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Tree,2023-11-15,2023,7,Fall
-Mallard,Waterfowl & Friends,Waterfowl,3,NA,2023-11-15,2023,7,Fall
 Yellow-rumped Warbler,Warblers,Wood-Warblers,1,Bare ground,2023-11-15,2023,7,Fall
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,4,Bare ground,2023-11-15,2023,7,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Bare ground,2023-11-15,2023,7,Fall
@@ -467,16 +451,10 @@ Least Sandpiper,Shorebirds,Shorebirds,10,Bare ground,2023-11-15,2023,7,Fall
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,10,Air,2023-11-15,2023,7,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2023-11-15,2023,7,Fall
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,Air,2023-11-15,2023,7,Fall
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2023-11-15,2023,7,Fall
-California Towhee,Omnivores,New World Sparrows,1,NA,2023-11-15,2023,7,Fall
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2023-11-15,2023,7,Fall
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Other,2023-11-15,2023,7,Fall
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Herbaceous,2023-11-15,2023,7,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2023-11-15,2023,7,Fall
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Habitat Feature - Snag,2023-11-15,2023,7,Fall
 Western Bluebird,Insectivores - Terrestrial,Thrushes,2,Habitat Feature - Snag,2023-11-15,2023,7,Fall
-Eurasian Collared-Dove,Seed & Fruit Eaters,Pigeons and Doves,2,NA,2023-11-15,2023,7,Fall
-Western Bluebird,Insectivores - Terrestrial,Thrushes,3,NA,2023-11-15,2023,7,Fall
 Great Blue Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2023-12-04,2023,7,Winter
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Habitat Feature - Log,2023-12-04,2023,7,Winter
 Black-necked Stilt,Shorebirds,Shorebirds,1,Water - Wading,2023-12-04,2023,7,Winter
@@ -517,9 +495,7 @@ Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and A
 Least Sandpiper,Shorebirds,Shorebirds,3,Bare ground,2023-12-04,2023,7,Winter
 Common Yellowthroat,Warblers,Wood-Warblers,2,Bare ground,2023-12-04,2023,7,Winter
 Bewick's Wren,Insectivores - Terrestrial,Wrens,1,Vegetation - Shrub,2023-12-04,2023,7,Winter
-Least Sandpiper,Shorebirds,Shorebirds,3,NA,2023-12-04,2023,7,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Shrub,2023-12-04,2023,7,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2023-12-04,2023,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2023-12-04,2023,7,Winter
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,Flyover,2023-12-04,2023,7,Winter
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2023-12-04,2023,7,Winter
@@ -568,19 +544,16 @@ American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",11,Fence,2023-12-04,2
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,2,Flyover,2023-12-04,2023,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2023-12-04,2023,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,2023-12-04,2023,7,Winter
-Yellow-rumped Warbler,Warblers,Wood-Warblers,3,NA,2023-12-04,2023,7,Winter
 Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Tree,2023-12-04,2023,7,Winter
 Orange-crowned Warbler,Warblers,Wood-Warblers,1,Vegetation - Shrub,2023-12-04,2023,7,Winter
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2023-12-04,2023,7,Winter
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,6,Vegetation - Herbaceous,2023-12-04,2023,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Tree,2023-12-04,2023,7,Winter
-Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,4,NA,2023-12-04,2023,7,Winter
 Yellow-rumped Warbler,Warblers,Wood-Warblers,3,Vegetation - Tree,2023-12-04,2023,7,Winter
 Canada Goose,Waterfowl & Friends,Waterfowl,2,Flyover,2023-12-04,2023,7,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,4,Vegetation - Tree,2023-12-04,2023,7,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,5,Vegetation - Herbaceous,2023-12-04,2023,7,Winter
 Yellow-rumped Warbler,Warblers,Wood-Warblers,2,Vegetation - Tree,2023-12-04,2023,7,Winter
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2023-12-04,2023,7,Winter
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2023-12-04,2023,7,Winter
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Vegetation - Herbaceous,2023-12-04,2023,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2023-12-04,2023,7,Winter
@@ -610,8 +583,6 @@ Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Shr
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Tree,2023-12-04,2023,7,Winter
 Northern Mockingbird,Omnivores,"Catbirds, Mockingbirds, and Thrashers",2,Fence,2023-12-04,2023,7,Winter
 American Coot,Waterfowl & Friends,"Rails, Gallinules, and Allies",8,Water - Floating,2024-01-18,2024,7,Winter
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-01-18,2024,7,Winter
-Greater Yellowlegs,Shorebirds,Shorebirds,1,NA,2024-01-18,2024,7,Winter
 Canada Goose,Waterfowl & Friends,Waterfowl,14,Water - Floating,2024-01-18,2024,7,Winter
 Ruddy Duck,Waterfowl & Friends,Waterfowl,3,Water - Floating,2024-01-18,2024,7,Winter
 Bufflehead,Waterfowl & Friends,Waterfowl,3,Water - Floating,2024-01-18,2024,7,Winter
@@ -652,7 +623,6 @@ American Coot,Waterfowl & Friends,"Rails, Gallinules, and Allies",7,Water - Floa
 Mallard,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-01-18,2024,7,Winter
 American Wigeon,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-01-18,2024,7,Winter
 Northern Shoveler,Waterfowl & Friends,Waterfowl,2,Flyover,2024-01-18,2024,7,Winter
-Killdeer,Shorebirds,Shorebirds,2,NA,2024-01-18,2024,7,Winter
 Least Sandpiper,Shorebirds,Shorebirds,2,Water - Wading,2024-01-18,2024,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,2024-01-18,2024,7,Winter
 Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-01-18,2024,7,Winter
@@ -728,8 +698,6 @@ Double-crested Cormorant,Cormorants,Cormorants and Anhingas,1,Bare ground,2024-0
 Great Blue Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Bare ground,2024-02-26,2024,7,Winter
 Double-crested Cormorant,Cormorants,Cormorants and Anhingas,1,Water - Floating,2024-02-26,2024,7,Winter
 California Thrasher,Insectivores - Terrestrial,"Catbirds, Mockingbirds, and Thrashers",2,Fence,2024-02-26,2024,7,Winter
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",2,NA,2024-02-26,2024,7,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-02-26,2024,7,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,4,Bare ground,2024-02-26,2024,7,Winter
 Ring-billed Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",43,Mud,2024-02-26,2024,7,Winter
 California Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",1,Mud,2024-02-26,2024,7,Winter
@@ -738,10 +706,8 @@ White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,5,Vegetation
 California Towhee,Omnivores,New World Sparrows,2,Bare ground,2024-02-26,2024,7,Winter
 Killdeer,Shorebirds,Shorebirds,25,Bare ground,2024-02-26,2024,7,Winter
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2024-02-26,2024,7,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2024-02-26,2024,7,Winter
 California Towhee,Omnivores,New World Sparrows,1,Fence,2024-02-26,2024,7,Winter
 Mew Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",7,Bare ground,2024-02-26,2024,7,Winter
-Semipalmated Plover,Shorebirds,Shorebirds,9,NA,2024-02-26,2024,7,Winter
 Least Sandpiper,Shorebirds,Shorebirds,3,Bare ground,2024-02-26,2024,7,Winter
 Western Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",6,Bare ground,2024-02-26,2024,7,Winter
 Ring-billed Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",6,Bare ground,2024-02-26,2024,7,Winter
@@ -755,7 +721,6 @@ Semipalmated Plover,Shorebirds,Shorebirds,49,Bare ground,2024-02-26,2024,7,Winte
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Bare ground,2024-02-26,2024,7,Winter
 Great Blue Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Bare ground,2024-02-26,2024,7,Winter
 Long-billed Curlew,Shorebirds,Shorebirds,4,Bare ground,2024-02-26,2024,7,Winter
-Whimbrel,Shorebirds,Shorebirds,4,NA,2024-02-26,2024,7,Winter
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2024-02-26,2024,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-02-26,2024,7,Winter
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-02-26,2024,7,Winter
@@ -862,32 +827,24 @@ American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",3,Flyover,2024-02-26,
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Air,2024-02-26,2024,7,Winter
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Tree,2024-02-26,2024,7,Winter
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,3,NA,2024-02-26,2024,7,Winter
 Lincoln's Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2024-02-26,2024,7,Winter
 Sora,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Tree,2024-02-26,2024,7,Winter
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-02-26,2024,7,Winter
 American Coot,Waterfowl & Friends,"Rails, Gallinules, and Allies",3,Water - Floating,2024-02-26,2024,7,Winter
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2024-02-26,2024,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
-Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-02-26,2024,7,Winter
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Bare ground,2024-02-26,2024,7,Winter
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
-Selasphorus sp.,Hummingbirds,Hummingbirds,1,NA,2024-02-26,2024,7,Winter
-Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",4,NA,2024-02-26,2024,7,Winter
 Anna's Hummingbird,Hummingbirds,Hummingbirds,2,Air,2024-02-26,2024,7,Winter
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",12,Vegetation - Tree,2024-02-26,2024,7,Winter
 European Starling,Insectivores - Terrestrial,Starlings and Mynas,2,Vegetation - Tree,2024-02-26,2024,7,Winter
 Yellow-rumped Warbler,Warblers,Wood-Warblers,3,Vegetation - Tree,2024-02-26,2024,7,Winter
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,Air,2024-02-26,2024,7,Winter
-House Wren,Insectivores - Terrestrial,Wrens,1,NA,2024-02-26,2024,7,Winter
-Bewick's Wren,Insectivores - Terrestrial,Wrens,1,NA,2024-02-26,2024,7,Winter
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",4,Air,2024-02-26,2024,7,Winter
 Bewick's Wren,Insectivores - Terrestrial,Wrens,1,Vegetation - Tree,2024-02-26,2024,7,Winter
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Tree,2024-02-26,2024,7,Winter
-Yellow-rumped Warbler,Warblers,Wood-Warblers,1,NA,2024-02-26,2024,7,Winter
 Mallard,Waterfowl & Friends,Waterfowl,4,Water - Floating,2024-02-26,2024,7,Winter
 Canada Goose,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-02-26,2024,7,Winter
 Northern Shoveler,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-02-26,2024,7,Winter
@@ -896,8 +853,6 @@ Ruddy Duck,Waterfowl & Friends,Waterfowl,1,Water - Floating,2024-02-26,2024,7,Wi
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,7,Building,2024-02-26,2024,7,Winter
 Sora,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
 Tree Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2024-02-26,2024,7,Winter
-House Wren,Insectivores - Terrestrial,Wrens,1,NA,2024-02-26,2024,7,Winter
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-02-26,2024,7,Winter
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Shrub,2024-02-26,2024,7,Winter
 Hooded Merganser,Waterfowl & Friends,Waterfowl,1,Water - Floating,2024-02-26,2024,7,Winter
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,5,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
@@ -905,21 +860,10 @@ Mallard,Waterfowl & Friends,Waterfowl,2,Vegetation - Herbaceous,2024-02-26,2024,
 Sora,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,Water - Floating,2024-02-26,2024,7,Winter
 American Coot,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
 Sora,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,Vegetation - Herbaceous,2024-02-26,2024,7,Winter
-Double-crested Cormorant,Cormorants,Cormorants and Anhingas,1,NA,2024-03-25,2024,7,Spring
-Greater White-fronted Goose,Waterfowl & Friends,Waterfowl,3,NA,2024-03-25,2024,7,Spring
-Snow Goose,Waterfowl & Friends,Waterfowl,1,NA,2024-03-25,2024,7,Spring
-California Towhee,Omnivores,New World Sparrows,1,NA,2024-03-25,2024,7,Spring
-Northern Shoveler,Waterfowl & Friends,Waterfowl,3,NA,2024-03-25,2024,7,Spring
 American Wigeon,Waterfowl & Friends,Waterfowl,3,Mud,2024-03-25,2024,7,Spring
 Canada Goose,Waterfowl & Friends,Waterfowl,5,Mud,2024-03-25,2024,7,Spring
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,3,NA,2024-03-25,2024,7,Spring
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2024-03-25,2024,7,Spring
-California Towhee,Omnivores,New World Sparrows,1,NA,2024-03-25,2024,7,Spring
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-03-25,2024,7,Spring
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Shrub,2024-03-25,2024,7,Spring
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,3,NA,2024-03-25,2024,7,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-03-25,2024,7,Spring
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-03-25,2024,7,Spring
 Northern Shoveler,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-03-25,2024,7,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2024-03-25,2024,7,Spring
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,Flyover,2024-03-25,2024,7,Spring
@@ -937,10 +881,6 @@ Killdeer,Shorebirds,Shorebirds,1,Bare ground,2024-03-25,2024,7,Spring
 Mallard,Waterfowl & Friends,Waterfowl,1,Water - Floating,2024-03-25,2024,7,Spring
 Western Bluebird,Insectivores - Terrestrial,Thrushes,2,Fence,2024-03-25,2024,7,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Fence,2024-03-25,2024,7,Spring
-Western Bluebird,Insectivores - Terrestrial,Thrushes,1,NA,2024-03-25,2024,7,Spring
-Yellow-rumped Warbler,Warblers,Wood-Warblers,3,NA,2024-03-25,2024,7,Spring
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,NA,2024-03-25,2024,7,Spring
-Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-03-25,2024,7,Spring
 Yellow-rumped Warbler,Warblers,Wood-Warblers,2,Vegetation - Herbaceous,2024-03-25,2024,7,Spring
 Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-03-25,2024,7,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",2,Bare ground,2024-03-25,2024,7,Spring
@@ -987,9 +927,7 @@ Ring-billed Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",3,Mud,2024-03-25,202
 Ring-billed Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",1,Mud,2024-03-25,2024,7,Spring
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-03-25,2024,7,Spring
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Flyover,2024-03-25,2024,7,Spring
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2024-03-25,2024,7,Spring
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2024-03-25,2024,7,Spring
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-03-25,2024,7,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2024-03-25,2024,7,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,Vegetation - Tree,2024-03-25,2024,7,Spring
 Gadwall,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-03-25,2024,7,Spring
@@ -1001,11 +939,6 @@ White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,4,Vegetation
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Herbaceous,2024-03-25,2024,7,Spring
 American Wigeon,Waterfowl & Friends,Waterfowl,20,Water - Floating,2024-03-25,2024,7,Spring
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Shrub,2024-03-25,2024,7,Spring
-California Towhee,Omnivores,New World Sparrows,2,NA,2024-03-25,2024,7,Spring
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,NA,2024-03-25,2024,7,Spring
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-03-25,2024,7,Spring
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,NA,2024-03-25,2024,7,Spring
-Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-03-25,2024,7,Spring
 Hooded Merganser,Waterfowl & Friends,Waterfowl,4,Water - Floating,2024-03-25,2024,7,Spring
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2024-03-25,2024,7,Spring
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2024-03-25,2024,7,Spring
@@ -1100,7 +1033,6 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,1,Vegetation - Shrub,2024-03-25,2024,7,Spring
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2024-03-25,2024,7,Spring
 Downy Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Vegetation - Shrub,2024-03-25,2024,7,Spring
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",8,NA,2024-03-25,2024,7,Spring
 Mourning Dove,Seed & Fruit Eaters,Pigeons and Doves,3,Vegetation - Tree,2024-03-25,2024,7,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",2,Vegetation - Tree,2024-03-25,2024,7,Spring
 Red-tailed Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2024-03-25,2024,7,Spring
@@ -1109,9 +1041,7 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2
 Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Shrub,2024-03-25,2024,7,Spring
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Fence,2024-03-25,2024,7,Spring
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,20,Air,2024-03-25,2024,7,Spring
-House Wren,Insectivores - Terrestrial,Wrens,1,NA,2024-03-25,2024,7,Spring
 Western Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",2,Mud,2024-03-25,2024,7,Spring
-Greater Yellowlegs,Shorebirds,Shorebirds,1,NA,2024-04-17,2024,7,Spring
 Spotted Sandpiper,Shorebirds,Shorebirds,1,Bare ground,2024-04-17,2024,7,Spring
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Flyover,2024-04-17,2024,7,Spring
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-04-17,2024,7,Spring
@@ -1122,7 +1052,6 @@ Killdeer,Shorebirds,Shorebirds,3,Bare ground,2024-04-17,2024,7,Spring
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-04-17,2024,7,Spring
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-04-17,2024,7,Spring
 Black-necked Stilt,Shorebirds,Shorebirds,2,Bare ground,2024-04-17,2024,7,Spring
-Peep sp.,Shorebirds,NA,2,Flyover,2024-04-17,2024,7,Spring
 Canada Goose,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-04-17,2024,7,Spring
 Western Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",31,Water - Floating,2024-04-17,2024,7,Spring
 California Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",2,Water - Floating,2024-04-17,2024,7,Spring
@@ -1226,8 +1155,6 @@ Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,1,Vegetation - Herbaceous,20
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-04-17,2024,7,Spring
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2024-04-17,2024,7,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-04-17,2024,7,Spring
-Eurasian Collared-Dove,Seed & Fruit Eaters,Pigeons and Doves,1,NA,2024-04-17,2024,7,Spring
-Mourning Dove,Seed & Fruit Eaters,Pigeons and Doves,1,NA,2024-04-17,2024,7,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",4,Air,2024-04-17,2024,7,Spring
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,6,Air,2024-04-17,2024,7,Spring
 Great-tailed Grackle,Insectivores - Terrestrial,Blackbirds,1,Vegetation - Herbaceous,2024-04-17,2024,7,Spring
@@ -1249,7 +1176,6 @@ Green-winged Teal,Waterfowl & Friends,Waterfowl,1,Water - Floating,2024-04-17,20
 Red-tailed Hawk,Raptors,"Vultures, Hawks, and Allies",1,Air,2024-04-17,2024,7,Spring
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-04-17,2024,7,Spring
 Northern Rough-winged Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2024-04-17,2024,7,Spring
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,NA,2024-04-17,2024,7,Spring
 Canada Goose,Waterfowl & Friends,Waterfowl,4,Mud,2024-04-17,2024,7,Spring
 Barn Swallow,Insectivores - Aerial,Martins and Swallows,2,Air,2024-04-17,2024,7,Spring
 Gadwall,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-04-17,2024,7,Spring
@@ -1257,7 +1183,6 @@ Mallard,Waterfowl & Friends,Waterfowl,1,Water - Wading,2024-04-17,2024,7,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,Air,2024-04-17,2024,7,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Vegetation - Shrub,2024-04-17,2024,7,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-04-17,2024,7,Spring
-Least Sandpiper,Shorebirds,Shorebirds,4,NA,2024-04-17,2024,7,Spring
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Other,2024-04-17,2024,7,Spring
 California Towhee,Omnivores,New World Sparrows,2,Fence,2024-04-17,2024,7,Spring
 Killdeer,Shorebirds,Shorebirds,1,Mud,2024-04-17,2024,7,Spring
@@ -1312,10 +1237,8 @@ Western Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, a
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-04-17,2024,7,Spring
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2024-04-17,2024,7,Spring
 Western Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Tree,2024-04-17,2024,7,Spring
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-04-17,2024,7,Spring
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Tree,2024-04-17,2024,7,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",4,Bare ground,2024-04-17,2024,7,Spring
-European Starling,Insectivores - Terrestrial,Starlings and Mynas,2,NA,2024-04-17,2024,7,Spring
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Bare ground,2024-04-17,2024,7,Spring
 European Starling,Insectivores - Terrestrial,Starlings and Mynas,2,Fence,2024-04-17,2024,7,Spring
 Lark Sparrow,Seed & Fruit Eaters,New World Sparrows,1,Vegetation - Tree,2024-04-17,2024,7,Spring
@@ -1359,7 +1282,6 @@ Mourning Dove,Seed & Fruit Eaters,Pigeons and Doves,2,Vegetation - Tree,2024-04-
 Red-tailed Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2024-04-17,2024,7,Spring
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Tree,2024-04-17,2024,7,Spring
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Air,2024-04-17,2024,7,Spring
-Great Blue Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,NA,2024-05-22,2024,7,Spring
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
 Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-05-22,2024,7,Spring
@@ -1518,10 +1440,8 @@ Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Shrub,2024-05-22,202
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2024-05-22,2024,7,Spring
 Killdeer,Shorebirds,Shorebirds,1,Mud,2024-05-22,2024,7,Spring
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-05-22,2024,7,Spring
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
-California Towhee,Omnivores,New World Sparrows,1,NA,2024-05-22,2024,7,Spring
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
 Orange-crowned Warbler,Warblers,Wood-Warblers,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
 Acorn Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Air,2024-05-22,2024,7,Spring
@@ -1531,12 +1451,10 @@ House Sparrow,Omnivores,Old World Sparrows,1,Vegetation - Shrub,2024-05-22,2024,
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
 Common Yellowthroat,Warblers,Wood-Warblers,2,Vegetation - Shrub,2024-05-22,2024,7,Spring
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2024-05-22,2024,7,Spring
-Cliff Swallow,Insectivores - Aerial,Martins and Swallows,50,NA,2024-05-22,2024,7,Spring
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2024-05-22,2024,7,Spring
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,1,Vegetation - Herbaceous,2024-05-22,2024,7,Spring
 Mallard,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-05-22,2024,7,Spring
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,6,Vegetation - Herbaceous,2024-05-22,2024,7,Spring
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2024-05-22,2024,7,Spring
 Pied-billed Grebe,Waterfowl & Friends,Grebes,2,Water - Floating,2024-05-22,2024,7,Spring
 Killdeer,Shorebirds,Shorebirds,4,Mud,2024-05-22,2024,7,Spring
 Dark-eyed Junco,Seed & Fruit Eaters,New World Sparrows,1,Vegetation - Herbaceous,2024-05-22,2024,7,Spring
@@ -1625,11 +1543,9 @@ California Towhee,Omnivores,New World Sparrows,2,Vegetation - Shrub,2024-06-12,2
 House Sparrow,Omnivores,Old World Sparrows,2,Vegetation - Shrub,2024-06-12,2024,7,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,6,Air,2024-06-12,2024,7,Summer
 Gadwall,Waterfowl & Friends,Waterfowl,7,Mud,2024-06-12,2024,7,Summer
-Black-necked Stilt,Shorebirds,Shorebirds,2,NA,2024-06-12,2024,7,Summer
 Canada Goose,Waterfowl & Friends,Waterfowl,6,Water - Floating,2024-06-12,2024,7,Summer
 Mallard,Waterfowl & Friends,Waterfowl,3,Water - Floating,2024-06-12,2024,7,Summer
 Gadwall,Waterfowl & Friends,Waterfowl,1,Water - Floating,2024-06-12,2024,7,Summer
-Cliff Swallow,Insectivores - Aerial,Martins and Swallows,6,NA,2024-06-12,2024,7,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,4,Air,2024-06-12,2024,7,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-06-12,2024,7,Summer
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Shrub,2024-06-12,2024,7,Summer
@@ -1647,13 +1563,10 @@ Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and A
 Mallard,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-06-12,2024,7,Summer
 Ruddy Duck,Waterfowl & Friends,Waterfowl,3,Water - Floating,2024-06-12,2024,7,Summer
 Canada Goose,Waterfowl & Friends,Waterfowl,9,Water - Floating,2024-06-12,2024,7,Summer
-Black-necked Stilt,Shorebirds,Shorebirds,1,NA,2024-06-12,2024,7,Summer
-Killdeer,Shorebirds,Shorebirds,1,NA,2024-06-12,2024,7,Summer
 Caspian Tern,Gulls & Terns,"Gulls, Terns, and Skimmers",2,Air,2024-06-12,2024,7,Summer
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-06-12,2024,7,Summer
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2024-06-12,2024,7,Summer
 Black-necked Stilt,Shorebirds,Shorebirds,2,Mud,2024-06-12,2024,7,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2024-06-12,2024,7,Summer
 Western Bluebird,Insectivores - Terrestrial,Thrushes,1,Fence,2024-06-12,2024,7,Summer
 Western Bluebird,Insectivores - Terrestrial,Thrushes,1,Fence,2024-06-12,2024,7,Summer
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-06-12,2024,7,Summer
@@ -1733,7 +1646,6 @@ Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and A
 Canada Goose,Waterfowl & Friends,Waterfowl,2,Water - Floating,2024-06-12,2024,7,Summer
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2024-06-12,2024,7,Summer
 Killdeer,Shorebirds,Shorebirds,5,Bare ground,2024-06-12,2024,7,Summer
-Killdeer,Shorebirds,Shorebirds,1,NA,2024-07-08,2024,7,Summer
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2024-07-08,2024,7,Summer
 Pied-billed Grebe,Waterfowl & Friends,Grebes,1,Water - Floating,2024-07-08,2024,7,Summer
 Mallard,Waterfowl & Friends,Waterfowl,7,Mud,2024-07-08,2024,7,Summer
@@ -1754,7 +1666,6 @@ Double-crested Cormorant,Cormorants,Cormorants and Anhingas,1,Habitat Feature - 
 Gadwall,Waterfowl & Friends,Waterfowl,1,Water - Floating,2024-07-08,2024,7,Summer
 Killdeer,Shorebirds,Shorebirds,2,Mud,2024-07-08,2024,7,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,2,Air,2024-07-08,2024,7,Summer
-Western Sandpiper,Shorebirds,Shorebirds,2,NA,2024-07-08,2024,7,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Habitat Feature - Log,2024-07-08,2024,7,Summer
 Black-necked Stilt,Shorebirds,Shorebirds,3,Mud,2024-07-08,2024,7,Summer
 Barn Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2024-07-08,2024,7,Summer
@@ -1777,7 +1688,6 @@ Killdeer,Shorebirds,Shorebirds,1,Bridge,2024-07-08,2024,7,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-07-08,2024,7,Summer
 Killdeer,Shorebirds,Shorebirds,2,Mud,2024-07-08,2024,7,Summer
 Great-tailed Grackle,Insectivores - Terrestrial,Blackbirds,4,Vegetation - Tree,2024-07-08,2024,7,Summer
-Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,NA,2024-07-08,2024,7,Summer
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",2,Building,2024-07-08,2024,7,Summer
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-07-08,2024,7,Summer
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,3,Building,2024-07-08,2024,7,Summer
@@ -1826,10 +1736,8 @@ Black-necked Stilt,Shorebirds,Shorebirds,4,Mud,2024-07-08,2024,7,Summer
 Green-winged Teal,Waterfowl & Friends,Waterfowl,1,Water - Floating,2024-07-08,2024,7,Summer
 Cinnamon Teal,Waterfowl & Friends,Waterfowl,3,Mud,2024-07-08,2024,7,Summer
 Killdeer,Shorebirds,Shorebirds,4,Mud,2024-07-08,2024,7,Summer
-Black-necked Stilt,Shorebirds,Shorebirds,4,NA,2024-07-08,2024,7,Summer
 Black-necked Stilt,Shorebirds,Shorebirds,1,Bare ground,2024-07-08,2024,7,Summer
 Killdeer,Shorebirds,Shorebirds,3,Mud,2024-08-23,2024,7,Summer
-Barn Swallow,Insectivores - Aerial,Martins and Swallows,4,NA,2024-08-23,2024,7,Summer
 Belted Kingfisher,Kingfishers,Kingfishers,2,Air,2024-08-23,2024,7,Summer
 Pied-billed Grebe,Waterfowl & Friends,Grebes,1,Mud,2024-08-23,2024,7,Summer
 Pied-billed Grebe,Waterfowl & Friends,Grebes,1,Water - Floating,2024-08-23,2024,7,Summer
@@ -1906,7 +1814,6 @@ Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,Ve
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Herbaceous,2024-08-23,2024,7,Summer
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Vegetation - Herbaceous,2024-08-23,2024,7,Summer
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,1,Vegetation - Herbaceous,2024-08-23,2024,7,Summer
-Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,1,NA,2024-08-23,2024,7,Summer
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",2,Air,2024-08-23,2024,7,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Bare ground,2024-08-23,2024,7,Summer
 Black-necked Stilt,Shorebirds,Shorebirds,2,Water - Wading,2024-08-23,2024,7,Summer
@@ -1925,20 +1832,9 @@ Killdeer,Shorebirds,Shorebirds,2,Bare ground,2024-08-23,2024,7,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Bare ground,2024-08-23,2024,7,Summer
 Western Sandpiper,Shorebirds,Shorebirds,2,Bare ground,2024-08-23,2024,7,Summer
 House Sparrow,Omnivores,Old World Sparrows,1,Vegetation - Shrub,2024-08-23,2024,7,Summer
-Semipalmated Plover,Shorebirds,Shorebirds,2,NA,2024-08-23,2024,7,Summer
-Black-necked Stilt,Shorebirds,Shorebirds,4,NA,2024-08-23,2024,7,Summer
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-08-23,2024,7,Summer
 House Sparrow,Omnivores,Old World Sparrows,6,Vegetation - Shrub,2024-08-23,2024,7,Summer
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",5,NA,2024-08-23,2024,7,Summer
-California Towhee,Omnivores,New World Sparrows,1,NA,2024-08-23,2024,7,Summer
 House Sparrow,Omnivores,Old World Sparrows,30,Vegetation - Herbaceous,2024-08-23,2024,7,Summer
-Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,5,NA,2024-08-23,2024,7,Summer
 Common Yellowthroat,Warblers,Wood-Warblers,2,Vegetation - Herbaceous,2024-08-23,2024,7,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-08-23,2024,7,Summer
-Sora,Waterfowl & Friends,"Rails, Gallinules, and Allies",3,NA,2024-08-23,2024,7,Summer
-Virginia Rail,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,NA,2024-08-23,2024,7,Summer
-Red-tailed Hawk,Raptors,"Vultures, Hawks, and Allies",1,NA,2024-08-23,2024,7,Summer
-Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,2,NA,2024-08-23,2024,7,Summer
 Wrentit,Insectivores - Terrestrial,"Parrotbills, Wrentit, and Allies",2,Vegetation - Shrub,2024-08-23,2024,7,Summer
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Fence,2024-08-23,2024,7,Summer
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2024-08-23,2024,7,Summer
@@ -1951,12 +1847,10 @@ Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Shrub,2024-08-23,2024,
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-08-23,2024,7,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,6,Vegetation - Herbaceous,2024-08-23,2024,7,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-08-23,2024,7,Summer
-Loggerhead Shrike,Raptors,Shrikes,1,NA,2024-08-23,2024,7,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,2,Air,2024-08-23,2024,7,Summer
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Flyover,2024-08-23,2024,7,Summer
 Barn Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2024-08-23,2024,7,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-08-23,2024,7,Summer
-Loggerhead Shrike,Raptors,Shrikes,1,NA,2024-08-23,2024,7,Summer
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2024-08-23,2024,7,Summer
 Mourning Dove,Seed & Fruit Eaters,Pigeons and Doves,1,Flyover,2024-08-23,2024,7,Summer
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,3,Vegetation - Shrub,2024-08-23,2024,7,Summer
@@ -2103,8 +1997,6 @@ Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,2,Air,2024-09-2
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Flyover,2024-09-26,2024,8,Fall
 Belted Kingfisher,Kingfishers,Kingfishers,1,Flyover,2024-09-26,2024,8,Fall
 Western Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",1,Flyover,2024-09-26,2024,8,Fall
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",6,NA,2024-09-26,2024,8,Fall
-California Towhee,Omnivores,New World Sparrows,2,NA,2024-09-26,2024,8,Fall
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",4,Flyover,2024-09-26,2024,8,Fall
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-09-26,2024,8,Fall
 Downy Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Vegetation - Tree,2024-09-26,2024,8,Fall
@@ -2124,7 +2016,6 @@ Loggerhead Shrike,Raptors,Shrikes,1,Vegetation - Tree,2024-09-26,2024,8,Fall
 Western Meadowlark,Insectivores - Terrestrial,Blackbirds,10,Air,2024-09-26,2024,8,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,4,Air,2024-09-26,2024,8,Fall
 White-faced Ibis,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Air,2024-09-26,2024,8,Fall
-Western Meadowlark,Insectivores - Terrestrial,Blackbirds,1,NA,2024-09-26,2024,8,Fall
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-09-26,2024,8,Fall
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-09-26,2024,8,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-09-26,2024,8,Fall
@@ -2138,39 +2029,20 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Air,2024-09-26,2024,8,Fall
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Shrub,2024-09-26,2024,8,Fall
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2024-09-26,2024,8,Fall
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2024-09-26,2024,8,Fall
-Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,NA,2024-09-26,2024,8,Fall
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2024-09-26,2024,8,Fall
 Canada Goose,Waterfowl & Friends,Waterfowl,8,Air,2024-09-26,2024,8,Fall
 Western Meadowlark,Insectivores - Terrestrial,Blackbirds,3,Air,2024-09-26,2024,8,Fall
 Mallard,Waterfowl & Friends,Waterfowl,8,Air,2024-09-26,2024,8,Fall
 Hairy Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Vegetation - Tree,2024-09-26,2024,8,Fall
-Western Sandpiper,Shorebirds,Shorebirds,3,NA,2024-09-26,2024,8,Fall
-Least Sandpiper,Shorebirds,Shorebirds,6,NA,2024-09-26,2024,8,Fall
 Downy Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Vegetation - Tree,2024-09-26,2024,8,Fall
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2024-09-26,2024,8,Fall
 California Towhee,Omnivores,New World Sparrows,2,Vegetation - Shrub,2024-09-26,2024,8,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-09-26,2024,8,Fall
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2024-09-26,2024,8,Fall
-Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-09-26,2024,8,Fall
-Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-09-26,2024,8,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2024-09-26,2024,8,Fall
-Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,1,NA,2024-09-26,2024,8,Fall
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",4,Air,2024-09-26,2024,8,Fall
 Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-09-26,2024,8,Fall
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2024-09-26,2024,8,Fall
 Anna's Hummingbird,Hummingbirds,Hummingbirds,2,Air,2024-09-26,2024,8,Fall
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Tree,2024-09-26,2024,8,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,4,NA,2024-09-26,2024,8,Fall
-Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",3,NA,2024-09-26,2024,8,Fall
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Tree,2024-09-26,2024,8,Fall
-Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,6,NA,2024-09-26,2024,8,Fall
-Allen's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2024-09-26,2024,8,Fall
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,NA,2024-09-26,2024,8,Fall
-Allen's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2024-09-26,2024,8,Fall
-Northern Mockingbird,Omnivores,"Catbirds, Mockingbirds, and Thrashers",1,NA,2024-09-26,2024,8,Fall
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-09-26,2024,8,Fall
-Northern Mockingbird,Omnivores,"Catbirds, Mockingbirds, and Thrashers",1,NA,2024-09-26,2024,8,Fall
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Shrub,2024-09-26,2024,8,Fall
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,1,Vegetation - Herbaceous,2024-09-26,2024,8,Fall
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2024-10-23,2024,8,Fall
@@ -2309,8 +2181,6 @@ Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Vegetation - Tree,202
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Tree,2024-10-23,2024,8,Fall
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,20,Vegetation - Shrub,2024-10-23,2024,8,Fall
 Great Blue Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2024-10-23,2024,8,Fall
-Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-10-23,2024,8,Fall
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-10-23,2024,8,Fall
 Anna's Hummingbird,Hummingbirds,Hummingbirds,2,Vegetation - Tree,2024-10-23,2024,8,Fall
 Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Vegetation - Tree,2024-10-23,2024,8,Fall
 Yellow-rumped Warbler,Warblers,Wood-Warblers,2,Vegetation - Tree,2024-10-23,2024,8,Fall
@@ -2323,7 +2193,6 @@ Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and A
 Mallard,Waterfowl & Friends,Waterfowl,3,Flyover,2024-10-23,2024,8,Fall
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Air,2024-10-23,2024,8,Fall
 Loggerhead Shrike,Raptors,Shrikes,1,Air,2024-10-23,2024,8,Fall
-American Pipit,Insectivores - Terrestrial,Wagtails and Pipits,1,NA,2024-10-23,2024,8,Fall
 Western Meadowlark,Insectivores - Terrestrial,Blackbirds,1,Bare ground,2024-10-23,2024,8,Fall
 Yellow-rumped Warbler,Warblers,Wood-Warblers,1,Vegetation - Shrub,2024-10-23,2024,8,Fall
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Tree,2024-10-23,2024,8,Fall
@@ -2335,7 +2204,6 @@ Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,Bare ground,2024
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-10-23,2024,8,Fall
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Fence,2024-10-23,2024,8,Fall
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,15,Bare ground,2024-10-23,2024,8,Fall
-Bewick's Wren,Insectivores - Terrestrial,Wrens,1,NA,2024-10-23,2024,8,Fall
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2024-10-23,2024,8,Fall
 Cooper's Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2024-10-23,2024,8,Fall
 American Kestrel,Raptors,Falcons and Caracaras,1,Habitat Feature - Snag,2024-10-23,2024,8,Fall
@@ -2345,29 +2213,17 @@ Yellow-rumped Warbler,Warblers,Wood-Warblers,2,Vegetation - Shrub,2024-10-23,202
 Yellow-headed Blackbird,Insectivores - Terrestrial,Blackbirds,1,Flyover,2024-10-23,2024,8,Fall
 Western Meadowlark,Insectivores - Terrestrial,Blackbirds,2,Air,2024-10-23,2024,8,Fall
 Western Meadowlark,Insectivores - Terrestrial,Blackbirds,15,Air,2024-10-23,2024,8,Fall
-Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,3,NA,2024-10-23,2024,8,Fall
-Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-10-23,2024,8,Fall
-Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,3,NA,2024-10-23,2024,8,Fall
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",3,Vegetation - Herbaceous,2024-10-23,2024,8,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-10-23,2024,8,Fall
 Yellow-rumped Warbler,Warblers,Wood-Warblers,3,Vegetation - Tree,2024-10-23,2024,8,Fall
 Orange-crowned Warbler,Warblers,Wood-Warblers,1,Vegetation - Tree,2024-10-23,2024,8,Fall
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Bare ground,2024-10-23,2024,8,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2024-10-23,2024,8,Fall
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2024-10-23,2024,8,Fall
-Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-10-23,2024,8,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-10-23,2024,8,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Shrub,2024-10-23,2024,8,Fall
 Spotted Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2024-10-23,2024,8,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-10-23,2024,8,Fall
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,15,Vegetation - Tree,2024-10-23,2024,8,Fall
-Bewick's Wren,Insectivores - Terrestrial,Wrens,1,NA,2024-10-23,2024,8,Fall
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2024-10-23,2024,8,Fall
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2024-10-23,2024,8,Fall
-Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,NA,2024-10-23,2024,8,Fall
 Canada Goose,Waterfowl & Friends,Waterfowl,13,Flyover,2024-10-23,2024,8,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Tree,2024-10-23,2024,8,Fall
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2024-10-23,2024,8,Fall
 House Wren,Insectivores - Terrestrial,Wrens,1,Vegetation - Herbaceous,2024-10-23,2024,8,Fall
 Bewick's Wren,Insectivores - Terrestrial,Wrens,1,Vegetation - Tree,2024-10-23,2024,8,Fall
 Great Blue Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2024-11-18,2024,8,Fall
@@ -2378,7 +2234,6 @@ American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,Air,2024-11-18,2024
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Shrub,2024-11-18,2024,8,Fall
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Air,2024-11-18,2024,8,Fall
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2024-11-18,2024,8,Fall
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-11-18,2024,8,Fall
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Shrub,2024-11-18,2024,8,Fall
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Air,2024-11-18,2024,8,Fall
 Killdeer,Shorebirds,Shorebirds,53,Bare ground,2024-11-18,2024,8,Fall
@@ -2407,7 +2262,6 @@ Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2024-11-18,
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2024-11-18,2024,8,Fall
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",6,Flyover,2024-11-18,2024,8,Fall
 House Wren,Insectivores - Terrestrial,Wrens,1,Vegetation - Tree,2024-11-18,2024,8,Fall
-Yellow-rumped Warbler,Warblers,Wood-Warblers,3,NA,2024-11-18,2024,8,Fall
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Bare ground,2024-11-18,2024,8,Fall
 Common Yellowthroat,Warblers,Wood-Warblers,1,Bare ground,2024-11-18,2024,8,Fall
 Yellow-rumped Warbler,Warblers,Wood-Warblers,1,Vegetation - Tree,2024-11-18,2024,8,Fall
@@ -2421,7 +2275,6 @@ American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",5,Air,2024-11-18,2024
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,26,Vegetation - Tree,2024-11-18,2024,8,Fall
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Tree,2024-11-18,2024,8,Fall
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2024-11-18,2024,8,Fall
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2024-11-18,2024,8,Fall
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-11-18,2024,8,Fall
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Tree,2024-11-18,2024,8,Fall
 Mallard,Waterfowl & Friends,Waterfowl,15,Bare ground,2024-11-18,2024,8,Fall
@@ -2543,12 +2396,8 @@ House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Vegetation - 
 Common Yellowthroat,Warblers,Wood-Warblers,2,Vegetation - Shrub,2024-12-17,2024,8,Winter
 Orange-crowned Warbler,Warblers,Wood-Warblers,1,Vegetation - Shrub,2024-12-17,2024,8,Winter
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Shrub,2024-12-17,2024,8,Winter
-Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,NA,2024-12-17,2024,8,Winter
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2024-12-17,2024,8,Winter
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2024-12-17,2024,8,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2024-12-17,2024,8,Winter
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2024-12-17,2024,8,Winter
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,NA,2024-12-17,2024,8,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,8,Vegetation - Tree,2024-12-17,2024,8,Winter
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2024-12-17,2024,8,Winter
 California Towhee,Omnivores,New World Sparrows,2,Vegetation - Shrub,2024-12-17,2024,8,Winter
@@ -2566,7 +2415,6 @@ American Pipit,Insectivores - Terrestrial,Wagtails and Pipits,6,Vegetation - Her
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,8,Vegetation - Herbaceous,2024-12-17,2024,8,Winter
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,8,Flyover,2024-12-17,2024,8,Winter
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2024-12-17,2024,8,Winter
-American Kestrel,Raptors,Falcons and Caracaras,1,NA,2024-12-17,2024,8,Winter
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,6,Vegetation - Tree,2024-12-17,2024,8,Winter
 California Scrub-Jay,Omnivores,"Jays, Magpies, Crows, and Ravens",1,Vegetation - Tree,2024-12-17,2024,8,Winter
 American Pipit,Insectivores - Terrestrial,Wagtails and Pipits,3,Vegetation - Herbaceous,2024-12-17,2024,8,Winter
@@ -2638,7 +2486,6 @@ Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Vegetation - Tree,202
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-12-17,2024,8,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,2024-12-17,2024,8,Winter
 Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Vegetation - Tree,2024-12-17,2024,8,Winter
-Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,NA,2024-12-17,2024,8,Winter
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2024-12-17,2024,8,Winter
 Dark-eyed Junco,Seed & Fruit Eaters,New World Sparrows,1,Vegetation - Tree,2024-12-17,2024,8,Winter
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,3,Vegetation - Tree,2024-12-17,2024,8,Winter
@@ -2712,13 +2559,11 @@ Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Sh
 Ruddy Duck,Waterfowl & Friends,Waterfowl,2,Water - Floating,2025-01-31,2025,8,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Mallard,Waterfowl & Friends,Waterfowl,2,Water - Floating,2025-01-31,2025,8,Winter
-Killdeer,Shorebirds,Shorebirds,10,NA,2025-01-31,2025,8,Winter
 Green-winged Teal,Waterfowl & Friends,Waterfowl,1,Water - Floating,2025-01-31,2025,8,Winter
 Least Sandpiper,Shorebirds,Shorebirds,5,Water - Wading,2025-01-31,2025,8,Winter
 Greater Yellowlegs,Shorebirds,Shorebirds,5,Water - Wading,2025-01-31,2025,8,Winter
 Double-crested Cormorant,Cormorants,Cormorants and Anhingas,1,Bare ground,2025-01-31,2025,8,Winter
 Western Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",2,Bare ground,2025-01-31,2025,8,Winter
-California Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",1,NA,2025-01-31,2025,8,Winter
 Canada Goose,Waterfowl & Friends,Waterfowl,12,Water - Floating,2025-01-31,2025,8,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,8,Bare ground,2025-01-31,2025,8,Winter
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Shrub,2025-01-31,2025,8,Winter
@@ -2726,100 +2571,40 @@ Pied-billed Grebe,Waterfowl & Friends,Grebes,2,Water - Floating,2025-01-31,2025,
 Canada Goose,Waterfowl & Friends,Waterfowl,12,Water - Floating,2025-01-31,2025,8,Winter
 Greater White-fronted Goose,Waterfowl & Friends,Waterfowl,1,Water - Floating,2025-01-31,2025,8,Winter
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
-Ring-necked Duck,Waterfowl & Friends,Waterfowl,3,NA,2025-01-31,2025,8,Winter
 Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",2,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Greater Yellowlegs,Shorebirds,Shorebirds,1,Water - Wading,2025-01-31,2025,8,Winter
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 American Coot,Waterfowl & Friends,"Rails, Gallinules, and Allies",3,Water - Floating,2025-01-31,2025,8,Winter
-Red-tailed Hawk,Raptors,"Vultures, Hawks, and Allies",1,NA,2025-01-31,2025,8,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Tree,2025-01-31,2025,8,Winter
 Killdeer,Shorebirds,Shorebirds,4,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
-Killdeer,Shorebirds,Shorebirds,1,NA,2025-01-31,2025,8,Winter
-Greater Yellowlegs,Shorebirds,Shorebirds,1,NA,2025-01-31,2025,8,Winter
-Killdeer,Shorebirds,Shorebirds,2,NA,2025-01-31,2025,8,Winter
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
-Long-billed Dowitcher,Shorebirds,Shorebirds,1,NA,2025-01-31,2025,8,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
-American Pipit,Insectivores - Terrestrial,Wagtails and Pipits,1,NA,2025-01-31,2025,8,Winter
-Yellow-rumped Warbler,Warblers,Wood-Warblers,1,NA,2025-01-31,2025,8,Winter
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",3,NA,2025-01-31,2025,8,Winter
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
-Yellow-rumped Warbler,Warblers,Wood-Warblers,2,NA,2025-01-31,2025,8,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,12,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
-Dark-eyed Junco,Seed & Fruit Eaters,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
-Mallard,Waterfowl & Friends,Waterfowl,8,NA,2025-01-31,2025,8,Winter
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",6,NA,2025-01-31,2025,8,Winter
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-01-31,2025,8,Winter
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,3,Vegetation - Tree,2025-01-31,2025,8,Winter
 Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Vegetation - Tree,2025-01-31,2025,8,Winter
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,14,Vegetation - Tree,2025-01-31,2025,8,Winter
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",3,NA,2025-01-31,2025,8,Winter
-Yellow-rumped Warbler,Warblers,Wood-Warblers,1,NA,2025-01-31,2025,8,Winter
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Tree,2025-01-31,2025,8,Winter
 California Towhee,Omnivores,New World Sparrows,2,Bare ground,2025-01-31,2025,8,Winter
 Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Air,2025-01-31,2025,8,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,12,Vegetation - Tree,2025-01-31,2025,8,Winter
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,2,Air,2025-01-31,2025,8,Winter
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-01-31,2025,8,Winter
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,NA,2025-01-31,2025,8,Winter
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",3,NA,2025-01-31,2025,8,Winter
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2025-01-31,2025,8,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2025-01-31,2025,8,Winter
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,12,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
-Marsh Wren,Insectivores - Terrestrial,Wrens,1,NA,2025-01-31,2025,8,Winter
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",3,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 American Coot,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,Water - Floating,2025-01-31,2025,8,Winter
-Common Yellowthroat,Warblers,Wood-Warblers,2,NA,2025-01-31,2025,8,Winter
 Yellow-rumped Warbler,Warblers,Wood-Warblers,1,Vegetation - Tree,2025-01-31,2025,8,Winter
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Tree,2025-01-31,2025,8,Winter
-Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2025-01-31,2025,8,Winter
-Allen's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2025-01-31,2025,8,Winter
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2025-01-31,2025,8,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
-Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,NA,2025-01-31,2025,8,Winter
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
-Yellow-rumped Warbler,Warblers,Wood-Warblers,1,NA,2025-01-31,2025,8,Winter
-Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,NA,2025-01-31,2025,8,Winter
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,3,NA,2025-01-31,2025,8,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2025-01-31,2025,8,Winter
-Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,NA,2025-01-31,2025,8,Winter
 White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,5,Vegetation - Shrub,2025-01-31,2025,8,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-01-31,2025,8,Winter
-Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,10,NA,2025-01-31,2025,8,Winter
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,NA,2025-01-31,2025,8,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-01-31,2025,8,Winter
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,11,NA,2025-01-31,2025,8,Winter
-California Towhee,Omnivores,New World Sparrows,1,NA,2025-01-31,2025,8,Winter
-House Sparrow,Omnivores,Old World Sparrows,1,NA,2025-01-31,2025,8,Winter
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2025-01-31,2025,8,Winter
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,4,NA,2025-01-31,2025,8,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,4,NA,2025-01-31,2025,8,Winter
-Mallard,Waterfowl & Friends,Waterfowl,4,NA,2025-01-31,2025,8,Winter
-California Thrasher,Insectivores - Terrestrial,"Catbirds, Mockingbirds, and Thrashers",1,NA,2025-01-31,2025,8,Winter
-Hooded Merganser,Waterfowl & Friends,Waterfowl,2,NA,2025-01-31,2025,8,Winter
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2025-01-31,2025,8,Winter
 Wrentit,Insectivores - Terrestrial,"Parrotbills, Wrentit, and Allies",1,Vegetation - Tree,2025-01-31,2025,8,Winter
-Common Yellowthroat,Warblers,Wood-Warblers,3,NA,2025-01-31,2025,8,Winter
-American Wigeon,Waterfowl & Friends,Waterfowl,2,NA,2025-01-31,2025,8,Winter
-Pied-billed Grebe,Waterfowl & Friends,Grebes,1,NA,2025-01-31,2025,8,Winter
-White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-01-31,2025,8,Winter
-Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,2,NA,2025-01-31,2025,8,Winter
 Canada Goose,Waterfowl & Friends,Waterfowl,42,Bare ground,2025-01-31,2025,8,Winter
 Spotted Towhee,Omnivores,New World Sparrows,1,Vegetation - Tree,2025-01-31,2025,8,Winter
-Cooper's Hawk,Raptors,"Vultures, Hawks, and Allies",1,NA,2025-01-31,2025,8,Winter
-Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,NA,2025-01-31,2025,8,Winter
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-01-31,2025,8,Winter
-American Coot,Waterfowl & Friends,"Rails, Gallinules, and Allies",2,NA,2025-01-31,2025,8,Winter
-Mallard,Waterfowl & Friends,Waterfowl,1,NA,2025-01-31,2025,8,Winter
 Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Vegetation - Shrub,2025-01-31,2025,8,Winter
-Yellow-rumped Warbler,Warblers,Wood-Warblers,1,NA,2025-01-31,2025,8,Winter
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Shrub,2025-01-31,2025,8,Winter
 Cooper's Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2025-01-31,2025,8,Winter
@@ -2831,7 +2616,6 @@ White-crowned Sparrow,Insectivores - Terrestrial,New World Sparrows,5,Vegetation
 California Towhee,Omnivores,New World Sparrows,2,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Tree,2025-01-31,2025,8,Winter
 Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Vegetation - Tree,2025-01-31,2025,8,Winter
-Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,NA,2025-01-31,2025,8,Winter
 Killdeer,Shorebirds,Shorebirds,4,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Flyover,2025-01-31,2025,8,Winter
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
@@ -2841,7 +2625,6 @@ Wrentit,Insectivores - Terrestrial,"Parrotbills, Wrentit, and Allies",1,Vegetati
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 American Pipit,Insectivores - Terrestrial,Wagtails and Pipits,25,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2025-01-31,2025,8,Winter
-Killdeer,Shorebirds,Shorebirds,5,NA,2025-01-31,2025,8,Winter
 Western Meadowlark,Insectivores - Terrestrial,Blackbirds,7,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Loggerhead Shrike,Raptors,Shrikes,1,Fence,2025-01-31,2025,8,Winter
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,Air,2025-01-31,2025,8,Winter
@@ -2885,7 +2668,6 @@ Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,10,Vegeta
 Dark-eyed Junco,Seed & Fruit Eaters,New World Sparrows,1,Vegetation - Herbaceous,2025-01-31,2025,8,Winter
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Tree,2025-01-31,2025,8,Winter
 Ruby-crowned Kinglet,Insectivores - Terrestrial,Kinglets,1,Vegetation - Tree,2025-01-31,2025,8,Winter
-Yellow-rumped Warbler,Warblers,Wood-Warblers,2,NA,2025-01-31,2025,8,Winter
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,6,Vegetation - Tree,2025-01-31,2025,8,Winter
 Western Bluebird,Insectivores - Terrestrial,Thrushes,2,Vegetation - Tree,2025-01-31,2025,8,Winter
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Tree,2025-01-31,2025,8,Winter
@@ -3112,7 +2894,6 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,2,Vegetation - Shrub,2025-02-19,2025,8,Winter
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-02-19,2025,8,Winter
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2025-02-19,2025,8,Winter
-Pied-billed Grebe,Waterfowl & Friends,Grebes,1,NA,2025-02-19,2025,8,Winter
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-02-19,2025,8,Winter
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Herbaceous,2025-02-19,2025,8,Winter
 Cinnamon Teal,Waterfowl & Friends,Waterfowl,3,Water - Floating,2025-03-18,2025,8,Spring
@@ -3177,8 +2958,6 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,4,Vegetation - Shrub,
 Tree Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2025-03-18,2025,8,Spring
 House Sparrow,Omnivores,Old World Sparrows,1,Vegetation - Shrub,2025-03-18,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2025-03-18,2025,8,Spring
-Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,2,NA,2025-03-18,2025,8,Spring
-Redhead,Waterfowl & Friends,Waterfowl,2,NA,2025-03-18,2025,8,Spring
 Gadwall,Waterfowl & Friends,Waterfowl,4,Water - Floating,2025-03-18,2025,8,Spring
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,20,Air,2025-03-18,2025,8,Spring
 American Coot,Waterfowl & Friends,"Rails, Gallinules, and Allies",10,Water - Floating,2025-03-18,2025,8,Spring
@@ -3207,7 +2986,6 @@ Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,1,Veg
 Killdeer,Shorebirds,Shorebirds,1,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
 Canada Goose,Waterfowl & Friends,Waterfowl,13,Bare ground,2025-03-18,2025,8,Spring
-Killdeer,Shorebirds,Shorebirds,1,NA,2025-03-18,2025,8,Spring
 Barn Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2025-03-18,2025,8,Spring
 Tree Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2025-03-18,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,2025-03-18,2025,8,Spring
@@ -3223,19 +3001,16 @@ Killdeer,Shorebirds,Shorebirds,3,Bare ground,2025-03-18,2025,8,Spring
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
 Barn Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2025-03-18,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Air,2025-03-18,2025,8,Spring
-Mallard,Waterfowl & Friends,Waterfowl,2,NA,2025-03-18,2025,8,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",3,Air,2025-03-18,2025,8,Spring
 Mallard,Waterfowl & Friends,Waterfowl,2,Air,2025-03-18,2025,8,Spring
 Killdeer,Shorebirds,Shorebirds,1,Air,2025-03-18,2025,8,Spring
 Least Sandpiper,Shorebirds,Shorebirds,2,Water - Wading,2025-03-18,2025,8,Spring
 Red-tailed Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2025-03-18,2025,8,Spring
 Western Meadowlark,Insectivores - Terrestrial,Blackbirds,3,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
-European Starling,Insectivores - Terrestrial,Starlings and Mynas,2,NA,2025-03-18,2025,8,Spring
 American Pipit,Insectivores - Terrestrial,Wagtails and Pipits,25,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Tree,2025-03-18,2025,8,Spring
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,2,Air,2025-03-18,2025,8,Spring
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,3,Fence,2025-03-18,2025,8,Spring
-Killdeer,Shorebirds,Shorebirds,2,NA,2025-03-18,2025,8,Spring
 Tree Swallow,Insectivores - Aerial,Martins and Swallows,2,Air,2025-03-18,2025,8,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",2,Air,2025-03-18,2025,8,Spring
 Savannah Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
@@ -3253,20 +3028,11 @@ Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and A
 Yellow-rumped Warbler,Warblers,Wood-Warblers,4,Vegetation - Tree,2025-03-18,2025,8,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Vegetation - Tree,2025-03-18,2025,8,Spring
 Blue-gray Gnatcatcher,Insectivores - Terrestrial,Gnatcatchers,1,Vegetation - Tree,2025-03-18,2025,8,Spring
-Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2025-03-18,2025,8,Spring
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Shrub,2025-03-18,2025,8,Spring
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-03-18,2025,8,Spring
 Loggerhead Shrike,Raptors,Shrikes,1,Habitat Feature - Snag,2025-03-18,2025,8,Spring
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2025-03-18,2025,8,Spring
-Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,NA,2025-03-18,2025,8,Spring
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2025-03-18,2025,8,Spring
-Killdeer,Shorebirds,Shorebirds,1,NA,2025-03-18,2025,8,Spring
-Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,NA,2025-03-18,2025,8,Spring
 Tree Swallow,Insectivores - Aerial,Martins and Swallows,3,Air,2025-03-18,2025,8,Spring
 Mallard,Waterfowl & Friends,Waterfowl,1,Air,2025-03-18,2025,8,Spring
 Killdeer,Shorebirds,Shorebirds,2,Bare ground,2025-03-18,2025,8,Spring
-Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,2,NA,2025-03-18,2025,8,Spring
-Cliff Swallow,Insectivores - Aerial,Martins and Swallows,20,NA,2025-03-18,2025,8,Spring
 Northern Rough-winged Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2025-03-18,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
 Sora,Waterfowl & Friends,"Rails, Gallinules, and Allies",1,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
@@ -3274,7 +3040,6 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbac
 Pied-billed Grebe,Waterfowl & Friends,Grebes,1,Water - Floating,2025-03-18,2025,8,Spring
 Mallard,Waterfowl & Friends,Waterfowl,2,Bare ground,2025-03-18,2025,8,Spring
 Northern Shoveler,Waterfowl & Friends,Waterfowl,3,Water - Floating,2025-03-18,2025,8,Spring
-Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,1,NA,2025-03-18,2025,8,Spring
 Common Yellowthroat,Warblers,Wood-Warblers,2,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,7,Vegetation - Tree,2025-03-18,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Herbaceous,2025-03-18,2025,8,Spring
@@ -3304,7 +3069,6 @@ Wrentit,Insectivores - Terrestrial,"Parrotbills, Wrentit, and Allies",1,Vegetati
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",3,Vegetation - Shrub,2025-04-25,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-04-25,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-04-25,2025,8,Spring
-Allen's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2025-04-25,2025,8,Spring
 Gadwall,Waterfowl & Friends,Waterfowl,8,Bare ground,2025-04-25,2025,8,Spring
 Northern Shoveler,Waterfowl & Friends,Waterfowl,4,Bare ground,2025-04-25,2025,8,Spring
 Mallard,Waterfowl & Friends,Waterfowl,9,Bare ground,2025-04-25,2025,8,Spring
@@ -3344,13 +3108,9 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2025-04-25,2025,8,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Tree,2025-04-25,2025,8,Spring
 California Towhee,Omnivores,New World Sparrows,1,Fence,2025-04-25,2025,8,Spring
-Northern Mockingbird,Omnivores,"Catbirds, Mockingbirds, and Thrashers",1,NA,2025-04-25,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2025-04-25,2025,8,Spring
 House Sparrow,Omnivores,Old World Sparrows,1,Vegetation - Tree,2025-04-25,2025,8,Spring
-Allen's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2025-04-25,2025,8,Spring
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2025-04-25,2025,8,Spring
-Brown-headed Cowbird,Seed & Fruit Eaters,Blackbirds,3,NA,2025-04-25,2025,8,Spring
-Mourning Dove,Seed & Fruit Eaters,Pigeons and Doves,1,NA,2025-04-25,2025,8,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Vegetation - Tree,2025-04-25,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2025-04-25,2025,8,Spring
 Orange-crowned Warbler,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-04-25,2025,8,Spring
@@ -3370,18 +3130,11 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbac
 Western Tanager,Insectivores - Terrestrial,"Cardinals, Grosbeaks, and Allies",1,Vegetation - Tree,2025-04-25,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-04-25,2025,8,Spring
 Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-04-25,2025,8,Spring
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-04-25,2025,8,Spring
 Killdeer,Shorebirds,Shorebirds,1,Water - Wading,2025-04-25,2025,8,Spring
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2025-04-25,2025,8,Spring
-Mallard,Waterfowl & Friends,Waterfowl,16,NA,2025-04-25,2025,8,Spring
 Northern Shoveler,Waterfowl & Friends,Waterfowl,1,Bare ground,2025-04-25,2025,8,Spring
-House Sparrow,Omnivores,Old World Sparrows,2,NA,2025-04-25,2025,8,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",5,Vegetation - Herbaceous,2025-04-25,2025,8,Spring
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-04-25,2025,8,Spring
-Killdeer,Shorebirds,Shorebirds,2,NA,2025-04-25,2025,8,Spring
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,NA,2025-04-25,2025,8,Spring
 Orange-crowned Warbler,Warblers,Wood-Warblers,1,Vegetation - Tree,2025-04-25,2025,8,Spring
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2025-04-25,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,2025-04-25,2025,8,Spring
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,2,Vegetation - Herbaceous,2025-04-25,2025,8,Spring
 Wrentit,Insectivores - Terrestrial,"Parrotbills, Wrentit, and Allies",1,Vegetation - Herbaceous,2025-04-25,2025,8,Spring
@@ -3448,7 +3201,6 @@ Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-04-25,
 Yellow Warbler,Warblers,Wood-Warblers,1,Vegetation - Tree,2025-04-25,2025,8,Spring
 Spotted Towhee,Omnivores,New World Sparrows,1,Vegetation - Tree,2025-04-25,2025,8,Spring
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-04-25,2025,8,Spring
-Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,NA,2025-04-25,2025,8,Spring
 Selasphorus sp.,Hummingbirds,Hummingbirds,1,Vegetation - Herbaceous,2025-04-25,2025,8,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",5,Vegetation - Tree,2025-04-25,2025,8,Spring
 Acorn Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Vegetation - Tree,2025-04-25,2025,8,Spring
@@ -3504,7 +3256,6 @@ Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-05-29,
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Herbaceous,2025-05-29,2025,8,Spring
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,1,Flyover,2025-05-29,2025,8,Spring
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Vegetation - Shrub,2025-05-29,2025,8,Spring
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2025-05-29,2025,8,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Shrub,2025-05-29,2025,8,Spring
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,8,Vegetation - Herbaceous,2025-05-29,2025,8,Spring
 Great-tailed Grackle,Insectivores - Terrestrial,Blackbirds,1,Vegetation - Herbaceous,2025-05-29,2025,8,Spring
@@ -3599,7 +3350,6 @@ Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Air,2025-05-29,2025,8,Spring
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,2,Vegetation - Tree,2025-05-29,2025,8,Spring
 California Towhee,Omnivores,New World Sparrows,2,Air,2025-05-29,2025,8,Spring
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2025-05-29,2025,8,Spring
-Orange-crowned Warbler,Warblers,Wood-Warblers,1,NA,2025-05-29,2025,8,Spring
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-05-29,2025,8,Spring
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,Air,2025-05-29,2025,8,Spring
 Cooper's Hawk,Raptors,"Vultures, Hawks, and Allies",1,Air,2025-05-29,2025,8,Spring
@@ -3609,20 +3359,17 @@ Western Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",1,Air,2025-05-29,2025,8,
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Shrub,2025-05-29,2025,8,Spring
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2025-05-29,2025,8,Spring
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,2,Vegetation - Tree,2025-05-29,2025,8,Spring
-Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2025-05-29,2025,8,Spring
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,2,Vegetation - Tree,2025-05-29,2025,8,Spring
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Vegetation - Tree,2025-05-29,2025,8,Spring
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,1,Vegetation - Shrub,2025-05-29,2025,8,Spring
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-05-29,2025,8,Spring
 Gadwall,Waterfowl & Friends,Waterfowl,2,Water - Floating,2025-05-29,2025,8,Spring
-Western Snowy Plover,Shorebirds,NA,3,Bare ground,2025-05-29,2025,8,Spring
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-05-29,2025,8,Spring
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2025-05-29,2025,8,Spring
 California Towhee,Omnivores,New World Sparrows,2,Fence,2025-05-29,2025,8,Spring
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2025-05-29,2025,8,Spring
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,Air,2025-05-29,2025,8,Spring
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",2,Air,2025-05-29,2025,8,Spring
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-05-29,2025,8,Spring
 Mallard,Waterfowl & Friends,Waterfowl,60,Water - Floating,2025-05-29,2025,8,Spring
 Gadwall,Waterfowl & Friends,Waterfowl,10,Water - Floating,2025-05-29,2025,8,Spring
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2025-05-29,2025,8,Spring
@@ -3638,7 +3385,6 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,1,Vegetation - Herbaceous,2025-05-29,2025,8,Spring
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2025-05-29,2025,8,Spring
 Green Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Vegetation - Herbaceous,2025-05-29,2025,8,Spring
-Northern Pintail,Waterfowl & Friends,Waterfowl,1,NA,2025-05-29,2025,8,Spring
 Canada Goose,Waterfowl & Friends,Waterfowl,6,Bare ground,2025-05-29,2025,8,Spring
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,12,Vegetation - Tree,2025-05-29,2025,8,Spring
 American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,Air,2025-05-29,2025,8,Spring
@@ -3648,7 +3394,6 @@ Mallard,Waterfowl & Friends,Waterfowl,8,Water - Floating,2025-06-24,2025,8,Summe
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-06-24,2025,8,Summer
 Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-06-24,2025,8,Summer
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Air,2025-06-24,2025,8,Summer
-Western Snowy Plover,Shorebirds,NA,2,Bare ground,2025-06-24,2025,8,Summer
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-06-24,2025,8,Summer
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",4,Water - Wading,2025-06-24,2025,8,Summer
 Double-crested Cormorant,Cormorants,Cormorants and Anhingas,1,Water - Floating,2025-06-24,2025,8,Summer
@@ -3675,47 +3420,26 @@ Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Bare ground,2025-06
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Tree,2025-06-24,2025,8,Summer
 Anna's Hummingbird,Hummingbirds,Hummingbirds,2,Air,2025-06-24,2025,8,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",3,Vegetation - Tree,2025-06-24,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-06-24,2025,8,Summer
 Mallard,Waterfowl & Friends,Waterfowl,2,Water - Floating,2025-06-24,2025,8,Summer
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Vegetation - Herbaceous,2025-06-24,2025,8,Summer
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Air,2025-06-24,2025,8,Summer
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,2,Vegetation - Herbaceous,2025-06-24,2025,8,Summer
-California Towhee,Omnivores,New World Sparrows,1,NA,2025-06-24,2025,8,Summer
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2025-06-24,2025,8,Summer
-Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,NA,2025-06-24,2025,8,Summer
 California Towhee,Omnivores,New World Sparrows,2,Vegetation - Shrub,2025-06-24,2025,8,Summer
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,Water - Wading,2025-06-24,2025,8,Summer
 Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Fence,2025-06-24,2025,8,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,3,Air,2025-06-24,2025,8,Summer
 Canada Goose,Waterfowl & Friends,Waterfowl,5,Water - Floating,2025-06-24,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2025-06-24,2025,8,Summer
-Killdeer,Shorebirds,Shorebirds,1,NA,2025-06-24,2025,8,Summer
 Gadwall,Waterfowl & Friends,Waterfowl,2,Water - Floating,2025-06-24,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,1,Water - Wading,2025-06-24,2025,8,Summer
 Savannah Sparrow (Belding's),Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-06-24,2025,8,Summer
 Greater Yellowlegs,Shorebirds,Shorebirds,1,Water - Wading,2025-06-24,2025,8,Summer
-Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,NA,2025-06-24,2025,8,Summer
-Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",5,NA,2025-06-24,2025,8,Summer
 Mallard,Waterfowl & Friends,Waterfowl,45,Bare ground,2025-06-24,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,4,NA,2025-06-24,2025,8,Summer
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2025-06-24,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,3,Bare ground,2025-06-24,2025,8,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,2,Air,2025-06-24,2025,8,Summer
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Air,2025-06-24,2025,8,Summer
-House Sparrow,Omnivores,Old World Sparrows,3,NA,2025-06-24,2025,8,Summer
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2025-06-24,2025,8,Summer
-Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,2,NA,2025-06-24,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-06-24,2025,8,Summer
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,3,Vegetation - Herbaceous,2025-06-24,2025,8,Summer
-Allen's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2025-06-24,2025,8,Summer
-California Towhee,Omnivores,New World Sparrows,1,NA,2025-06-24,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-06-24,2025,8,Summer
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-06-24,2025,8,Summer
-House Sparrow,Omnivores,Old World Sparrows,20,NA,2025-06-24,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-06-24,2025,8,Summer
-Hooded Oriole,Insectivores - Terrestrial,Blackbirds,1,NA,2025-06-24,2025,8,Summer
-Anna's Hummingbird,Hummingbirds,Hummingbirds,2,NA,2025-06-24,2025,8,Summer
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",25,NA,2025-06-24,2025,8,Summer
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2025-06-24,2025,8,Summer
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Tree,2025-06-24,2025,8,Summer
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Herbaceous,2025-06-24,2025,8,Summer
@@ -3776,7 +3500,6 @@ Cliff Swallow,Insectivores - Aerial,Martins and Swallows,20,Air,2025-06-24,2025,
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-07-23,2025,8,Summer
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-07-23,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,3,Bare ground,2025-07-23,2025,8,Summer
-Western Snowy Plover,Shorebirds,NA,1,Bare ground,2025-07-23,2025,8,Summer
 Mallard,Waterfowl & Friends,Waterfowl,2,Water - Floating,2025-07-23,2025,8,Summer
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",4,Water - Wading,2025-07-23,2025,8,Summer
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-07-23,2025,8,Summer
@@ -3791,9 +3514,7 @@ Killdeer,Shorebirds,Shorebirds,2,Bare ground,2025-07-23,2025,8,Summer
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,Water - Wading,2025-07-23,2025,8,Summer
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,Water - Wading,2025-07-23,2025,8,Summer
 Say's Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",3,Vegetation - Shrub,2025-07-23,2025,8,Summer
-Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,6,NA,2025-07-23,2025,8,Summer
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",2,Bare ground,2025-07-23,2025,8,Summer
-Western Snowy Plover,Shorebirds,NA,3,Bare ground,2025-07-23,2025,8,Summer
 Western Gull,Gulls & Terns,"Gulls, Terns, and Skimmers",2,Bare ground,2025-07-23,2025,8,Summer
 Great Blue Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-07-23,2025,8,Summer
 Green Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-07-23,2025,8,Summer
@@ -3805,50 +3526,34 @@ Dark-eyed Junco,Seed & Fruit Eaters,New World Sparrows,1,Vegetation - Tree,2025-
 Killdeer,Shorebirds,Shorebirds,2,Bare ground,2025-07-23,2025,8,Summer
 Least Sandpiper,Shorebirds,Shorebirds,1,Bare ground,2025-07-23,2025,8,Summer
 Dark-eyed Junco,Seed & Fruit Eaters,New World Sparrows,2,Bare ground,2025-07-23,2025,8,Summer
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",1,NA,2025-07-23,2025,8,Summer
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-07-23,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-07-23,2025,8,Summer
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",2,NA,2025-07-23,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Tree,2025-07-23,2025,8,Summer
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-07-23,2025,8,Summer
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2025-07-23,2025,8,Summer
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2025-07-23,2025,8,Summer
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,10,Vegetation - Tree,2025-07-23,2025,8,Summer
-American Crow,Omnivores,"Jays, Magpies, Crows, and Ravens",5,NA,2025-07-23,2025,8,Summer
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,4,Vegetation - Tree,2025-07-23,2025,8,Summer
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,2,Vegetation - Tree,2025-07-23,2025,8,Summer
 Mallard,Waterfowl & Friends,Waterfowl,17,Water - Floating,2025-07-23,2025,8,Summer
 Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",8,Vegetation - Herbaceous,2025-07-23,2025,8,Summer
 Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-07-23,2025,8,Summer
-American Kestrel,Raptors,Falcons and Caracaras,1,NA,2025-07-23,2025,8,Summer
 Red-winged Blackbird,Insectivores - Terrestrial,Blackbirds,8,Vegetation - Tree,2025-07-23,2025,8,Summer
-Black-crowned Night-Heron,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,NA,2025-07-23,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,Bare ground,2025-07-23,2025,8,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Tree,2025-07-23,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-07-23,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Shrub,2025-07-23,2025,8,Summer
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2025-07-23,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Shrub,2025-07-23,2025,8,Summer
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",3,NA,2025-07-23,2025,8,Summer
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Shrub,2025-07-23,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-07-23,2025,8,Summer
-Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",3,NA,2025-07-23,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,1,Water - Wading,2025-07-23,2025,8,Summer
-Western Sandpiper,Shorebirds,Shorebirds,5,NA,2025-07-23,2025,8,Summer
-Least Sandpiper,Shorebirds,Shorebirds,1,NA,2025-07-23,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,2,Water - Wading,2025-07-23,2025,8,Summer
-California Towhee,Omnivores,New World Sparrows,2,NA,2025-07-23,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-07-23,2025,8,Summer
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,NA,2025-07-23,2025,8,Summer
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",4,NA,2025-07-23,2025,8,Summer
 Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,Air,2025-07-23,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-07-23,2025,8,Summer
 Mallard,Waterfowl & Friends,Waterfowl,10,Bare ground,2025-07-23,2025,8,Summer
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,4,Vegetation - Herbaceous,2025-07-23,2025,8,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Bridge,2025-07-23,2025,8,Summer
 Cooper's Hawk,Raptors,"Vultures, Hawks, and Allies",1,Vegetation - Tree,2025-07-23,2025,8,Summer
 Downy Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Vegetation - Tree,2025-07-23,2025,8,Summer
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",4,NA,2025-07-23,2025,8,Summer
 California Towhee,Omnivores,New World Sparrows,1,Vegetation - Shrub,2025-07-23,2025,8,Summer
 Oak Titmouse,Insectivores - Terrestrial,"Tits, Chickadees, and Titmice",2,Vegetation - Tree,2025-07-23,2025,8,Summer
 Anna's Hummingbird,Hummingbirds,Hummingbirds,2,Vegetation - Tree,2025-07-23,2025,8,Summer
@@ -3869,7 +3574,6 @@ Turkey Vulture,Raptors,"Vultures, Hawks, and Allies",1,Air,2025-07-23,2025,8,Sum
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,6,Vegetation - Shrub,2025-07-23,2025,8,Summer
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",5,Vegetation - Herbaceous,2025-07-23,2025,8,Summer
 Common Yellowthroat,Warblers,Wood-Warblers,2,Vegetation - Tree,2025-07-23,2025,8,Summer
-Anna's Hummingbird,Hummingbirds,Hummingbirds,2,NA,2025-07-23,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-07-23,2025,8,Summer
 Hooded Oriole,Insectivores - Terrestrial,Blackbirds,1,Vegetation - Tree,2025-07-23,2025,8,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2025-07-23,2025,8,Summer
@@ -3880,7 +3584,6 @@ Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Vegetati
 Cooper's Hawk,Raptors,"Vultures, Hawks, and Allies",1,Air,2025-07-23,2025,8,Summer
 Mourning Dove,Seed & Fruit Eaters,Pigeons and Doves,1,Air,2025-07-23,2025,8,Summer
 Wrentit,Insectivores - Terrestrial,"Parrotbills, Wrentit, and Allies",1,Vegetation - Shrub,2025-07-23,2025,8,Summer
-Mourning Dove,Seed & Fruit Eaters,Pigeons and Doves,1,NA,2025-07-23,2025,8,Summer
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",4,Vegetation - Tree,2025-07-23,2025,8,Summer
 California Towhee,Omnivores,New World Sparrows,2,Bare ground,2025-07-23,2025,8,Summer
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Herbaceous,2025-07-23,2025,8,Summer
@@ -3890,7 +3593,6 @@ Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Shrub,2025-07-23,202
 House Sparrow,Omnivores,Old World Sparrows,2,Vegetation - Herbaceous,2025-07-23,2025,8,Summer
 Hooded Oriole,Insectivores - Terrestrial,Blackbirds,1,Vegetation - Shrub,2025-07-23,2025,8,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,5,Air,2025-07-23,2025,8,Summer
-Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,9,NA,2025-07-23,2025,8,Summer
 Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",2,Vegetation - Shrub,2025-07-23,2025,8,Summer
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-07-23,2025,8,Summer
 Selasphorus sp.,Hummingbirds,Hummingbirds,1,Air,2025-07-23,2025,8,Summer
@@ -3923,13 +3625,9 @@ Least Sandpiper,Shorebirds,Shorebirds,2,Bare ground,2025-08-11,2025,8,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,4,Air,2025-08-11,2025,8,Summer
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,3,Air,2025-08-11,2025,8,Summer
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",2,Vegetation - Herbaceous,2025-08-11,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,2,NA,2025-08-11,2025,8,Summer
-Common Yellowthroat,Warblers,Wood-Warblers,1,NA,2025-08-11,2025,8,Summer
 Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,6,Vegetation - Herbaceous,2025-08-11,2025,8,Summer
-Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,3,NA,2025-08-11,2025,8,Summer
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Air,2025-08-11,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-08-11,2025,8,Summer
-Scaly-breasted Munia,Seed & Fruit Eaters,Estrildids,2,NA,2025-08-11,2025,8,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Vegetation - Herbaceous,2025-08-11,2025,8,Summer
 Common Yellowthroat,Warblers,Wood-Warblers,2,Vegetation - Tree,2025-08-11,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Herbaceous,2025-08-11,2025,8,Summer
@@ -3951,12 +3649,6 @@ Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,4,Vegetat
 Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-08-11,2025,8,Summer
 California Towhee,Omnivores,New World Sparrows,1,Bare ground,2025-08-11,2025,8,Summer
 Common Yellowthroat,Warblers,Wood-Warblers,1,Vegetation - Shrub,2025-08-11,2025,8,Summer
-Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,NA,2025-08-11,2025,8,Summer
-Anna's Hummingbird,Hummingbirds,Hummingbirds,1,NA,2025-08-11,2025,8,Summer
-Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,2,NA,2025-08-11,2025,8,Summer
-House Sparrow,Omnivores,Old World Sparrows,9,NA,2025-08-11,2025,8,Summer
-Mallard,Waterfowl & Friends,Waterfowl,8,NA,2025-08-11,2025,8,Summer
-Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,NA,2025-08-11,2025,8,Summer
 Great Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-08-11,2025,8,Summer
 Snowy Egret,"Herons, Egrets, Ibis","Herons, Ibis, and Allies",1,Water - Wading,2025-08-11,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2025-08-11,2025,8,Summer
@@ -3968,11 +3660,9 @@ Semipalmated Plover,Shorebirds,Shorebirds,2,Bare ground,2025-08-11,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-08-11,2025,8,Summer
 Mallard,Waterfowl & Friends,Waterfowl,8,Water - Floating,2025-08-11,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-08-11,2025,8,Summer
-Western Snowy Plover,Shorebirds,NA,1,Bare ground,2025-08-11,2025,8,Summer
 Mallard,Waterfowl & Friends,Waterfowl,34,Water - Floating,2025-08-11,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,4,Water - Wading,2025-08-11,2025,8,Summer
 Black Phoebe,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,Bare ground,2025-08-11,2025,8,Summer
-Western Snowy Plover,Shorebirds,NA,1,Bare ground,2025-08-11,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,2,Water - Wading,2025-08-11,2025,8,Summer
 Killdeer,Shorebirds,Shorebirds,1,Bare ground,2025-08-11,2025,8,Summer
 Least Sandpiper,Shorebirds,Shorebirds,1,Bare ground,2025-08-11,2025,8,Summer
@@ -3986,7 +3676,6 @@ Anna's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-08-11,2025
 Barn Swallow,Insectivores - Aerial,Martins and Swallows,1,Air,2025-08-11,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,1,Vegetation - Shrub,2025-08-11,2025,8,Summer
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Tree,2025-08-11,2025,8,Summer
-House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,NA,2025-08-11,2025,8,Summer
 Song Sparrow,Insectivores - Terrestrial,New World Sparrows,3,Vegetation - Shrub,2025-08-11,2025,8,Summer
 Lesser Goldfinch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",5,Vegetation - Shrub,2025-08-11,2025,8,Summer
 Red-shouldered Hawk,Raptors,"Vultures, Hawks, and Allies",1,Fence,2025-08-11,2025,8,Summer
@@ -4015,7 +3704,6 @@ Allen's Hummingbird,Hummingbirds,Hummingbirds,1,Vegetation - Tree,2025-08-11,202
 Acorn Woodpecker,Insectivores - Terrestrial,Woodpeckers,1,Vegetation - Tree,2025-08-11,2025,8,Summer
 Anna's Hummingbird,Hummingbirds,Hummingbirds,2,Vegetation - Tree,2025-08-11,2025,8,Summer
 Rock Pigeon (Feral Pigeon),Seed & Fruit Eaters,Pigeons and Doves,3,Bare ground,2025-08-11,2025,8,Summer
-Cassin's Kingbird,Insectivores - Aerial,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",1,NA,2025-08-11,2025,8,Summer
 Bushtit,Insectivores - Terrestrial,Penduline-Tits and Long-tailed Tits,8,Vegetation - Shrub,2025-08-11,2025,8,Summer
 House Finch,Seed & Fruit Eaters,"Finches, Euphonias, and Allies",1,Vegetation - Tree,2025-08-11,2025,8,Summer
 Cliff Swallow,Insectivores - Aerial,Martins and Swallows,6,Air,2025-08-11,2025,8,Summer

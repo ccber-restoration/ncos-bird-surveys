@@ -69,9 +69,13 @@ df25 <- map_dfr(csvfiles25,~ read_csv(.x,col_types = cols(.default = "c"),
 df25$Observation_Date[df25$Observation_Date == "2025-04-29"] <- "2025-04-25"
 
 # selecting only relevant variables to ensure equal number of variables for rbind
-df23 <- df23 %>% select(c(Species,Count,Substrate,Observation_Date))
-df24 <- df24 %>% select(c(Species,Count,Substrate,Observation_Date))
-df25 <- df25 %>% select(c(Species,Count,Substrate,Observation_Date))
+# removing data missing substrate (NA substrate)
+df23 <- df23 %>% select(c(Species,Count,Substrate,Observation_Date)) %>% 
+  filter(!is.na(Substrate))
+df24 <- df24 %>% select(c(Species,Count,Substrate,Observation_Date)) %>% 
+  filter(!is.na(Substrate))
+df25 <- df25 %>% select(c(Species,Count,Substrate,Observation_Date)) %>% 
+  filter(!is.na(Substrate))
 
 # rbind-ing bird survey data of each year and creating year, survey year and season variables using
 # case_when()
@@ -92,6 +96,7 @@ newaggregate <- rbind(intermediate,df25) %>% mutate(
 newaggregate$Count <- as.integer(newaggregate$Count)
 newaggregate <- newaggregate %>% filter(!is.na(newaggregate$Count))
 newaggregate <- newaggregate[!is.na(newaggregate$Species),]
+
 
 
 
@@ -120,7 +125,8 @@ birdsurveys_select <- birdsurveys_filtered %>% select(c("Species","General.Type"
 
 # combining old and new aggregated data
 updated_aggregated_survey_data <- rbind(newjoined_select,birdsurveys_select)
-# seems to not have lost any data along the way
+updated_aggregated_survey_data <- updated_aggregated_survey_data %>% filter(!is.na(eBird_Group))
+# removing NA eBird group data eliminates 7 rows
 
 
 
