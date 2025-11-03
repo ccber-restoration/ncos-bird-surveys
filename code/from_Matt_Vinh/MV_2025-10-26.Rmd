@@ -7,6 +7,9 @@ output: html_document
 library(tidyverse)
 library(here)
 library(ggVennDiagram)
+library(DescTools)
+library(Kendall)
+library(vegan)
 
 MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
 aggregated <- read_csv(MVaggregatedpath)
@@ -19,45 +22,156 @@ relative_proportions <- aggregated %>% group_by(Survey_Year,Substrate) %>%
   mutate(total = sum(substrate_count)) %>% 
   mutate(proportion = substrate_count / total)
 
-# test of concept
-relative_proportions %>% filter(Substrate == "Habitat Feature - Hibernacula") %>% 
+# shortening substrate names for better display
+relative_proportions$Substrate[relative_proportions$Substrate == "Habitat Feature - Hibernacula"] <- 
+  "Hibernacula"
+relative_proportions$Substrate[relative_proportions$Substrate == "Habitat Feature - Log"] <- 
+  "Log"
+relative_proportions$Substrate[relative_proportions$Substrate == "Habitat Feature - Snag"] <- 
+  "Snag"
+relative_proportions$Substrate[relative_proportions$Substrate == "Vegetation - Herbaceous"] <- 
+  "Herbaceous"
+relative_proportions$Substrate[relative_proportions$Substrate == "Vegetation - Shrub"] <- 
+  "Shrub"
+relative_proportions$Substrate[relative_proportions$Substrate == "Vegetation - Tree"] <- 
+  "Tree"
+
+
+
+### relative proportion vs survey year
+# proof of concept / just hibernacula
+relative_proportions %>% filter(Substrate == "Hibernacula") %>% 
   ggplot(aes(x = Survey_Year,y = proportion)) + 
   geom_line() + theme_light() +
-  labs(title = "Hibernacula Substrate Relative Usage Over Time",x = "Survey Year",
-       y = "Proportion (per Year)") +
+  labs(title = "Hibernacula Substrate Relative Proportion of Observations Over Time",x = "Survey Year",
+       y = "Proportion of Observations") +
   theme(plot.title = element_text(hjust = 0.5))
 
-# all substrates relative proportion of observations over time
+# all substrates
 relative_proportions %>% ggplot(aes(x = Survey_Year,y = proportion)) +
   geom_line() + theme_light() +
   facet_wrap(~ Substrate,scale = "free_y") +
-  labs(x = "Survey Year",y = "Proportion (per Year)",title = "Relative Usage over Time by Substrate") +
+  labs(x = "Survey Year",y = "Proportion of Observations",
+       title = "Relative Proportion of Observations over Time by Substrate") +
   theme(plot.title = element_text(hjust = 0.5))
-# substrates not generating graph:
-# air/flyover
-# rock
-# telephone wire
-# vernal pool
+# substrates not generating graph due to lack of recording:
+# air/flyover - only year 3
+# rock - only year 3
+# telephone wire - only year 3
+# vernal pool - only year 5
+
+# all substrates except those only recorded for one year
+fig1 <- relative_proportions %>% filter(Substrate != "Air/Flyover" & Substrate != "Rock" & 
+                                  Substrate != "telephone wire" & Substrate != "Vernal Pool") %>%
+  ggplot(aes(x = Survey_Year,y = proportion)) +
+  geom_line() + theme_light() +
+  facet_wrap(~ Substrate,scale = "free_y") +
+  labs(x = "Survey Year",y = "Proportion of Observations",
+       title = "Relative Proportion of Observations over Time by Substrate") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggsave(filename = paste0("Substrate_Relative_Proportion_vs_Survey Year",
+                         format(Sys.Date(),"%y-%m-%d"),".pdf"),fig1,
+       width = 200,height = 140,units = "mm")
+
+
+
+### total count vs survey year
+# proof of concept / just hibernacula
+relative_proportions %>% filter(Substrate == "Hibernacula") %>% 
+  ggplot(aes(x = Survey_Year,y = substrate_count)) + 
+  geom_line() + theme_light() +
+  labs(x = "Survey Year",y = "Count",
+       title = "Hibernacula Substrate Observation Count over Time") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+# "all" substrates
+fig2 <- relative_proportions %>% filter(Substrate != "Air/Flyover" & Substrate != "Rock" & 
+                                  Substrate != "telephone wire" & Substrate != "Vernal Pool") %>%
+  ggplot(aes(x = Survey_Year,y = substrate_count)) +
+  geom_line() + theme_light() +
+  facet_wrap(~ Substrate,scale = "free_y") +
+  labs(x = "Survey Year",y = "Count",title = "Observation Count over Time by Substrate") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggsave(filename = paste0("Substrate_Total_Count_vs_Survey Year",
+                         format(Sys.Date(),"%y-%m-%d"),".pdf"),fig2,
+       width = 200,height = 140,units = "mm")
 
 ```
 
 ```{r}
 
-# proof of concept venn diagram
-hibernacula_only <- aggregated %>% filter(Substrate == "Habitat Feature - Hibernacula")
-hibernacula_venn <- split(hibernacula_only$Count,hibernacula_only$Survey_Year)
+# anova and post hoc fisher lsd tests for hibernacula substrate
+aggregated$Survey_Year <- as.factor(aggregated$Survey_Year)
+hibernacula <- aggregated %>% filter(Substrate == "Habitat Feature - Hibernacula")
+fit1 <- aov(Count ~ Survey_Year,data = hibernacula)
+summary(fit1) # p-value 0.781 - seems to contradict total count over time, which definitely changes
+PostHocTest(fit1,method = "lsd") # no significant comparisons
+
+
+
+# mann-kendall test for hibernacula
+MannKendall(hibernacula$Count) # p-value 0.744
+# skeptical of application of mann-kendall because of nature of bird survey data collection
+
+```
+
+```{r}
+
+# hibernacula venn diagrams
+
+hibernacula_venn <- split(hibernacula$Species,hibernacula$Survey_Year)
+# generates nested lists containing all species recorded per survey year for hibernacula
+
 HV1 <- hibernacula_venn[1:4]
 HV2 <- hibernacula_venn[3:6]
 HV3 <- hibernacula_venn[5:8]
+HV4 <- hibernacula_venn[c(1,2,7,8)]
+
 ggVennDiagram(HV1)
-# minimal overlap between species observed at hibernacula substrate over survey years 1 to 4
-#TODO manual verification of venn diagram for understanding
+ggVennDiagram(HV2)
+ggVennDiagram(HV3)
+ggVennDiagram(HV4)
+
+# no species overlap between all survey years
 
 ```
 
 ```{r}
 
+# herbaceous vegetation venn diagrams
+# chosen because of large number of observations
 
+herbaceous <- aggregated %>% filter(Substrate == "Vegetation - Herbaceous")
+herbaceous_venn <- split(herbaceous$Species,herbaceous$Survey_Year)
+
+vhv1 <- herbaceous_venn[1:4]
+vhv2 <- herbaceous_venn[3:6]
+vhv3 <- herbaceous_venn[5:8]
+vhv4 <- herbaceous_venn[c(1,2,7,8)]
+
+ggVennDiagram(vhv1)
+ggVennDiagram(vhv2)
+ggVennDiagram(vhv3)
+ggVennDiagram(vhv4)
+
+# considerable overlap between every survey year; always 20-25 species
+
+```
+
+```{r,warning = F}
+
+# NMDS
+# calculated stress is essentially 0, data sample size too small?
+# stress plot also strange
+
+community <- xtabs(Count ~ Survey_Year + Species, data = hibernacula)
+community <- as.matrix(community)
+
+nmds1 <- metaMDS(community,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+print(nmds1)
+stressplot(nmds1,lwd = 5)
 
 ```
 
