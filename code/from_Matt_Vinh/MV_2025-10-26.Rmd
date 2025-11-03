@@ -1,21 +1,45 @@
 ---
 title: "MV_2025-10-26"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
-```{r}
+This document is a summary of my work since Francis and I last met following the September 19th bird survey. Not included here is the R script used to generate an updated dataset containing the aggregation of the most recent bird survey data with the previous aggregation that spanned until 2023. In general, the produced visualizations have less to say about the hibernacula habitat type as opposed to more popular alternatives.
+
+```{r,warning = F,include = F}
 library(tidyverse)
 library(here)
 library(ggVennDiagram)
 library(DescTools)
 library(Kendall)
 library(vegan)
+library(goeveg)
 
 MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
 aggregated <- read_csv(MVaggregatedpath)
+
+hibernacula <- aggregated %>% filter(Substrate == "Habitat Feature - Hibernacula")
 ```
 
-```{r}
+## Habitat Proportions and Counts
+
+Below are three plots of proportion vs time followed by two plots of count vs time.
+
+The first graphs the proportion of hibernacula observations to overall observations for each survey year. Although the slope trends downward, it should be noted that the scale of the y-axis, 0% - 0.6%, is very small.
+
+The second displays the proportion of the specified habitat's observations to the overall observations for each survey year. Here, I found it strange that four habitat types, air/flyover, rock, telephone wire and vernal pool, did not generate anything, leading me to discover that each of these types were only recorded during one of the eight survey years. Thus, there would only be one data point to plot so a slope cannot be produced.
+
+The third plot remedies this problem with lack of data for certain habitats by removing them. I think these graphs are generically interesting and that statistical tests would be an appropriate followup, however as will be seen later I did not focus much on testing.
+
+The fourth plots the total count of observations at the hibernacula habitat for each survey year. The slope here is almost identical to that of the first plot of hibernacula relative proportion.
+
+The fifth graphs the total count of observations for each survey year per habitat type while continuing to omit habitats with only one survey years' worth of data. Again, the graph slopes are similar to the corresponding relative proportion graph slopes.
+
+I ended up ggsaving the two facet wrapped plots.
+
+```{r,warning = F,echo = F}
 
 relative_proportions <- aggregated %>% group_by(Survey_Year,Substrate) %>%
   summarize(substrate_count = sum(Count)) %>% 
@@ -70,9 +94,11 @@ fig1 <- relative_proportions %>% filter(Substrate != "Air/Flyover" & Substrate !
        title = "Relative Proportion of Observations over Time by Substrate") +
   theme(plot.title = element_text(hjust = 0.5))
 
-ggsave(filename = paste0("Substrate_Relative_Proportion_vs_Survey Year",
-                         format(Sys.Date(),"%y-%m-%d"),".pdf"),fig1,
-       width = 200,height = 140,units = "mm")
+plot(fig1)
+
+#ggsave(filename = paste0("Substrate_Relative_Proportion_vs_Survey Year",
+#                         format(Sys.Date(),"%y-%m-%d"),".pdf"),fig1,
+#       width = 200,height = 140,units = "mm")
 
 
 
@@ -94,17 +120,28 @@ fig2 <- relative_proportions %>% filter(Substrate != "Air/Flyover" & Substrate !
   labs(x = "Survey Year",y = "Count",title = "Observation Count over Time by Substrate") +
   theme(plot.title = element_text(hjust = 0.5))
 
-ggsave(filename = paste0("Substrate_Total_Count_vs_Survey Year",
-                         format(Sys.Date(),"%y-%m-%d"),".pdf"),fig2,
-       width = 200,height = 140,units = "mm")
+plot(fig2)
+
+#ggsave(filename = paste0("Substrate_Total_Count_vs_Survey Year",
+#                         format(Sys.Date(),"%y-%m-%d"),".pdf"),fig2,
+#       width = 200,height = 140,units = "mm")
 
 ```
 
-```{r}
+Here I perform tests for the hibernacula habitat.
+
+First I did ANOVA for the effect of survey year on observation count at the hibernacula habitat, yielding F = 0.559 and p-value = 0.781, indicating there were no significant differences between survey years. I found this result surprising given that, as seen above, the count of total observations for hibernacula habitats does change over the eight survey years. To confirm this finding, I conducted a Post-Hoc Fisher LSD comparison, analyzing differences between apired survey years. This test yielded no signficant differences between any of the pairs at a 95% confidence level. This agrees with the result of the ANOVA.
+
+I then performed a Mann-Kendall tets for the observation count of the hibernacula habitat, yielding a $\tau$ = -0.051 and p-value = 0.744, suggesting there is no monotonic trend. This is also surprising because the observed trend via earlier graph appears decently monotonic.
+
+Lastly I repeat ANOVA for the total observation count of the hibernacula habitat but per observation date instead of survey year. This made the results worse, with F = 0.236 and p-value = 0.997, so I did not continue to post-ANOVA analysis.
+
+```{r,echo = F}
+
+aggregated$Survey_Year <- as.factor(aggregated$Survey_Year)
+hibernacula$Survey_Year <- as.factor(hibernacula$Survey_Year)
 
 # anova and post hoc fisher lsd tests for hibernacula substrate
-aggregated$Survey_Year <- as.factor(aggregated$Survey_Year)
-hibernacula <- aggregated %>% filter(Substrate == "Habitat Feature - Hibernacula")
 fit1 <- aov(Count ~ Survey_Year,data = hibernacula)
 summary(fit1) # p-value 0.781 - seems to contradict total count over time, which definitely changes
 PostHocTest(fit1,method = "lsd") # no significant comparisons
@@ -115,9 +152,21 @@ PostHocTest(fit1,method = "lsd") # no significant comparisons
 MannKendall(hibernacula$Count) # p-value 0.744
 # skeptical of application of mann-kendall because of nature of bird survey data collection
 
+
+
+hibernacula$Observation_Date <- as.factor(hibernacula$Observation_Date)
+
+# ~ observation date (survey id) instead of ~ survey year
+fit2 <- aov(Count ~ Observation_Date,data = hibernacula)
+summary(fit2) # performs worse, p-value = 0.997
+
 ```
 
-```{r}
+## Venn Diagrams
+
+Next I generate venn diagrams using ggVennDiagram for the hibernacula habitat to investigate what species have overlapping observation at the substrate over different survey years. For each figure, survey year is written above each bubble. Since a venn diagram with eight intersecting bubbles would offer poor visualization of species overlap, I broke the analysis into four groups of four, the first being survey years 1 through 4, the second 3 to 6, the third 5 to 8 and the last of 1, 2, 7 and 8. The diagrams display that there is minimal species overlap between the survey years. Notably, none of the years share a single species in common to all years. Additionally, the third diagra of years 5 through 8 shows that there is 0 overlap, with none of the included years intersecting with any of the others. However, it should be taken into consideration that the small sample size of species recorded at hibernacula is small.
+
+```{r,echo = F}
 
 # hibernacula venn diagrams
 
@@ -135,10 +184,16 @@ ggVennDiagram(HV3)
 ggVennDiagram(HV4)
 
 # no species overlap between all survey years
+# year 1 overlaps with years 2, 3, 8 but with only one species each
+# year 3 overlaps with years 1, 2, 4, 6
+# NO overlap between years 5, 6, 7, 8
+# year 8 overlaps with years 1, 2, only one species each
 
 ```
 
-```{r}
+To demonstrate the venn diagrams of a more popular habitat, I selected the most populated one, herbaceous vegetation, and performed the same analysis with groups of four survey years. In contrast to the hibernacula diagrams, it can be noted that every year shares at least 21 species in common.
+
+```{r,echo = F}
 
 # herbaceous vegetation venn diagrams
 # chosen because of large number of observations
@@ -160,18 +215,109 @@ ggVennDiagram(vhv4)
 
 ```
 
+## NMDS
+
+Finally I attempted to learn about and conduct NMDS. To do so, I followed the instruction provided by the University of Virginia.
+
+https://library.virginia.edu/data/articles/starting-non-metric-multidimensional-scaling-nmds
+
+The first community matrix constructed utilizes a Count ~ Survey Year + Species model for the hibernacula habitat. This yields stress = 4.74e-05, a number that I considered close enough to 0 to indicate that some aspect of the input data was faulty, whether that be sample size or my assemblage. The accompanying stress plot further motivated me to try to remedy by approach.
+
 ```{r,warning = F}
 
-# NMDS
-# calculated stress is essentially 0, data sample size too small?
-# stress plot also strange
+# hibernacula NMDS
 
-community <- xtabs(Count ~ Survey_Year + Species, data = hibernacula)
-community <- as.matrix(community)
+# calculated stress is close to 0, data sample size too small?
 
-nmds1 <- metaMDS(community,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+community1 <- xtabs(Count ~ Survey_Year + Species,data = hibernacula)
+community1 <- as.matrix(community1)
+
+nmds1 <- metaMDS(community1,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
 print(nmds1)
 stressplot(nmds1,lwd = 5)
 
 ```
 
+The next community matrix was made with a Count ~ Observation Date + Species model for the hibernacula habitat but returned a stress = 0. While the stress plot has slightly more shape to it, I still deemed it insufficient and moved on.
+
+```{r,warning = F}
+
+# NMDS but ~ observation date
+
+community2 <- xtabs(Count ~ Observation_Date + Species,data = hibernacula)
+community2 <- as.matrix(community2)
+
+nmds2 <- metaMDS(community2,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+print(nmds2) # stress ~= 0
+stressplot(nmds2,lwd = 5)
+
+```
+
+For the third community matrix the same model was used as in the first community matrix, or Count ~ Survey Year + Species, but for the entire aggregated dataset instead. This yielded a better stress of 0.0191 and a slightly improved stress plot. To test whether I had improved the NMDS significantly I performed a dimension check, a step following initial NMDS construction suggested by the University of Virginia. However, it yielded a stress of 0 for all dimensions of analysis, so I moved onto my final NMDS iteration.
+
+```{r,warning = F}
+
+# overall dataset NMDS by survey year
+
+community3 <- xtabs(Count ~ Survey_Year + Species,data = aggregated)
+community3 <- as.matrix(community3)
+
+nmds3 <- metaMDS(community3,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+print(nmds3)
+stressplot(nmds3,lwd = 3)
+
+dimcheckMDS(community3,distance = "bray",k = 6) # all 0
+
+```
+
+Here I blended the model of the second and third community matrices, utilizing Count ~ Observation Date + Species for the entire aggregated dataset. This approach gave me the most hope because of the significant increase in sample size compared to the first community matrix. This yielded a stress of 0.0721, the largest yet. The accompanying stress plot and dimension check returned unhelpful results, however I continued on to produce an ordination plot, figuring that this was my best yield thus far and wondering how it would visualize. Under the guidance of the included article I produced an ordination plot by season and ggsaved it. Within the graph are color coordinaated seasons, each with a "centroid" or mean data point and a colored polygon spanning the majority of data points. This visualization seems successful except for the Spring season, which has a deviated centroid displayed in the final plot. This deviation must stem from sensitivity to outlier data point distance. 
+
+```{r,warning = F}
+
+# overall dataset NMDS by observation date
+
+community4 <- xtabs(Count ~ Observation_Date + Species,data = aggregated)
+community4 <- as.matrix(community4)
+
+nmds4 <- metaMDS(community4,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+print(nmds4) # stress = 0.0721
+stressplot(nmds4,lwd = 3) # line is very close to x-axis until ~0.85 dissimilarity; seems suboptimal
+
+dimcheckMDS(community4,distance = "bray",k = 6) # stress is ~= 0 for dimensions 1 to 6
+
+
+
+# plotting NMDS dimension ordiination according to https://library.virginia.edu/data/articles/starting-non-metric-multidimensional-scaling-nmds
+
+season <- aggregated %>% distinct(Observation_Date,Season)
+season$Observation_Date <- as.character(season$Observation_Date)
+
+# NMDS scores
+nmds4_odscores <- as.data.frame(scores(nmds4)$sites) %>% 
+  rownames_to_column(var = "Observation_Date") %>% 
+  left_join(season)
+
+# enhanced visualization
+season_centroid <- nmds4_odscores %>% group_by(Season) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+season_shape <- nmds4_odscores %>% group_by(Season) %>% slice(chull(NMDS1,NMDS2))
+
+nmdsfigure <- ggplot() + geom_point(data = nmds4_odscores,aes(x = NMDS1,y = NMDS2,color = Season),
+                                    size = 1.5) + 
+  geom_point(data = season_centroid,aes(x = axis1,y = axis2,color = Season),size = 6,shape = 17) + 
+  geom_polygon(data = season_shape,aes(x = NMDS1,y = NMDS2,fill = Season,group = Season),alpha = 0.25) +
+  annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds4$stress,3))) + 
+  theme_light() + xlim(c(-2,0.5)) + ylim(c(-1.5,1.5)) +
+  labs(title = "NMDS of Species by Season") + theme(plot.title = element_text(hjust = 0.5))
+
+plot(nmdsfigure)
+
+ggsave(filename = paste0("Aggregated_Species_NMDS_by_Season",format(Sys.Date(),"%y-%m-%d"),".pdf"),
+       nmdsfigure,width = 200,height = 140,units = "mm")
+
+nmdsfigure + xlim(c(-2,10))
+
+```
+
+My understanding of what NMDS is only surface level; I am not that confident in my understanding of dissimilarity and ordination. Thus, I am unsure if the generated NMDS ordination plot is of any use. Regardless, I hope to deepen my understanding to better utilize this tool, along with further analysis following this report.
