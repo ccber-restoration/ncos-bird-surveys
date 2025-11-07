@@ -1,0 +1,63 @@
+---
+title: "MV_2025-11-07_2"
+output: html_document
+---
+
+# relative proportion per habitat by year all on one graph, to compare to each other
+# figure captions
+
+# patchwork package?
+
+# 2018-03-30 data not correctly aggregated?
+# in aggregated data, change removal of NA to "unknown" substrate
+
+# nmds for max abundance per species per year
+# nmds for mean abundance per species per year
+
+```{r,include = F}
+
+library(tidyverse)
+library(here)
+library(vegan)
+
+MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
+aggregated <- read_csv(MVaggregatedpath)
+
+```
+
+```{r}
+
+# recreating NMDS by season with updated aggregated data (new "Unknown" substrate)
+
+community1 <- xtabs(Count ~ Observation_Date + Species,data = aggregated)
+community1 <- as.matrix(community1)
+nmds1 <- metaMDS(community1,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+
+print(nmds1) # stress = 0.201 - much higher than 0.07
+
+stressplot(nmds1,lwd = 3)
+
+season <- aggregated %>% distinct(Observation_Date,Season)
+season$Observation_Date <- as.character(season$Observation_Date)
+nmds1_odscores <- as.data.frame(scores(nmds1)$sites) %>% 
+  rownames_to_column(var = "Observation_Date") %>% 
+  left_join(season)
+season_centroid <- nmds1_odscores %>% group_by(Season) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+season_shape <- nmds1_odscores %>% group_by(Season) %>% slice(chull(NMDS1,NMDS2))
+
+nmdsfigure <- ggplot() + geom_point(data = nmds1_odscores,
+                                    aes(x = NMDS1,y = NMDS2,color = Season),size = 1.5) + 
+  geom_point(data = season_centroid,aes(x = axis1,y = axis2,color = Season),size = 6,shape = 17) + 
+  geom_polygon(data = season_shape,aes(x = NMDS1,y = NMDS2,fill = Season,group = Season),alpha = 0.25) +
+  annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds1$stress,3))) + 
+  theme_light() + xlim(c(-1,1)) + ylim(c(-1.5,1.5)) +
+  labs(title = "NMDS of Species by Season") + theme(plot.title = element_text(hjust = 0.5))
+plot(nmdsfigure) # plot reflects higher stress - less overlap
+
+ggsave(filename = paste0("Season_NMDS_Updated",format(Sys.Date(),"%y-%m-%d"),".pdf"),
+       nmdsfigure,width = 200,height = 140,units = "mm")
+
+```
+

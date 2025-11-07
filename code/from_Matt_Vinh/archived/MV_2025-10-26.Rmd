@@ -316,7 +316,7 @@ plot(nmdsfigure)
 ggsave(filename = paste0("Aggregated_Species_NMDS_by_Season",format(Sys.Date(),"%y-%m-%d"),".pdf"),
        nmdsfigure,width = 200,height = 140,units = "mm")
 
-nmdsfigure + xlim(c(-2,10))
+nmdsfigure + xlim(c(-2,100))
 
 ```
 
