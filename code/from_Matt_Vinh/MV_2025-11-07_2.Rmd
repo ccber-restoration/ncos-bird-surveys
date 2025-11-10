@@ -8,9 +8,6 @@ output: html_document
 
 # patchwork package?
 
-# 2018-03-30 data not correctly aggregated?
-# in aggregated data, change removal of NA to "unknown" substrate
-
 # nmds for max abundance per species per year
 # nmds for mean abundance per species per year
 
@@ -19,6 +16,7 @@ output: html_document
 library(tidyverse)
 library(here)
 library(vegan)
+library(RColorBrewer)
 
 MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
 aggregated <- read_csv(MVaggregatedpath)
@@ -58,6 +56,72 @@ plot(nmdsfigure) # plot reflects higher stress - less overlap
 
 ggsave(filename = paste0("Season_NMDS_Updated",format(Sys.Date(),"%y-%m-%d"),".pdf"),
        nmdsfigure,width = 200,height = 140,units = "mm")
+
+```
+
+```{r}
+
+# dataframe of total count per species per year
+total_counts <- aggregated %>% 
+  group_by(Species,Survey_Year) %>% 
+  summarise(total_count = sum(Count))
+
+community2 <- xtabs(total_count ~ Survey_Year + Species,data = total_counts)
+community2 <- as.matrix(unclass(community2))
+
+nmds2 <- metaMDS(community2,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+
+print(nmds2)
+stressplot(nmds2)
+
+years <- aggregated %>% distinct(Survey_Year)
+years$Survey_Year <- as.character(years$Survey_Year)
+
+nmds2_odscores <- as.data.frame(scores(nmds2)$sites) %>% 
+  rownames_to_column(var = "Survey_Year") %>% 
+  left_join(years)
+
+years_centroid <- nmds2_odscores %>% group_by(Survey_Year) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+
+years_shape <- nmds2_odscores %>% group_by(Survey_Year) %>% slice(chull(NMDS1,NMDS2))
+
+ggplot() + geom_point(data = nmds2_odscores,aes(x = NMDS1,y = NMDS2,color = Survey_Year),size = 1.5) + 
+  geom_point(data = years_centroid,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
+  geom_polygon(data = years_shape,aes(x = NMDS1,y = NMDS2,fill = Survey_Year,group = Survey_Year),
+               alpha = 0.25) +
+  annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds2$stress,3))) + 
+  theme_light() + xlim(c(-0.001,0.001)) + ylim(c(0.05,0.075)) + 
+  labs(title = "NMDS of Species by Survey Year") + theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
+```{r}
+
+relative_proportions <- aggregated %>% group_by(Survey_Year,Substrate) %>%
+  summarize(substrate_count = sum(Count)) %>% 
+  mutate(total = sum(substrate_count)) %>% 
+  mutate(proportion = substrate_count / total)
+
+chosen <- relative_proportions %>% filter(Substrate != "Air/Flyover" & Substrate != "Flyover" & Substrate != "Rock" & Substrate != "telephone wire" & Substrate != "Vernal Pool")
+# removes 12 rows, 8 flyover rows and 1 of each of the others
+
+colors <- colorRampPalette(brewer.pal(12,"Set3"))(16)
+
+ggplot(chosen,aes(x = Survey_Year,y = proportion,group = Substrate,color = Substrate)) + 
+  geom_line(alpha = 0.85) + theme_light() + 
+  labs(title = "Overlay of Substrate Observation Proportions over Time",
+       x = "Survey Year",y = "Proportion") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
+```{r}
+
+
 
 ```
 
