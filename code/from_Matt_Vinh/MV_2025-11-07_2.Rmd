@@ -54,8 +54,8 @@ nmdsfigure <- ggplot() + geom_point(data = nmds1_odscores,
   labs(title = "NMDS of Species by Season") + theme(plot.title = element_text(hjust = 0.5))
 plot(nmdsfigure) # plot reflects higher stress - less overlap
 
-ggsave(filename = paste0("Season_NMDS_Updated",format(Sys.Date(),"%y-%m-%d"),".pdf"),
-       nmdsfigure,width = 200,height = 140,units = "mm")
+#ggsave(filename = paste0("Season_NMDS_Updated",format(Sys.Date(),"%y-%m-%d"),".pdf"),
+#       nmdsfigure,width = 200,height = 140,units = "mm")
 
 ```
 
@@ -74,12 +74,8 @@ nmds2 <- metaMDS(community2,autotransform = F,distance = "bray",engine = "monoMD
 print(nmds2)
 stressplot(nmds2)
 
-years <- aggregated %>% distinct(Survey_Year)
-years$Survey_Year <- as.character(years$Survey_Year)
-
 nmds2_odscores <- as.data.frame(scores(nmds2)$sites) %>% 
-  rownames_to_column(var = "Survey_Year") %>% 
-  left_join(years)
+  rownames_to_column(var = "Survey_Year")
 
 years_centroid <- nmds2_odscores %>% group_by(Survey_Year) %>% summarise(
   axis1 = mean(NMDS1),
@@ -101,10 +97,10 @@ ggplot() + geom_point(data = nmds2_odscores,aes(x = NMDS1,y = NMDS2,color = Surv
 
 # corrected NMDS of maximum count per species per year
 
-survey_max <- aggregated %>% group_by(Species,Survey_Year) %>% 
+year_max <- aggregated %>% group_by(Species,Survey_Year) %>% 
   summarise(max_count = max(Count))
 
-community3 <- xtabs(max_count ~ Survey_Year + Species,data = survey_max)
+community3 <- xtabs(max_count ~ Survey_Year + Species,data = year_max)
 community3 <- as.matrix(unclass(community3))
 
 nmds3 <- metaMDS(community3,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
@@ -112,12 +108,8 @@ nmds3 <- metaMDS(community3,autotransform = F,distance = "bray",engine = "monoMD
 print(nmds3)
 stressplot(nmds3)
 
-years <- aggregated %>% distinct(Survey_Year)
-years$Survey_Year <- as.character(years$Survey_Year)
-
 nmds3_scores <- as.data.frame(scores(nmds3)$sites) %>% 
-  rownames_to_column(var = "Survey_Year") %>% 
-  left_join(years)
+  rownames_to_column(var = "Survey_Year")
 
 years_centroid <- nmds3_scores %>% group_by(Survey_Year) %>% summarise(
   axis1 = mean(NMDS1),
@@ -135,6 +127,44 @@ ggplot() + geom_point(data = nmds3_scores,aes(x = NMDS1,y = NMDS2,color = Survey
   theme(plot.title = element_text(hjust = 0.5))
 
 ```
+
+```{r}
+
+survey_max <- aggregated %>% group_by(Species,Observation_Date) %>% 
+  summarise(max_count = max(Count))
+
+community4 <- xtabs(max_count ~ Observation_Date + Species,data = survey_max)
+community4 <- as.matrix(unclass(community4))
+
+nmds4 <- metaMDS(community4,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+
+print(nmds4)
+stressplot(nmds4)
+
+years <- aggregated %>% distinct(Observation_Date,Survey_Year)
+years$Observation_Date <- as.character(years$Observation_Date)
+
+nmds4_scores <- as.data.frame(scores(nmds4)$sites) %>% 
+  rownames_to_column(var = "Observation_Date") %>% 
+  left_join(years)
+
+years_centroid <- nmds4_scores %>% group_by(Survey_Year) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+
+years_shape <- nmds4_scores %>% group_by(Survey_Year) %>% slice(chull(NMDS1,NMDS2))
+
+ggplot() + geom_point(data = nmds4_scores,aes(x = NMDS1,y = NMDS2,color = Survey_Year),size = 1.5) + 
+  geom_point(data = years_centroid,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
+  geom_polygon(data = years_shape,aes(x = NMDS1,y = NMDS2,fill = Survey_Year,group = Survey_Year),
+               alpha = 0.25) +
+  #annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds3$stress,3))) + 
+  theme_light() + 
+  labs(title = "NMDS of Maximum Survey Count per Species per Survey") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
 
 ```{r}
 
