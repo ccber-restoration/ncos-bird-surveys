@@ -1,8 +1,14 @@
 ---
 title: "MV_2025-11-18"
 author: "Matt Vinh"
-date: "2025-11-19"
-output: html_document
+output:
+  pdf_document:
+    number_sections: false
+  html_document: default
+  word_document: default
+header-includes:
+  - \usepackage{caption}
+  - \captionsetup{labelformat=empty}
 ---
 
 ```{r setup,include=FALSE}
@@ -20,7 +26,9 @@ MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
 aggregated <- read_csv(MVaggregatedpath)
 ```
 
-```{r,echo = F,warning = F,fig.cap = "Relative proportions of observations per substrate per year with all substrates layered on top of each other. Due to the difficulty of differentiating 16 substrates, I added a text label at the end of each line, allowing the substrates with nonzero relative proportion during survey year 8 to be better distinguished. This solution feels imperfect but I cannot think of another way to label the substrates while retaining readability."}
+### Main Figures
+
+```{r,echo = F,warning = F,message = F,fig.cap = "Figure 1: Relative proportions of observations per substrate per survey year with all substrates layered on top of each other. Due to the difficulty of differentiating the 16 included substrates I added a text label at the end of each line, allowing the substrates with nonzero relative proportion during survey year 8 to be better distinguished. This solution feels imperfect but I cannot think of another way to label the substrates to improve readability."}
 
 relative_proportions <- aggregated %>% group_by(Survey_Year,Substrate) %>%
   summarize(substrate_count = sum(Count)) %>% 
@@ -42,7 +50,7 @@ ggplot(chosen,aes(x = Survey_Year,y = proportion,group = Substrate,color = Subst
 
 ```
 
-```{r,echo = F,fig.cap = "Updated NMDS of Species per Season utilizing improved data aggregation, namely implementation of "unknown" substrate. The overlap is reduced and the stress is increased.}
+```{r,echo = F,warning = F,message = F,fig.cap = "Figure 2, left: Previous species per season NMDS. This figure was incorporated as a saved .pdf, so formatting was limited, hence it looks a little weird. Next time I will just go through the process of recreating the figure. Figure 3, right: Updated Species per Season NMDS utilizing improved data aggregation, namely implementation of \"unknown\" substrate. Compared to Figure 2, Figure 3 has reduced ordination overlap and increased stress."}
 
 savedpath <- here("code","from_Matt_Vinh","figures","Aggregated_Species_NMDS_by_Season25-11-03.pdf")
 savedimage <- image_read_pdf(savedpath)
@@ -73,11 +81,11 @@ nmdsfigure1 <- ggplot() + geom_point(data = nmds1_odscores,
   theme_light() + xlim(c(-1,1)) + ylim(c(-1.5,1.5)) +
   labs(title = "NMDS of Species by Season") + theme(plot.title = element_text(hjust = 0.5))
 
-csavedimage + nmdsfigure1
+csavedimage + nmdsfigure1 + plot_layout(widths = c(1.5,1))
 
 ```
 
-```{r,echo = F,warning = F,fig.cap = ""}
+```{r,echo = F,warning = F,message = F,fig.cap = "Figure 4, left: Maximum species abundance per survey year NMDS. Figure 5, right: Mean species abundance per survey year NMDS. Note that for the centroids in Figure 5, survey years 4, 5, 7 and 8 are all stacked in the \"north\" and survey years 2 and 3 are stacked in the \"south\". Refer to Figure 6 for more details."}
 
 year_max <- aggregated %>% group_by(Species,Survey_Year) %>% 
   summarise(max_count = max(Count))
@@ -90,19 +98,17 @@ nmds3 <- metaMDS(community3,autotransform = F,distance = "bray",engine = "monoMD
 nmds3_scores <- as.data.frame(scores(nmds3)$sites) %>% 
   rownames_to_column(var = "Survey_Year")
 
-years_centroid <- nmds3_scores %>% group_by(Survey_Year) %>% summarise(
+years_centroid1 <- nmds3_scores %>% group_by(Survey_Year) %>% summarise(
   axis1 = mean(NMDS1),
   axis2 = mean(NMDS2)) %>% ungroup()
 
 nmdsfigure2 <- ggplot() + geom_point(data = nmds3_scores,aes(x = NMDS1,y = NMDS2,
                                                              color = Survey_Year),size = 1.5) + 
-  geom_point(data = years_centroid,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
-  geom_polygon(data = years_shape,aes(x = NMDS1,y = NMDS2,fill = Survey_Year,group = Survey_Year),
-               alpha = 0.25) +
-  #annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds3$stress,3))) + 
+  geom_point(data = years_centroid1,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
+  annotate("text",x = -0.025,y = -0.0875,label = paste("2D stress =",round(nmds3$stress,3))) + 
   theme_light() + 
-  labs(title = "NMDS of Maximum Survey Count per Species per Year") + 
-  theme(plot.title = element_text(hjust = 0.5))
+  labs(title = "Maximum") + 
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "none")
 
 
 
@@ -117,22 +123,99 @@ nmds5 <- metaMDS(community5,autotransform = F,distance = "bray",engine = "monoMD
 nmds5_scores <- as.data.frame(scores(nmds5)$sites) %>% 
   rownames_to_column(var = "Survey_Year")
   
-years_centroid <- nmds5_scores %>% group_by(Survey_Year) %>% summarise(
+years_centroid2 <- nmds5_scores %>% group_by(Survey_Year) %>% summarise(
   axis1 = mean(NMDS1),
   axis2 = mean(NMDS2)) %>% ungroup()
 
 nmdsfigure3 <- ggplot() + geom_point(data = nmds5_scores,aes(x = NMDS1,y = NMDS2,color = Survey_Year),size = 1.5) + 
-  geom_point(data = years_centroid,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
-  geom_polygon(data = years_shape,aes(x = NMDS1,y = NMDS2,fill = Survey_Year,group = Survey_Year),
-               alpha = 0.25) +
-  #annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds3$stress,3))) + 
+  geom_point(data = years_centroid2,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
+  annotate("text",x = 0,y = -0.1,label = paste("2D stress =",round(nmds5$stress,3))) + 
   theme_light() + 
-  labs(title = "NMDS of Mean Survey Count per Species per Year") + 
-  theme(plot.title = element_text(hjust = 0.5))
+  labs(title = "Mean") + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  scale_color_discrete(name = "Survey Year")
 
-nmdsfigure2 + nmdsfigure3
-
-kable(years_centroid)
+nmdsfigure2 + nmdsfigure3 + plot_layout(axes = "collect")
 
 ```
 
+```{r,echo = F,warning = F,message = F}
+
+kable(years_centroid2,caption = "Figure 6: Table of mean species abundance per survey year NMDS centroid axes coordinates. Note the overlap of survey years 4, 5, 7 and 8 and survey years 2 and 3.")
+
+```
+
+### Developmental Figures
+
+```{r,echo = F,warning = F,message = F,fig.cap = "Figure 7: Maximum species abundance per survey NMDS. This NMDS visualization was produced to uderstand how changing from annual to indivdual survey would affect the ordination."}
+
+survey_max <- aggregated %>% group_by(Species,Observation_Date) %>% 
+  summarise(max_count = max(Count))
+
+community4 <- xtabs(max_count ~ Observation_Date + Species,data = survey_max)
+community4 <- as.matrix(unclass(community4))
+
+nmds4 <- metaMDS(community4,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+
+years <- aggregated %>% distinct(Observation_Date,Survey_Year)
+years$Observation_Date <- as.character(years$Observation_Date)
+
+nmds4_scores <- as.data.frame(scores(nmds4)$sites) %>% 
+  rownames_to_column(var = "Observation_Date") %>% 
+  left_join(years)
+nmds4_scores$Survey_Year <- as.factor(nmds4_scores$Survey_Year)
+
+years_centroid3 <- nmds4_scores %>% group_by(Survey_Year) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+
+years_shape <- nmds4_scores %>% group_by(Survey_Year) %>% slice(chull(NMDS1,NMDS2))
+
+ggplot() + geom_point(data = nmds4_scores,aes(x = NMDS1,y = NMDS2,color = Survey_Year),size = 1.5) + 
+  geom_point(data = years_centroid3,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
+  geom_polygon(data = years_shape,aes(x = NMDS1,y = NMDS2,fill = Survey_Year,group = Survey_Year),
+               alpha = 0.25) +
+  annotate("text",x = 0.5,y = -0.75,label = paste("2D stress =",round(nmds4$stress,3))) + 
+  theme_light() + 
+  labs(title = "Maximum Species Abundance per Survey NMDS") + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  scale_color_discrete(name = "Survey Year") + 
+  scale_fill_discrete(name = "Survey Year")
+
+```
+
+```{r,echo = F,warning = F,message = F,fig.cap = "Figure 8: Total species abundance per survey year NMDS. This figure was the first produced, initially seeming \"poor\" to me due to the lack of encompassing hull such as that which is visible per survey year in Figure 7. The ordination result is similar to that of Figure 5, with survey years 4, 5, 6, 7 and 8 all stacked in the \"north\". Although the plot is interesting, I am not sure if it is as informative as maximum abundance or mean abundance. Refer to Figure 9 for more details."}
+
+total_counts <- aggregated %>% 
+  group_by(Species,Survey_Year) %>% 
+  summarise(total_count = sum(Count))
+
+community2 <- xtabs(total_count ~ Survey_Year + Species,data = total_counts)
+community2 <- as.matrix(unclass(community2))
+
+nmds2 <- metaMDS(community2,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+
+nmds2_odscores <- as.data.frame(scores(nmds2)$sites) %>% 
+  rownames_to_column(var = "Survey_Year")
+
+years_centroid4 <- nmds2_odscores %>% group_by(Survey_Year) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+
+ggplot() + geom_point(data = nmds2_odscores,aes(x = NMDS1,y = NMDS2,color = Survey_Year),size = 1.5) + 
+  geom_point(data = years_centroid4,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
+  annotate("text",x = 0,y = -0.05,label = paste("2D stress =",round(nmds2$stress,6))) + 
+  theme_light() + 
+  labs(title = "Total Species Abundance per Survey Year NMDS") + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  scale_color_discrete(name = "Survey Year")
+
+```
+
+```{r,echo = F,warning = F,message = F}
+
+kable(years_centroid4,caption = "Figure 9: Table of total species abundance per survey year NMDS centroid axes coordinates. Note the overlap of survey years 4, 5, 6, 7 and 8.")
+
+```
+
+Special thanks to Francis for helping me understand NMDS results as I worked.
