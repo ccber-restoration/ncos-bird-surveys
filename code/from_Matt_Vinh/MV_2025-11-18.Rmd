@@ -1,0 +1,138 @@
+---
+title: "MV_2025-11-18"
+author: "Matt Vinh"
+date: "2025-11-19"
+output: html_document
+---
+
+```{r setup,include=FALSE}
+
+library(tidyverse)
+library(here)
+library(vegan)
+library(magick)
+library(pdftools)
+library(ggpubr)
+library(patchwork)
+library(knitr)
+
+MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
+aggregated <- read_csv(MVaggregatedpath)
+```
+
+```{r,echo = F,warning = F,fig.cap = "Relative proportions of observations per substrate per year with all substrates layered on top of each other. Due to the difficulty of differentiating 16 substrates, I added a text label at the end of each line, allowing the substrates with nonzero relative proportion during survey year 8 to be better distinguished. This solution feels imperfect but I cannot think of another way to label the substrates while retaining readability."}
+
+relative_proportions <- aggregated %>% group_by(Survey_Year,Substrate) %>%
+  summarize(substrate_count = sum(Count)) %>% 
+  mutate(total = sum(substrate_count)) %>% 
+  mutate(proportion = substrate_count / total)
+
+chosen <- relative_proportions %>% filter(Substrate != "Air/Flyover" & Substrate != "Flyover" & Substrate != "Rock" & Substrate != "telephone wire" & Substrate != "Vernal Pool")
+# removes 12 rows, 8 flyover rows and 1 of each of the others
+
+chosen_end <- chosen %>% group_by(Substrate) %>% slice_max(Survey_Year)
+
+ggplot(chosen,aes(x = Survey_Year,y = proportion,group = Substrate,color = Substrate)) + 
+  geom_line(alpha = 0.85) + theme_light() + 
+  geom_text(data = chosen_end,aes(label = Substrate),nudge_x = 0.3,hjust = 0) + 
+  labs(title = "Overlay of Substrate Observation Proportions over Time",
+       x = "Survey Year",y = "Proportion") + 
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "none") + 
+  scale_x_continuous(breaks = seq(1,11,by = 1)) + xlim(c(1,11))
+
+```
+
+```{r,echo = F,fig.cap = "Updated NMDS of Species per Season utilizing improved data aggregation, namely implementation of "unknown" substrate. The overlap is reduced and the stress is increased.}
+
+savedpath <- here("code","from_Matt_Vinh","figures","Aggregated_Species_NMDS_by_Season25-11-03.pdf")
+savedimage <- image_read_pdf(savedpath)
+csavedimage <- as.raster(savedimage)
+csavedimage <- ggplot() + background_image(csavedimage) + theme_void()
+
+
+
+community1 <- xtabs(Count ~ Observation_Date + Species,data = aggregated)
+community1 <- as.matrix(unclass(community1))
+nmds1 <- metaMDS(community1,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+
+season <- aggregated %>% distinct(Observation_Date,Season)
+season$Observation_Date <- as.character(season$Observation_Date)
+nmds1_odscores <- as.data.frame(scores(nmds1)$sites) %>% 
+  rownames_to_column(var = "Observation_Date") %>% 
+  left_join(season)
+season_centroid <- nmds1_odscores %>% group_by(Season) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+season_shape <- nmds1_odscores %>% group_by(Season) %>% slice(chull(NMDS1,NMDS2))
+
+nmdsfigure1 <- ggplot() + geom_point(data = nmds1_odscores,
+                                    aes(x = NMDS1,y = NMDS2,color = Season),size = 1.5) + 
+  geom_point(data = season_centroid,aes(x = axis1,y = axis2,color = Season),size = 6,shape = 17) + 
+  geom_polygon(data = season_shape,aes(x = NMDS1,y = NMDS2,fill = Season,group = Season),alpha = 0.25) +
+  annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds1$stress,3))) + 
+  theme_light() + xlim(c(-1,1)) + ylim(c(-1.5,1.5)) +
+  labs(title = "NMDS of Species by Season") + theme(plot.title = element_text(hjust = 0.5))
+
+csavedimage + nmdsfigure1
+
+```
+
+```{r,echo = F,warning = F,fig.cap = ""}
+
+year_max <- aggregated %>% group_by(Species,Survey_Year) %>% 
+  summarise(max_count = max(Count))
+
+community3 <- xtabs(max_count ~ Survey_Year + Species,data = year_max)
+community3 <- as.matrix(unclass(community3))
+
+nmds3 <- metaMDS(community3,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+
+nmds3_scores <- as.data.frame(scores(nmds3)$sites) %>% 
+  rownames_to_column(var = "Survey_Year")
+
+years_centroid <- nmds3_scores %>% group_by(Survey_Year) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+
+nmdsfigure2 <- ggplot() + geom_point(data = nmds3_scores,aes(x = NMDS1,y = NMDS2,
+                                                             color = Survey_Year),size = 1.5) + 
+  geom_point(data = years_centroid,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
+  geom_polygon(data = years_shape,aes(x = NMDS1,y = NMDS2,fill = Survey_Year,group = Survey_Year),
+               alpha = 0.25) +
+  #annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds3$stress,3))) + 
+  theme_light() + 
+  labs(title = "NMDS of Maximum Survey Count per Species per Year") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+
+year_mean <- aggregated %>% group_by(Species,Survey_Year) %>% 
+  summarise(mean_count = mean(Count))
+
+community5 <- xtabs(mean_count ~ Survey_Year + Species,data = year_mean)
+community5 <- as.matrix(unclass(community5))
+
+nmds5 <- metaMDS(community5,autotransform = F,distance = "bray",engine = "monoMDS",k = 2,weakties = T,model = "global",maxit = 300,try = 40,trymax = 100,trace = F)
+
+nmds5_scores <- as.data.frame(scores(nmds5)$sites) %>% 
+  rownames_to_column(var = "Survey_Year")
+  
+years_centroid <- nmds5_scores %>% group_by(Survey_Year) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+
+nmdsfigure3 <- ggplot() + geom_point(data = nmds5_scores,aes(x = NMDS1,y = NMDS2,color = Survey_Year),size = 1.5) + 
+  geom_point(data = years_centroid,aes(x = axis1,y = axis2,color = Survey_Year),size = 6,shape = 17) + 
+  geom_polygon(data = years_shape,aes(x = NMDS1,y = NMDS2,fill = Survey_Year,group = Survey_Year),
+               alpha = 0.25) +
+  #annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds3$stress,3))) + 
+  theme_light() + 
+  labs(title = "NMDS of Mean Survey Count per Species per Year") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+nmdsfigure2 + nmdsfigure3
+
+kable(years_centroid)
+
+```
+
