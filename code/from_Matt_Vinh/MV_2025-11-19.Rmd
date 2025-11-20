@@ -1,0 +1,17 @@
+---
+title: "MV_2025-11-19"
+output: html_document
+---
+
+facet wrap substrate line graph to separate substrates - higher proportion vs lower proportions or logical grouping (water, herbs)
+
+make NMDS plots not have giant triangle - single, smaller point for differentiability
+
+add species to seasons, maximum nmds
+
+sequential color palette or arrows for maximum nmds instead of current color grouping system
+
+make aggregated include all other variables such as water level etc
+also save aggregated as an .rds to save data types
+
+google doc of stuff to do long term?
