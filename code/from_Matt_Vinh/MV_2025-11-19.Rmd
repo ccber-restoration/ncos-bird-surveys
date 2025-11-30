@@ -39,7 +39,7 @@ aggregated <- read_csv(MVaggregatedpath)
 
 ```
 
-```{r substrate observation proportions per survey year patchwork facet,out.width = "100%",fig.align = "center",echo = F,fig.cap = ""}
+```{r substrate observation proportions per survey year patchwork facet}
 
 ### substrate groupings for visualization differentiation
 ### based on similar observation proportions and logic

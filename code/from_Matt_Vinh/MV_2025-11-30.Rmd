@@ -1,6 +1,9 @@
 ---
 title: "MV_2025-11-30"
-output: html_document
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup,include = F}
@@ -10,7 +13,7 @@ library(knitr)
 
 ```
 
-```{r substrate proportions,echo = F,out.width = "100%",fig.align = "center",fig.cap = "Substrate relative observation proportions per survey year with manual faceting by groups defined by similarity. Similarity can further be specified as close relative proportion at survey year 8 or logical similarity, such as all herbaceous substrates, etc. facet_wrap was not used because I found that the faceted plots were too squished. Manual faceting with the patchwork package seemed to improve readability. I would have liked to have found a way to combine the x-axes and y-axes labels but with the blank plot in the bottom right made this difficult."}
+```{r substrate proportions,echo = F,out.width = "100%",fig.align = "center",fig.cap = "Substrate relative observation proportions per survey year with manual faceting by groups defined by similarity. Similarity can further be specified as close relative proportion at survey year 8 or logical similarity, such as all herbaceous substrates, etc. Facet wrap was not used because I found that the faceted plots were too squished. Manual faceting with the patchwork package seemed to improve readability. I would have liked to have found a way to combine the x-axes and y-axes labels but with the blank plot in the bottom right made this difficult."}
 
 figure1path <- here("code","from_Matt_Vinh","Substrate_Proportions_1_25-11-29.pdf")
 include_graphics(figure1path)
@@ -19,8 +22,8 @@ include_graphics(figure1path)
 
 ```{r seasons nmds,echo = F,out.width = "100%",fig.align = "center",fig.cap = "Seasons NMDS with the top 5 most abundant species per season included. Other than the addition of species, the figure is the same."}
 
-figure2path <- here("code","from_Matt_Vinh","Seasons_NMDS_25-11-29.pdf")
-include_app(figure2path)
+figure2path <- here("code","from_Matt_Vinh","Season_NMDS_25-11-29.pdf")
+include_graphics(figure2path)
 
 ```
 
