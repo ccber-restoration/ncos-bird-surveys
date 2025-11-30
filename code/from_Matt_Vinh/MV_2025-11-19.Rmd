@@ -1,7 +1,20 @@
 ---
 title: "MV_2025-11-19"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
+
+todo
+
+make aggregated include all other variables such as water level etc
+also save aggregated as an .rds to save data types
+
+google doc of stuff to do long term?
+
+
+
+done
 
 facet wrap substrate line graph to separate substrates - higher proportion vs lower proportions or logical grouping (water, herbs)
 
@@ -11,7 +24,187 @@ add species to seasons, maximum nmds
 
 sequential color palette or arrows for maximum nmds instead of current color grouping system
 
-make aggregated include all other variables such as water level etc
-also save aggregated as an .rds to save data types
 
-google doc of stuff to do long term?
+
+```{r,include = F}
+
+library(here)
+library(tidyverse)
+library(patchwork)
+library(vegan)
+library(ggrepel)
+
+MVaggregatedpath <- here("data","aggregated","MV_aggregated.csv")
+aggregated <- read_csv(MVaggregatedpath)
+
+```
+
+```{r substrate observation proportions per survey year patchwork facet,out.width = "100%",fig.align = "center"}
+
+### substrate groupings for visualization differentiation
+### based on similar observation proportions and logic
+# - vegetation
+# - air + bare ground + unknown
+# - water + mud
+# - man-made: bridge, building, fence
+#  + other
+# - habitat features
+
+relative_proportions <- aggregated %>% group_by(Survey_Year,Substrate) %>%
+  summarize(substrate_count = sum(Count)) %>% 
+  mutate(total = sum(substrate_count)) %>% 
+  mutate(proportion = substrate_count / total,grouping = case_when(
+    grepl("Vegetation",Substrate) ~ 1,
+    Substrate == "Air" ~ 2,
+    Substrate == "Bare ground" ~ 2,
+    Substrate == "Unknown" ~ 2,
+    grepl("Water",Substrate) ~ 3,
+    Substrate == "Mud" ~ 3,
+    Substrate == "Bridge" ~ 4,
+    Substrate == "Building" ~ 4,
+    Substrate == "Fence" ~ 4,
+    Substrate == "Other" ~ 4,
+    grepl("Habitat",Substrate) ~ 5))
+# grepl returns boolean vector for string component match
+
+chosen <- relative_proportions %>% 
+  filter(Substrate != "Air/Flyover" & Substrate != "Flyover" & Substrate != "Rock" & 
+           Substrate != "telephone wire" & Substrate != "Vernal Pool")
+# removes 12 rows, 8 flyover rows and 1 of each of the others
+
+
+
+line1 <- ggplot(chosen %>% filter(grouping == 1),
+                aes(x = Survey_Year,y = proportion,group = Substrate,color = Substrate)) + 
+  geom_line(alpha = 0.85,linewidth = 1) + theme_light() + 
+  facet_wrap(~ grouping,scales = "free_y",ncol = 1,dir = "v") + 
+  labs(x = "Survey Year",y = "Proportion") + 
+  scale_x_continuous(breaks = seq(1,8,by = 1))
+
+line2 <- ggplot(chosen %>% filter(grouping == 2),
+                aes(x = Survey_Year,y = proportion,group = Substrate,color = Substrate)) + 
+  geom_line(alpha = 0.85,linewidth = 1) + theme_light() + 
+  facet_wrap(~ grouping,scales = "free_y",ncol = 1,dir = "v") + 
+  labs(x = "Survey Year",y = "Proportion") + 
+  scale_x_continuous(breaks = seq(1,8,by = 1))
+
+line3 <- ggplot(chosen %>% filter(grouping == 3),
+                aes(x = Survey_Year,y = proportion,group = Substrate,color = Substrate)) + 
+  geom_line(alpha = 0.85,linewidth = 1) + theme_light() + 
+  facet_wrap(~ grouping,scales = "free_y",ncol = 1,dir = "v") + 
+  labs(x = "Survey Year",y = "Proportion") + 
+  scale_x_continuous(breaks = seq(1,8,by = 1))
+
+line4 <- ggplot(chosen %>% filter(grouping == 4),
+                aes(x = Survey_Year,y = proportion,group = Substrate,color = Substrate)) + 
+  geom_line(alpha = 0.85,linewidth = 1) + theme_light() + 
+  facet_wrap(~ grouping,scales = "free_y",ncol = 1,dir = "v") + 
+  labs(x = "Survey Year",y = "Proportion") + 
+  scale_x_continuous(breaks = seq(1,8,by = 1))
+
+line5 <- ggplot(chosen %>% filter(grouping == 5),
+                aes(x = Survey_Year,y = proportion,group = Substrate,color = Substrate)) + 
+  geom_line(alpha = 0.85,linewidth = 1) + theme_light() + 
+  facet_wrap(~ grouping,scales = "free_y",ncol = 1,dir = "v") + 
+  labs(x = "Survey Year",y = "Proportion") + 
+  scale_x_continuous(breaks = seq(1,8,by = 1))
+
+
+
+plot1 <- (line1 + line2) / (line3 + line4) / (line5 + plot_spacer()) + 
+  plot_annotation(title = "Substrate Relative Observation Proportion per Survey Year",
+                  theme = theme(plot.title = element_text(hjust = 0.5)))
+ggsave(paste0("Substrate_Proportions_1_",format(Sys.Date(),"%y-%m-%d"),".pdf"),
+       plot1,width = 200,height = 180,units = "mm",)
+
+```
+
+
+
+```{r seasons nmds}
+
+community1 <- xtabs(Count ~ Observation_Date + Species,data = aggregated)
+community1 <- as.matrix(unclass(community1))
+nmds1 <- metaMDS(community1,autotransform = F,distance = "bray",engine = "monoMDS",
+                 k = 2,weakties = T,model = "global",maxit = 300,try = 40,
+                 trymax = 100,trace = F)
+
+season <- aggregated %>% distinct(Observation_Date,Season)
+season$Observation_Date <- as.character(season$Observation_Date)
+top_species_pseason <- aggregated %>% group_by(Season,Species) %>%
+  summarise(total = sum(Count)) %>% slice_max(order_by = total,n = 5)
+
+nmds1_site_scores <- as.data.frame(scores(nmds1)$sites) %>% 
+  rownames_to_column(var = "Observation_Date") %>% 
+  left_join(season)
+nmds1_species_scores <- as.data.frame(scores(nmds1,"species"))
+nmds1_species_scores$Species <- rownames(nmds1_species_scores)
+nmds1_species_scores_joined <- right_join(nmds1_species_scores,top_species_pseason)
+
+season_centroid <- nmds1_site_scores %>% group_by(Season) %>% summarise(
+  axis1 = mean(NMDS1),
+  axis2 = mean(NMDS2)) %>% ungroup()
+season_shape <- nmds1_site_scores %>% group_by(Season) %>% slice(chull(NMDS1,NMDS2))
+
+nmdsfigure1 <- ggplot() + geom_point(data = nmds1_site_scores,aes(x = NMDS1,y = NMDS2,color = Season),
+                      size = 1.5) + 
+  geom_point(data = season_centroid,aes(x = axis1,y = axis2,color = Season),
+             size = 6,shape = 17) + 
+  geom_polygon(data = season_shape,aes(x = NMDS1,y = NMDS2,fill = Season,group = Season),
+               alpha = 0.25) +
+  geom_text_repel(data = nmds1_species_scores_joined,
+                  aes(x = NMDS1,y = NMDS2,label = Species),max.overlaps = 500,size = 3) + 
+  annotate("text",x = 0,y = 1.25,label = paste("2D stress =",round(nmds1$stress,3))) + 
+  theme_light() + xlim(c(-1,1)) + ylim(c(-1.5,1.5)) +
+  labs(title = "NMDS of Species by Season") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggsave(paste0("Season_NMDS_",format(Sys.Date(),"%y-%m-%d"),".pdf"),nmdsfigure1,
+       width = 200,units = "mm")
+
+```
+
+
+
+```{r maximum survey count per survey year nmds}
+
+year_max <- aggregated %>% group_by(Species,Survey_Year) %>% 
+  summarise(max_count = max(Count))
+top_species_pyear <- year_max %>% group_by(Survey_Year) %>% 
+  slice_max(order_by = max_count,n = 3)
+
+community2 <- xtabs(max_count ~ Survey_Year + Species,data = year_max)
+community2 <- as.matrix(unclass(community2))
+
+nmds2 <- metaMDS(community2,autotransform = F,distance = "bray",engine = "monoMDS",
+                 k = 2,weakties = T,model = "global",maxit = 300,try = 40,
+                 trymax = 100,trace = F)
+
+nmds2_site_scores <- as.data.frame(scores(nmds2)$sites) %>% 
+  rownames_to_column(var = "Survey_Year")
+nmds2_site_scores$Survey_Year <- as.numeric(nmds2_site_scores$Survey_Year)
+nmds2_site_scores <- nmds2_site_scores %>% arrange(Survey_Year) %>% 
+  mutate(xend = lead(NMDS1),yend = lead(NMDS2))
+nmds2_species_scores <- as.data.frame(scores(nmds2,"species"))
+nmds2_species_scores$Species <- rownames(nmds2_species_scores)
+nmds2_species_scores_joined <- right_join(nmds2_species_scores,top_species_pyear)
+nmds2_species_scores_joined$Survey_Year <- as.numeric(nmds2_species_scores_joined$Survey_Year)
+
+nmdsfigure2 <- ggplot() + geom_point(data = nmds2_site_scores,
+                      aes(x = NMDS1,y = NMDS2,color = Survey_Year),size = 3) + 
+  geom_segment(data = nmds2_site_scores,
+               aes(x = NMDS1,y = NMDS2,xend = xend,yend = yend,color = Survey_Year),
+                   arrow = arrow(length = unit(0.25,"cm"))) + 
+  geom_text_repel(data = nmds2_species_scores_joined,
+                  aes(x = NMDS1,y = NMDS2,label = Species),max.overlaps = 500,size = 3) + 
+  annotate("text",x = -0.2,y = 0.1,label = paste("2D stress =",round(nmds2$stress,3))) + 
+  scale_color_viridis_c(option = "C",alpha = 0.8) + 
+  theme_light() + labs(title = "Maximum") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggsave(paste0("Maximum_Survey_per_Year_NMDS_",format(Sys.Date(),"%y-%m-%d"),".pdf"),nmdsfigure2,
+       width = 200,units = "mm")
+
+```
+
+
