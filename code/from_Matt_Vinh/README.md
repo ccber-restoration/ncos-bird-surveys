@@ -4,6 +4,7 @@
 
 ### Current Work
 Visualizations of NCOS bird species richness over time
+
 Ongoing development of NCOS bird survey data analysis project
 
 ### Figures
@@ -13,5 +14,6 @@ Ongoing development of NCOS bird survey data analysis project
 
 ### Archived Work
 Contains all files from previous meetings organized by month
+
 Notable code:
 - Updated NCOS bird survey dataset aggregation through survey year 8
