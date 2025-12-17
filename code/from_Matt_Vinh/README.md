@@ -1,7 +1,5 @@
 # CCBER North Campus Open Space Bird Survey Data Exploration and Analysis by Matt Vinh
 
-## Folder contents:
-
 ## Current Work
 Visualizations of NCOS bird species richness over time
 
