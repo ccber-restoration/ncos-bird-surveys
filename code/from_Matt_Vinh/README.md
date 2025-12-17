@@ -2,18 +2,16 @@
 
 ## Folder contents:
 
-### Current work
-MV_2025-09-19 R script: No content currently
+### Current Work
+Visualizations of NCOS bird species richness over time
+Ongoing development of NCOS bird survey data analysis project
 
 ### Figures
-fig_general_type_count_2025-09-02: Relative abundance of general bird species types from bird survey data spanning from 2017-09 to 2023-08
-
-Camera_Trapping_Hibernacula_Composition_2021_2025-09-18: Count of all species observations at hibernacula substrate from 2021 camera trapping data
-
-Monthly_Bird_Survey_Hibernacula_Composition_2025-09-18: Count of all species observations per survey year at hibernacula substrate from bird survey data spanning from 2017-09 to 2023-08
+- Time series
+- NMDS
+- Miscellaneous (bar charts)
 
 ### Archived Work
-Found in the archived folder
-
-Notable entries:
-- MV_2025-09-06 R Markdown, Word Document and HTML
+Contains all files from previous meetings organized by month
+Notable code:
+- Updated NCOS bird survey dataset aggregation through survey year 8
