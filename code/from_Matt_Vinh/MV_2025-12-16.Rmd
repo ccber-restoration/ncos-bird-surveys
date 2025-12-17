@@ -1,0 +1,84 @@
+---
+title: "MV_2025-12-16"
+output: html_document
+---
+
+```{r setup}
+
+library(here)
+library(tidyverse)
+library(patchwork)
+
+datapath <- here("data","aggregated","MV_updated_aggregated.rds")
+data <- readRDS(datapath)
+
+```
+
+```{r species richness}
+
+richness <- data %>% group_by(survey_year,substrate) %>% 
+  mutate(richness = length(unique(species)))
+richness <- richness %>% select(c(survey_year,substrate,richness)) %>% 
+  distinct(survey_year,substrate,richness) %>% mutate(grouping = case_when(
+    grepl("Vegetation",substrate) ~ 1,
+    substrate == "Air" ~ 2,
+    substrate == "Bare ground" ~ 2,
+    substrate == "Unknown" ~ 2,
+    grepl("Water",substrate) ~ 3,
+    substrate == "Mud" ~ 3,
+    substrate == "Bridge" ~ 4,
+    substrate == "Building" ~ 4,
+    substrate == "Fence" ~ 4,
+    substrate == "Other" ~ 4,
+    grepl("Habitat",substrate) ~ 5))
+
+colors <- palette.colors(16,"Alphabet")
+
+richness1 <- ggplot(richness %>% filter(grouping == 1),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = NULL,y = NULL,color = "Guild") + 
+  scale_color_manual(values = colors[1:3]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+richness2 <- ggplot(richness %>% filter(grouping == 2),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = NULL,y = NULL,color = "Guild") + 
+  scale_color_manual(values = colors[4:6]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+richness3 <- ggplot(richness %>% filter(grouping == 3),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = NULL,y = "Species Richness",color = "Guild") + 
+  scale_color_manual(values = colors[7:9]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+richness4 <- ggplot(richness %>% filter(grouping == 4),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = "Survey Year",y = "Species Richness",color = "Guild") + 
+  scale_color_manual(values = colors[10:13]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+richness5 <- ggplot(richness %>% filter(grouping == 5),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = "Survey Year",y = NULL,color = "Guild") + 
+  scale_color_manual(values = colors[14:16]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+(richness1 + richness2) / (richness3 + richness4) / (richness5 + plot_spacer()) + 
+  plot_annotation(title = "Species Richness by Guild Collection per Survey Year",
+                  theme = theme(plot.title = element_text(hjust = 0.5))) + 
+  plot_layout(axis_titles = "collect")
+
+```
+
+```{r}
+
+
+
+```
+

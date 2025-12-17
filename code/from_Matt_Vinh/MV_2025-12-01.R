@@ -22,3 +22,6 @@ substrate proportions: different colors, group the groupings by nature vs manmad
 connecting weekly work - drafting cohesive poster contents
 
 try canonical correspondence analysis?
+  
+  
+
