@@ -1,20 +1,19 @@
-# CCBER North Campus Open Space Bird Survey Data Exploration and Analysis by Matt Vinh
+# CCBER North Campus Open Space Bird Survey Data Exploration and Analysis
+
+# Matt Vinh
 
 ## Current Work
-Visualizations of NCOS bird species richness over time
+I am often working on bird survey data visualizations, exploring relationships and trends.
 
-Ongoing development of NCOS bird survey data analysis project
+My work drives the ongoing development of an NCOS bird survey data analysis project.
 
 ## Archived Work
-Contains all files from previous meetings organized by month
-
-### Notable code
-- Updated NCOS bird survey dataset aggregation through survey year 8
+Contains all files from previous meetings and work, organized by month.
 
 ## Current Dataset Aggregation Code
-Separates the most updated CCBER bird survey data aggregation R script from other archived work for ease of access
+Separates the most updated CCBER bird survey data aggregation R script from other archived work for ease of access.
 
 ## Figures
 - Time series
 - NMDS
-- Miscellaneous (bar charts)
+- Miscellaneous visualizations
