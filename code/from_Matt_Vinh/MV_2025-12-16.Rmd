@@ -8,6 +8,7 @@ output: html_document
 library(here)
 library(tidyverse)
 library(patchwork)
+library(knitr)
 
 datapath <- here("data","aggregated","MV_updated_aggregated.rds")
 data <- readRDS(datapath)
@@ -37,48 +38,77 @@ colors <- palette.colors(16,"Alphabet")
 richness1 <- ggplot(richness %>% filter(grouping == 1),
                     aes(x = survey_year,y = richness,group = substrate,
                                  color = substrate)) + geom_line(alpha = 0.85) + 
-  theme_light() + labs(x = NULL,y = NULL,color = "Guild") + 
+  theme_light() + labs(x = NULL,y = NULL,color = "Substrate") + 
   scale_color_manual(values = colors[1:3]) + 
   scale_x_continuous(breaks = seq(1,8,1))
 
 richness2 <- ggplot(richness %>% filter(grouping == 2),
                     aes(x = survey_year,y = richness,group = substrate,
                                  color = substrate)) + geom_line(alpha = 0.85) + 
-  theme_light() + labs(x = NULL,y = NULL,color = "Guild") + 
+  theme_light() + labs(x = NULL,y = NULL,color = "Substrate") + 
   scale_color_manual(values = colors[4:6]) + 
   scale_x_continuous(breaks = seq(1,8,1))
 
 richness3 <- ggplot(richness %>% filter(grouping == 3),
                     aes(x = survey_year,y = richness,group = substrate,
                                  color = substrate)) + geom_line(alpha = 0.85) + 
-  theme_light() + labs(x = NULL,y = "Species Richness",color = "Guild") + 
+  theme_light() + labs(x = NULL,y = "Species Richness",color = "Substrate") + 
   scale_color_manual(values = colors[7:9]) + 
   scale_x_continuous(breaks = seq(1,8,1))
 
 richness4 <- ggplot(richness %>% filter(grouping == 4),
                     aes(x = survey_year,y = richness,group = substrate,
                                  color = substrate)) + geom_line(alpha = 0.85) + 
-  theme_light() + labs(x = "Survey Year",y = "Species Richness",color = "Guild") + 
+  theme_light() + labs(x = "Survey Year",y = "Species Richness",color = "Substrate") + 
   scale_color_manual(values = colors[10:13]) + 
   scale_x_continuous(breaks = seq(1,8,1))
 
 richness5 <- ggplot(richness %>% filter(grouping == 5),
                     aes(x = survey_year,y = richness,group = substrate,
                                  color = substrate)) + geom_line(alpha = 0.85) + 
-  theme_light() + labs(x = "Survey Year",y = NULL,color = "Guild") + 
+  theme_light() + labs(x = "Survey Year",y = NULL,color = "Substrate") + 
   scale_color_manual(values = colors[14:16]) + 
   scale_x_continuous(breaks = seq(1,8,1))
 
 (richness1 + richness2) / (richness3 + richness4) / (richness5 + plot_spacer()) + 
-  plot_annotation(title = "Species Richness by Guild Collection per Survey Year",
+  plot_annotation(title = "Species Richness by Substrate per Survey Year",
                   theme = theme(plot.title = element_text(hjust = 0.5))) + 
   plot_layout(axis_titles = "collect")
 
 ```
 
-```{r}
+```{r breeding period}
 
+breed <- data %>% filter(substrate != "Air/Flyover" & substrate != "Other" & 
+                           substrate != "Rock" & substrate != "telephone wire" & 
+                           substrate != "Vernal Pool") %>% mutate(period = case_when(
+  month(observation_date) %in% c(4:7) ~ "breeding",
+  month(observation_date) %in% c(8:11) ~ "summer_fall",
+  month(observation_date) %in% c(1:3,12) ~ "winter_spring")) %>% 
+    group_by(substrate,survey_year,period) %>% mutate(mean_count = mean(count)) %>% 
+  distinct(survey_year,period,substrate,mean_count)
+levels(breed$substrate)[levels(breed$substrate) == "Habitat Feature - Hibernacula"] <- "Hibernacula"
+levels(breed$substrate)[levels(breed$substrate) == "Habitat Feature - Log"] <- "Log"
+levels(breed$substrate)[levels(breed$substrate) == "Habitat Feature - Snag"] <- "Snag"
+levels(breed$substrate)[levels(breed$substrate) == "Vegetation - Herbaceous"] <- "Herbaceous"
+levels(breed$substrate)[levels(breed$substrate) == "Vegetation - Shrub"] <- "Shrub"
+levels(breed$substrate)[levels(breed$substrate) == "Vegetation - Tree"] <- "Tree"
 
+ggplot(breed,aes(x = survey_year,y = mean_count,color = period)) + 
+  geom_line() + facet_wrap(~ substrate,scale = "free_y")
+
+# habitat feature - snag and air substrates have higher average counts during
+# hypothetical breeding period than other thirds of the survey year
+# year thirds defined as four-month blocks preceding and following april-july breeding
+# air is less relevant?
+
+```
+
+```{r all species utilizing snag substrate}
+
+snag_species <- unique(data$species[data$substrate == "Habitat Feature - Snag"])
+frame <- data.frame(snag_species = snag_species)
+kable(frame)
 
 ```
 
