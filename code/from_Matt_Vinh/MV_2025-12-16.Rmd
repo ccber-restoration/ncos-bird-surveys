@@ -112,3 +112,29 @@ kable(frame)
 
 ```
 
+```{r guild abundance}
+
+guild_abundance_year <- data %>% group_by(survey_year,general_type) %>% 
+  summarise(abundance = sum(count)) %>% distinct(survey_year,general_type,abundance)
+
+guild_abundance_season <- data %>% group_by(survey_year,season,general_type) %>% 
+  summarise(abundance = sum(count)) %>% distinct(survey_year,season,general_type,abundance)
+
+ggplot(guild_abundance_year,aes(x = survey_year,y = abundance)) +  
+  geom_line() + facet_wrap(~ general_type,scale = "free_y")
+
+```
+
+```{r}
+
+guild_richness_year <- data %>% group_by(survey_year,general_type) %>% 
+  mutate(richness = length(unique(species))) %>% distinct(survey_year,general_type,richness)
+
+guild_richness_season <- data %>% group_by(survey_year,season,general_type) %>% 
+  mutate(richness = length(unique(species))) %>% distinct(survey_year,season,general_type,richness)
+
+ggplot(guild_richness_year,aes(x = survey_year,y = richness)) + 
+  geom_line() + facet_wrap(~ general_type,scale = "free_y")
+
+```
+
