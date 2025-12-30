@@ -25,3 +25,5 @@ try canonical correspondence analysis?
   
   
 
+modify aggregation - include original variables with no recorded values
+  
