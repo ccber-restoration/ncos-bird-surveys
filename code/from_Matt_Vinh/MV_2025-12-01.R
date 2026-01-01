@@ -2,8 +2,19 @@ breeding period - april to june or july
  - still migrating in april
  - late breeding in july
 
+connecting weekly work - drafting cohesive poster contents
+
+modify aggregation - include original variables with no recorded values
+
+#TODO
+
+
+add vertical lines to visualize season to year + season plots
+
+
 density of watefowl birds or others
-- google scholar density of birds?
+
+google scholar density of birds?
   
 species richness per guild over time
 
@@ -18,12 +29,4 @@ species in nmds should help to describe separation or closeness of points/hulls
 
 substrate proportions: different colors, group the groupings by nature vs manmade, remove grouping label on top
 
-
-connecting weekly work - drafting cohesive poster contents
-
 try canonical correspondence analysis?
-  
-  
-
-modify aggregation - include original variables with no recorded values
-  

@@ -170,13 +170,9 @@ updated_aggregated_survey_data$VDOP <- as.numeric(updated_aggregated_survey_data
 updated_aggregated_survey_data$`Number of Satellites` <- 
   as.numeric(updated_aggregated_survey_data$`Number of Satellites`)
 
-# removing variables that are intermediary or completely blank
-# - 11 variables, total 53
+# removing redundant observation date variables
 updated_aggregated_survey_data <- updated_aggregated_survey_data %>% 
-  select(-c(`Weather Note`,`Speed (km/h)`,`Direction of travel (Â°)`,`Compass reading (Â°)`,
-            `Position source type`,`Correction Age`,`Station ID`,`Average Horizontal Accuracy (m)`,
-            `Average Vertical Accuracy (m)`,`Averaged Positions`,`Standard Deviation (m)`,
-            Observation.Date,obs_date2))
+  select(-c(Observation.Date,obs_date2))
 
 updated_aggregated_survey_data <- clean_names(updated_aggregated_survey_data)
 
