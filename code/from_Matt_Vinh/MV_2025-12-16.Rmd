@@ -199,3 +199,30 @@ grichness1 + inset_element(text1,left = 0.35,right = 0.9,bottom = 0,top = 0.2)
 
 ```
 
+```{r waterfowl and friends general type abundance and richness}
+
+season_numbers <- data.frame(
+  xint = c(seq(1,8,1),seq(1.25,8.25,1),seq(1.5,8.5,1),seq(1.75,8.75,1)),
+  season = c(rep("Fall",8),rep("Winter",8),rep("Spring",8),rep("Summer",8)))
+
+waterfowl_a <- guild_abundance_year_and_season %>% filter(general_type == "Waterfowl & Friends")
+
+ggplot(waterfowl_a,aes(x = year_and_season,y = abundance)) + 
+  geom_line() + theme_light() + 
+  geom_vline(data = season_numbers,aes(xintercept = xint,color = season),alpha = 0.4) + 
+  labs(title = "'Waterfowl and Friends' Species Abundance by Season per Survey Year",
+       x = "Survey Year + Season",y = "Species Abundance",color = "Season") + 
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "inside",
+        legend.position.inside = c(0.8,0.8)) + scale_x_continuous(breaks = seq(1,9,by = 1))
+
+waterfowl_r <- guild_richness_year_and_season %>% filter(general_type == "Waterfowl & Friends")
+
+ggplot(waterfowl_r,aes(x = year_and_season,y = richness)) + 
+  geom_line() + theme_light() + 
+  geom_vline(data = season_numbers,aes(xintercept = xint,color = season),alpha = 0.4) + 
+  labs(title = "'Waterfowl and Friends' Species Richness by Season per Survey Year",
+       x = "Survey Year + Season",y = "Species Richness",color = "Season") + 
+  theme(plot.title = element_text(hjust = 0.5)) + scale_x_continuous(breaks = seq(1,9,by = 1))
+
+```
+
