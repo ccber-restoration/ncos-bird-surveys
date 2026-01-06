@@ -1,0 +1,274 @@
+---
+title: "MV_report_2026-01-06"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup,include = F}
+
+library(here)
+library(tidyverse)
+library(grid)
+library(patchwork)
+library(knitr)
+
+# rds data
+
+datapath <- here("data","aggregated","MV_updated_aggregated.rds")
+data <- readRDS(datapath)
+
+# year and season composite variable
+
+season_map <- c(Fall = 0,Winter = 0.25,Spring = 0.5,Summer = 0.75)
+data$year_and_season <- data$survey_year + season_map[data$season]
+
+# substrate species richness
+# substrates grouped as before
+
+richness <- data %>% group_by(survey_year,substrate) %>% 
+  mutate(richness = length(unique(species)))
+richness <- richness %>% select(c(survey_year,substrate,richness)) %>% 
+  distinct(survey_year,substrate,richness) %>% mutate(grouping = case_when(
+    grepl("Vegetation",substrate) ~ 1,
+    substrate == "Air" ~ 2,
+    substrate == "Bare ground" ~ 2,
+    substrate == "Unknown" ~ 2,
+    grepl("Water",substrate) ~ 3,
+    substrate == "Mud" ~ 3,
+    substrate == "Bridge" ~ 4,
+    substrate == "Building" ~ 4,
+    substrate == "Fence" ~ 4,
+    substrate == "Other" ~ 4,
+    grepl("Habitat",substrate) ~ 5))
+
+# average of all species abundances with variable designating grouping corresponding
+# to four-month blocks with respect to the april-july breeding period
+
+breed <- data %>% filter(substrate != "Air/Flyover" & substrate != "Other" & 
+                           substrate != "Rock" & substrate != "telephone wire" & 
+                           substrate != "Vernal Pool") %>% mutate(period = case_when(
+  month(observation_date) %in% c(4:7) ~ "breeding",
+  month(observation_date) %in% c(8:11) ~ "summer_fall",
+  month(observation_date) %in% c(1:3,12) ~ "winter_spring")) %>% 
+    group_by(substrate,survey_year,period) %>% mutate(mean_count = mean(count)) %>% 
+  distinct(survey_year,period,substrate,mean_count)
+levels(breed$substrate)[levels(breed$substrate) == "Habitat Feature - Hibernacula"] <- "Hibernacula"
+levels(breed$substrate)[levels(breed$substrate) == "Habitat Feature - Log"] <- "Log"
+levels(breed$substrate)[levels(breed$substrate) == "Habitat Feature - Snag"] <- "Snag"
+levels(breed$substrate)[levels(breed$substrate) == "Vegetation - Herbaceous"] <- "Herbaceous"
+levels(breed$substrate)[levels(breed$substrate) == "Vegetation - Shrub"] <- "Shrub"
+levels(breed$substrate)[levels(breed$substrate) == "Vegetation - Tree"] <- "Tree"
+
+# guild abundance by different sets of time
+
+guild_abundance_year <- data %>% group_by(survey_year,general_type) %>% 
+  summarise(abundance = sum(count)) %>% distinct(survey_year,general_type,abundance)
+
+guild_abundance_season <- data %>% group_by(season,general_type) %>% 
+  summarise(average_abundance = mean(count)) %>% distinct(season,general_type,average_abundance)
+
+guild_abundance_year_and_season <- data %>% group_by(year_and_season,general_type) %>% 
+  summarise(abundance = sum(count)) %>% distinct(year_and_season,general_type,abundance)
+
+# guild richness by different sets of time
+
+guild_richness_year <- data %>% group_by(survey_year,general_type) %>% 
+  mutate(richness = length(unique(species))) %>% distinct(survey_year,general_type,richness)
+
+guild_richness_season <- data %>% group_by(survey_year,season,general_type) %>% 
+  mutate(richness = length(unique(species))) %>% distinct(survey_year,season,general_type,richness) %>% 
+  group_by(season,general_type) %>% summarise(average_richness = mean(richness)) %>% 
+  distinct(season,general_type,average_richness)
+
+guild_richness_year_and_season <- data %>% group_by(year_and_season,general_type) %>% 
+  mutate(richness = length(unique(species))) %>% distinct(year_and_season,general_type,richness)
+
+# waterfowl and friends guild specific data
+
+waterfowl_a <- guild_abundance_year_and_season %>% filter(general_type == "Waterfowl & Friends")
+
+waterfowl_r <- guild_richness_year_and_season %>% filter(general_type == "Waterfowl & Friends")
+
+waterfowl_species <- data %>% filter(general_type == "Waterfowl & Friends") %>% 
+  distinct(year_and_season,species)
+
+waterfowl_species_count <- waterfowl_species %>% count(species) %>% rename(season_count = n) %>% 
+  arrange(desc(season_count))
+
+w_and_f_top_abundance <- data %>% group_by(year_and_season,species) %>% 
+  summarise(abundance = sum(count)) %>% distinct(year_and_season,species,abundance) %>% 
+  filter(species == "Mallard" | species == "Canada Goose" | species == "Gadwall" | species == "Sora")
+
+# season visualization aid
+
+season_numbers <- data.frame(
+  xint = c(seq(1,8,1),seq(1.25,8.25,1),seq(1.5,8.5,1),seq(1.75,8.75,1)),
+  season = c(rep("Fall",8),rep("Winter",8),rep("Spring",8),rep("Summer",8)))
+
+```
+
+## Plot iteration
+
+```{r species richness,echo = F,fig.cap = "Species richness vs survey year by substrate grouping, adjusted with feedback. Alignment of x-axes by column couldn't be done but could be tried again in the future."}
+
+colors <- palette.colors(16,"Alphabet")
+
+richness1 <- ggplot(richness %>% filter(grouping == 1),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = NULL,y = NULL,color = "Substrate") + 
+  scale_color_manual(values = colors[1:3]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+richness2 <- ggplot(richness %>% filter(grouping == 2),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = NULL,y = NULL,color = "Substrate") + 
+  scale_color_manual(values = colors[4:6]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+richness3 <- ggplot(richness %>% filter(grouping == 3),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = NULL,y = "Species Richness",color = "Substrate") + 
+  scale_color_manual(values = colors[7:9]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+richness4 <- ggplot(richness %>% filter(grouping == 4),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = "Survey Year",y = "Species Richness",color = "Substrate") + 
+  scale_color_manual(values = colors[10:13]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+richness5 <- ggplot(richness %>% filter(grouping == 5),
+                    aes(x = survey_year,y = richness,group = substrate,
+                                 color = substrate)) + geom_line(alpha = 0.85) + 
+  theme_light() + labs(x = "Survey Year",y = NULL,color = "Substrate") + 
+  scale_color_manual(values = colors[14:16]) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+(richness1 + richness2) / (richness3 + richness4) / (richness5 + plot_spacer()) + 
+  plot_annotation(title = "Species Richness by Substrate per Survey Year",
+                  theme = theme(plot.title = element_text(hjust = 0.5))) + 
+  plot_layout(axis_titles = "collect")
+
+```
+
+## Exploring breeding period (April-July)
+
+```{r breeding period,echo = F,fig.cap = "Mean species abundance vs survey year per substrate by time range. The set time ranges were chosen as four-month intervals based on the April-July potential breeding period. Specifically, the summer-fall range includes August through November and the winter-spring range includes January through March and December. I thought that this might be an interesting way to visualize whether certain substrates recorded more bird activity, comparing the four-month breednig period window to two other four-month ranges. A by month visualization may be more informative."}
+
+ggplot(breed,aes(x = survey_year,y = mean_count,color = period)) + 
+  geom_line() + facet_wrap(~ substrate,scale = "free_y") + theme_light() + 
+  labs(x = "Survey Year",y = "Mean Abundance",color = "Time Range",
+       title = "Mean Species Abundance per Substrate by Time Range") + 
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  scale_x_continuous(breaks = seq(1,8,1))
+
+# habitat feature - snag and air substrates have higher average counts during
+# hypothetical breeding period than other thirds of the survey year
+# year thirds defined as four-month blocks preceding and following april-july breeding
+# air is less relevant?
+
+```
+
+```{r guild abundance,message = F,echo = F,fig.cap = "Analysis of species abundance by guild over varying measures of time. Top: Species abundance vs survey year by guild. Middle: Average species abundance vs season by guild. Bottom: Species abundance vs survey year brpken up by incremental seasons by guild. The bottom visualization accounting for individual seasons per survey year is a development of the top visualization, revealing more specific trends pertaining to seasons. I thought that it was difficult to differentiate the specific data points in the bottom plot following adjustment for seasons, inspiring a later visualization."}
+
+# by year
+
+ggplot(guild_abundance_year,aes(x = survey_year,y = abundance)) +  
+  geom_line() + facet_wrap(~ general_type,scale = "free_y") + theme_light() + 
+  labs(title = "Guild Species Abundance by Survey Year",x = "Survey Year",y = "Species Abundance") + 
+  theme(plot.title = element_text(hjust = 0.5)) + scale_x_continuous(breaks = seq(1,8,by = 1))
+
+# by season
+
+ggplot(guild_abundance_season,aes(x = season,y = average_abundance,fill = season)) + 
+  geom_col(alpha = 0.8) + facet_wrap(~ general_type,scale = "free_y") + theme_light() + 
+  labs(title = "Average Guild Species Abundance by Season",x = "Season",
+       y = "Average Species Abundance",fill = "Season") + 
+  theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 90))
+
+text1 <- textGrob("x-axis ticks = survey year + season, season map:\nfall = 0,winter = 0.25, spring = 0.5, summer = 0.75")
+
+gabundance1 <- ggplot(guild_abundance_year_and_season,aes(x = year_and_season,y = abundance)) + 
+  geom_line() + facet_wrap(~ general_type,scale = "free_y") + theme_light() + 
+  labs(title = "Guild Species Abundance by Season per Survey Year",x = "Survey Year + Season",
+       y = "Species Abundance") + theme(plot.title = element_text(hjust = 0.5)) + 
+  scale_x_continuous(breaks = seq(1,9,by = 1))
+
+gabundance1 + inset_element(text1,left = 0.4,right = 0.8,bottom = 0,top = 0.2)
+
+```
+
+```{r guild richness,message = F,echo = F,fig.cap = "Analysis of species richness by guild over varying measures of time, like what was done with abundance. Top: Species richness vs survey year by guild. Middle: Average species richness vs season by guild. Bottom: Species richness vs survey year broken up by incremental seasons by guild. Like with abundance, I thought that the full effect of the survey year accounting for seasons would be best illustrated with an enlarged plot focusing on less, or just one, guild. Note that cormorants and kingfishers only record one species. They could be removed."}
+
+# by year
+
+ggplot(guild_richness_year,aes(x = survey_year,y = richness)) + 
+  geom_line() + facet_wrap(~ general_type,scale = "free_y") + theme_light() + 
+  labs(title = "Guild Richness by Survey Year",x = "Survey Year",y = "Species Richness") + 
+  theme(plot.title = element_text(hjust = 0.5)) + scale_x_continuous(breaks = seq(1,8,by = 1))
+  
+
+# by season
+
+ggplot(guild_richness_season,aes(x = season,y = average_richness,fill = season)) + 
+  geom_col(alpha = 0.8) + facet_wrap(~ general_type,scale = "free_y") + theme_light() + 
+  labs(title = "Average Guild Species Richness by Season",x = "Season",
+       y = "Average Species Richness",fill = "Season") + 
+  theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 90))
+
+# cormorants and kingfishers only record one species
+
+# by year and season composite
+
+grichness1 <- ggplot(guild_richness_year_and_season,aes(x = year_and_season,y = richness)) + 
+  geom_line() + facet_wrap(~ general_type,scale = "free_y") + theme_light() + 
+  labs(title = "Guild Species Richness by Season per Survey Year",x = "Survey Year + Season",
+       y = "Species Richness") + 
+  theme(plot.title = element_text(hjust = 0.5)) + scale_x_continuous(breaks = seq(1,9,by = 1))
+
+grichness1 + inset_element(text1,left = 0.35,right = 0.9,bottom = 0,top = 0.2)
+
+```
+
+```{r waterfowl and friends general type abundance and richness,echo = F,fig.cap = "'Waterfowl and Friends' guild analysis. Top: Species abundance vs survey year and season. Bottom: Species richness vs survey year and season. With a larger plot, the season-specific changes become more obvious. Both plots conclude that species within the Waterfowl and Friends guild prefer the summer season and dislike the winter season. Since the summer season is defined by the month range from June to August in the current bird survey data aggregation, the abundance increase in the summer and decrease in the winter could be an iindicator of utilization of NCOS for breeding?"}
+
+ggplot(waterfowl_a,aes(x = year_and_season,y = abundance)) + 
+  geom_line() + theme_light() + 
+  geom_vline(data = season_numbers,aes(xintercept = xint,color = season),alpha = 0.4) + 
+  labs(title = "'Waterfowl and Friends' Species Abundance by Season per Survey Year",
+       x = "Survey Year + Season",y = "Species Abundance",color = "Season") + 
+  theme(plot.title = element_text(hjust = 0.5),legend.position = "inside",
+        legend.position.inside = c(0.8,0.8)) + scale_x_continuous(breaks = seq(1,9,by = 1))
+
+ggplot(waterfowl_r,aes(x = year_and_season,y = richness)) + 
+  geom_line() + theme_light() + 
+  geom_vline(data = season_numbers,aes(xintercept = xint,color = season),alpha = 0.4) + 
+  labs(title = "'Waterfowl and Friends' Species Richness by Season per Survey Year",
+       x = "Survey Year + Season",y = "Species Richness",color = "Season") + 
+  theme(plot.title = element_text(hjust = 0.5)) + scale_x_continuous(breaks = seq(1,9,by = 1))
+
+```
+
+```{r waterfowl species,echo = F,fig.cap = "Frequency of species within the Waterfowl and Friends guild. A count of one indicates the species was documented for one season of one survey year. Since there are eight survey years with four seasons each, maximum frequency is 32."}
+
+kable(waterfowl_species_count,caption = "'Waterfowl and Friends' Guild Species Frequency")
+
+```
+
+```{r top waterfowl species abundances,echo = F,fig.cap = "Species abundance vs survey year and season for the four most frequent Waterfowl and Friends guild species. Similar inferences about breeding could be made with a visualization of this style?"}
+
+ggplot(w_and_f_top_abundance,aes(x = year_and_season,y = abundance)) + geom_line() + 
+  theme_light() + facet_wrap(~ species,scale = "free_y") + 
+  geom_vline(data = season_numbers,aes(xintercept = xint,color = season),alpha = 0.4) + 
+  labs(x = "Survey Year by Season",y = "Abundance",color = "Season",
+       title = "Abundance of Four Most Frequent 'Waterfowl and Friends' Species 
+       by Survey Year and Season") + 
+  theme(plot.title = element_text(hjust = 0.5)) + scale_x_continuous(breaks = seq(1,9,by = 1))
+
+```
