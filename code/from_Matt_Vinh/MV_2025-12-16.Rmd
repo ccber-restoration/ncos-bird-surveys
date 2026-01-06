@@ -14,6 +14,11 @@ library(knitr)
 datapath <- here("data","aggregated","MV_updated_aggregated.rds")
 data <- readRDS(datapath)
 
+# year and season composite variable
+
+season_map <- c(Fall = 0,Winter = 0.25,Spring = 0.5,Summer = 0.75)
+data$year_and_season <- data$survey_year + season_map[data$season]
+
 ```
 
 ```{r species richness}
@@ -136,11 +141,6 @@ ggplot(guild_abundance_season,aes(x = season,y = average_abundance,fill = season
        y = "Average Species Abundance",fill = "Season") + 
   theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 90))
 
-# by year and season composite
-
-season_map <- c(Fall = 0,Winter = 0.25,Spring = 0.5,Summer = 0.75)
-data$year_and_season <- data$survey_year + season_map[data$season]
-
 guild_abundance_year_and_season <- data %>% group_by(year_and_season,general_type) %>% 
   summarise(abundance = sum(count)) %>% distinct(year_and_season,general_type,abundance)
 
@@ -222,6 +222,34 @@ ggplot(waterfowl_r,aes(x = year_and_season,y = richness)) +
   geom_vline(data = season_numbers,aes(xintercept = xint,color = season),alpha = 0.4) + 
   labs(title = "'Waterfowl and Friends' Species Richness by Season per Survey Year",
        x = "Survey Year + Season",y = "Species Richness",color = "Season") + 
+  theme(plot.title = element_text(hjust = 0.5)) + scale_x_continuous(breaks = seq(1,9,by = 1))
+
+```
+
+```{r waterfowl species}
+
+waterfowl_species <- data %>% filter(general_type == "Waterfowl & Friends") %>% 
+  distinct(year_and_season,species)
+
+waterfowl_species_count <- waterfowl_species %>% count(species) %>% rename(season_count = n) %>% 
+  arrange(desc(season_count))
+
+kable(waterfowl_species_count,caption = "'Waterfowl and Friends' Guild Species Frequency")
+
+```
+
+```{r top waterfowl species abundances}
+
+w_and_f_top_abundance <- data %>% group_by(year_and_season,species) %>% 
+  summarise(abundance = sum(count)) %>% distinct(year_and_season,species,abundance) %>% 
+  filter(species == "Mallard" | species == "Canada Goose" | species == "Gadwall" | species == "Sora")
+
+ggplot(w_and_f_top_abundance,aes(x = year_and_season,y = abundance)) + geom_line() + 
+  theme_light() + facet_wrap(~ species,scale = "free_y") + 
+  geom_vline(data = season_numbers,aes(xintercept = xint,color = season),alpha = 0.4) + 
+  labs(x = "Survey Year by Season",y = "Abundance",color = "Season",
+       title = "Abundance of Four Most Frequent 'Waterfowl and Friends' Species 
+       by Survey Year and Season") + 
   theme(plot.title = element_text(hjust = 0.5)) + scale_x_continuous(breaks = seq(1,9,by = 1))
 
 ```
