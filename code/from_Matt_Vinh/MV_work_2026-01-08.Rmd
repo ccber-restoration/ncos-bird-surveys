@@ -1,0 +1,77 @@
+---
+title: "MV_work_2026-01-08"
+output: html_document
+---
+
+```{r setup}
+
+library(here)
+library(tidyverse)
+
+datapath <- here("data","aggregated","MV_updated_aggregated.rds")
+data <- readRDS(datapath)
+
+```
+
+## average abundance per species per survey year
+
+```{r bootstrap data}
+
+# formatting S x T matrix
+
+year_mean <- data %>% group_by(species,survey_year) %>% 
+  summarise(mean_count = mean(count))
+
+community <- xtabs(mean_count ~ survey_year + species,data = year_mean)
+community <- as.matrix(unclass(community))
+community <- t(community)
+
+```
+
+```{r bootstrapping variables}
+
+# calculating null model variables
+# row 1 = m_1, for example
+
+# m_i
+null <- data.frame(m_i = 1:169)
+for (i in 1:169){
+  x = 0
+  for (j in 1:8){
+    x = x + community[i,j]
+  }
+  null$m_i[i] = x
+}
+
+# N
+N <- 0
+for (i in 1:169){
+  N = N + null$m_i[i]
+}
+
+# s_i
+for (i in 1:169){
+  null$s_i[i] = null$m_i[i] / N
+}
+
+# estimating undetected species
+
+number_occurences <- data.frame(species_number_surveys_detected = 1:169)
+for (i in 1:169){
+  x = 0
+  for (j in 1:8){
+    if (community[i,j] > 0){
+      x = x + 1
+    }
+  }
+  number_occurences$species_number_surveys_detected[i] = x
+}
+q1_numbers <- which(number_occurences$species_number_surveys_detected == 1)
+q1 <- length(q1_numbers)
+q2_numbers <- which(number_occurences$species_number_surveys_detected == 2)
+q2 <- length(q2_numbers)
+
+S_bar <- (7 / 8) * ((q1 * (q1 - 1)) / (2 * (q2 + 1))) # 8.5
+
+```
+
