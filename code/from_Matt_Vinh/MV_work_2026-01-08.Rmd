@@ -13,7 +13,7 @@ data <- readRDS(datapath)
 
 ```
 
-## average abundance per species per survey year
+
 
 ```{r bootstrap data}
 
@@ -48,10 +48,17 @@ N <- 0
 for (i in 1:169){
   N = N + null$m_i[i]
 }
+# 2696 individuals
 
 # s_i
 for (i in 1:169){
   null$s_i[i] = null$m_i[i] / N
+}
+
+null2 <- data.frame(n_j = 1:8,q_j = 1:8)
+for (i in 1:8){
+  null2$n_j[i] = sum(community[,i])
+  null2$q_j[i] = null2$n_j[i] / N
 }
 
 # estimating undetected species
@@ -71,7 +78,37 @@ q1 <- length(q1_numbers)
 q2_numbers <- which(number_occurences$species_number_surveys_detected == 2)
 q2 <- length(q2_numbers)
 
-S_bar <- (7 / 8) * ((q1 * (q1 - 1)) / (2 * (q2 + 1))) # 8.5
+S_bar <- (7 / 8) * ((q1 * (q1 - 1)) / (2 * (q2 + 1))) # 8.5, rounds to 9
+
+null_test <- data.frame(sample_group = sample(1:8,2696,prob = null2$q_j,replace = T),
+                        sample_species = sample(rownames(community),2696,prob = null$s_i,replace = T))
+
+```
+
+```{r regression plot,message = F}
+
+observed <- data %>% group_by(observation_date,species) %>% 
+  summarize(species_abundance = sum(count)) %>% 
+  distinct(observation_date,species,species_abundance)
+
+ggplot(observed,aes(x = observation_date,y = species_abundance,color = species)) + 
+  geom_smooth(method = "lm",se = F,fullrange = T) + 
+  theme(legend.position = "none") + ylim(c(0,50)) + 
+  labs(x = "Year",y = "Observed Abundance",title = "")
+
+sample_observed <- null_test %>% group_by(sample_group,sample_species) %>% 
+  tally %>% distinct(sample_group,sample_species,n)
+
+ggplot(sample_observed,aes(x = sample_group,y = n,color = sample_species)) + 
+  geom_smooth(method = "lm",se = F,fullrange = T) + 
+  theme(legend.position = "none") + ylim(c(0,50)) + 
+  labs(x = "Year",y = "Simulated Abundance",title = "")
+
+```
+
+```{r}
+
+test <- rmultinom(2,size = 100,c(0.5,0.3,0.2))
 
 ```
 
