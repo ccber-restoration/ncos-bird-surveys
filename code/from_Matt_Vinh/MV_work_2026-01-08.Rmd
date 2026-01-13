@@ -30,6 +30,8 @@ community <- t(community)
 
 ```{r bootstrapping variables}
 
+set.seed(234)
+
 # calculating null model variables
 # row 1 = m_1, for example
 
@@ -80,35 +82,101 @@ q2 <- length(q2_numbers)
 
 S_bar <- (7 / 8) * ((q1 * (q1 - 1)) / (2 * (q2 + 1))) # 8.5, rounds to 9
 
+# accounting for undetected species
+
+undetected <- data.frame(m_i = 9 * NA,s_i = rep(0.5 * min(null$s_i),9))
+
+null <- rbind(null,undetected) # adding 9 repetitions of 0.5 * minimum observed s_i
+
+names <- append(rownames(community),paste0("undetected",1:9))
+
+# testing simulation
+
 null_test <- data.frame(sample_group = sample(1:8,2696,prob = null2$q_j,replace = T),
-                        sample_species = sample(rownames(community),2696,prob = null$s_i,replace = T))
+                        sample_species = sample(names,2696,prob = null$s_i,replace = T))
 
 ```
 
-```{r regression plot,message = F}
+```{r regression plots,message = F}
 
-observed <- data %>% group_by(observation_date,species) %>% 
+observed <- data %>% group_by(survey_year,species) %>% 
   summarize(species_abundance = sum(count)) %>% 
-  distinct(observation_date,species,species_abundance)
+  distinct(survey_year,species,species_abundance)
 
-ggplot(observed,aes(x = observation_date,y = species_abundance,color = species)) + 
+ggplot(observed,aes(x = survey_year,y = species_abundance,color = species)) + 
   geom_smooth(method = "lm",se = F,fullrange = T) + 
-  theme(legend.position = "none") + ylim(c(0,50)) + 
+  theme(legend.position = "none") +# ylim(c(0,50)) + 
   labs(x = "Year",y = "Observed Abundance",title = "")
+# if ylim is applied:
+# stat_smooth removes 175 rows
+# geom_smooth removes 183 rows
 
-sample_observed <- null_test %>% group_by(sample_group,sample_species) %>% 
+simulated <- null_test %>% group_by(sample_group,sample_species) %>% 
   tally %>% distinct(sample_group,sample_species,n)
 
-ggplot(sample_observed,aes(x = sample_group,y = n,color = sample_species)) + 
+ggplot(simulated,aes(x = sample_group,y = n,color = sample_species)) + 
   geom_smooth(method = "lm",se = F,fullrange = T) + 
-  theme(legend.position = "none") + ylim(c(0,50)) + 
+  theme(legend.position = "none") +# ylim(c(0,50)) + 
   labs(x = "Year",y = "Simulated Abundance",title = "")
+# if ylim is applied:
+# geom_smooth removes 68 rows
 
 ```
 
-```{r}
+```{r calcuating TCs}
 
-test <- rmultinom(2,size = 100,c(0.5,0.3,0.2))
+# extracting beta1 coefficients for observed
+
+species_observed <- unique(observed$species)
+beta1_observed <- 1:length(species_observed)
+for (i in 1:length(species_observed)){
+  x <- lm(species_abundance ~ survey_year,
+          data = observed[observed$species == species_observed[i],])
+  beta1_observed[i] <- as.numeric(x$coefficients[2])
+}
+beta1_observed <- beta1_observed[!is.na(beta1_observed)]
+# some coefficients are NA, caused by lack of data or consistent abundance
+
+# calculating observed TC
+
+intermediate1 <- 0
+beta1bar_observed <- sum(beta1_observed)
+for (i in 1:length(beta1_observed)){
+  x <- (beta1_observed[i] - beta1bar_observed)^2
+  intermediate1 = intermediate1 + x
+}
+
+TC_observed <- (1 / (length(species_observed) - 1)) * intermediate1
+print(TC_observed)
+
+# extractiing beta1 coefficients for simulated
+
+species_simulated <- unique(simulated$sample_species)
+beta1_simulated <- 1:length(species_simulated)
+for (i in 1:length(species_simulated)){
+  x <- lm(n ~ sample_group,
+          data = simulated[simulated$sample_species == species_simulated[i],])
+  beta1_simulated[i] <- as.numeric(x$coefficients[2])
+}
+beta1_simulated <- beta1_simulated[!is.na(beta1_simulated)]
+
+# calculating simulated TC
+
+intermediate2 <- 0
+beta1bar_simulated <- sum(beta1_simulated)
+for (i in 1:length(beta1_simulated)){
+  x <- (beta1_simulated[i] - beta1bar_simulated)^2
+  intermediate2 = intermediate2 + x
+}
+
+TC_simulated <- (1 / (length(species_simulated) - 1)) * intermediate2
+print(TC_simulated)
+
+# the observed TC is much larger than the simulated TC
+# thus the observed data has much more heterogeneity
+
+# observed TC is two orders of magnitude larger than any reported
+# in gotelli paper - incorrect replication of methods/analysis?
 
 ```
 
