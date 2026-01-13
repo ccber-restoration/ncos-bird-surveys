@@ -1,9 +1,11 @@
 ---
 title: "MV_work_2026-01-08"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
-```{r setup}
+```{r setup,include = F}
 
 library(here)
 library(tidyverse)
@@ -15,7 +17,7 @@ data <- readRDS(datapath)
 
 
 
-```{r bootstrap data}
+```{r bootstrap data,include = F}
 
 # formatting S x T matrix
 
@@ -28,7 +30,7 @@ community <- t(community)
 
 ```
 
-```{r bootstrapping variables}
+```{r bootstrapping variables,include = F}
 
 set.seed(234)
 
@@ -97,33 +99,47 @@ null_test <- data.frame(sample_group = sample(1:8,2696,prob = null2$q_j,replace 
 
 ```
 
-```{r regression plots,message = F}
+Simple linear model: $y_{ij} = \beta_{0i} + \beta_{1i}t_j + \epsilon_{ij}$ where $i = 1,\ 2,\ ...,\ S; S = \operatorname{number of species observed}; j = 1,\ 2,\ ...,\ T; T = \operatorname{number of sampling periods}$
+
+$y_{ij}$: Simulated number of individuals of species $i$ in sample $j$.
+
+$\beta_{0i}$: Regression intercept for species $i$.
+
+$\beta_{1i}$: Regression slope for species $i$.
+
+$\epsilon_{ij} \sim \mathcal{N}(0,\ \sigma_i^2)$: Error term
+
+```{r observed regression plot,message = F,echo = F,fig.cap = "Observed trend lines for existing bird survey abundance data. Similar to the visualizations included in Gotelli's paper, species are trending upward and downward with a few heading into the negatives. Although the observed abundance scale is larger than those included in the paper, the replication of methods seems correct."}
 
 observed <- data %>% group_by(survey_year,species) %>% 
   summarize(species_abundance = sum(count)) %>% 
   distinct(survey_year,species,species_abundance)
 
 ggplot(observed,aes(x = survey_year,y = species_abundance,color = species)) + 
-  geom_smooth(method = "lm",se = F,fullrange = T) + 
+  geom_smooth(method = "lm",se = F,fullrange = T) + theme_light() + 
   theme(legend.position = "none") +# ylim(c(0,50)) + 
-  labs(x = "Year",y = "Observed Abundance",title = "")
+  labs(x = "Year",y = "Observed Abundance",title = "Regression for Observed Data")
 # if ylim is applied:
 # stat_smooth removes 175 rows
 # geom_smooth removes 183 rows
+
+```
+
+```{r simulated regression plot,message = F,echo = F,fig.cap = "Trend lines for one simulation of the null model. Compared to the abundance y-axis scale for the observed trendlines, the y-axis scale here is less by a factor of 20, thus the replication seems to be incorrect in some way."}
 
 simulated <- null_test %>% group_by(sample_group,sample_species) %>% 
   tally %>% distinct(sample_group,sample_species,n)
 
 ggplot(simulated,aes(x = sample_group,y = n,color = sample_species)) + 
-  geom_smooth(method = "lm",se = F,fullrange = T) + 
+  geom_smooth(method = "lm",se = F,fullrange = T) + theme_light() + 
   theme(legend.position = "none") +# ylim(c(0,50)) + 
-  labs(x = "Year",y = "Simulated Abundance",title = "")
+  labs(x = "Year",y = "Simulated Abundance",title = "Regression for Simulated Null Moddl Data")
 # if ylim is applied:
 # geom_smooth removes 68 rows
 
 ```
 
-```{r calcuating TCs}
+```{r calcuating TCs,echo = F,fig.cap = "Calculated TC values for the observed data and the simulated null model data. While the simulated TC seems feasible, the observed TC of ~30,000 seems very off."}
 
 # extracting beta1 coefficients for observed
 
@@ -180,3 +196,6 @@ print(TC_simulated)
 
 ```
 
+Temporal change, $TC = \frac{1}{S - 1} \sum_{i = 1}^S(\beta_{1i} - \bar{\beta_1})^2$
+
+Calculated TC values for the observed data and the simulated null model data. While the simulated TC seems feasible, the observed TC of ~30,000 seems very off.

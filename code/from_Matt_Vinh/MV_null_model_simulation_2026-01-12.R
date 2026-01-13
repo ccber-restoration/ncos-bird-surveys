@@ -119,4 +119,6 @@ for (i in 1:nsim){
 }
 
 TC_data <- data.frame(TC = TC_list)
-ggplot(TC_data,aes(x = TC)) + geom_histogram(alpha = 0.8)
+hist <- ggplot(TC_data,aes(x = TC)) + geom_histogram(alpha = 0.8)
+ggsave(filename = paste0("Rough_Simulated_TC_Histogram",format(Sys.Date(),"%y-%m-%d"),
+                         ".pdf"),hist,width = 200,height = 140,units = "mm")
