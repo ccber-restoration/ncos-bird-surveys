@@ -115,7 +115,9 @@ observed <- data %>% group_by(survey_year,species) %>%
   summarize(species_abundance = sum(count)) %>% 
   distinct(survey_year,species,species_abundance)
 
-ggplot(observed,aes(x = survey_year,y = species_abundance,color = species)) + 
+
+
+fig_observed <- ggplot(observed,aes(x = survey_year,y = species_abundance,color = species)) + 
   geom_smooth(method = "lm",se = F,fullrange = T) + theme_light() + 
   theme(legend.position = "none") +# ylim(c(0,50)) + 
   labs(x = "Year",y = "Observed Abundance",title = "Regression for Observed Data")
@@ -123,6 +125,7 @@ ggplot(observed,aes(x = survey_year,y = species_abundance,color = species)) +
 # stat_smooth removes 175 rows
 # geom_smooth removes 183 rows
 
+fig_observed
 ```
 
 ```{r simulated regression plot,message = F,echo = F,fig.cap = "Trend lines for one simulation of the null model. Compared to the abundance y-axis scale for the observed trendlines, the y-axis scale here is less by a factor of 20, thus the replication seems to be incorrect in some way."}
