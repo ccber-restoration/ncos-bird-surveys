@@ -8,12 +8,12 @@ data <- readRDS(datapath)
 
 ### S x T matrix construction
 
-year_mean <- data %>% group_by(species,survey_year) %>% 
-  summarise(mean_count = mean(count))
+year_abundance <- data %>% group_by(survey_year,species) %>% 
+  summarise(abundance = sum(count))
 
 #this works, but could also use pivot_wider()
 
-community <- xtabs(mean_count ~ survey_year + species,data = year_mean)
+community <- xtabs(abundance ~ survey_year + species,data = year_abundance)
 
 #convert to proper matrix
 community <- as.matrix(unclass(community))
@@ -138,9 +138,13 @@ for (i in 1:nsim){
 }
 
 TC_data <- data.frame(TC = TC_list)
-hist <- ggplot(TC_data,aes(x = TC)) + geom_histogram(alpha = 0.8)
+
+TC_observed <- 29821
+
+hist <- ggplot(TC_data,aes(x = TC)) + geom_histogram(alpha = 0.8) + 
+  geom_vline(xintercept = TC_observed,color = "red")
 
 hist
 
-ggsave(filename = paste0("Rough_Simulated_TC_Histogram",format(Sys.Date(),"%y-%m-%d"),
-                         ".pdf"),hist,width = 200,height = 140,units = "mm")
+#ggsave(filename = paste0("Rough_Simulated_TC_Histogram",format(Sys.Date(),"%y-%m-%d"),
+#                         ".pdf"),hist,width = 200,height = 140,units = "mm")

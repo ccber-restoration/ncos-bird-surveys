@@ -21,10 +21,10 @@ data <- readRDS(datapath)
 
 # formatting S x T matrix
 
-year_mean <- data %>% group_by(species,survey_year) %>% 
-  summarise(mean_count = mean(count))
+year_abundance <- data %>% group_by(survey_year,species) %>% 
+  summarise(abundance = sum(count))
 
-community <- xtabs(mean_count ~ survey_year + species,data = year_mean)
+community <- xtabs(abundance ~ survey_year + species,data = year_abundance)
 community <- as.matrix(unclass(community))
 community <- t(community)
 
@@ -94,8 +94,8 @@ names <- append(rownames(community),paste0("undetected",1:9))
 
 # testing simulation
 
-null_test <- data.frame(sample_group = sample(1:8,2696,prob = null2$q_j,replace = T),
-                        sample_species = sample(names,2696,prob = null$s_i,replace = T))
+null_test <- data.frame(sample_group = sample(1:8,N,prob = null2$q_j,replace = T),
+                        sample_species = sample(names,N,prob = null$s_i,replace = T))
 
 ```
 
