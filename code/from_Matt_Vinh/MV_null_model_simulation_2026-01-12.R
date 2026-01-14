@@ -11,13 +11,22 @@ data <- readRDS(datapath)
 year_mean <- data %>% group_by(species,survey_year) %>% 
   summarise(mean_count = mean(count))
 
+#this works, but could also use pivot_wider()
+
 community <- xtabs(mean_count ~ survey_year + species,data = year_mean)
+
+#convert to proper matrix
 community <- as.matrix(unclass(community))
+
+#transpose
 community <- t(community)
 
 
 
 ### calculating bootstrapping variables
+
+# m_i 
+#"The total number of individuals of species i in all sampling periods"
 
 # m_i
 null <- data.frame(m_i = 1:169)
@@ -29,7 +38,8 @@ for (i in 1:169){
   null$m_i[i] = x
 }
 
-# N
+# N= "total number of individuals summed across all species and samples"
+
 N <- 0
 for (i in 1:169){
   N = N + null$m_i[i]
@@ -38,6 +48,8 @@ N <- ceiling(N)
 # 2696 individuals
 
 # s_i
+# We define the relative abundance of species i in the source pool of N individuals as
+
 for (i in 1:169){
   null$s_i[i] = null$m_i[i] / N
 }
@@ -51,6 +63,9 @@ for (i in 1:8){
 
 
 ### estimating undetected species
+
+# Chao diversity indices (1 & 2) can also be directly calculated using functions in packages
+#vegan and iNEXT
 
 number_occurences <- data.frame(species_number_surveys_detected = 1:169)
 for (i in 1:169){
@@ -66,6 +81,10 @@ q1_numbers <- which(number_occurences$species_number_surveys_detected == 1)
 q1 <- length(q1_numbers)
 q2_numbers <- which(number_occurences$species_number_surveys_detected == 2)
 q2 <- length(q2_numbers)
+
+
+
+#estimated undetected species...
 
 S_bar <- (7 / 8) * ((q1 * (q1 - 1)) / (2 * (q2 + 1))) # 8.5, rounds to 9
 
@@ -120,5 +139,8 @@ for (i in 1:nsim){
 
 TC_data <- data.frame(TC = TC_list)
 hist <- ggplot(TC_data,aes(x = TC)) + geom_histogram(alpha = 0.8)
+
+hist
+
 ggsave(filename = paste0("Rough_Simulated_TC_Histogram",format(Sys.Date(),"%y-%m-%d"),
                          ".pdf"),hist,width = 200,height = 140,units = "mm")
