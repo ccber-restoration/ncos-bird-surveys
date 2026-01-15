@@ -114,7 +114,8 @@ newaggregate <- newaggregate[!is.na(newaggregate$Species),] # -29 rows
 ebirdpath <- here("data","ebird_clements_checklist",
                   "ebird-Clements-v2018-integrated-checklist-August-2018.csv")
 ebird <- read_csv(ebirdpath)
-ebird <- ebird %>% distinct(`English name`,`eBird species group`)
+ebird <- ebird %>% distinct(`English name`,`eBird species group`,category)
+# now includes category variable for distinction of taxa not at species level
 newAndEbird <- left_join(newaggregate,ebird,by = c("Species" = "English name"))
 # + 1 variable, total 60
 
@@ -127,11 +128,15 @@ newjoined <- inner_join(newAndEbird,species_unique,by = "Species")
 
 # variable renaming
 newjoined <- newjoined %>% 
-  rename(General_Type = General.Type,eBird_Group = "eBird species group",
-         Repeat_Observation = `Repeat Observation`,Breeding_Activity = `Breeding Activity`)
+  rename(General_Type = General.Type,
+         eBird_Group = "eBird species group",
+         Repeat_Observation = `Repeat Observation`,
+         Breeding_Activity = `Breeding Activity`)
 birdsurveys_filtered <- birdsurveys_filtered %>% 
-  rename(General_Type = General.Type,eBird_Group = eBird.Group,
-         Repeat_Observation = Repeat.Observation,Breeding_Activity = Breeding.Activity)
+  rename(General_Type = General.Type,
+         eBird_Group = eBird.Group,
+         Repeat_Observation = Repeat.Observation,
+         Breeding_Activity = Breeding.Activity)
 
 # combining new aggregated with old aggregated
 updated_aggregated_survey_data <- bind_rows(newjoined,birdsurveys_filtered)
