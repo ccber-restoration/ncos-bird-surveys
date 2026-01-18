@@ -9,6 +9,8 @@ output:
 
 library(here)
 library(tidyverse)
+library(popbayes)
+library(R2jags)
 
 datapath <- here("data","aggregated","MV_updated_aggregated.rds")
 data <- readRDS(datapath)
@@ -202,3 +204,53 @@ print(TC_simulated)
 Temporal change, $TC = \frac{1}{S - 1} \sum_{i = 1}^S(\beta_{1i} - \bar{\beta_1})^2$
 
 Calculated TC values for the observed data and the simulated null model data. While the simulated TC seems feasible, the observed TC of ~30,000 seems very off.
+
+```{r hierarchical model parameter estimation}
+
+test <- system.file("extdata", "garamba_survey.csv", 
+                         package = "popbayes")
+test_data <- read.csv(file = test)
+
+test_format <- format_data(test_data,path = path,field_method = "field_method",
+  pref_field_method = "pref_field_method",
+  conversion_A2G    = "conversion_A2G",
+  rmax              = "rmax")
+
+a_buselaphus <- filter_series(test_format, 
+                                        location = "Garamba",
+                                        species  = "Alcelaphus buselaphus")
+
+a_buselaphus_mod <- fit_trend(a_buselaphus, path = path)
+
+plot_trend(series = "garamba__alcelaphus_buselaphus", 
+                     path   = path)
+
+a_buselaphus_mod[["garamba__alcelaphus_buselaphus"]][["BUGSoutput"]][["sims.list"]][["r"]]
+
+```
+
+```{r}
+
+data <- data %>% mutate(location = rep("NCOS",times = nrow(data)),
+                        stat_method = rep("T",times = nrow(data)),
+                        include = case_when(
+                          grepl("sp.",species) ~ "no",
+                          grepl("hybrid",species) ~ "no",
+                          .default = "yes"),
+                        rmax = rep(0.01,times = nrow(data)))
+
+species_list <- c("Black-chinned Hummingbird","Black-headed Grosbeak","Blue Grosbeak","Brewer's Blackbird","California Quail","Canvasback","Chipping Sparrow","Clay-colored Sparrow","Common Raven","Fox Sparrow","Mute Swan","Pectoral Sandpiper","Sanderling","Solitary Sandpiper","Vaux's Swift","Western Wood-Pewee","Whimbrel","Willet","Willow Flycatcher")
+
+mod <- data %>% filter(include == "yes",!species %in% species_list)
+
+formatted <- format_data(mod,
+                         path = path,
+                         date = "year",
+                         lower_ci = NULL,
+                         upper_ci = NULL,
+                         rmax = "rmax")
+
+trend <- fit_trend(formatted,path = path)
+
+```
+

@@ -1,5 +1,7 @@
 library(here)
 library(tidyverse)
+library(patchwork)
+library(grid)
 
 datapath <- here("data","aggregated","MV_updated_aggregated.rds")
 data <- readRDS(datapath)
@@ -141,10 +143,36 @@ TC_data <- data.frame(TC = TC_list)
 
 TC_observed <- 29821
 
-hist <- ggplot(TC_data,aes(x = TC)) + geom_histogram(alpha = 0.8) + 
-  geom_vline(xintercept = TC_observed,color = "red")
+TC_data_desc <- TC_data %>% arrange(desc(TC))
+percentile_95 <- TC_data_desc$TC[51]
+
+p_value <- mean(TC_list >= TC_observed)
+
+text1 <- "Observed TC"
+text2 <- "95th percentile"
+text3 <- "p-value: 0.057"
+
+hist <- ggplot(TC_data,aes(x = TC)) + geom_histogram(alpha = 0.9) + 
+  geom_vline(xintercept = TC_observed,color = "red") + 
+  geom_text(aes(label = text1),
+            x = 34000,y = 75,
+            color = "red",
+            size = 5) + 
+  geom_vline(xintercept = percentile_95,color = "blue") + 
+  geom_text(aes(label = text2),
+            x = 34000,y = 69,
+            color = "blue",
+            size = 5) + 
+  geom_text(aes(label = text3),
+            x = 17500,y = 75,
+            size = 5) + 
+  theme_light() + 
+  labs(title = "Distribution of Simulated TC Values",
+       x = "Temporal Change (TC)",
+       y = "Count") + 
+  theme(plot.title = element_text(hjust = 0.5))
 
 hist
 
-#ggsave(filename = paste0("Rough_Simulated_TC_Histogram",format(Sys.Date(),"%y-%m-%d"),
-#                         ".pdf"),hist,width = 200,height = 140,units = "mm")
+ggsave(filename = paste0("Simulated_TC_Histogram",format(Sys.Date(),"%y-%m-%d"),
+                         ".pdf"),hist,width = 200,height = 200,units = "mm")
