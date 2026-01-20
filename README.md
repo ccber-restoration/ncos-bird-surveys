@@ -45,4 +45,5 @@
 ## North American Breeding Bird Survey (USGS)
 
 -  See USGS site: https://www.pwrc.usgs.gov/bbs/RouteMap/Map.cfm
+-  USGS developed an R package for working with the data set: BbsAssistant, https://pubs.usgs.gov/publication/70217534
 -  Could use the full 32 sites in the "Coastal California" Bird Conservation Region, or compare to specific routes (e.g. Santa Ynez (14038)). Note that many routes end before 2025.
