@@ -41,3 +41,8 @@
 -   R auk package for querying/downloading full eBird data set: <https://cornelllabofornithology.github.io/auk/>
 -   The eBird hotspot is "UCSB North Campus Open Space (formerly Ocean Meadows Golf Course)": <https://ebird.org/hotspot/L820867>
 -   Birdview is a third-party web app for exploring/visualizing eBird data: <https://s3.us-west-1.amazonaws.com/membot.com/BirdView.html>
+
+## North American Breeding Bird Survey (USGS)
+
+-  See USGS site: https://www.pwrc.usgs.gov/bbs/RouteMap/Map.cfm
+-  Could use the full 32 sites in the "Coastal California" Bird Conservation Region, or compare to specific routes (e.g. Santa Ynez (14038)). Note that many routes end before 2025.
