@@ -69,7 +69,10 @@ formatted <- format_data(mod,
 trend <- fit_trend(formatted,
                    path = path,
                    model_opts = list(100,T),
-                   mcmc_opts = list(ni = 4200,nb = 1000,nc = 5))
+                   mcmc_opts = list(ni = 4200,nt = 5,nb = 1000,nc = 5))
+
+#Error in update.jags(model, n.iter, ...) : Error in node sdr
+#Invalid parent values
 
 ```
 
