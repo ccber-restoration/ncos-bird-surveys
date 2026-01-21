@@ -19,8 +19,8 @@
 
 ## Trait data
 
--   AVONET (Tobias et al. 2022)
--   Elton Traits (Wilman et al. 2014)
+-   AVONET (Tobias et al. 2022): https://figshare.com/s/b990722d72a26b5bfead
+-   Elton Traits (Wilman et al. 2014): https://datadryad.org/dataset/doi:10.5061/dryad.1zcrjdg56
 -   both can be accessed using the 'traitdata' R package (not on CRAN): <https://github.com/RS-eco/traitdata/>
 
 ## Taxonomy/nomenclature
