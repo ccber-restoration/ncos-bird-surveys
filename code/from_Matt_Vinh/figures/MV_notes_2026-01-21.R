@@ -20,4 +20,4 @@ create data frames at the species and survey levels
 
 lisa:
   - total number of species over time
-  - presence absence community similarity
+  - presence absence community s imilarity
