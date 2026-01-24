@@ -5,11 +5,11 @@ library(janitor)
 
 ##### data
 
-datapath <- here("data","aggregated","MV_updated_cleaned.rds")
+datapath <- here("data","aggregated","from_Matt_Vinh","MV_cleaned_2026-01-24.rds")
 data <- readRDS(datapath)
 
 taxonomy_path <- here("data","ebird_clements_checklist","Clements_v2025-October-2025.csv")
-taxonomy_data <- read_csv(testpath)
+taxonomy_data <- read_csv(taxonomy_path)
 
 
 ##### filtering for all unique NCOS species recorded
@@ -41,9 +41,9 @@ species_level <- clean_names(species_level)
 
 
 ##### saving 
-#TODO
-csv_path <- here("data","aggregated","MV_species-level_2026-01-.csv")
+
+csv_path <- here("data","aggregated","from_Matt_Vinh","MV_species-level_2026-01-24.csv")
 write_csv(species_level,csv_path)
 
-rds_path <- here("data","aggregated","MV_species-level_2026-01-.rds")
+rds_path <- here("data","aggregated","from_Matt_Vinh","MV_species-level_2026-01-24.rds")
 saveRDS(species_level,rds_path)
