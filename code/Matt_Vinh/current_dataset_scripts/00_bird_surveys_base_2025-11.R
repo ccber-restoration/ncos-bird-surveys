@@ -2,7 +2,7 @@ library(tidyverse)
 library(here)
 library(janitor)
 
-##### existing aggregated dataset wrangling
+##### existing aggregated dataset wrangling ####
 
 birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023",
                            "doi_10_5061_dryad_bvq83bkhz__v20240617",
@@ -43,7 +43,7 @@ birdsurveys_filtered <- birdsurveys_filtered %>% # + 3 variables
 # total 15 variables
 
 
-##### wrangling recent data (2025-2025)
+##### wrangling recent data (2025-2025) ----
 
 # file paths to folders organized by year containing bird survey data
 csvpath23 <- here("data","2023")
@@ -123,7 +123,7 @@ newaggregate_chk <- newaggregate %>%
   filter(is.na(Species))
 
 
-##### compiling aggregates
+##### compiling aggregates ----
 #TODO declutter objects after not needed
 
 # reading eBird.csv, joining with new aggregated dataframe
