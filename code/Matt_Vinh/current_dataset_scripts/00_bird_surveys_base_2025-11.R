@@ -12,6 +12,7 @@ birdsurveys <- read_csv(birdsurveyfilepath) # 11 variables
 # cleaning substrates
 # NA and <Null> substrates become Unknown
 birdsurveys_filtered <- birdsurveys %>%
+  #FIXME make NA counts 1, rather than excluding
   filter(!is.na(Count)) # removes 6 rows with no recorded species count
 birdsurveys_filtered$Substrate[birdsurveys_filtered$Substrate == "rocks"] <- "Rock"
 birdsurveys_filtered$Substrate[birdsurveys_filtered$Substrate == 
@@ -37,12 +38,12 @@ birdsurveys_filtered <- birdsurveys_filtered %>% # + 3 variables
            month(Observation_Date) %in% c(3:5) ~ "Spring",
            month(Observation_Date) %in% c(6:8) ~ "Summer",
            month(Observation_Date) %in% c(9:11) ~ "Fall")) %>% 
+  #FIXME- we can probably figure out the correct date for these two rows
   filter(!is.na(Observation_Date))
 # total 15 variables
 
 
-
-##### wrangling recent data
+##### wrangling recent data (2025-2025)
 
 # file paths to folders organized by year containing bird survey data
 csvpath23 <- here("data","2023")
@@ -62,6 +63,10 @@ df23 <- map_dfr(csvfiles23,~ read_csv(.x,col_types = cols(.default = "c"),
                   mutate(
                     parsed = mdy_hms(CreationDate),
                     Observation_Date = as.Date(parsed)))
+
+#FIXME The problem here is that the filename doesn't match the actual survey date
+# (Probably rescheduled due to rain or something)
+#Trust the data, not the filename
 df23$Observation_Date[df23$Observation_Date == "2023-12-06"] <- "2023-12-04"
 
 df24 <- map_dfr(csvfiles24,~ read_csv(.x,col_types = cols(.default = "c"),
@@ -101,14 +106,25 @@ newaggregate <- rbind(intermediate,df25) %>% mutate( # + 3 variables
     month(Observation_Date) %in% c(6:8) ~ "Summer",
     month(Observation_Date) %in% c(9:11) ~ "Fall"))
 
+#declutter
+rm(intermediate)
+rm(df23)
+rm(df24)
+rm(df25)
+
 # cleaning resulting aggregated data frame
 newaggregate$Count <- as.integer(newaggregate$Count)
+#FIXME- look at these 12 rows...
 newaggregate <- newaggregate %>% filter(!is.na(newaggregate$Count)) # -12 rows
-newaggregate <- newaggregate[!is.na(newaggregate$Species),] # -29 rows
 
+newaggregate <- newaggregate[!is.na(newaggregate$Species),] # -29 rows
+#FIXME- checked these as well. Most of these had OBSERVATION NOTES
+newaggregate_chk <- newaggregate %>% 
+  filter(is.na(Species))
 
 
 ##### compiling aggregates
+#TODO declutter objects after not needed
 
 # reading eBird.csv, joining with new aggregated dataframe
 ebirdpath <- here("data","ebird_clements_checklist",
@@ -121,8 +137,12 @@ newAndEbird <- left_join(newaggregate,ebird,by = c("Species" = "English name"))
 
 # using existing general type designations to apply to new aggregated dataframe
 species <- birdsurveys_filtered %>% select(c("Species","General.Type"))
-species_unique <- species %>% distinct() # reduces data size from 10634 to 164
-newjoined <- inner_join(newAndEbird,species_unique,by = "Species")
+species_unique <- species %>% distinct() # reduces data size from 10634 to 169
+
+#use leftjoin here
+newjoined <- left_join(newAndEbird,species_unique,by = "Species")
+
+
 # + 1 row, total 61
 
 
