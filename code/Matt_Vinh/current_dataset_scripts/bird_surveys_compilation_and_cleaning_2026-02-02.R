@@ -1,4 +1,3 @@
-
 ##### libraries ----
 
 library(tidyverse)
@@ -16,7 +15,10 @@ birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023",
 birdsurveys <- read_csv(birdsurveyfilepath) # 11 variables
 
 
-birdsurveys_filtered <- birdsurveys %>% 
+### cleaning and adding new variables
+# + 2 variables: survye_year, season
+# 13 total variables, 11351 observations
+birdsurveys_cleaned <- birdsurveys %>% 
   mutate(
     
     ### data type
@@ -104,6 +106,7 @@ csvfiles25 <- list.files(path = csvpath25,pattern = "\\.csv$",full.names = T)
 # for all survey data objects, observation date variable is added,
 # observation date intermediate variable "parsed" is removed,
 # and NA substrates become new Unknown level
+# all have 55 variables
 
 df23 <- map_dfr(csvfiles23,~ read_csv(.x,col_types = cols(.default = "c"),
                                       locale = locale(encoding = "Latin1")) %>% 
@@ -154,14 +157,13 @@ df25 <- map_dfr(csvfiles25,~ read_csv(.x,col_types = cols(.default = "c"),
 
 
 ### rbind-ing bird survey data of each year, new variables and cleaning
-compiled <- rbind(df23,df24,df25) %>% 
+# + 3 variables: year, survey_year, season
+# total 58 variables, 4848 observations
+compiled1 <- rbind(df23,df24,df25) %>% 
   mutate(
     
     ### new variable
     year = year(observation_date),
-    
-    ### correct data type
-    observation_date = as.Date(observation_date),
     
     ### adding survey year variable
     survey_year = case_when(
@@ -242,7 +244,9 @@ compiled <- rbind(df23,df24,df25) %>%
     Count = as.integer(Count),
     
     ### replacing NA count with 1
-    Count = replace_na(Count,1))
+    Count = replace_na(Count,1)) %>% 
+  
+  clean_names()
 
 
 ### declutter
@@ -250,87 +254,176 @@ rm(df23,df24,df25)
 
 
 
-##### compiling aggregates ----
-#TODO declutter objects after not needed
+##### adding bird grouping variables and joining data ----
 
-# reading eBird.csv, joining with new aggregated dataframe
+
 ebirdpath <- here("data","ebird_clements_checklist",
                   "ebird-Clements-v2018-integrated-checklist-August-2018.csv")
 ebird <- read_csv(ebirdpath)
-ebird <- ebird %>% distinct(`English name`,`eBird species group`,category)
-# now includes category variable for distinction of taxa not at species level
-newAndEbird <- left_join(newaggregate,ebird,by = c("Species" = "English name"))
-# + 1 variable, total 60
-
-# using existing general type designations to apply to new aggregated dataframe
-species <- birdsurveys_filtered %>% select(c("Species","General.Type"))
-species_unique <- species %>% distinct() # reduces data size from 10634 to 169
-
-#use leftjoin here
-newjoined <- left_join(newAndEbird,species_unique,by = "Species")
 
 
-# + 1 row, total 61
+### ebird_clements ebird variable joining
+# + 1 variable
+# total 59 variables, 4848 observations
+ebird_group <- ebird %>% 
+  distinct(`English name`, `eBird species group`)
+
+compiled2 <- left_join(compiled1,
+                       ebird_group,
+                       by = c("species" = "English name")) %>% 
+  clean_names() %>% 
+  
+  # renaming for better row binding with birdsurveys_cleaned
+  rename(e_bird_group = e_bird_species_group)
 
 
-# variable renaming
-newjoined <- newjoined %>% 
-  rename(General_Type = General.Type,
-         eBird_Group = "eBird species group",
-         Repeat_Observation = `Repeat Observation`,
-         Breeding_Activity = `Breeding Activity`)
-birdsurveys_filtered <- birdsurveys_filtered %>% 
-  rename(General_Type = General.Type,
-         eBird_Group = eBird.Group,
-         Repeat_Observation = Repeat.Observation,
-         Breeding_Activity = Breeding.Activity)
+### existing dataset general type variable joining
+# + 1 variable
+# total 60 variables, 4848 observations
+general_type <- birdsurveys_cleaned %>% 
+  distinct(species, general_type)
 
-# combining new aggregated with old aggregated
-updated_aggregated_survey_data <- bind_rows(newjoined,birdsurveys_filtered)
-# + 3 variables, total 64
-# 4034 obs + 11343 obs = 15377 obs
-# writes NAs for variables not common to both dataframes
+compiled3 <- left_join(compiled2,
+                       general_type,
+                       by = "species") %>% 
+  clean_names()
 
 
+### binding compiled3 with birdsurveys_cleaned
+# 4848 observations + 11351 observations = 16199 observations
+# total 61 variables
+# + 1 variable: slough_water_elevation_ft only in birdsurveys_cleaned
+compiled_new_and_old <- bind_rows(compiled3, birdsurveys_cleaned)
 
-# manipulating data types
-updated_aggregated_survey_data$Substrate <- 
-  as.factor(updated_aggregated_survey_data$Substrate)
-updated_aggregated_survey_data$`Water Level`<- 
-  as.numeric(updated_aggregated_survey_data$`Water Level`)
-updated_aggregated_survey_data$`Starting Temp (F)` <- 
-  as.numeric(updated_aggregated_survey_data$`Starting Temp (F)`)
-updated_aggregated_survey_data$`Starting % Cloud Cover` <- 
-  as.numeric(updated_aggregated_survey_data$`Starting % Cloud Cover`)
-updated_aggregated_survey_data$`Ending Temp (F)` <- 
-  as.numeric(updated_aggregated_survey_data$`Ending Temp (F)`)
-updated_aggregated_survey_data$`Ending % Cloud Cover` <- 
-  as.numeric(updated_aggregated_survey_data$`Ending % Cloud Cover`)
-updated_aggregated_survey_data$`Horizontal Accuracy (m)` <- 
-  as.numeric(updated_aggregated_survey_data$`Horizontal Accuracy (m)`)
-updated_aggregated_survey_data$`Vertical Accuracy (m)` <- 
-  as.numeric(updated_aggregated_survey_data$`Vertical Accuracy (m)`)
-updated_aggregated_survey_data$Latitude <- 
-  as.numeric(updated_aggregated_survey_data$Latitude)
-updated_aggregated_survey_data$Longitude <- 
-  as.numeric(updated_aggregated_survey_data$Longitude)
-updated_aggregated_survey_data$Altitude <- 
-  as.numeric(updated_aggregated_survey_data$Altitude)
-updated_aggregated_survey_data$PDOP <- as.numeric(updated_aggregated_survey_data$PDOP)
-updated_aggregated_survey_data$HDOP <- as.numeric(updated_aggregated_survey_data$HDOP)
-updated_aggregated_survey_data$VDOP <- as.numeric(updated_aggregated_survey_data$VDOP)
-updated_aggregated_survey_data$`Number of Satellites` <- 
-  as.numeric(updated_aggregated_survey_data$`Number of Satellites`)
 
-# removing redundant observation date variables
-updated_aggregated_survey_data <- updated_aggregated_survey_data %>% 
-  select(-c(Observation.Date,obs_date2))
+### ebird_clements category variable joining
+# + 1 variable
+# total 62 variables, 16199 observations
+category <- ebird %>% 
+  distinct(`English name`, category)
 
-updated_aggregated_survey_data <- clean_names(updated_aggregated_survey_data)
+compiled_final <- left_join(compiled_new_and_old,
+                            category,
+                            by = c("species" = "English name"))
 
-# writing .csv and .rds
-csvpath <- here("data","aggregated","MV_updated_aggregated.csv")
-write_csv(updated_aggregated_survey_data,csvpath)
-rdspath <- here("data","aggregated","MV_updated_aggregated.rds")
-saveRDS(updated_aggregated_survey_data,rdspath)
+
+### declutter
+rm(ebird,ebird_group,general_type,category,
+   compiled1,compiled2,compiled_new_and_old)
+
+
+
+##### further cleaning ----
+
+
+compiled_final <- compiled_final %>% 
+  mutate(
+    
+    ### data types
+    
+    # factor
+    substrate = as.factor(substrate),
+    
+    #numeric
+    water_level = as.numeric(water_level),
+    starting_temp_f = as.numeric(starting_temp_f),
+    starting_percent_cloud_cover = as.numeric(starting_percent_cloud_cover),
+    ending_temp_f = as.numeric(ending_temp_f),
+    ending_percent_cloud_cover = as.numeric(ending_percent_cloud_cover),
+    horizontal_accuracy_m = as.numeric(horizontal_accuracy_m),
+    vertical_accuracy_m = as.numeric(vertical_accuracy_m),
+    latitude = as.numeric(latitude),
+    longitude = as.numeric(longitude),
+    altitude = as.numeric(altitude),
+    pdop = as.numeric(pdop),
+    hdop = as.numeric(hdop),
+    vdop = as.numeric(vdop),
+    number_of_satellites = as.numeric(number_of_satellites),
+    
+    ### taxonomy update
+    # based on investigation during species-level dataset cleaning,
+    # the following species have no taxonomic match with
+    # updated clements dataset: "Clements_v2025-October-2025.csv"
+    
+    # Black-crowned Night-Heron
+    # Yellow Warbler
+    # Rock Pigeon (Feral Pigeon)
+    # House Wren
+    # Mew Gull
+    # Whimbrel
+    # Pacific-slope Flycatcher
+    
+    ### replacements (based on cornell ebird unless stated otherwise):
+    
+    # Black-crowned Night Heron (spelling change, removal of second "-")
+    # Northern Yellow Warbler
+    # Rock Pigeon (removal of second name)
+    # Northern House Wren
+    # Common Gull (according to https://animaldiversity.org/accounts/Larus_canus/)
+    # Hudsonian Whimbrel
+    # Western Flycatcher
+    
+    species = replace(species,
+                      species == "Black-crowned Night-Heron",
+                      "Black-crowned Night Heron"),
+    species = replace(species,
+                      species == "Yellow Warbler",
+                      "Northern Yellow Warbler"),
+    species = replace(species,
+                      species == "Rock Pigeon (Feral Pigeon)",
+                      "Rock Pigeon"),
+    species = replace(species,
+                      species == "House Wren",
+                      "Northern House Wren"),
+    species = replace(species,
+                      species == "Mew Gull",
+                      "Common Gull"),
+    species = replace(species,
+                      species == "Whimbrel",
+                      "Hudsonian Whimbrel"),
+    species = replace(species,
+                      species == "Pacific-slope Flycatcher",
+                      "Western Flycatcher")) %>% 
+  
+  ### filling data where applicable
+  # TODO manual verification of filled data accuracy
+  arrange(desc(observation_date)) %>%
+  
+  fill(c(water_level,
+         
+         observers,
+         
+         starting_time,
+         ending_time,
+         
+         starting_temp_f,
+         ending_temp_f,
+         
+         starting_percent_cloud_cover,
+         ending_percent_cloud_cover,
+         
+         starting_cloud_height,
+         ending_cloud_height,
+         
+         starting_wind_speed,
+         ending_wind_speed,
+         
+         starting_wind_direction,
+         ending_wind_direction,
+         
+         starting_rain,
+         ending_rain),
+       
+       .by = observation_date,
+       .direction = "down")
+
+
+##### writing .csv and .rds ----
+
+
+csvpath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-02.csv")
+write_csv(compiled_final,csvpath)
+
+rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-02.rds")
+saveRDS(compiled_final,rdspath)
 
