@@ -6,7 +6,7 @@ library(janitor)
 
 
 
-##### existing compiled data cleaning ----
+##### existing compiled data (Dryad) cleaning ----
 
 
 birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023",
@@ -16,7 +16,7 @@ birdsurveys <- read_csv(birdsurveyfilepath) # 11 variables
 
 
 ### cleaning and adding new variables
-# + 2 variables: survye_year, season
+# + 2 variables: survey_year, season
 # 13 total variables, 11351 observations
 birdsurveys_cleaned <- birdsurveys %>% 
   mutate(
@@ -85,17 +85,29 @@ birdsurveys_cleaned <- birdsurveys %>%
 ### declutter
 rm(birdsurveys)
 
+### explore the Dryad data a bit... ----
 
+dryad_exploration <- birdsurveys_cleaned %>% 
+  distinct(year, observation_date)  
+  
+#note that there's no survey for March 2022! 
+
+#but the survey was carried out, and the csv is in this repo:
+#TODO: make the variables consistent with the dyrad data frame and rbind
+survey_2022_03 <- read_csv("data/2022/NCOS_Bird_Survey_Data_2022_03_16.csv")
 
 ##### wrangling recent data (2023-2025) ----
 
-
+# Each survey is its own csv file, within a subdirectory for year
 csvpath23 <- here("data","2023")
 csvpath24 <- here("data","2024")
 csvpath25 <- here("data","2025")
 
 
 ### file extraction with list.files()
+### extract filepaths to use below to actually read in data
+
+#only need last 4 months of 2023, because the first 8 months were already compiled in Dryad file
 csvfiles23 <- list.files(path = csvpath23,pattern = "2023_(09|10|11|12)_.*\\.csv$",
                          full.names = T)
 csvfiles24 <- list.files(path = csvpath24,pattern = "\\.csv$",full.names = T)
@@ -257,6 +269,8 @@ rm(df23,df24,df25)
 ##### adding bird grouping variables and joining data ----
 
 
+# this is the bird checklist that was used by Ryan Clark for the ArcGIS dropdown menu of species
+
 ebirdpath <- here("data","ebird_clements_checklist",
                   "ebird-Clements-v2018-integrated-checklist-August-2018.csv")
 ebird <- read_csv(ebirdpath)
@@ -316,7 +330,7 @@ rm(ebird,ebird_group,general_type,category,
 ##### further cleaning ----
 
 
-compiled_final <- compiled_final %>% 
+compiled_final_clean <- compiled_final %>% 
   mutate(
     
     ### data types
@@ -389,6 +403,7 @@ compiled_final <- compiled_final %>%
   # TODO manual verification of filled data accuracy
   arrange(desc(observation_date)) %>%
   
+  group_by(observation_date) %>% 
   fill(c(water_level,
          
          observers,
@@ -414,8 +429,23 @@ compiled_final <- compiled_final %>%
          starting_rain,
          ending_rain),
        
-       .by = observation_date,
-       .direction = "down")
+       #.by = observation_date,
+       .direction = "down") %>% 
+  ungroup()
+
+#declutter
+rm(compiled_final)
+
+#look at survey-level data (aka metadata)
+
+#initially, summarize number of surveys per calendar year
+
+survey_metadata <- compiled_final_clean %>% 
+  select(water_level:weather_note, observation_date:season, slough_water_elevation_ft) %>% 
+  distinct() %>% 
+  distinct(observation_date, year) %>% 
+  group_by(year) %>% 
+  summarize(n = n())
 
 
 ##### writing .csv and .rds ----
