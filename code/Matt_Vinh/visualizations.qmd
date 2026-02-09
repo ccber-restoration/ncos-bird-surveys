@@ -1,0 +1,15 @@
+---
+title: "visualizations"
+format: html
+---
+
+```{r setup}
+
+library(here)
+library(tidyverse)
+
+datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-02.rds")
+data <- readRDS(datapath)
+
+```
+

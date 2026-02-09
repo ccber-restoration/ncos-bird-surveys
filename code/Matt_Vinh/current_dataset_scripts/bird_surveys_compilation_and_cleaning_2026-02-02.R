@@ -6,7 +6,7 @@ library(janitor)
 
 
 
-##### existing compiled data (Dryad) cleaning ----
+##### existing compiled Dryad data cleaning ----
 
 
 birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023",
@@ -18,6 +18,7 @@ birdsurveys <- read_csv(birdsurveyfilepath) # 11 variables
 ### cleaning and adding new variables
 # + 2 variables: survey_year, season
 # 13 total variables, 11351 observations
+
 birdsurveys_cleaned <- birdsurveys %>% 
   mutate(
     
@@ -83,38 +84,31 @@ birdsurveys_cleaned <- birdsurveys %>%
 
 
 ### declutter
+
 rm(birdsurveys)
 
-### explore the Dryad data a bit... ----
 
-dryad_exploration <- birdsurveys_cleaned %>% 
-  distinct(year, observation_date)  
-  
-#note that there's no survey for March 2022! 
 
-#but the survey was carried out, and the csv is in this repo:
-#TODO: make the variables consistent with the dyrad data frame and rbind
-survey_2022_03 <- read_csv("data/2022/NCOS_Bird_Survey_Data_2022_03_16.csv")
-
-##### wrangling recent data (2023-2025) ----
+##### wrangling recent data (2023-2025) and missing 2022-03-16 survey----
 
 # Each survey is its own csv file, within a subdirectory for year
+
 csvpath23 <- here("data","2023")
 csvpath24 <- here("data","2024")
 csvpath25 <- here("data","2025")
 
 
-### file extraction with list.files()
-### extract filepaths to use below to actually read in data
+### extract filepaths
 
 #only need last 4 months of 2023, because the first 8 months were already compiled in Dryad file
+
 csvfiles23 <- list.files(path = csvpath23,pattern = "2023_(09|10|11|12)_.*\\.csv$",
                          full.names = T)
 csvfiles24 <- list.files(path = csvpath24,pattern = "\\.csv$",full.names = T)
 csvfiles25 <- list.files(path = csvpath25,pattern = "\\.csv$",full.names = T)
 
 
-### reading files with map_dfr() and cleaning
+### reading files and cleaning
 # for all survey data objects, observation date variable is added,
 # observation date intermediate variable "parsed" is removed,
 # and NA substrates become new Unknown level
@@ -124,7 +118,7 @@ df23 <- map_dfr(csvfiles23,~ read_csv(.x,col_types = cols(.default = "c"),
                                       locale = locale(encoding = "Latin1")) %>% 
                   mutate(
                     
-                    # intermediate and new variable
+                    # date variables
                     parsed = mdy_hms(CreationDate),
                     observation_date = as.Date(parsed),
                     
@@ -133,11 +127,42 @@ df23 <- map_dfr(csvfiles23,~ read_csv(.x,col_types = cols(.default = "c"),
   # remove intermediate
   select(-"parsed")
 
+# the missing March 2022 survey
+# data format matches the 2023-2025 raw data format
+
+survey_2022_03 <- read_csv("data/2022/NCOS_Bird_Survey_Data_2022_03_16.csv") %>% 
+  mutate(
+    
+    # date variables
+    datatype = as.character(CreationDate),
+    parsed = mdy_hms(datatype),
+    observation_date = as.Date(parsed),
+    
+    # which(is.na()) returns that 146 observations have NA substrate,
+    # but does not appear that way with View()?
+    Substrate = replace_na(Substrate,"Unknown"),
+    
+    'Direction of travel (Â°)' = NA * 171,
+    'Compass reading (Â°)' = NA * 171,
+    'Station ID' = NA * 171,
+    'Number of Satellites' = NA * 171,
+    'Fix Time' = NA * 171,
+    'Average Horizontal Accuracy (m)' = NA * 171,
+    'Average Vertical Accuracy (m)' = NA * 171,
+    'Averaged Positions' = NA * 171,
+    'Standard Deviation (m)' = NA * 171) %>%
+  
+  # remove intermediate
+  select(-c("datatype",
+            "parsed",
+            "Direction of travel (°)",
+            "Compass reading (°)"))
+
 df24 <- map_dfr(csvfiles24,~ read_csv(.x,col_types = cols(.default = "c"),
                                       locale = locale(encoding = "Latin1")) %>% 
                   mutate(
                     
-                    # intermediate na dnew variable
+                    # date variables
                     parsed = mdy_hms(CreationDate),
                     observation_date = as.Date(parsed),
                     
@@ -157,7 +182,7 @@ df25 <- map_dfr(csvfiles25,~ read_csv(.x,col_types = cols(.default = "c"),
                                       locale = locale(encoding = "Latin1")) %>% 
                   mutate(
                     
-                    # intermediate and new variable
+                    # date variables
                     parsed = mdy_hms(CreationDate),
                     observation_date = as.Date(parsed),
                     
@@ -171,7 +196,12 @@ df25 <- map_dfr(csvfiles25,~ read_csv(.x,col_types = cols(.default = "c"),
 ### rbind-ing bird survey data of each year, new variables and cleaning
 # + 3 variables: year, survey_year, season
 # total 58 variables, 4848 observations
-compiled1 <- rbind(df23,df24,df25) %>% 
+
+#TODO running into error:
+#Error in `abort_lossy_cast()`:
+#  ! Lossy cast from <character> to <hms> at position(s) 109, 353, 491, 567
+
+compiled1 <- rbind(survey_2022_03,df23,df24,df25) %>% 
   mutate(
     
     ### new variable
@@ -238,11 +268,9 @@ compiled1 <- rbind(df23,df24,df25) %>%
     Species = replace(Species,
                       `Observation Notes` == "cost as hummingbird",
                       "Costa's Hummingbird"),
-    # guessing that this is a peregrine falcon because no other bird species with
-    # "falcon" in the name have been recorded
     Species = replace(Species,
                       `Observation Notes` == "falcon ppp flew over",
-                      "Peregrine Falcon"),
+                      "Falcon sp."),
     Species = replace(Species,
                       `Observation Notes` == "swallow spp",
                       "Swallow sp."),
@@ -262,12 +290,12 @@ compiled1 <- rbind(df23,df24,df25) %>%
 
 
 ### declutter
+
 rm(df23,df24,df25)
 
 
 
 ##### adding bird grouping variables and joining data ----
-
 
 # this is the bird checklist that was used by Ryan Clark for the ArcGIS dropdown menu of species
 
@@ -279,6 +307,7 @@ ebird <- read_csv(ebirdpath)
 ### ebird_clements ebird variable joining
 # + 1 variable
 # total 59 variables, 4848 observations
+
 ebird_group <- ebird %>% 
   distinct(`English name`, `eBird species group`)
 
@@ -294,6 +323,7 @@ compiled2 <- left_join(compiled1,
 ### existing dataset general type variable joining
 # + 1 variable
 # total 60 variables, 4848 observations
+
 general_type <- birdsurveys_cleaned %>% 
   distinct(species, general_type)
 
@@ -307,12 +337,14 @@ compiled3 <- left_join(compiled2,
 # 4848 observations + 11351 observations = 16199 observations
 # total 61 variables
 # + 1 variable: slough_water_elevation_ft only in birdsurveys_cleaned
+
 compiled_new_and_old <- bind_rows(compiled3, birdsurveys_cleaned)
 
 
 ### ebird_clements category variable joining
 # + 1 variable
 # total 62 variables, 16199 observations
+
 category <- ebird %>% 
   distinct(`English name`, category)
 
@@ -322,7 +354,8 @@ compiled_final <- left_join(compiled_new_and_old,
 
 
 ### declutter
-rm(ebird,ebird_group,general_type,category,
+
+rm(ebird_group,general_type,category,
    compiled1,compiled2,compiled_new_and_old)
 
 
@@ -433,19 +466,11 @@ compiled_final_clean <- compiled_final %>%
        .direction = "down") %>% 
   ungroup()
 
-#declutter
+
+### declutter
+
 rm(compiled_final)
 
-#look at survey-level data (aka metadata)
-
-#initially, summarize number of surveys per calendar year
-
-survey_metadata <- compiled_final_clean %>% 
-  select(water_level:weather_note, observation_date:season, slough_water_elevation_ft) %>% 
-  distinct() %>% 
-  distinct(observation_date, year) %>% 
-  group_by(year) %>% 
-  summarize(n = n())
 
 
 ##### writing .csv and .rds ----
@@ -457,3 +482,17 @@ write_csv(compiled_final,csvpath)
 rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-02.rds")
 saveRDS(compiled_final,rdspath)
 
+
+
+##### scratchwork ----
+
+#look at survey-level data (aka metadata)
+
+#initially, summarize number of surveys per calendar year
+
+survey_metadata <- compiled_final_clean %>% 
+  select(water_level:weather_note, observation_date:season, slough_water_elevation_ft) %>% 
+  distinct() %>% 
+  distinct(observation_date, year) %>% 
+  group_by(year) %>% 
+  summarize(n = n())
