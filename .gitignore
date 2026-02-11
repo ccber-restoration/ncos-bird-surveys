@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 .DS_Store
+data/ebird/ncos_data.rds
