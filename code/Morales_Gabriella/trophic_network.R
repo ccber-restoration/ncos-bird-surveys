@@ -6,17 +6,32 @@ library(tidyverse)
 library(readxl)
 
 #packages we could use for visualizing networks:
-
-library(foodwebr)
 library(bipartite)
+library(igraph)
 
 
-links_path <- "data/aquatic_diets/NCOS_aquatic_trophic_links_2026-02-03.xlsx"
+links_path <- "data/aquatic_diets/NCOS_aquatic_trophic_links_2026-02-10.xlsx"
 
-trophic_links <- read_xlsx(path = links_path, sheet = "trophic links")
+#in network terminology this is an "edge list"
+trophic_links <- read_xlsx(path = links_path, sheet = "trophic links") %>% 
+  select(c(bird_species, invert_taxon)) %>% 
+  relocate(invert_taxon, .before = bird_species) %>% 
+  filter(bird_species != "Whimbrel") %>% 
+  filter(bird_species != "Hooded Merganser")
 
+#create vector of bird names
+birds <- unique(trophic_links$bird_species)
+inverts <- unique(trophic_links$invert_taxon)
 
-#next steps:
+tl_matrix <- trophic_links %>% 
+  as.matrix()
+
+trophic_network <- graph_from_edgelist(tl_matrix, directed = FALSE)
+
+adj_matrix <- as_adjacency_matrix(trophic_network, sparse=FALSE)
+
+matrix_subset <- adj_matrix[inverts, birds]
 
 #continue filling out trophic links data
 #create draft network viz based on existing data
+plotweb(web = matrix_subset, text.rot = 90)
