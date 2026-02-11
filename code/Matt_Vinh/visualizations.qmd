@@ -1,15 +1,97 @@
 ---
 title: "visualizations"
-format: html
+format: pdf
+execute: 
+  echo: false
+fig-align: center
 ---
 
-```{r setup}
+```{r setup,include = F}
 
 library(here)
 library(tidyverse)
+library(vegan)
 
-datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-02.rds")
+datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-10.rds")
 data <- readRDS(datapath)
 
 ```
 
+```{r species richness per survey year}
+#| label: fig-bar
+#| fig-cap: "Species richness per survey year at NCOS. The lowest richness occurs at survey year 1 with the rest appearing more similar."
+
+# notably, no "spuh" category observations
+
+richness <- data %>% 
+  filter(!survey_year == 9,category != "spuh") %>% 
+  group_by(survey_year) %>% 
+  summarise(n = length(unique(species)))
+
+ggplot(richness,
+       aes(x = factor(survey_year),
+           y = n,
+           fill = survey_year)) + 
+  geom_col() + 
+  theme_light() + 
+  scale_fill_viridis_c(option = "C",
+                       alpha = 0.85,
+                       end = 0.9) + 
+  labs(title = "Species Richness by Survey Year",
+       x = "Survey Year",
+       y = "Number of Species Detected") + 
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "none")
+
+```
+
+```{r NMDS replication}
+#| label: fig-nmds
+#| fig-cap: "Replication of the 'Maximum Species Abundance' NMDS. I reproduced it thinking that with cleaner data it might appear differently, giving insight into species identity similarities or differences, following the bar chart of species richness. The usage of setdiff() may be more desirable in this situation. I became unsure of the application of setdiff() you (Francis) wrote on the sticky note and would love to revisit it."
+
+year_max <- data %>% filter(!survey_year == 9) %>% 
+  group_by(survey_year,species) %>% 
+  summarise(max_count = max(count))
+
+community <- as.matrix(unclass(xtabs(max_count ~ survey_year + species,
+                                     data = year_max)))
+
+nmds <- metaMDS(community,autotransform = F,distance = "bray",engine = "monoMDS",
+                 k = 2,weakties = T,model = "global",maxit = 300,try = 40,
+                 trymax = 100,trace = F)
+
+nmds_site_scores <- as.data.frame(scores(nmds)$sites) %>% 
+  rownames_to_column(var = "survey_year") %>% 
+  mutate(survey_year = as.numeric(survey_year)) %>% 
+  arrange(survey_year) %>% 
+  mutate(
+    xend = lead(NMDS1),
+    yend = lead(NMDS2))
+
+ggplot() + 
+  geom_point(data = nmds_site_scores,
+                      aes(x = NMDS1,
+                          y = NMDS2,
+                          color = survey_year),
+             size = 3) + 
+  geom_segment(data = nmds_site_scores,
+               aes(x = NMDS1,
+                   y = NMDS2,
+                   xend = xend,
+                   yend = yend,
+                   color = survey_year),
+                   arrow = arrow(length = unit(0.25,"cm"))) + 
+  annotate("text",
+           x = -0.2,
+           y = 0.15,
+           label = paste("2D stress =",
+                         round(nmds$stress,3))) + 
+  scale_color_viridis_c(option = "C",
+                        alpha = 0.8,
+                        end = 0.95) + 
+  theme_light() + 
+  labs(title = "Maximum Species Abundance by Survey Year NMDS",
+       color = "Survey Year") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+```

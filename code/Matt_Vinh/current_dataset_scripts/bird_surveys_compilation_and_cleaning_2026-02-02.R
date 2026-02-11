@@ -114,6 +114,7 @@ csvfiles25 <- list.files(path = csvpath25,pattern = "\\.csv$",full.names = T)
 # and NA substrates become new Unknown level
 # all have 55 variables
 
+# 626 observations
 df23 <- map_dfr(csvfiles23,~ read_csv(.x,col_types = cols(.default = "c"),
                                       locale = locale(encoding = "Latin1")) %>% 
                   mutate(
@@ -128,14 +129,15 @@ df23 <- map_dfr(csvfiles23,~ read_csv(.x,col_types = cols(.default = "c"),
   select(-"parsed")
 
 # the missing March 2022 survey
-# data format matches the 2023-2025 raw data format
+# data format almost matches the 2023-2025 raw data format
 
-survey_2022_03 <- read_csv("data/2022/NCOS_Bird_Survey_Data_2022_03_16.csv") %>% 
+# 171 observations
+survey_2022_03 <- read_csv("data/2022/NCOS_Bird_Survey_Data_2022_03_16.csv",
+                           col_types = cols(.default = "c")) %>% 
   mutate(
     
     # date variables
-    datatype = as.character(CreationDate),
-    parsed = mdy_hms(datatype),
+    parsed = mdy_hms(CreationDate),
     observation_date = as.Date(parsed),
     
     # which(is.na()) returns that 146 observations have NA substrate,
@@ -153,11 +155,11 @@ survey_2022_03 <- read_csv("data/2022/NCOS_Bird_Survey_Data_2022_03_16.csv") %>%
     'Standard Deviation (m)' = NA * 171) %>%
   
   # remove intermediate
-  select(-c("datatype",
-            "parsed",
+  select(-c("parsed",
             "Direction of travel (°)",
             "Compass reading (°)"))
 
+# 2143 observations
 df24 <- map_dfr(csvfiles24,~ read_csv(.x,col_types = cols(.default = "c"),
                                       locale = locale(encoding = "Latin1")) %>% 
                   mutate(
@@ -178,6 +180,7 @@ df24 <- map_dfr(csvfiles24,~ read_csv(.x,col_types = cols(.default = "c"),
   # removing two extra variables with no data, along with intermediate
   select(-c("parsed",`Direction of travel (°)`,`Compass reading (°)`))
 
+# 2079 observations
 df25 <- map_dfr(csvfiles25,~ read_csv(.x,col_types = cols(.default = "c"),
                                       locale = locale(encoding = "Latin1")) %>% 
                   mutate(
@@ -195,11 +198,7 @@ df25 <- map_dfr(csvfiles25,~ read_csv(.x,col_types = cols(.default = "c"),
 
 ### rbind-ing bird survey data of each year, new variables and cleaning
 # + 3 variables: year, survey_year, season
-# total 58 variables, 4848 observations
-
-#TODO running into error:
-#Error in `abort_lossy_cast()`:
-#  ! Lossy cast from <character> to <hms> at position(s) 109, 353, 491, 567
+# total 58 variables, 626 + 2143 + 2079 + 171 = 5019 observations
 
 compiled1 <- rbind(survey_2022_03,df23,df24,df25) %>% 
   mutate(
@@ -209,8 +208,10 @@ compiled1 <- rbind(survey_2022_03,df23,df24,df25) %>%
     
     ### adding survey year variable
     survey_year = case_when(
+      observation_date >= as.Date("2021-09-01") & observation_date <= as.Date("2022-08-31") ~ 5,
       observation_date >= as.Date("2023-09-01") & observation_date <= as.Date("2024-08-31") ~ 7,
-      observation_date >= as.Date("2024-09-01") & observation_date <= as.Date("2025-08-31") ~ 8),
+      observation_date >= as.Date("2024-09-01") & observation_date <= as.Date("2025-08-31") ~ 8,
+      observation_date >= as.Date("2025-09-01") & observation_date <= as.Date("2026-08-31") ~ 9),
     
     ### adding season variable
     season = case_when(
@@ -304,9 +305,9 @@ ebirdpath <- here("data","ebird_clements_checklist",
 ebird <- read_csv(ebirdpath)
 
 
-### ebird_clements ebird variable joining
+### ebird_clements "ebird group" variable joining
 # + 1 variable
-# total 59 variables, 4848 observations
+# total 59 variables, 5019 observations
 
 ebird_group <- ebird %>% 
   distinct(`English name`, `eBird species group`)
@@ -320,9 +321,9 @@ compiled2 <- left_join(compiled1,
   rename(e_bird_group = e_bird_species_group)
 
 
-### existing dataset general type variable joining
+### existing dataset "general type" variable joining
 # + 1 variable
-# total 60 variables, 4848 observations
+# total 60 variables, 5019 observations
 
 general_type <- birdsurveys_cleaned %>% 
   distinct(species, general_type)
@@ -334,16 +335,16 @@ compiled3 <- left_join(compiled2,
 
 
 ### binding compiled3 with birdsurveys_cleaned
-# 4848 observations + 11351 observations = 16199 observations
+# 5019 observations + 11351 observations = 16370 observations
 # total 61 variables
 # + 1 variable: slough_water_elevation_ft only in birdsurveys_cleaned
 
 compiled_new_and_old <- bind_rows(compiled3, birdsurveys_cleaned)
 
 
-### ebird_clements category variable joining
+### ebird_clements "category" variable joining
 # + 1 variable
-# total 62 variables, 16199 observations
+# total 62 variables, 161370 observations
 
 category <- ebird %>% 
   distinct(`English name`, category)
@@ -476,11 +477,11 @@ rm(compiled_final)
 ##### writing .csv and .rds ----
 
 
-csvpath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-02.csv")
-write_csv(compiled_final,csvpath)
+csvpath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-10.csv")
+write_csv(compiled_final_clean,csvpath)
 
-rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-02.rds")
-saveRDS(compiled_final,rdspath)
+rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-10.rds")
+saveRDS(compiled_final_clean,rdspath)
 
 
 
