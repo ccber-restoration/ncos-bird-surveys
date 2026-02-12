@@ -1,0 +1,56 @@
+Display name,esri_field_name,type,description
+OBJECTID,OBJECTID,ObjectID,identifier assigned by ArcGIS Online; these are sequential and only uniquely identify the record within a survey date.
+Species,Species,string,"bird species (common name), from dropdown list of 200 values (following 2018 [?] ebird taxonomy). "
+Count,Count_,small integer,
+Repeat Observation,Repeat_Observation,string,domain: yes or no
+Substrate,Substrate,string,domain: dropdown list of 17 values
+Sex,Sex,string,"domain: M, F, J, Uncertain"
+Breeding Activity,Breeding_Activity,string,"5 dropdown values: Carrying Nest Material, Copulation, Feeding/Begging, Nest Building, Other"
+Observation Notes,Observation_Notes,string,
+Water Level,Water_Level,double,
+Observers,Observers,string,Names or initials of individuals carrying out survey. Not used very consistently and would need to be processed to parse names
+Starting Time,Time_Start,string,
+Ending Time,Time_End,string,
+Starting Temp (F),Temp_Start_F,small integer,
+Starting % Cloud Cover,Cloud_Cover_Start,small integer,
+Starting Cloud Height,Cloud_Height_Start,string,"domain of 5 possible values: Clear, Fog, Low, Medium, High"
+Starting Wind Speed,Wind_Speed_Start,string,"domain of 4 possible values: None, Light, Medium, Strong"
+Starting Wind Direction,Wind_Direction_Start,string,"domain of 9 possible values: N,S,E,W, NW, SW, NE, SE, None"
+Starting Rain,Rain_Start,string,"domain of 6 possible values: None, Intermittent Drizzle, Constant Drizzle, Intermittent Showers, Constant Downpour"
+Ending Temp (F),Temp_End_F,small integer,
+Ending % Cloud Cover,Cloud_Cover_End,small integer,
+Ending Cloud Height,Cloud_Height_End,string,"domain of 5 possible values: Clear, Fog, Low, Medium, High"
+Ending Wind Speed,Wind_Speed_End,string,"domain of 4 possible values: None, Light, Medium, Strong"
+Ending Wind Direction,Wind_Direction_End,string,"domain of 9 possible values: N,S,E,W, NW, SW, NE, SE, None"
+Ending Rain,Rain_End,string,"domain of 6 possible values: None, Intermittent Drizzle, Constant Drizzle, Intermittent Showers, Constant Downpour"
+Weather Note,Weather_Note,string,
+GlobalID,GlobalID,GlobalID,automatically-generated identifier; these are non-sequential and are globally unique
+Speed (km/h),esrignss_speed,double,automatically-generated speed (from device)
+Direction of travel (Â°),esrignss_direction,double,
+Compass reading (Â°),esrisnsr_azimuth,double,
+Position source type,esrignss_positionsourcetype,integer,Automatically-generated. Domain: list of 5 numeric codes for source of position (so really categorical)
+Receiver Name,esrignss_receiver,string,
+Horizontal Accuracy (m),esrignss_h_rms,double,
+Vertical Accuracy (m),esrignss_v_rms,double,
+Latitude,esrignss_latitude,double,"latitude from device gps. This is the observer's position, not the bird(s)'s position!"
+Longitude,esrignss_longitude,double,"latitude from device gps. This is the observer's position, not the bird(s)'s position!"
+Altitude,esrignss_altitude,double,
+PDOP,esrignss_pdop,double,position dilution of precision
+HDOP,esrignss_hdop,double,horizontal dilution of precision
+VDOP,esrignss_vdop,double,vertical dilution of precision
+Fix Type,esrignss_fixtype,small integer,automatically-generated. Domain: list of 6 values.
+Correction Age,esrignss_correctionage,small integer,
+Station ID,esrignss_stationid,small integer,
+Number of Satellites,esrignss_numsats,small integer,Integer between 0 and 99
+Fix Time,esrignss_fixdatetime,date-time,
+Average Horizontal Accuracy (m),esrignss_avg_h_rms,double,
+Average Vertical Accuracy (m),esrignss_avg_v_rms,double,
+Averaged Positions,esrignss_avg_positions,integer,
+Standard Deviation (m),esrignss_h_stddev,double,
+CreationDate,CreationDate,date-time,Automatically-generated date-time stamp assigned by ArcGIS Online
+Creator,Creator,string,ArcGIS user account that submitted the data
+EditDate,,date-time,
+Editor,,string,ArcGIS user account that last edited the data
+x,,,longitude in decimal degrees. This is the location of the bird(s)
+y,,,latitude in decimal degrees. This is the location of the bird(s).
+observation_date,,,
