@@ -6,7 +6,7 @@ library(tidyverse)
 focal_aquatic_groups <- c("Waterfowl & Friends", "Shorebirds")
 
 #calculate the total non-repeat number of bird detections by species, then filter to the two focal aquatic groups
-focal_aquatic_species <- read_rds("data/aggregated/MV_updated_aggregated.rds") %>% 
+focal_aquatic_species <- read_rds("data/aggregated/Matt_Vinh/compiled_and_cleaned_2026-02-10.rds") %>% 
   #filter out repeat observations
   filter(repeat_observation != "Yes") %>% 
   #get total num,ber of observations
@@ -29,7 +29,7 @@ write_csv(focal_aquatic_species, "data/aquatic_diets/aquatic_focal_species.csv")
 
 focal_piscivorous_groups <- c("Herons, Egrets, Ibis", "Cormorants", "Kingfishers", "Gulls & Terns") 
 
-focal_piscivorous_species <- read_rds("data/aggregated/MV_updated_aggregated.rds") %>% 
+focal_piscivorous_species <- read_rds("data/aggregated/Matt_Vinh/compiled_and_cleaned_2026-02-10.rds") %>% 
   #filter out repeat observations
   filter(repeat_observation != "Yes") %>% 
   #get total num,ber of observations
@@ -41,4 +41,4 @@ focal_piscivorous_species <- read_rds("data/aggregated/MV_updated_aggregated.rds
   arrange(-total_count)
 
 
-write_csv(focal_piscivorous_species, "data/aquatic_diets/piscivorous_focal_species.csv")
+write_csv(focal_piscivorous_species, "data/aquatic_diets/piscivorous_focal_species_2026-02-12.csv")
