@@ -41,7 +41,7 @@
 
 -   There is a separate repo for working with ebird data from Santa Barbara county: https://github.com/ccber-restoration/sb-county-ebird
 -   The eBird hotspot is "UCSB North Campus Open Space (formerly Ocean Meadows Golf Course)": <https://ebird.org/hotspot/L820867>
--   Birdview is a third-party web app for exploring/visualizing data from ebird (and other global databases): <https://s3.us-west-1.amazonaws.com/membot.com/BirdView.html>
+-   Birdview (https://birdview.info/) is a third-party web app for exploring/visualizing data from ebird (and other global databases).
 
 ## North American Breeding Bird Survey (USGS)
 
