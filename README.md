@@ -11,11 +11,19 @@
 
 # Survey data
 
+## Raw data
+-   Individual data files for each survey date are saved to ArcGIS Online: <https://ucsb.maps.arcgis.com/home/group.html?id=5196673ce5ea4d68882435ddc2f8ae3f#overview>
+  - Individual survey files are downloaded as csv in subdirectories for each calendar year in the data directory (complete for 2023 through Jan 2026 as of 2026-02-12).
+  -  See description of columns here: https://github.com/ccber-restoration/ncos-bird-surveys/blob/main/data/data_dictionary_surveys.csv
+  -  Note that all of the fields with esri_field_names starting with "esrignss_" are automatically generated from the device's gps, and are typically not used.  
+
+## Processed data
 -   Data for 2017-2023 are in a Dryad repository: <https://datadryad.org/dataset/doi:10.5061/dryad.bvq83bkhz>
   -   See eScholarship data description here: <https://escholarship.org/uc/item/47q7s0gb>
--   Individual data files are saved to ArcGIS Online: <https://ucsb.maps.arcgis.com/home/group.html?id=5196673ce5ea4d68882435ddc2f8ae3f#overview>
-  -  See description of columns here: https://github.com/ccber-restoration/ncos-bird-surveys/blob/main/data/data_dictionary_surveys.csv
-  -  Note that all of the fields with esri_field_names starting with "esrignss_" are automatically generated from the device's gps, and are not used.  
+
+- Data for the first 8 survey years and 3 months of survey year 9 (Sep 2017- Dec 2025) are currently saved as csv and rds in data/aggregated/Matt_Vinh
+   
+
 
 # External resources
 
