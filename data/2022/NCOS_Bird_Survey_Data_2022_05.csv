@@ -1,0 +1,211 @@
+﻿OBJECTID,Species,Count,Repeat Observation,Substrate,Sex,Breeding Activity,Observation Notes,Water Level,Observers,Starting Time,Ending Time,Starting Temp (F),Starting % Cloud Cover,Starting Cloud Height,Starting Wind Speed,Starting Wind Direction,Starting Rain,Ending Temp (F),Ending % Cloud Cover,Ending Cloud Height,Ending Wind Speed,Ending Wind Direction,Ending Rain,Weather Note,GlobalID,Speed (km/h),Direction of travel (°),Compass reading (°),Position source type,Receiver Name,Horizontal Accuracy (m),Vertical Accuracy (m),Latitude,Longitude,Altitude,PDOP,HDOP,VDOP,Fix Type,Correction Age,CreationDate,Creator,EditDate,Editor,x,y
+2,Brown Pelican,1,No,Mud,,,,,,,,,,,,,,,,,,,,,63c2f82d-3c85-4a96-83f1-52d5265cb32b,,,,,,,,,,,,,,,,5/16/22 13:54,ccber_user,5/16/22 13:54,ccber_user,-119.8745846,34.41796921
+3,Black-necked Stilt,4,No,Mud,,,,,,,,,,,,,,,,,,,,,da7c9a94-a412-45c3-b16a-9f581cc7ca68,,,,,,,,,,,,,,,,5/16/22 13:55,ccber_user,5/16/22 13:56,ccber_user,-119.8746089,34.41808788
+4,Cliff Swallow,5,No,Air,,,,,,,,,,,,,,,,,,,,,691317c7-24f6-49eb-89a4-8fe3689f549b,,,,,,,,,,,,,,,,5/16/22 13:55,ccber_user,5/16/22 13:55,ccber_user,-119.8742912,34.41781929
+5,Mallard,2,No,Water - Floating,,,,,,,,,,,,,,,,,,,,,2d8876cc-8f60-4044-9685-8381da57f16c,,,,,,,,,,,,,,,,5/16/22 13:57,ccber_user,5/16/22 13:57,ccber_user,-119.8742436,34.41801892
+6,Brown Pelican,2,No,Mud,,,,,,,,,,,,,,,,,,,,,013edd4f-e388-4291-838a-453e85eff2bd,,,,,,,,,,,,,,,,5/16/22 13:58,ccber_user,5/16/22 13:58,ccber_user,-119.8753871,34.41889021
+7,California Towhee,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,9b8df3ea-ff50-4365-8cf4-fc3fb6bb0a8c,,,,,,,,,,,,,,,,5/16/22 14:07,ccber_user,5/16/22 14:07,ccber_user,-119.8764909,34.41781794
+8,Song Sparrow,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,a185d165-e436-4cc9-b9bc-d7ac94b540d2,,,,,Samsung SM-T713,5.17,4.23,34.41778273,-119.876509,-27.7,1.4,1.1,0.9,1,,5/16/22 14:10,ccber_user,5/16/22 14:10,ccber_user,-119.876509,34.41778273
+9,Anna's Hummingbird,2,No,Air,,,,,,,,,,,,,,,,,,,,,64ef0d6b-5d48-46c0-9d6a-98ab26c7294f,,,,,,,,,,,,,,,,5/16/22 14:11,ccber_user,5/16/22 14:11,ccber_user,-119.876352,34.41766589
+10,Yellow Warbler,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,44c60ee7-f34e-4e1f-9bc3-13024c67f383,,,,,,,,,,,,,,,,5/16/22 14:12,ccber_user,5/16/22 14:12,ccber_user,-119.8762975,34.41784206
+11,Cliff Swallow,3,No,Air,,,,,,,,,,,,,,,,,,,,,1905b603-7e12-4310-866d-3ce892d4f1d5,,,,,,,,,,,,,,,,5/16/22 14:13,ccber_user,5/16/22 14:13,ccber_user,-119.8764675,34.41793798
+12,Gadwall,2,No,Water - Floating,,,,,,,,,,,,,,,,,,,,,bc59c60e-78c2-4829-aa07-fd0aed1a47e8,,,,,,,,,,,,,,,,5/16/22 14:15,ccber_user,5/16/22 14:15,ccber_user,-119.8769214,34.41796422
+13,Ash-throated Flycatcher,1,No,Fence,,,,,,,,,,,,,,,,,,,,,bbbff751-a37a-4783-97b4-e29796585843,,,,,,,,,,,,,,,,5/16/22 14:15,ccber_user,5/16/22 14:15,ccber_user,-119.8774303,34.41750693
+14,Ash-throated Flycatcher,1,No,Vegetation - Shrub,,Other,two birds protecting something possible nest,,,,,,,,,,,,,,,,,,e1f0b4c1-95e6-4a78-a2f9-3abc4bff13c5,,,,,,,,,,,,,,,,5/16/22 14:16,ccber_user,5/16/22 14:18,ccber_user,-119.8764988,34.41799046
+15,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,9f595440-e71c-40c5-ab56-ee2e9e2f9728,,,,,,,,,,,,,,,,5/16/22 14:19,ccber_user,5/16/22 14:19,ccber_user,-119.8769078,34.41834654
+16,Cooper's Hawk,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,00e2e5de-942d-4c0e-8704-b971b75f71d7,,,,,,,,,,,,,,,,5/16/22 14:19,ccber_user,5/16/22 14:19,ccber_user,-119.8731729,34.41731577
+17,Black Phoebe,1,No,Habitat Feature - Log,,,,,,,,,,,,,,,,,,,,,350465fa-2a98-49aa-990d-99c452e7e8a4,,,,,,,,,,,,,,,,5/16/22 14:21,ccber_user,5/16/22 14:21,ccber_user,-119.8764097,34.41922963
+18,Mourning Dove,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,c5f19b01-5bbf-4443-950b-350f9a0a0bb6,,,,,,,,,,,,,,,,5/16/22 14:21,ccber_user,5/16/22 14:21,ccber_user,-119.8777211,34.4193698
+19,European Starling,1,No,Air,,,,,,,,,,,,,,,,,,,,,6d07cc44-dfdf-4955-949a-d9ac3b80afc3,,,,,,,,,,,,,,,,5/16/22 14:24,ccber_user,5/16/22 14:24,ccber_user,-119.8776529,34.41837278
+20,Common Yellowthroat,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,3e785b36-6d86-4dc1-af08-b9065055e726,,,,,,,,,,,,,,,,5/16/22 14:31,ccber_user,5/16/22 14:31,ccber_user,-119.8806427,34.41778431
+21,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,4dd2bd86-b1f4-456e-92a5-139b35fb79fe,,,,,,,,,,,,,,,,5/16/22 14:31,ccber_user,5/16/22 14:31,ccber_user,-119.8802287,34.4178068
+22,California Scrub-Jay,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,b0fc3015-0161-4df1-a0c2-12201a887646,,,,,,,,,,,,,,,,5/16/22 14:32,ccber_user,5/16/22 14:32,ccber_user,-119.8806876,34.41817038
+23,Red-tailed Hawk,1,No,Habitat Feature - Snag,,,,,,,,,,,,,,,,,,,,,96510f91-222e-46e6-b1be-d43a0cd3c65a,,,,,,,,,,,,,,,,5/16/22 14:32,ccber_user,5/16/22 14:32,ccber_user,-119.8809784,34.41980459
+24,Lark Sparrow,1,No,Bare ground,,,,,,,,,,,,,,,,,,,,,63ff93e5-d981-4fb1-a75f-070379611007,,,,,,,,,,,,,,,,5/16/22 14:34,ccber_user,5/16/22 14:34,ccber_user,-119.879579,34.41818912
+25,Red-shouldered Hawk,1,No,Air,,,,,,,,,,,,,,,,,,,,,5bfc0d66-e344-47ed-a24b-421725b89048,,,,,,,,,,,,,,,,5/16/22 14:34,ccber_user,5/16/22 14:34,ccber_user,-119.8809512,34.41766061
+26,Gadwall,1,No,Air,,,,,,,,,,,,,,,,,,,,,15136d32-50b5-43fa-91ca-17c2821c8336,,,,,,,,,,,,,,,,5/16/22 14:34,ccber_user,5/16/22 14:34,ccber_user,-119.8789338,34.41840277
+27,Mourning Dove,1,No,Air,,,,,,,,,,,,,,,,,,,,,561f8c36-1237-4639-9f6a-5b9eca863734,,,,,,,,,,,,,,,,5/16/22 14:35,ccber_user,5/16/22 14:35,ccber_user,-119.8801606,34.41876634
+28,California Towhee,1,No,Fence,,,,,,,,,,,,,,,,,,,,,b00e886a-4617-4058-9bca-13dc32a45bb2,,,,,,,,,,,,,,,,5/16/22 14:35,ccber_user,5/16/22 14:35,ccber_user,-119.8806399,34.41851521
+29,Red-winged Blackbird,3,No,Air,,,,,,,,,,,,,,,,,,,,,f9e9bdcf-9a3d-4814-9952-fab0a32c9b02,,,,,,,,,,,,,,,,5/16/22 14:36,ccber_user,5/16/22 14:36,ccber_user,-119.879436,34.41922756
+30,California Towhee,2,No,Fence,,,,,,,,,,,,,,,,,,,,,be9a07fc-e108-45d6-9121-b1ca9ceceeea,,,,,,,,,,,,,,,,5/16/22 14:37,ccber_user,5/16/22 14:37,ccber_user,-119.8805038,34.41838421
+31,Killdeer,3,No,Bare ground,,,,,,,,,,,,,,,,,,,,,6d3669bf-1c80-4747-9234-b950d9d62659,,,,,,,,,,,,,,,,5/16/22 14:38,ccber_user,5/16/22 14:38,ccber_user,-119.879386,34.41935125
+32,Cooper's Hawk,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,2cc511ba-913b-4f9d-bd66-629c0f5cb15a,,,,,,,,,,,,,,,,5/16/22 14:44,ccber_user,5/16/22 14:44,ccber_user,-119.8817624,34.41891271
+33,American Crow,1,No,Air,,,,,,,,,,,,,,,,,,,,,02f1d59c-f84b-4156-a45e-b3b95ad9b1d0,,,,,,,,,,,,,,,,5/16/22 14:45,ccber_user,5/16/22 14:45,ccber_user,-119.8817689,34.42044086
+34,Cooper's Hawk,1,No,Air,,,possibly both juvenile from last year,,,,,,,,,,,,,,,,,,bcdbc753-a7c9-4252-9a72-4770d03832b6,,,,,,,,,,,,,,,,5/16/22 14:46,ccber_user,5/16/22 14:46,ccber_user,-119.8810135,34.42028339
+35,Cliff Swallow,3,No,Air,,,,,,,,,,,,,,,,,,,,,f36c7153-989f-46b5-955b-316cd03f875f,,,,,,,,,,,,,,,,5/16/22 14:47,ccber_user,5/16/22 14:47,ccber_user,-119.8807908,34.41929387
+36,Downy Woodpecker,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,5d1af81f-fe2e-4985-8406-472a69185670,,,,,,,,,,,,,,,,5/16/22 14:47,ccber_user,5/16/22 14:49,ccber_user,-119.8817086,34.41845802
+37,Turkey Vulture,1,No,Air,,,,,,,,,,,,,,,,,,,,,8ab91792-a287-4b90-bba1-315f80fdbdbc,,,,,,,,,,,,,,,,5/16/22 14:48,ccber_user,5/16/22 14:48,ccber_user,-119.8817223,34.41909147
+38,American Crow,2,No,Air,,,,,,,,,,,,,,,,,,,,,0b435184-f409-497a-8aab-8a339b954fb1,,,,,,,,,,,,,,,,5/16/22 14:51,ccber_user,5/16/22 14:51,ccber_user,-119.8812859,34.41990081
+39,American Crow,2,No,Fence,,,,,,,,,,,,,,,,,,,,,d406fe1e-9a95-40e2-8e23-5d3b2216fd33,,,,,,,,,,,,,,,,5/16/22 14:55,ccber_user,5/16/22 14:55,ccber_user,-119.878001,34.41872415
+40,Northern Mockingbird,1,No,Fence,,,,,,,,,,,,,,,,,,,,,74e52a71-4700-44dd-be0f-9ffdeb113dbf,,,,,,,,,,,,,,,,5/16/22 14:56,ccber_user,5/16/22 14:56,ccber_user,-119.8780221,34.41933201
+41,Anna's Hummingbird,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,75620de2-6a27-4713-b1ac-1976c44e8dd8,,,,,,,,,,,,,,,,5/16/22 15:00,ccber_user,5/16/22 15:00,ccber_user,-119.8777547,34.41947802
+42,Black Phoebe,1,No,Fence,,,,,,,,,,,,,,,,,,,,,2d87659d-e307-42d3-a27b-5d6e26a31342,,,,,,,,,,,,,,,,5/16/22 15:05,ccber_user,5/16/22 15:05,ccber_user,-119.8768028,34.4194799
+43,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,cbd08b10-b92e-4600-832c-e9fab99089cc,,,,,,,,,,,,,,,,5/16/22 15:10,ccber_user,5/16/22 15:10,ccber_user,-119.8778842,34.42013582
+44,Canada Goose,2,No,Air,,,,,,,,,,,,,,,,,,,,,6298a9f2-76ec-4ea5-8cac-4c6d68b8a55f,,,,,,,,,,,,,,,,5/16/22 15:11,ccber_user,5/16/22 15:11,ccber_user,-119.8780497,34.4203623
+45,Killdeer,2,No,Mud,,,,,,,,,,,,,,,,,,,,,92305c36-c90a-4d8a-ad90-c6252f58ede6,,,,,,,,,,,,,,,,5/16/22 15:13,ccber_user,5/16/22 15:13,ccber_user,-119.8782678,34.42065091
+46,Snowy Egret,2,Yes,Mud,,,,,,,,,,,,,,,,,,,,,24afa3a3-e960-489b-8778-f6421ce453b5,,,,,,,,,,,,,,,,5/16/22 15:13,ccber_user,5/16/22 15:13,ccber_user,-119.878554,34.42081583
+47,House Finch,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,7a07a5a8-e78b-4766-bbdf-9bd975f4eddd,,,,,,,,,,,,,,,,5/16/22 15:16,ccber_user,5/16/22 15:16,ccber_user,-119.8781005,34.4204852
+48,House Finch,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,f5d34555-8f24-4011-9528-b03f010b6975,,,,,,,,,,,,,,,,5/16/22 15:18,ccber_user,5/16/22 15:18,ccber_user,-119.8791183,34.4204927
+49,House Sparrow,1,No,Air,,,,,,,,,,,,,,,,,,,,,f03b48df-dfb8-4023-a385-38b3bfda5356,,,,,,,,,,,,,,,,5/16/22 15:19,ccber_user,5/16/22 15:19,ccber_user,-119.8792274,34.4209912
+50,Song Sparrow,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,f961e595-6282-4fd4-863f-6aaca472fc97,,,,,,,,,,,,,,,,5/16/22 15:19,ccber_user,5/16/22 15:19,ccber_user,-119.878773,34.42064262
+51,Song Sparrow,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,0a0f30b7-447d-4624-9b5e-259ca34545fa,,,,,,,,,,,,,,,,5/16/22 15:20,ccber_user,5/16/22 15:20,ccber_user,-119.8797544,34.42116361
+52,American Crow,1,No,Air,,,,,,,,,,,,,,,,,,,,,97a01940-cb9f-47f6-855d-e994617fa93d,,,,,,,,,,,,,,,,5/16/22 15:22,ccber_user,5/16/22 15:22,ccber_user,-119.879709,34.42076631
+53,Mourning Dove,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,559e4a58-3bc0-48fb-8528-1e4bdac21cca,,,,,,,,,,,,,,,,5/16/22 15:23,ccber_user,5/16/22 15:23,ccber_user,-119.8836461,34.42088952
+54,Red-tailed Hawk,1,Yes,Habitat Feature - Snag,,,,,,,,,,,,,,,,,,,,,16abc9c4-061c-40b5-9f25-b58b668fefa6,,,,,,,,,,,,,,,,5/16/22 15:23,ccber_user,5/16/22 15:23,ccber_user,-119.8809517,34.42204394
+55,Turkey Vulture,2,No,Air,,,,,,,,,,,,,,,,,,,,,d69fc7ad-39b2-4487-971d-90dc7266c254,,,,,,,,,,,,,,,,5/16/22 15:24,ccber_user,5/16/22 15:24,ccber_user,-119.8835507,34.42185653
+56,Red-winged Blackbird,1,No,Air,,,,,,,,,,,,,,,,,,,,,46310967-759a-497b-87d3-88aef7210977,,,,,,,,,,,,,,,,5/16/22 15:25,ccber_user,5/16/22 15:25,ccber_user,-119.8827192,34.4209345
+57,Cliff Swallow,5,No,Air,,,,,,,,,,,,,,,,,,,,,01393c73-382b-45bc-acbe-df7e2c1e0eb2,,,,,,,,,,,,,,,,5/16/22 15:25,ccber_user,5/16/22 15:25,ccber_user,-119.8837324,34.42110691
+58,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,d8874416-4907-4343-aa43-25fa5642833b,,,,,,,,,,,,,,,,5/16/22 15:26,ccber_user,5/16/22 15:26,ccber_user,-119.8810789,34.42094574
+59,Common Yellowthroat,2,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,42800aec-247f-44fb-8ace-e50691eb6810,,,,,,,,,,,,,,,,5/16/22 15:27,ccber_user,5/16/22 15:27,ccber_user,-119.8813015,34.42119552
+60,Song Sparrow,1,No,Vegetation - Herbaceous,,Other,baby,,,,,,,,,,,,,,,,,,69cc6ab3-a9e0-42f8-932e-7386b9c8d9e1,,,,,,,,,,,,,,,,5/16/22 15:28,ccber_user,5/16/22 15:28,ccber_user,-119.8807927,34.42131921
+61,Anna's Hummingbird,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,d789db4a-0c03-40c6-9a00-6e41f3e18c36,,,,,,,,,,,,,,,,5/16/22 15:28,ccber_user,5/16/22 15:28,ccber_user,-119.8828827,34.42090317
+62,Red-winged Blackbird,2,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,0ff020fd-beea-4c71-95e8-d88799f2bad6,,,,,,,,,,,,,,,,5/16/22 15:29,ccber_user,5/16/22 15:29,ccber_user,-119.8823284,34.42091816
+63,Allen's Hummingbird,1,No,Air,,,,,,,,,,,,,,,,,,,,,a69f0458-a5a8-45ba-98b5-e7634a41a834,,,,,,,,,,,,,,,,5/16/22 15:33,ccber_user,5/16/22 15:33,ccber_user,-119.8818783,34.42062479
+64,Song Sparrow,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,79105231-2714-434d-aa94-033894f322e1,,,,,,,,,,,,,,,,5/16/22 15:34,ccber_user,5/16/22 15:34,ccber_user,-119.8819016,34.42091037
+65,Song Sparrow,4,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,cf6878d7-c1c9-434b-aefa-52510a8519b9,,,,,,,,,,,,,,,,5/16/22 15:34,ccber_user,5/16/22 15:34,ccber_user,-119.8824273,34.42042328
+66,Lesser Goldfinch,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,6f8a8bca-e066-4ecb-861d-70d6eb49898f,,,,,,,,,,,,,,,,5/16/22 15:43,ccber_user,5/16/22 15:43,ccber_user,-119.8843441,34.42021274
+67,Western Kingbird,1,No,Air,,,,,,,,,,,,,,,,,,,,,aadc2612-1de5-4bfd-b576-e33a13626436,,,,,,,,,,,,,,,,5/16/22 15:43,ccber_user,5/16/22 15:43,ccber_user,-119.8833668,34.42042108
+68,Lesser Goldfinch,2,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,2207d0ca-6960-400b-9504-dd87bb095423,,,,,,,,,,,,,,,,5/16/22 15:44,ccber_user,5/16/22 15:44,ccber_user,-119.8836742,34.42015839
+69,Common Yellowthroat,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,adb1d635-170d-43ea-9e6a-ab8497ed4573,,,,,,,,,,,,,,,,5/16/22 15:46,ccber_user,5/16/22 15:46,ccber_user,-119.8833593,34.42098762
+70,American Crow,5,No,Air,,,crows chasing red tail,,,,,,,,,,,,,,,,,,e1e5dc00-3175-418f-bde7-94e3a56e9013,,,,,,,,,,,,,,,,5/16/22 15:46,ccber_user,5/16/22 15:46,ccber_user,-119.8830447,34.42137265
+71,Acorn Woodpecker,4,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,043c451b-d20a-4534-90c6-4116a497df0c,,,,,,,,,,,,,,,,5/16/22 15:47,ccber_user,5/16/22 15:47,ccber_user,-119.8846914,34.42096166
+72,House Wren,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,33224608-30ad-49d7-b008-e5df8a72e8e5,,,,,,,,,,,,,,,,5/16/22 15:47,ccber_user,5/16/22 15:47,ccber_user,-119.884875,34.42051606
+73,Red-winged Blackbird,2,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,b84ab085-85fd-45da-9786-f5c54999b2ab,,,,,,,,,,,,,,,,5/16/22 15:51,ccber_user,5/16/22 15:51,ccber_user,-119.8836425,34.42131209
+74,Common Yellowthroat,3,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,61fde165-7276-4ca5-add4-ed381520aa36,,,,,,,,,,,,,,,,5/16/22 15:55,ccber_user,5/16/22 15:55,ccber_user,-119.8833729,34.42115579
+75,Western Kingbird,1,No,Air,,,,,,,,,,,,,,,,,,,,,b2b1d35e-b393-476c-b90c-36fca0cebc2d,,,,,,,,,,,,,,,,5/16/22 15:59,ccber_user,5/16/22 15:59,ccber_user,-119.8821431,34.42071855
+76,Rock Pigeon (Feral Pigeon),1,No,,,,,6,Lisa beau conor,650,920,,,,,,,62,0,,,,,,8049aca0-bd98-4e25-b968-d91122660e9b,,,,,,,,,,,,,,,,5/16/22 16:09,ccber_user,5/16/22 16:09,ccber_user,-119.8783461,34.42180875
+77,Great Egret,1,No,Water - Wading,,,,,,700,,55,0,,,,,,,,,,,,fb887723-f7ea-45fd-a0a9-2455834b344c,,,,,,,,,,,,,,,,5/16/22 13:57,CCBER-Admin,5/16/22 13:57,CCBER-Admin,-119.8740493,34.41761214
+78,Ring-billed Gull,1,No,Mud,,,,,,,,,,,,,,,,,,,,,5fd0fb64-b9f1-43d1-825e-2a010578d2e3,,,,,,,,,,,,,,,,5/16/22 14:02,CCBER-Admin,5/16/22 14:02,CCBER-Admin,-119.8753447,34.41980784
+79,California Gull,4,No,Mud,,,,,,,,,,,,,,,,,,,,,c76541b7-7bf2-44dd-b149-7f99194c5bde,,,,,,,,,,,,,,,,5/16/22 14:03,CCBER-Admin,5/16/22 14:03,CCBER-Admin,-119.8753769,34.4196324
+80,Brant,1,No,Mud,,,,,,,,,,,,,,,,,,,,,081a7b68-cf7b-4e6b-bfc1-976edafef55e,,,,,,,,,,,,,,,,5/16/22 14:03,CCBER-Admin,5/16/22 14:03,CCBER-Admin,-119.8754156,34.41966962
+81,Northern Rough-winged Swallow,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,e433e3ee-0fd8-4597-a80f-734457f2deae,,,,,,,,,,,,,,,,5/16/22 14:03,CCBER-Admin,5/16/22 14:03,CCBER-Admin,-119.8743844,34.41792582
+82,Black Phoebe,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,ec9e44ac-adad-478a-b947-dfe346aacca0,,,,,,,,,,,,,,,,5/16/22 14:04,CCBER-Admin,5/16/22 14:04,CCBER-Admin,-119.8754993,34.41892532
+83,Brown Pelican,2,Yes,Mud,,,,,,,,,,,,,,,,,,,,,00934938-37bc-4db3-808d-d701c53c13e1,,,,,,,,,,,,,,,,5/16/22 14:04,CCBER-Admin,5/16/22 14:04,CCBER-Admin,-119.8754478,34.41960582
+84,Western Gull,6,No,Mud,,,,,,,,,,,,,,,,,,,,,06d842dd-57bb-4f77-bcbf-20f7d4c498fd,,,,,,,,,,,,,,,,5/16/22 14:05,CCBER-Admin,5/16/22 14:05,CCBER-Admin,-119.8754008,34.41981906
+85,Mallard,7,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,9e653911-a55c-49e4-8c3c-131299c9c5cd,,,,,,,,,,,,,,,,5/16/22 14:06,CCBER-Admin,5/16/22 14:06,CCBER-Admin,-119.8754459,34.41935653
+86,Common Yellowthroat,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,d8165378-2a9d-47ef-87c3-42c6a45abf99,,,,,,,,,,,,,,,,5/16/22 14:07,CCBER-Admin,5/16/22 14:07,CCBER-Admin,-119.874505,34.41866539
+87,Song Sparrow,3,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,7829fad8-57ee-49b7-bc02-275e60ed32c4,,,,,,,,,,,,,,,,5/16/22 14:07,CCBER-Admin,5/16/22 14:07,CCBER-Admin,-119.8743374,34.4184102
+88,Song Sparrow,2,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,b0bf3f04-c0ce-4176-bae4-d0a4974381d7,,,,,,,,,,,,,,,,5/16/22 14:10,CCBER-Admin,5/16/22 14:10,CCBER-Admin,-119.8748272,34.4188621
+89,Snowy Egret,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,7781e3f0-df1f-4008-b192-d5ca94c834f3,,,,,,,,,,,,,,,,5/16/22 14:10,CCBER-Admin,5/16/22 14:10,CCBER-Admin,-119.8751237,34.41878236
+90,Common Yellowthroat,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,2f8df215-d507-4b2f-b81e-2f7039824a9d,,,,,,,,,,,,,,,,5/16/22 14:11,CCBER-Admin,5/16/22 14:11,CCBER-Admin,-119.8750335,34.41900299
+91,American Goldfinch,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,a9958016-e2c7-4e0b-a576-dea9460c5ca4,,,,,,,,,,,,,,,,5/16/22 14:13,CCBER-Admin,5/16/22 14:13,CCBER-Admin,-119.8752977,34.41898704
+92,Song Sparrow,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,d9f8a13e-51b7-4d30-83c6-8bb93022f359,,,,,,,,,,,,,,,,5/16/22 14:14,CCBER-Admin,5/16/22 14:14,CCBER-Admin,-119.8750077,34.41918375
+93,California Towhee,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,69127cc4-458c-4df8-8198-3972c92cee35,,,,,,,,,,,,,,,,5/16/22 14:15,CCBER-Admin,5/16/22 14:15,CCBER-Admin,-119.8751688,34.41918906
+94,California Gull,8,No,Mud,,,,,,,,,,,,,,,,,,,,,5b172cf2-e193-4e8a-b83d-d6469b3e1ebf,,,,,,,,,,,,,,,,5/16/22 14:15,CCBER-Admin,5/16/22 14:15,CCBER-Admin,-119.8753492,34.41955058
+95,Song Sparrow,2,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,4bb24207-89e8-4388-95af-fc7e84cd15fb,,,,,,,,,,,,,,,,5/16/22 14:17,CCBER-Admin,5/16/22 14:17,CCBER-Admin,-119.8750753,34.41937001
+96,Western Gull,2,No,Mud,,,,,,,,,,,,,,,,,,,,,2318f0b5-8b3a-431d-b1a3-5d3730e83bf5,,,,,,,,,,,,,,,,5/16/22 14:19,CCBER-Admin,5/16/22 14:19,CCBER-Admin,-119.8753202,34.42008772
+97,Gadwall,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,b7181337-a4a3-41c1-ab08-83426ff7baff,,,,,,,,,,,,,,,,5/16/22 14:20,CCBER-Admin,5/16/22 14:20,CCBER-Admin,-119.8749979,34.4201781
+98,Mallard,2,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,e62ebae3-892a-49c8-9463-fd2b949687a5,,,,,,,,,,,,,,,,5/16/22 14:20,CCBER-Admin,5/16/22 14:20,CCBER-Admin,-119.8740248,34.42073632
+99,European Starling,2,No,Flyover,,,,,,,,,,,,,,,,,,,,,0b284c2d-9c7d-4f54-8f4d-dab030e97788,,,,,,,,,,,,,,,,5/16/22 14:20,CCBER-Admin,5/16/22 14:20,CCBER-Admin,-119.8747853,34.42046033
+100,Mallard,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,6b2f159f-b6c9-4893-b8d8-9e55336e3773,,,,,,,,,,,,,,,,5/16/22 14:22,CCBER-Admin,5/16/22 14:22,CCBER-Admin,-119.8739603,34.42081652
+101,California Towhee,2,No,Bare ground,,,,,,,,,,,,,,,,,,,,,5cf26d8b-ed77-48ac-80b6-4cf2a5edd7da,,,,,,,,,,,,,,,,5/16/22 14:24,CCBER-Admin,5/16/22 14:24,CCBER-Admin,-119.8728583,34.42081121
+102,Red-winged Blackbird,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,483d18c7-5d33-4430-8307-f87a32d6752b,,,,,,,,,,,,,,,,5/16/22 14:25,CCBER-Admin,5/16/22 14:25,CCBER-Admin,-119.8729122,34.42109391
+103,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,a453deec-4a0b-4121-9fc4-a3b18d834a4b,,,,,,,,,,,,,,,,5/16/22 14:26,CCBER-Admin,5/16/22 14:26,CCBER-Admin,-119.8727359,34.42115146
+104,Say's Phoebe,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,94d15796-cc43-4bf5-9fcf-2b425e0e8570,,,,,,,,,,,,,,,,5/16/22 14:26,CCBER-Admin,5/16/22 14:26,CCBER-Admin,-119.8724349,34.4209879
+105,Rock Pigeon (Feral Pigeon),1,No,Flyover,,,,,,,,,,,,,,,,,,,,,b90d6e7e-7281-44fc-9444-22703c4c33e7,,,,,,,,,,,,,,,,5/16/22 14:27,CCBER-Admin,5/16/22 14:27,CCBER-Admin,-119.8731643,34.4204293
+106,American Crow,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,c9e9f032-e731-4a24-9837-22e6166a9d8e,,,,,,,,,,,,,,,,5/16/22 14:27,CCBER-Admin,5/16/22 14:27,CCBER-Admin,-119.8731129,34.42039901
+107,Common Yellowthroat,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,edd6125d-5017-4df9-9daa-ee019050bc62,,,,,,,,,,,,,,,,5/16/22 14:27,CCBER-Admin,5/16/22 14:27,CCBER-Admin,-119.872731,34.4209321
+108,Mallard,1,No,Bare ground,,,,,,,,,,,,,,,,,,,,,bb9eaff9-4505-447c-8fad-56e847b27438,,,,,,,,,,,,,,,,5/16/22 14:29,CCBER-Admin,5/16/22 14:29,CCBER-Admin,-119.8726906,34.42048382
+109,Western Bluebird,1,No,Fence,,,,,,,,,,,,,,,,,,,,,ca71fbfb-bf8d-4c1a-ad18-28655d4bea67,,,,,,,,,,,,,,,,5/16/22 14:29,CCBER-Admin,5/16/22 14:29,CCBER-Admin,-119.8723822,34.42058074
+110,California Towhee,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,9f61c3e7-1158-4cbc-af70-b5f260ab01db,,,,,,,,,,,,,,,,5/16/22 14:30,CCBER-Admin,5/16/22 14:30,CCBER-Admin,-119.8723969,34.42108354
+111,Red-shouldered Hawk,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,97354d97-d4bc-4eca-a1ae-b53a6c4ec8bd,,,,,,,,,,,,,,,,5/16/22 14:31,CCBER-Admin,5/16/22 14:31,CCBER-Admin,-119.8705813,34.42118185
+112,Song Sparrow,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,162a4d66-37a1-46fb-b936-c91011b7ae67,,,,,,,,,,,,,,,,5/16/22 14:32,CCBER-Admin,5/16/22 14:32,CCBER-Admin,-119.870574,34.42116974
+113,California Towhee,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,8f52c1db-34ad-42ce-b18e-50d37c4e0909,,,,,,,,,,,,,,,,5/16/22 14:32,CCBER-Admin,5/16/22 14:32,CCBER-Admin,-119.8705666,34.4210607
+114,Bushtit,4,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,ff3f89b9-0ddd-4fc2-bc56-4a4a0adad01e,,,,,,,,,,,,,,,,5/16/22 14:34,CCBER-Admin,5/16/22 14:34,CCBER-Admin,-119.8706607,34.4211031
+115,European Starling,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,558cb2df-b791-43ca-97bd-c8c5cdf60998,,,,,,,,,,,,,,,,5/16/22 14:34,CCBER-Admin,5/16/22 14:34,CCBER-Admin,-119.8711087,34.42070329
+116,Red-winged Blackbird,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,0fb97dc2-faf9-4f1f-95b0-4d00882ea83a,,,,,,,,,,,,,,,,5/16/22 14:35,CCBER-Admin,5/16/22 14:35,CCBER-Admin,-119.8709031,34.42069723
+117,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,de95abce-862c-448c-a79e-9b23d55c2b42,,,,,,,,,,,,,,,,5/16/22 14:36,CCBER-Admin,5/16/22 14:36,CCBER-Admin,-119.8702666,34.42110916
+118,Cassin's Kingbird,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,c82fa9de-e158-443a-8f08-af6638a110d7,,,,,,,,,,,,,,,,5/16/22 14:37,CCBER-Admin,5/16/22 14:37,CCBER-Admin,-119.8708137,34.42171493
+119,Hooded Oriole,2,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,60191eea-b3da-4839-bd83-be931e6b3a42,,,,,,,,,,,,,,,,5/16/22 14:37,CCBER-Admin,5/16/22 14:37,CCBER-Admin,-119.8708241,34.42181489
+120,Western Bluebird,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,1bb2bc20-6e16-40bb-80cd-61f81a887090,,,,,,,,,,,,,,,,5/16/22 14:38,CCBER-Admin,5/16/22 14:38,CCBER-Admin,-119.8708976,34.42173311
+121,House Finch,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,306763e9-9473-40bf-aa52-0e468b395aa3,,,,,,,,,,,,,,,,5/16/22 14:38,CCBER-Admin,5/16/22 14:38,CCBER-Admin,-119.870714,34.42136964
+122,Anna's Hummingbird,1,No,Fence,,,,,,,,,,,,,,,,,,,,,a7d793c4-1dc8-41da-b11b-a4f303c2c3c2,,,,,,,,,,,,,,,,5/16/22 14:41,CCBER-Admin,5/16/22 14:41,CCBER-Admin,-119.8724471,34.42135147
+123,Brown-headed Cowbird,3,No,Flyover,,,,,,,,,,,,,,,,,,,,,673ac548-10c4-478c-9c4e-fd0646317da9,,,,,,,,,,,,,,,,5/16/22 14:42,CCBER-Admin,5/16/22 14:42,CCBER-Admin,-119.8717237,34.42172099
+124,Anna's Hummingbird,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,8e41e232-54b5-4e82-b975-0ea35a3c9dc9,,,,,,,,,,,,,,,,5/16/22 14:43,CCBER-Admin,5/16/22 14:43,CCBER-Admin,-119.8716249,34.42174504
+125,Yellow Warbler,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,3f8477c3-a839-4115-be04-7a35750ba535,,,,,,,,,,,,,,,,5/16/22 14:46,CCBER-Admin,5/16/22 14:46,CCBER-Admin,-119.8724033,34.42216302
+126,Anna's Hummingbird,2,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,a83f414f-ac7e-4204-b07a-e59bfc656dd1,,,,,,,,,,,,,,,,5/16/22 14:47,CCBER-Admin,5/16/22 14:47,CCBER-Admin,-119.8722491,34.4221812
+127,Eurasian Collared-Dove,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,54308377-9604-45bb-83ba-cb8c1de82419,,,,,,,,,,,,,,,,5/16/22 14:47,CCBER-Admin,5/16/22 14:47,CCBER-Admin,-119.8723798,34.42209761
+128,Song Sparrow,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,261d4f1f-a0c8-4609-a8ff-3fc80eddd238,,,,,,,,,,,,,,,,5/16/22 14:49,CCBER-Admin,5/16/22 14:49,CCBER-Admin,-119.8723365,34.4224636
+129,American Crow,1,No,Other,,,bat box,,,,,,,,,,,,,,,,,,33c9ff30-4ff1-44f8-a8b9-21835f8364f7,,,,,,,,,,,,,,,,5/16/22 14:50,CCBER-Admin,5/16/22 14:50,CCBER-Admin,-119.872764,34.42244974
+130,Song Sparrow,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,9517595e-3998-417a-8595-6adb4ebf47c3,,,,,,,,,,,,,,,,5/16/22 14:51,CCBER-Admin,5/16/22 14:51,CCBER-Admin,-119.8727683,34.42201518
+131,Common Yellowthroat,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,231de7d8-22b9-4eed-863a-a8bf015f06ec,,,,,,,,,,,,,,,,5/16/22 14:52,CCBER-Admin,5/16/22 14:52,CCBER-Admin,-119.8730533,34.42191545
+132,Western Gull,2,Yes,Water - Wading,,,,,,,,,,,,,,,,,,,,,a4fac9fe-1a69-4f32-a12b-b91cc334c814,,,,,,,,,,,,,,,,5/16/22 14:54,CCBER-Admin,5/16/22 14:54,CCBER-Admin,-119.8734117,34.42175872
+133,Brown Pelican,1,Yes,Water - Wading,,,,,,,,,,,,,,,,,,,,,41d65fb1-f060-46d4-aab3-f4461bd52530,,,,,,,,,,,,,,,,5/16/22 14:54,CCBER-Admin,5/16/22 14:54,CCBER-Admin,-119.8734851,34.42173735
+134,Black-crowned Night-Heron,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,7daf5990-ca90-4ac7-8cb4-197ab6226b72,,,,,,,,,,,,,,,,5/16/22 14:54,CCBER-Admin,5/16/22 14:54,CCBER-Admin,-119.873252,34.42183708
+135,Black Phoebe,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,a655039c-9c02-422b-8f53-1efadba76807,,,,,,,,,,,,,,,,5/16/22 14:56,CCBER-Admin,5/16/22 14:56,CCBER-Admin,-119.873226,34.42187627
+136,Scaly-breasted Munia,6,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,b88586a5-fc40-48c4-a9ef-8122f6f935fc,,,,,,,,,,,,,,,,5/16/22 14:56,CCBER-Admin,5/16/22 14:56,CCBER-Admin,-119.8736708,34.42169104
+137,Common Yellowthroat,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,cc8bf31e-7623-48be-9cc6-76f46a9ef58f,,,,,,,,,,,,,,,,5/16/22 14:57,CCBER-Admin,5/16/22 14:57,CCBER-Admin,-119.8734534,34.42179201
+138,House Finch,3,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,ed31cb89-a6c3-4364-99c5-3d0afc9917fe,,,,,,,,,,,,,,,,5/16/22 14:57,CCBER-Admin,5/16/22 14:57,CCBER-Admin,-119.8735614,34.4217603
+139,Black Phoebe,2,No,Fence,,Feeding/Begging,,,,,,,,,,,,,,,,,,,328a9f47-ea41-473c-81da-1cddb7d57771,,,,,,,,,,,,,,,,5/16/22 14:59,CCBER-Admin,5/16/22 14:59,CCBER-Admin,-119.87357,34.42197758
+140,American Crow,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,3b67cd07-8551-4327-bebd-66c752553bc3,,,,,,,,,,,,,,,,5/16/22 15:04,CCBER-Admin,5/16/22 15:04,CCBER-Admin,-119.8733671,34.42187784
+141,Brown Pelican,3,Yes,Bare ground,,,,,,,,,,,,,,,,,,,,,0fc0fa7d-1bfe-4c3e-91d4-80d36b857b80,,,,,,,,,,,,,,,,5/16/22 15:05,CCBER-Admin,5/16/22 15:05,CCBER-Admin,-119.8729871,34.42162494
+142,Barn Swallow,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,1b912942-0deb-42c1-b7ab-3878961b1974,,,,,,,,,,,,,,,,5/16/22 15:07,CCBER-Admin,5/16/22 15:07,CCBER-Admin,-119.8735051,34.42172542
+143,Mallard,2,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,8c40e208-a04b-4120-b8a4-ace8ba4de303,,,,,,,,,,,,,,,,5/16/22 15:07,CCBER-Admin,5/16/22 15:07,CCBER-Admin,-119.8733893,34.42171835
+144,Brown Pelican,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,2dde9022-8a9c-4337-b4e4-1e58f08fb474,,,,,,,,,,,,,,,,5/16/22 15:07,CCBER-Admin,5/16/22 15:07,CCBER-Admin,-119.8735358,34.42168888
+145,Caspian Tern,2,No,Mud,,,,,,,,,,,,,,,,,,,,,5a08a6d3-9a46-4589-b445-eb40498b13f9,,,,,,,,,,,,,,,,5/16/22 15:09,CCBER-Admin,5/16/22 15:09,CCBER-Admin,-119.8752835,34.41991209
+146,Brown Pelican,1,No,Mud,,,,,,,,,,,,,,,,,,,,,ed2ecfa1-3a66-4b66-ac40-01bdb1de4eae,,,,,,,,,,,,,,,,5/16/22 15:09,CCBER-Admin,5/16/22 15:09,CCBER-Admin,-119.8755621,34.41961605
+147,Ring-billed Gull,3,No,Mud,,,,,,,,,,,,,,,,,,,,,30b41727-18e9-4391-8ddb-f13bd5c39d93,,,,,,,,,,,,,,,,5/16/22 15:11,CCBER-Admin,5/16/22 15:11,CCBER-Admin,-119.8753071,34.41998221
+148,Western Gull,25,No,Mud,,,,,,,,,,,,,,,,,,,,,63b9593f-f03b-4da2-a018-c3a915cf64db,,,,,,,,,,,,,,,,5/16/22 15:12,CCBER-Admin,5/16/22 15:12,CCBER-Admin,-119.8751748,34.42020813
+149,California Gull,20,No,Mud,,,,,,,,,,,,,,,,,,,,,daaa2797-d1d2-4828-8613-b03d28af4381,,,,,,,,,,,,,,,,5/16/22 15:12,CCBER-Admin,5/16/22 15:12,CCBER-Admin,-119.8754959,34.41983029
+150,Greater Yellowlegs,1,No,Mud,,,,,,,,,,,,,,,,,,,,,8d5e7ee8-d5f6-4d9f-b460-c164be85a418,,,,,,,,,,,,,,,,5/16/22 15:13,CCBER-Admin,5/16/22 15:13,CCBER-Admin,-119.8751654,34.4200309
+151,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,a08522a0-3054-420f-8f94-98acbe7b4fea,,,,,,,,,,,,,,,,5/16/22 15:15,CCBER-Admin,5/16/22 15:15,CCBER-Admin,-119.8751701,34.42058402
+152,Lesser Goldfinch,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,4e0a37b1-c11c-47fe-b14e-9bf8514de8d9,,,,,,,,,,,,,,,,5/16/22 15:15,CCBER-Admin,5/16/22 15:15,CCBER-Admin,-119.8750946,34.42075152
+153,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,2795e362-ed4b-4cd2-8f7f-4ffacb525d41,,,,,,,,,,,,,,,,5/16/22 15:17,CCBER-Admin,5/16/22 15:17,CCBER-Admin,-119.8757934,34.42004648
+154,Common Yellowthroat,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,61ee9ca5-301f-4b0e-84c6-85d62c2a6a12,,,,,,,,,,,,,,,,5/16/22 15:17,CCBER-Admin,5/16/22 15:17,CCBER-Admin,-119.8754251,34.42014386
+155,House Finch,2,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,ac287470-d71d-403d-9900-c701e3f6580e,,,,,,,,,,,,,,,,5/16/22 15:18,CCBER-Admin,5/16/22 15:18,CCBER-Admin,-119.8754653,34.420362
+156,Killdeer,1,No,Mud,,,,,,,,,,,,,,,,,,,,,710a2a1d-7851-4ed0-b3dc-d1d3082e38e6,,,,,,,,,,,,,,,,5/16/22 15:22,CCBER-Admin,5/16/22 15:22,CCBER-Admin,-119.8767213,34.42012466
+157,Ruddy Duck,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,dc315d19-33d6-4f83-803d-ba9e7ce707d9,,,,,,,,,,,,,,,,5/16/22 15:22,CCBER-Admin,5/16/22 15:22,CCBER-Admin,-119.8768488,34.41997566
+158,House Finch,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,67133a27-5fbf-4f4b-8037-e3dd5db73249,,,,,,,,,,,,,,,,5/16/22 15:22,CCBER-Admin,5/16/22 15:22,CCBER-Admin,-119.876386,34.42009251
+159,Snowy Egret,4,Yes,Water - Wading,,,,,,,,,,,,,,,,,,,,,4e4a07b0-535b-4dac-a45f-66b1666aa775,,,,,,,,,,,,,,,,5/16/22 15:23,CCBER-Admin,5/16/22 15:23,CCBER-Admin,-119.8773068,34.42033792
+160,Common Yellowthroat,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,72d37037-e3fb-47b6-8907-b661425c4760,,,,,,,,,,,,,,,,5/16/22 15:24,CCBER-Admin,5/16/22 15:24,CCBER-Admin,-119.8770306,34.42098842
+161,Anna's Hummingbird,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,51b26421-0d4d-4c24-a58a-e7f4f26b4959,,,,,,,,,,,,,,,,5/16/22 15:25,CCBER-Admin,5/16/22 15:25,CCBER-Admin,-119.8769621,34.42091052
+162,House Finch,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,95c2897c-1e95-452a-bfcc-a3d3c563f5bc,,,,,,,,,,,,,,,,5/16/22 15:25,CCBER-Admin,5/16/22 15:25,CCBER-Admin,-119.8773611,34.42070017
+163,American Crow,2,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,7d343ff1-46f0-40e0-a024-19f31b2edb31,,,,,,,,,,,,,,,,5/16/22 15:25,CCBER-Admin,5/16/22 15:25,CCBER-Admin,-119.8774768,34.42123382
+164,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,3e8794d2-e2ee-42b2-ac71-8dee539750bb,,,,,,,,,,,,,,,,5/16/22 15:25,CCBER-Admin,5/16/22 15:25,CCBER-Admin,-119.8772266,34.42101569
+165,Red-winged Blackbird,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,8fac0504-18dc-4b02-8c69-85823233c9c0,,,,,,,,,,,,,,,,5/16/22 15:26,CCBER-Admin,5/16/22 15:26,CCBER-Admin,-119.8774296,34.42112865
+166,Gadwall,2,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,3c686aac-6086-465f-8f7d-cda84fff770e,,,,,,,,,,,,,,,,5/16/22 15:27,CCBER-Admin,5/16/22 15:27,CCBER-Admin,-119.8778598,34.42076729
+167,Black Phoebe,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,cf7633a6-5c95-4db9-8424-5dbf0ca38949,,,,,,,,,,,,,,,,5/16/22 15:27,CCBER-Admin,5/16/22 15:27,CCBER-Admin,-119.8777226,34.4213056
+168,California Towhee,1,No,Bare ground,,,,,,,,,,,,,,,,,,,,,8403b77d-a903-4fbe-b379-1b887db11cec,,,,,,,,,,,,,,,,5/16/22 15:29,CCBER-Admin,5/16/22 15:29,CCBER-Admin,-119.8778669,34.42142252
+169,California Towhee,1,No,Bare ground,,,,,,,,,,,,,,,,,,,,,cdb19bb7-b851-4608-a9b9-659a86c2f921,,,,,,,,,,,,,,,,5/16/22 15:30,CCBER-Admin,5/16/22 15:30,CCBER-Admin,-119.8781367,34.42123405
+170,House Sparrow,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,996d8813-9b00-4cf7-81a4-1a2775bbcfb6,,,,,,,,,,,,,,,,5/16/22 15:30,CCBER-Admin,5/16/22 15:30,CCBER-Admin,-119.8780078,34.42113626
+171,House Finch,2,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,2b8bddc3-61c4-4db5-a48f-e477b5b9b8e3,,,,,,,,,,,,,,,,5/16/22 15:31,CCBER-Admin,5/16/22 15:31,CCBER-Admin,-119.8783093,34.42112776
+172,Song Sparrow,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,0f46fa7a-2b97-4127-a362-310c9d9e9237,,,,,,,,,,,,,,,,5/16/22 15:32,CCBER-Admin,5/16/22 15:32,CCBER-Admin,-119.8782681,34.42103422
+173,Mallard,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,4d4a8f5f-a4b7-42a8-b74d-6288567648d9,,,,,,,,,,,,,,,,5/16/22 15:32,CCBER-Admin,5/16/22 15:32,CCBER-Admin,-119.8789484,34.42138286
+174,Song Sparrow,1,No,Fence,,,,,,,,,,,,,,,,,,,,,4ce418c3-ea5f-48f5-b305-91ce68013f5d,,,,,,,,,,,,,,,,5/16/22 15:33,CCBER-Admin,5/16/22 15:33,CCBER-Admin,-119.8787938,34.42138286
+175,Mourning Dove,2,No,Flyover,,,,,,,,,,,,,,,,,,,,,a644ad28-7aad-443c-9f1a-058abe50f308,,,,,,,,,,,,,,,,5/16/22 15:34,CCBER-Admin,5/16/22 15:34,CCBER-Admin,-119.8784511,34.42170386
+176,House Finch,2,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,51b04625-87cc-411f-8147-e6669f5d1eed,,,,,,,,,,,,,,,,5/16/22 15:34,CCBER-Admin,5/16/22 15:34,CCBER-Admin,-119.8787887,34.42145089
+177,American Crow,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,25356890-a0c1-4fd5-87a7-c591b113f5f2,,,,,,,,,,,,,,,,5/16/22 15:35,CCBER-Admin,5/16/22 15:35,CCBER-Admin,-119.8788608,34.421419
+178,Red-winged Blackbird,1,No,Flyover,,,,,,,,,,,,,,,,,,,,,f192934f-673f-4bf2-a3ee-4478cc54d157,,,,,,,,,,,,,,,,5/16/22 15:35,CCBER-Admin,5/16/22 15:35,CCBER-Admin,-119.8786701,34.42095557
+179,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,53724bb2-6b93-4409-9433-5c484dd92843,,,,,,,,,,,,,,,,5/16/22 15:36,CCBER-Admin,5/16/22 15:36,CCBER-Admin,-119.8795489,34.42139455
+180,Song Sparrow,1,No,Vegetation - Herbaceous,,,,,,,,,,,,,,,,,,,,,32dbf36f-c776-4aa6-8b58-9f242e0e05bd,,,,,,,,,,,,,,,,5/16/22 15:36,CCBER-Admin,5/16/22 15:36,CCBER-Admin,-119.8796206,34.42123764
+181,Anna's Hummingbird,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,5362c0c9-e847-44e3-b794-97de8fc9d501,,,,,,,,,,,,,,,,5/16/22 15:37,CCBER-Admin,5/16/22 15:37,CCBER-Admin,-119.8791954,34.42149699
+182,Song Sparrow,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,ab85c580-e4ef-4365-9fd0-1b983d7961d8,,,,,,,,,,,,,,,,5/16/22 15:37,CCBER-Admin,5/16/22 15:37,CCBER-Admin,-119.8794247,34.42172445
+183,House Finch,1,No,Building,,,,,,,,,,,,,,,,,,,,,cd5fcf79-7fdf-4f8c-8196-62acb498dadc,,,,,,,,,,,,,,,,5/16/22 15:38,CCBER-Admin,5/16/22 15:38,CCBER-Admin,-119.8798963,34.42155439
+184,Allen's Hummingbird,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,e9114525-cf11-4066-94d9-609ab35f5240,,,,,,,,,,,,,,,,5/16/22 15:39,CCBER-Admin,5/16/22 15:39,CCBER-Admin,-119.8800457,34.42136731
+185,Common Yellowthroat,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,b09efeba-19be-49a8-8594-427ad455340b,,,,,,,,,,,,,,,,5/16/22 15:39,CCBER-Admin,5/16/22 15:39,CCBER-Admin,-119.880239,34.42142471
+186,Song Sparrow,2,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,5bb55f49-c57c-41d9-bf63-ee1a12fcdf64,,,,,,,,,,,,,,,,5/16/22 15:39,CCBER-Admin,5/16/22 15:39,CCBER-Admin,-119.8802273,34.42183297
+187,California Towhee,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,99bd9bea-8ce8-4ba9-a8c5-a3b76ce33b5e,,,,,,,,,,,,,,,,5/16/22 15:40,CCBER-Admin,5/16/22 15:40,CCBER-Admin,-119.8803299,34.42176739
+188,European Starling,2,No,Mud,,,,,,,,,,,,,,,,,,,,,5ef72b54-e420-4e3c-a7ce-04f40544382e,,,,,,,,,,,,,,,,5/16/22 15:41,CCBER-Admin,5/16/22 15:41,CCBER-Admin,-119.8812862,34.42157746
+189,American Crow,2,No,,,,,,,,,,,,,,,,,,,,,,c9e35502-9b35-4cc2-9a0a-e2f0ed520da4,,,,,,,,,,,,,,,,5/16/22 15:41,CCBER-Admin,5/16/22 15:41,CCBER-Admin,-119.8805547,34.42192677
+190,Mallard,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,49df7fc5-adb1-4ddb-9514-798fdd95edc8,,,,,,,,,,,,,,,,5/16/22 15:42,CCBER-Admin,5/16/22 15:42,CCBER-Admin,-119.8810097,34.42162936
+191,Black Phoebe,1,No,Habitat Feature - Snag,,,,,,,,,,,,,,,,,,,,,08fec435-0613-4cbc-b81c-710a028096c5,,,,,,,,,,,,,,,,5/16/22 15:42,CCBER-Admin,5/16/22 15:42,CCBER-Admin,-119.8806947,34.42151099
+192,House Sparrow,3,No,Flyover,,,,,,,,,,,,,,,,,,,,,8d2754cd-8f1c-4a27-a2ca-f2e505d48693,,,,,,,,,,,,,,,,5/16/22 15:43,CCBER-Admin,5/16/22 15:43,CCBER-Admin,-119.8800858,34.42171885
+193,Allen's Hummingbird,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,26295d78-a82a-408a-8656-9d4411193a41,,,,,,,,,,,,,,,,5/16/22 15:43,CCBER-Admin,5/16/22 15:43,CCBER-Admin,-119.8807052,34.42138686
+194,House Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,166bfb9b-ce59-4535-8297-fe6690c0c74d,,,,,,,,,,,,,,,,5/16/22 15:44,CCBER-Admin,5/16/22 15:44,CCBER-Admin,-119.8808417,34.4214215
+195,Red-tailed Hawk,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,9cb874c8-2058-434d-a585-4cee376640b0,,,,,,,,,,,,,,,,5/16/22 15:47,CCBER-Admin,5/16/22 15:47,CCBER-Admin,-119.880751,34.42195381
+196,Canada Goose,2,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,87310e62-fbf4-4297-9ace-860236322ce3,,,,,,,,,,,,,,,,5/16/22 15:47,CCBER-Admin,5/16/22 15:47,CCBER-Admin,-119.8812759,34.42163626
+197,Song Sparrow,1,Yes,Fence,,,,,,,,,,,,,,,,,,,,,8de426fc-4607-4986-b197-8a22d5df848e,,,,,,,,,,,,,,,,5/16/22 15:49,CCBER-Admin,5/16/22 15:49,CCBER-Admin,-119.8817865,34.421444
+198,Mourning Dove,1,Yes,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,1a065e17-ebd4-4cd6-b68d-830644b9359d,,,,,,,,,,,,,,,,5/16/22 15:50,CCBER-Admin,5/16/22 15:50,CCBER-Admin,-119.8824282,34.42098735
+199,Mallard,11,Yes,Water - Wading,,,,,,,,,,,,,,,,,,,,,d5ddcbdd-9a50-4b37-912c-115f0643a2f9,,,,,,,,,,,,,,,,5/16/22 15:50,CCBER-Admin,5/16/22 15:50,CCBER-Admin,-119.8824423,34.42118223
+200,Cedar Waxwing,26,No,Flyover,,,,,,,,,,,,,,,,,,,,,f178409e-cf5a-4404-b9bb-49a7e1ae05db,,,,,,,,,,,,,,,,5/16/22 15:54,CCBER-Admin,5/16/22 15:54,CCBER-Admin,-119.8830235,34.42149636
+201,Anna's Hummingbird,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,559e2cf7-d76a-43a2-8f2e-2f9166a96275,,,,,,,,,,,,,,,,5/16/22 15:55,CCBER-Admin,5/16/22 15:55,CCBER-Admin,-119.8830764,34.42176395
+202,Song Sparrow,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,2c5a575b-5504-4f4e-8d36-4dd95874f3a6,,,,,,,,,,,,,,,,5/16/22 15:55,CCBER-Admin,5/16/22 15:55,CCBER-Admin,-119.8835521,34.42136597
+203,Lesser Goldfinch,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,1831bdee-72d1-48c1-9c97-13f799abe35b,,,,,,,,,,,,,,,,5/16/22 15:56,CCBER-Admin,5/16/22 15:56,CCBER-Admin,-119.8829033,34.42172664
+204,Black Phoebe,1,No,Vegetation - Tree,,,,,,,,,,,,,,,,,,,,,9da861b8-7fd0-4276-9d70-161a789f8baa,,,,,,,,,,,,,,,,5/16/22 15:56,CCBER-Admin,5/16/22 15:56,CCBER-Admin,-119.8831924,34.42170919
+205,Cliff Swallow,100,No,Flyover,,,,,,,,,,,,,,,,,,,,,53e2017a-a146-4628-9661-e3e61d15c95c,,,,,,,,,,,,,,,,5/16/22 15:57,CCBER-Admin,5/16/22 15:57,CCBER-Admin,-119.8822862,34.42179354
+206,Spotted Sandpiper,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,3957b34a-812b-48a1-b51f-d72ef1683196,,,,,,,,,,,,,,,,5/16/22 16:01,CCBER-Admin,5/16/22 16:01,CCBER-Admin,-119.8810572,34.42163759
+207,Rock Pigeon (Feral Pigeon),1,No,Flyover,,,,,,,,,,,,,,,,,,,,,866e96f6-d8ac-4379-96fa-0aba227cd9c3,,,,,,,,,,,,,,,,5/16/22 16:02,CCBER-Admin,5/16/22 16:02,CCBER-Admin,-119.880948,34.42183982
+208,American Coot,1,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,3581d2eb-4039-4720-af0b-1ac35c2a883d,,,,,,,,,,,,,,,,5/16/22 16:11,CCBER-Admin,5/16/22 16:11,CCBER-Admin,-119.8822711,34.42121517
+209,Black-crowned Night-Heron,1,No,Vegetation - Shrub,,,,,,,,,,,,,,,,,,,,,4b5a546f-0c93-4fe4-b1d4-d160a0d50753,,,,,,,,,,,,,,,,5/16/22 16:21,CCBER-Admin,5/16/22 16:21,CCBER-Admin,-119.8733391,34.42172196
+210,Great Egret,4,No,Water - Wading,,,,,,,,,,,,,,,,,,,,,ec250dc7-3a83-489c-b71c-f24a86c30460,,,,,,,,,,,,,,,,5/16/22 16:21,CCBER-Admin,5/16/22 16:21,CCBER-Admin,-119.8781036,34.42076368
+211,Snowy Egret,3,No,Water - Wading,,,,,"Mark H, Sophie C, Oliver F",,930,,,,,,,63,,,,,,,a1f86749-45de-4e65-9e41-c8263b11b1e9,,,,,,,,,,,,,,,,5/16/22 16:22,CCBER-Admin,5/16/22 16:28,CCBER-Admin,-119.8779923,34.42068316
