@@ -3,6 +3,8 @@
 library(tidyverse)
 library(here)
 library(janitor)
+library(naniar)
+library(visdat)
 
 
 
@@ -14,6 +16,11 @@ birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023",
                            "NCOS_Monthly_Bird_Surveys_2017-2023.csv")
 birdsurveys <- read_csv(birdsurveyfilepath) # 11 variables
 
+
+#use visdat to visualize data types and missingness
+vis_dat(birdsurveys)
+
+vis_miss(birdsurveys)
 
 ### cleaning and adding new variables
 # + 2 variables: survey_year, season
@@ -49,6 +56,7 @@ birdsurveys_cleaned <- birdsurveys %>%
     # - then rows should be entered in chronological order for 2022?
     # - NA observation dates lie between dates 2022-04-20 and 2022-05-16
     # - assigning 2022-04-20 to one row and 2022-05-16 to the other
+    # TODO- FHJ to check 2022-04 and 2022-05 raw csv files. 
     obs_date2 = substr(birdsurveys$Observation.Date,1,10),
     observation_date = parse_date_time(obs_date2,
                                        orders = c("mdy","ymd")),
