@@ -38,4 +38,36 @@ pdf(file = "code/Matt_Vinh/figures/")
 #create draft network viz based on existing data
 plotweb(web = matrix_subset, text_size =1.1, horizontal = TRUE)
 
+# piscivorous network ----
+
+# FIXME- Gabriella to update, using new version of bipartite plotweb() AND saving directly to pdf
+
+fish_links_path <- "data/aquatic_diets/NCOS_piscivorous_trophic_links_2026-02-17.xlsx"
+
+#in network terminology this is an "edge list"
+fish_trophic_links <- read_xlsx(path = links_path, sheet = "trophic links") %>% 
+  select(c(bird_species, prey_taxon)) %>% 
+  relocate(prey_taxon, .before = bird_species) 
+
+#create vector of bird names
+birds_fish_eating <- unique(fish_trophic_links$bird_species)
+prey <- unique(fish_trophic_links$prey_taxon)
+
+tl_matrix_fish <- fish_trophic_links %>% 
+  as.matrix()
+
+#create netowrk "graph"
+trophic_network_fish <- graph_from_edgelist(tl_matrix_fish, directed = FALSE)
+
+#extract adjacency matrix
+adj_matrix_fish <- as_adjacency_matrix(trophic_network_fish, sparse=FALSE)
+
+#subset matrix to avoid duplication
+matrix_subset_fish <- adj_matrix_fish[prey, birds_fish_eating]
+
+#continue filling out trophic links data
+#create draft network viz based on existing data
+plotweb(web = matrix_subset_fish, text.rot = 90)
+
+
 
