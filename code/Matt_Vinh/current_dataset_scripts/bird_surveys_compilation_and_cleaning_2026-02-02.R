@@ -433,7 +433,7 @@ compiled_final_clean <- compiled_final %>%
                       "Northern House Wren"),
     species = replace(species,
                       species == "Mew Gull",
-                      "Common Gull"),
+                      "Short-billed Gull"),
     species = replace(species,
                       species == "Whimbrel",
                       "Hudsonian Whimbrel"),
@@ -485,10 +485,10 @@ rm(compiled_final)
 ##### writing .csv and .rds ----
 
 
-csvpath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-10.csv")
+csvpath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-16.csv")
 write_csv(compiled_final_clean,csvpath)
 
-rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-10.rds")
+rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-16.rds")
 saveRDS(compiled_final_clean,rdspath)
 
 
