@@ -3,6 +3,5 @@
 .RData
 .Ruserdata
 .DS_Store
-data/ebird/ncos_data.rds
 data/ncos_data.rds
 data/JRBP_Bird_Transect_Data.csv
