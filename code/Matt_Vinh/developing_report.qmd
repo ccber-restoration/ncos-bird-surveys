@@ -13,7 +13,7 @@ author: Matt Vinh
 library(here)
 library(tidyverse)
 library(vegan)
-library(cowplot)
+library(INLA)
 
 datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-16.rds")
 data <- readRDS(datapath)
@@ -369,6 +369,129 @@ ggplot() +
   labs(title = "NMDS based on Jaccard distance (presence/absence)",
        color = "Survey Year") + 
   theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+```{r wright-ueda et al paper methods replication}
+
+##### template #################################################################
+
+species <- 'CASJ'
+U <- 0.007 # component of prior
+distribution <- 'nbinomial' # distribution either poisson or nbinomial
+# only use nbinomial when poisson is overdispersed
+
+speciescol <- paste0('n.',species)
+MyData <- na.exclude(df[, c(speciescol, # specifying variables to include
+                            "Census_Area", "Day_of_year", "Date", 'Year',
+                            'ID',
+                            "Observer1")])
+names(MyData)[1] <- 'Abundance'
+bspecies <- MyData[,1] # only speciescol variable
+
+hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05))) # prior
+inla.setOption(scale.model.default = TRUE)
+
+I1 <- inla(Abundance ~ f(Year, model = "rw1", hyper = hyper.prec) + # first order walk
+             f(Day_of_year, model = "rw2", hyper = hyper.prec) + # second order walk
+             f(Census_Area, model = "iid") + # random effect
+             f(Observer1, model = "iid"), # random effect
+           control.predictor = list(compute = TRUE, 
+                                    quantiles = c("0.025", "0.975")),
+           control.compute = list(dic = TRUE,
+                                  waic = TRUE),
+           family = distribution,
+           data = MyData)
+
+################################################################################
+
+survey_path <- here("data","aggregated","Matt_Vinh","survey-level_2026-02-18.rds")
+df <- read_rds(survey_path)
+
+species <- 'Killdeer'
+U <- 0.001 # larger makes trend for both ggplots more apparent
+# smaller makes trend of first ggplot undetectable, less prominent for second ggplot
+distribution <- 'poisson' # poisson seems better than nbinomial, however have not tested overdispersion
+
+MyData <- na.exclude(df[, c(species,
+                            "survey_id",
+                            "day_of_survey_year",
+                            "observation_date",
+                            "survey_year")])
+names(MyData)[1] <- 'Abundance'
+bspecies <- MyData[,1]
+
+hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05)))
+inla.setOption(scale.model.default = TRUE)
+
+I1 <- inla(Abundance ~ f(survey_year, model = "rw1", hyper = hyper.prec) + 
+             f(day_of_survey_year, model = "rw2", hyper = hyper.prec),
+           control.predictor = list(compute = TRUE, 
+                                    quantiles = c("0.025", "0.975")),
+           control.compute = list(dic = TRUE,
+                                  waic = TRUE),
+           family = distribution,
+           data = MyData)
+
+
+#### Model Validation ####
+MyData$Fitted <- I1$summary.fitted.values[,'mean']
+# Plot trend for year
+Yearsm <- I1$summary.random$survey_year
+ggplot() +
+  xlab("Year") + ylab("Trend") +
+  geom_line(data = Yearsm, aes(x = ID, y = mean)) +
+  geom_ribbon(data = Yearsm, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_bw() +
+  theme(axis.text.y = element_text(size = 8)) +
+  theme(axis.text.x = element_text(size = 8)) +
+  theme(axis.title = element_text(size = 11)) +
+  ggtitle('Trend by Year') +
+  theme(plot.title = element_text(size = 15,
+                                  lineheight=.8, 
+                                  face="bold", 
+                                  hjust = 0.5)) +
+  # ylim(-0.5,0.5) +
+  ylim(min(Yearsm$`0.025quant`)-0.05,max(Yearsm$`0.975quant`)+0.05)
+
+
+### Dispersion ###
+mu <- I1$summary.fitted.values[, "mean"]
+theta <- I1$summary.hyperpar[1, "mean"]
+
+if(distribution == 'nbinomial'){
+  # Pearson residuals for negative binomial distribution
+  E1 <- (bspecies - mu) / sqrt(mu + mu^2 / theta) 
+}
+if(distribution == 'poisson'){
+  # Pearson residuals for poisson distribution
+  E1 <- (bspecies - mu) / sqrt(mu) 
+}
+if(distribution == 'gaussian'){
+  # Residuals for gaussian distribution
+  E1 <-  MyData$Abundance-MyData$Fitted
+}
+
+# Check for overdispersion
+N <- nrow(MyData)
+p <- nrow(I1$summary.fixed)
+Dispersion <- sum(E1^2) / (N - p)
+Dispersion
+I1$dic$dic
+
+# Day of Year Trends
+DayY <- I1$summary.random$day_of_survey_year
+ggplot() +
+  xlab("Year") + ylab("Trend") +
+  geom_line(data = DayY, aes(x = ID, y = mean)) +
+  geom_ribbon(data = DayY, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_bw() +
+  theme(axis.text.y = element_text(size = 15)) +
+  theme(axis.text.x = element_text(size = 15)) +
+  theme(axis.title = element_text(size = 20))
+
 ```
 
 
