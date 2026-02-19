@@ -3,8 +3,8 @@
 library(tidyverse)
 library(here)
 library(janitor)
-library(naniar)
 library(visdat)
+library(naniar)
 
 
 
@@ -17,10 +17,11 @@ birdsurveyfilepath <- here("data","aggregated","dryad_2017-2023",
 birdsurveys <- read_csv(birdsurveyfilepath) # 11 variables
 
 
-#use visdat to visualize data types and missingness
-vis_dat(birdsurveys)
+# visualization of data types and missingness with visdat and naniar
 
-vis_miss(birdsurveys)
+vis_dat(birdsurveys)
+miss_var_summary(birdsurveys)
+
 
 ### cleaning and adding new variables
 # + 2 variables: survey_year, season
@@ -91,6 +92,12 @@ birdsurveys_cleaned <- birdsurveys %>%
   clean_names()
 
 
+### visualization of data types and missingness
+
+vis_dat(birdsurveys_cleaned)
+miss_var_summary(birdsurveys_cleaned)
+
+
 ### declutter
 
 rm(birdsurveys)
@@ -107,13 +114,18 @@ csvpath25 <- here("data","2025")
 
 
 ### extract filepaths
+# only need last 4 months of 2023, because the first 8 months were already compiled in Dryad file
+# only want 2025 surveys until sep to round out survey year 8
 
-#only need last 4 months of 2023, because the first 8 months were already compiled in Dryad file
-
-csvfiles23 <- list.files(path = csvpath23,pattern = "2023_(09|10|11|12)_.*\\.csv$",
+csvfiles23 <- list.files(path = csvpath23,
+                         pattern = "2023_(09|10|11|12)_.*\\.csv$",
                          full.names = T)
-csvfiles24 <- list.files(path = csvpath24,pattern = "\\.csv$",full.names = T)
-csvfiles25 <- list.files(path = csvpath25,pattern = "\\.csv$",full.names = T)
+csvfiles24 <- list.files(path = csvpath24,
+                         pattern = "\\.csv$",
+                         full.names = T)
+csvfiles25 <- list.files(path = csvpath25,
+                         pattern = "2025_(01|02|03|04|05|06|07|08)_.*\\.csv$",
+                         full.names = T)
 
 
 ### reading files and cleaning
@@ -202,6 +214,18 @@ df25 <- map_dfr(csvfiles25,~ read_csv(.x,col_types = cols(.default = "c"),
   
   # remove intermediate
   select(-"parsed")
+
+
+### visualization of data types and missingness
+
+vis_dat(survey_2022_03)
+vis_dat(df23)
+vis_dat(df24)
+vis_dat(df25)
+miss_var_summary(survey_2022_03)
+miss_var_summary(df23)
+miss_var_summary(df24)
+miss_var_summary(df25)
 
 
 ### rbind-ing bird survey data of each year, new variables and cleaning
@@ -296,6 +320,12 @@ compiled1 <- rbind(survey_2022_03,df23,df24,df25) %>%
     Count = replace_na(Count,1)) %>% 
   
   clean_names()
+
+
+### visualization of data types and missingness
+
+vis_dat(compiled1)
+miss_var_summary(compiled1)
 
 
 ### declutter
@@ -476,6 +506,13 @@ compiled_final_clean <- compiled_final %>%
   ungroup()
 
 
+### visualization of data types and missingness
+
+vis_dat(compiled_final_clean,
+        warn_large_data = F)
+miss_var_summary(compiled_final_clean)
+
+
 ### declutter
 
 rm(compiled_final)
@@ -485,10 +522,10 @@ rm(compiled_final)
 ##### writing .csv and .rds ----
 
 
-csvpath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-16.csv")
+csvpath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-18.csv")
 write_csv(compiled_final_clean,csvpath)
 
-rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-16.rds")
+rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
 saveRDS(compiled_final_clean,rdspath)
 
 
