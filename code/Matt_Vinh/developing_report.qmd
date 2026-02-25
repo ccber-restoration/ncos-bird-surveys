@@ -457,6 +457,7 @@ if(distribution == 'poisson'){
 }
 if(distribution == 'gaussian'){
   # Residuals for gaussian distribution
+  ### there is exactly one species with this distribution: AMRO
   E1 <-  MyData$Abundance-MyData$Fitted
 }
 
