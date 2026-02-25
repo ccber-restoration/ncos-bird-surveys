@@ -15,17 +15,23 @@ library(tidyverse)
 library(vegan)
 library(INLA)
 
-datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-16.rds")
+datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
 data <- readRDS(datapath)
 
 # This rds is not synced to github... you have to download it from Google Drive
 #It includes all ebird checklists for the NCOS hotspot... more filtering required
 datapath_ebird <- here("data","ncos_data.rds")
-ncos_ebird <- read_rds(datapath_ebird)
+ncos_ebird <- read_rds(datapath_ebird) %>% 
+  mutate(observation_count = na_if(observation_count,"X"),
+         observation_count = as.integer(observation_count))
 
 ```
 
 ## Abstract (Executive summary)
+
+The short-term effects of the recent North Campus Open Space (NCOS) restoration project have been individually observed as massive, beneficial changes to the various ecosystems of the area. However, such changes lack a formal analysis on a higher level than the annual reports of statistics. To explore and understand how the restoration has affected NCOS avian biodiversity, the bird survey data of the Cheadle Center for Biodiversity and Restoration over eight years was leveraged.
+
+The division of avian biodiversity into breeding versus non breeding species observed at NCOS provides key insight into the effect of the restoration on bird  populations - differentiating the true dependent species as opposed to those who merely visit NCOS temporarily can assist detected trend explanation. Additionally, accounting for the short duration of available data is crucial for correct interpretation of statistical findings, as trends become harder to detect and less representative with fewer data.
 
 ## Introduction
 
@@ -33,13 +39,29 @@ ncos_ebird <- read_rds(datapath_ebird)
 
 ### Data collection
 
-\[Fill this in based on previous documentation in NCOS annual reports and in Dryad data publication\]
+one expert birder per survey vs two per team per survey?
+
+within one hour after sunrise vs 45 mins after sunrise?
+
+Starting in September 2017, following the completion of the restoration of North Campus Open Space (NCOS), Cheadle Center staff and associates conduct monthly bird surveys along two trails that cover the entirety of NCOS. The routes begin at Venocco Bridge and diverge west and east until the two groups meet at the survey end near Phelps Creek on the northern side of NCOS. The survey begins (within one hour vs 45 mins after) sunrise and takes 2 to 2.5 hours. Using binoculars, spotting scopes and with the assistance of (1 vs 4) expert birders, all birds observed or heard are documented on the GIS app Field Maps with their species and abundance. The Field Maps app also records the obeserver's location every 30 seconds. Observations that are considered repeats, whether by the same group or due to overlap of observation between the two groups, are marked as repeats. At the conclusion of the survey, the expert birders of the survey verify the collected bird observations and submit the data to the Cornell Lab of Ornithology's eBird repository, excluding repeat observations. Over 8 years, CCBER has conducted 96 surveys, recording 15,644 observations of 173 (vs ncos_ebird 258) different species.
+
+```{r}
+
+number_species_ccber <- data %>% filter(category == "species")
+length(unique(number_species_ccber$species))
+
+number_species_ebird <- ncos_ebird %>% filter(category == "species")
+length(unique(number_species_ebird$common_name))
+
+```
 
 ### Data cleaning
 
 -   summarize what happens in cleaning script
 
 -   standardize species names according to XYZ (specific ebird taxonomy version)
+
+
 
 ### Data analysis
 
@@ -84,12 +106,388 @@ setdiff(species_ebird, species_monthly_surveys)
 setdiff(species_monthly_surveys, species_ebird)
 
 #one species! common gull. Maybe mis-identified?
-```
+# - after fixing of common gull species name, there are no species recorded
+# - by ccber that are not also recorded by ebird
 
+
+
+# understanding frequency of birds recorded on ebird but not ccber
+
+diff <- setdiff(species_ebird, species_monthly_surveys)
+difference_df <- data.frame(species = diff,total_count = length(diff) * NA)
+restricted <- ncos_ebird %>% 
+  filter(observation_date >= as.Date("2017-09-01") & observation_date <= as.Date("2025-08-31"))
+for (i in 1:length(diff)){
+  temp <- restricted %>% filter(common_name == diff[i])
+  difference_df$total_count[i] = sum(temp$observation_count,na.rm = T)
+}
+print(difference_df)
+
+```
 
 ## Species composition over time
 
-The lowest richness occurs at survey year 1 with the following years appearing more similar.
+```{r line plot}
+
+# data organization
+
+richness <- data %>% 
+  filter(!survey_year == 9, category == "species") %>% 
+  group_by(survey_year) %>% 
+  summarise(n = length(unique(species)))
+
+ebird_sy <- ncos_ebird %>% # sy = survey year
+  mutate(survey_year = case_when(
+      observation_date >= as.Date("2017-09-01") & observation_date <= as.Date("2018-08-31") ~ 1,
+      observation_date >= as.Date("2018-09-01") & observation_date <= as.Date("2019-08-31") ~ 2,
+      observation_date >= as.Date("2019-09-01") & observation_date <= as.Date("2020-08-31") ~ 3,
+      observation_date >= as.Date("2020-09-01") & observation_date <= as.Date("2021-08-31") ~ 4,
+      observation_date >= as.Date("2021-09-01") & observation_date <= as.Date("2022-08-31") ~ 5,
+      observation_date >= as.Date("2022-09-01") & observation_date <= as.Date("2023-08-31") ~ 6,
+      observation_date >= as.Date("2023-09-01") & observation_date <= as.Date("2024-08-31") ~ 7,
+      observation_date >= as.Date("2024-09-01") & observation_date <= as.Date("2025-08-31") ~ 8,
+      .default = NA))
+ebird_richness <- ebird_sy %>% 
+  filter(category == "species",
+         !is.na(survey_year)) %>% 
+  group_by(survey_year) %>% 
+  summarize(richness = length(unique(common_name)))
+
+richness_composite <- inner_join(richness,ebird_richness) %>% 
+  mutate(diff = richness - n)
+
+reports_path <- here("data","species_totals_from_ncos_annual_reports.csv")
+annual_reports <- read_csv(reports_path)
+
+# visualization
+
+lines <- ggplot() + 
+  geom_point(data = richness,
+             aes(x = survey_year,
+                 y = n),
+             color = "blue") + 
+  geom_line(data = richness,
+             aes(x = survey_year,
+                 y = n),
+             color = "blue") + 
+  annotate("text",
+           x = 7,
+           y = richness$n[richness$survey_year == 7] - 10,
+           label = "CCBER",
+           color = "blue") + 
+  geom_point(data = ebird_richness,
+             aes(x = survey_year,
+                 y = richness),
+             color = "red") + 
+  geom_line(data = ebird_richness,
+             aes(x = survey_year,
+                 y = richness),
+             color = "red") + 
+  annotate("text",
+           x = 7,
+           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 10,
+           label = "eBird",
+           color = "red") + 
+  geom_point(data = richness_composite,
+             aes(x = survey_year,
+                 y = diff),
+             color = "purple") + 
+   geom_line(data = richness_composite,
+             aes(x = survey_year,
+                 y = diff),
+             color = "purple") + 
+  annotate("text",
+           x = 7,
+           y = richness_composite$diff[richness_composite$survey_year == 7] - 10,
+           label = "eBird - CCBER",
+           color = "purple") + 
+  geom_point(data = annual_reports,
+             aes(x = survey_year,
+                 y = reported_richness),
+             color = "forestgreen") + 
+  geom_line(data = annual_reports,
+             aes(x = survey_year,
+                 y = reported_richness),
+             color = "forestgreen") + 
+  annotate("text",
+           x = 7,
+           y = annual_reports$reported_richness[annual_reports$survey_year == 7] - 10,
+           label = "CCBER Annual Reports",
+           color = "forestgreen") + 
+  theme_classic() + 
+  labs(title = "Species Richness by Survey Year",
+       x = "Survey Year",
+       y = "Number of Species Detected") + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14),
+        axis.title.x = element_text(size = 13),
+        axis.title.y = element_text(size = 13),
+        legend.position = "none") + 
+  scale_x_continuous(breaks = seq(1,8,by = 1)) + 
+  scale_y_continuous(expand = c(0,0),
+                     breaks = seq(0,225, by = 50),
+                     limits = c(0,225))
+
+# saving
+
+ggsave(filename = paste0("Species_Richness_",
+                         format(Sys.Date(),
+                                "%y-%m-%d"),
+                         ".pdf"),
+       lines,
+       width = 200,
+       height = 140,
+       units = "mm")
+
+```
+
+```{r max count nmds}
+#| label: fig-nmds
+#| message: false
+#| warning: false
+#| fig-cap: Revised NMDS based on 'Maximum Species Abundance' of each species in each year. I reproduced it thinking that with cleaner data it might appear differently, giving insight into species identity similarities or differences, following the bar chart of species richness. The usage of setdiff() may be more desirable in this situation.
+#| include: false
+
+year_max <- data %>% 
+  filter(!survey_year == 9) %>%
+  group_by(survey_year, species) %>%
+  summarise(max_count = max(count))
+
+community <- as.matrix(unclass(xtabs(max_count ~ survey_year + species,
+                                     data = year_max)))
+
+nmds <- metaMDS(community,autotransform = F,distance = "bray",engine = "monoMDS",
+                 k = 2,weakties = T,model = "global",maxit = 300,try = 40,
+                 trymax = 100,trace = F)
+
+nmds_site_scores <- as.data.frame(scores(nmds)$sites) %>% 
+  rownames_to_column(var = "survey_year") %>% 
+  mutate(survey_year = as.numeric(survey_year)) %>% 
+  arrange(survey_year) %>% 
+  mutate(
+    xend = lead(NMDS1),
+    yend = lead(NMDS2))
+
+ggplot() + 
+  geom_point(data = nmds_site_scores,
+                      aes(x = NMDS1,
+                          y = NMDS2,
+                          color = survey_year),
+             size = 3) + 
+  geom_segment(data = nmds_site_scores,
+               aes(x = NMDS1,
+                   y = NMDS2,
+                   xend = xend,
+                   yend = yend,
+                   color = survey_year),
+                   arrow = arrow(length = unit(0.25,"cm"))) + 
+  annotate("text",
+           x = -0.2,
+           y = 0.15,
+           label = paste("2D stress =",
+                         round(nmds$stress,3))) + 
+  scale_color_viridis_c(option = "C",
+                        alpha = 0.8,
+                        end = 0.95) + 
+  theme_light() + 
+  labs(title = "Maximum Species Abundance by Survey Year NMDS",
+       color = "Survey Year") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
+
+```{r jaccard binary nmds}
+#| include: false
+#| # TODO- this chunk was a rough attempt at creating an NMDS based on presence-absence (really presence vs. non-detection) of species rather than abundance.
+
+nmds_binary <- metaMDS(community,autotransform = T, distance = "jaccard",engine = "monoMDS",
+                 k = 2,weakties = T,model = "global",maxit = 300,try = 40,
+                 trymax = 100,trace = F)
+
+nmds_site_scores_binary <- as.data.frame(scores(nmds_binary)$sites) %>% 
+  rownames_to_column(var = "survey_year") %>% 
+  mutate(survey_year = as.numeric(survey_year)) %>% 
+  arrange(survey_year) %>% 
+  mutate(
+    xend = lead(NMDS1),
+    yend = lead(NMDS2))
+
+ggplot() + 
+  geom_point(data = nmds_site_scores_binary,
+                      aes(x = NMDS1,
+                          y = NMDS2,
+                          color = survey_year),
+             size = 3) + 
+  geom_segment(data = nmds_site_scores_binary,
+               aes(x = NMDS1,
+                   y = NMDS2,
+                   xend = xend,
+                   yend = yend,
+                   color = survey_year),
+                   arrow = arrow(length = unit(0.25,"cm"))) + 
+  annotate("text",
+           x = -0.2,
+           y = 0.15,
+           label = paste("2D stress =",
+                         round(nmds_binary$stress,3))) + 
+  scale_color_viridis_c(option = "C",
+                        alpha = 0.8,
+                        end = 0.95) + 
+  theme_light() + 
+  labs(title = "NMDS based on Jaccard distance (presence/absence)",
+       color = "Survey Year") + 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+```{r wright-ueda et al paper methods replication}
+
+##### copy-paste template for note-taking ######################################
+
+species <- 'CASJ'
+U <- 0.007 # component of prior
+distribution <- 'nbinomial' # distribution either poisson or nbinomial
+# only use nbinomial when poisson is overdispersed
+
+speciescol <- paste0('n.',species)
+MyData <- na.exclude(df[, c(speciescol, # specifying variables to include
+                            "Census_Area", "Day_of_year", "Date", 'Year',
+                            'ID',
+                            "Observer1")])
+names(MyData)[1] <- 'Abundance'
+bspecies <- MyData[,1] # only speciescol variable
+
+hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05))) # prior
+### hyper precision \ hyper parameters control prior
+# pc.prec: penalized complexity priors, helps avoid overdispersion or over-fitting
+# specifically, U and 0.05: P(sigma > 0.007) = 0.05 represents complexity criteria
+# U range: 0.000125 to 1
+# only expects random walk standard deviation to exceed 0.007 at 5% frequency
+inla.setOption(scale.model.default = TRUE) #?
+
+I1 <- inla(Abundance ~ f(Year, model = "rw1", hyper = hyper.prec) + # first order walk
+             f(Day_of_year, model = "rw2", hyper = hyper.prec) + # second order walk
+             # variables with suspected data correlation are assigned to random effects
+             f(Census_Area, model = "iid") + # random effect
+             f(Observer1, model = "iid"), # random effect
+           # variables that impact temporal autocorrelation, where t is affected by t - 1,
+           # are assigned to random walks
+           control.predictor = list(compute = TRUE, 
+                                    quantiles = c("0.025", "0.975")),
+           control.compute = list(dic = TRUE,
+                                  waic = TRUE),
+           ### dic: deviance information criterion
+           # - quantifies predictive fit, penalizes model complexity
+           # - adjacent to AIC but for bayesian statistics
+           ### waic: watanabe-akaike or widely-applicable information criterion
+           # -  balances model fit and complexity, estimates out-of-sample predictive performance
+           family = distribution,
+           data = MyData)
+
+### "All models employed weakly informative penalized complexity priors"
+# - pc.prec, hyper parameters and information criteria (dic, waic) agree with summary
+
+################################################################################
+
+survey_path <- here("data","aggregated","Matt_Vinh","survey-level_2026-02-18.rds")
+df <- read_rds(survey_path)
+
+species <- 'Killdeer'
+U <- 0.05 # larger makes trend for both ggplots more apparent
+# smaller makes trend of first ggplot undetectable, less prominent for second ggplot
+distribution <- 'poisson' # poisson seems better than nbinomial, however have not tested overdispersion
+
+MyData <- na.exclude(df[, c(species,
+                            "survey_id",
+                            "day_of_survey_year",
+                            "observation_date",
+                            "survey_year")])
+names(MyData)[1] <- 'Abundance'
+bspecies <- MyData[,1]
+
+hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05)))
+inla.setOption(scale.model.default = TRUE)
+
+I1 <- inla(Abundance ~ f(survey_year, model = "rw1", hyper = hyper.prec) + 
+             f(day_of_survey_year, model = "rw2", hyper = hyper.prec),
+           control.predictor = list(compute = TRUE, 
+                                    quantiles = c("0.025", "0.975")),
+           control.compute = list(dic = TRUE,
+                                  waic = TRUE),
+           family = distribution,
+           data = MyData)
+
+
+#### Model Validation ####
+MyData$Fitted <- I1$summary.fitted.values[,'mean']
+# Plot trend for year
+Yearsm <- I1$summary.random$survey_year
+ggplot() +
+  xlab("Year") + ylab("Trend") +
+  geom_line(data = Yearsm, aes(x = ID, y = mean)) +
+  geom_ribbon(data = Yearsm, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_bw() +
+  theme(axis.text.y = element_text(size = 8)) +
+  theme(axis.text.x = element_text(size = 8)) +
+  theme(axis.title = element_text(size = 11)) +
+  ggtitle('Trend by Year') +
+  theme(plot.title = element_text(size = 15,
+                                  lineheight=.8, 
+                                  face="bold", 
+                                  hjust = 0.5)) +
+  # ylim(-0.5,0.5) +
+  ylim(min(Yearsm$`0.025quant`)-0.05,max(Yearsm$`0.975quant`)+0.05)
+
+
+### Dispersion ###
+mu <- I1$summary.fitted.values[, "mean"]
+theta <- I1$summary.hyperpar[1, "mean"]
+
+if(distribution == 'nbinomial'){
+  # Pearson residuals for negative binomial distribution
+  E1 <- (bspecies - mu) / sqrt(mu + mu^2 / theta) 
+}
+if(distribution == 'poisson'){
+  # Pearson residuals for poisson distribution
+  E1 <- (bspecies - mu) / sqrt(mu) 
+}
+if(distribution == 'gaussian'){
+  # Residuals for gaussian distribution
+  E1 <-  MyData$Abundance-MyData$Fitted
+}
+
+# Check for overdispersion
+N <- nrow(MyData)
+p <- nrow(I1$summary.fixed)
+Dispersion <- sum(E1^2) / (N - p)
+Dispersion
+I1$dic$dic
+
+# Day of Year Trends
+DayY <- I1$summary.random$day_of_survey_year
+ggplot() +
+  xlab("Year") + ylab("Trend") +
+  geom_line(data = DayY, aes(x = ID, y = mean)) +
+  geom_ribbon(data = DayY, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_bw() +
+  theme(axis.text.y = element_text(size = 15)) +
+  theme(axis.text.x = element_text(size = 15)) +
+  theme(axis.title = element_text(size = 20))
+
+```
+
+
+
+Discussion
+
+
+
+Archived visualizations (ignore)
 
 ```{r}
 #| label: fig-bar
@@ -210,290 +608,3 @@ ggplot(richness_composite,
 
 ```
 
-```{r line plots}
-
-# comparison of the three bar charts
-
-ggplot() + 
-  geom_point(data = richness,
-             aes(x = survey_year,
-                 y = n),
-             color = "blue") + 
-  geom_line(data = richness,
-             aes(x = survey_year,
-                 y = n),
-             color = "blue") + 
-  annotate("text",
-           x = 7,
-           y = richness$n[richness$survey_year == 7] - 15,
-           label = "CCBER",
-           color = "blue") + 
-  geom_point(data = ebird_richness,
-             aes(x = survey_year,
-                 y = richness),
-             color = "red") + 
-  geom_line(data = ebird_richness,
-             aes(x = survey_year,
-                 y = richness),
-             color = "red") + 
-  annotate("text",
-           x = 7,
-           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 15,
-           label = "eBird",
-           color = "red") + 
-  geom_point(data = richness_composite,
-             aes(x = survey_year,
-                 y = diff),
-             color = "purple") + 
-   geom_line(data = richness_composite,
-             aes(x = survey_year,
-                 y = diff),
-             color = "purple") + 
-  annotate("text",
-           x = 7,
-           y = richness_composite$diff[richness_composite$survey_year == 7] - 15,
-           label = "eBird - CCBER",
-           color = "purple") + 
-  theme_classic() + 
-  labs(title = "Species Richness by Survey Year",
-       x = "Survey Year",
-       y = "Number of Species Detected") + 
-  theme(plot.title = element_text(hjust = 0.5,
-                                  face = "bold",
-                                  size = 14),
-        axis.title.x = element_text(size = 13),
-        axis.title.y = element_text(size = 13),
-        legend.position = "none") + 
-  scale_x_continuous(breaks = seq(1,8,by = 1)) + 
-  scale_y_continuous(expand = c(0,0),
-                     breaks = seq(0,225, by = 50),
-                     limits = c(0,225))
-
-```
-
-```{r}
-#| label: fig-nmds
-#| message: false
-#| warning: false
-#| fig-cap: Revised NMDS based on 'Maximum Species Abundance' of each species in each year. I reproduced it thinking that with cleaner data it might appear differently, giving insight into species identity similarities or differences, following the bar chart of species richness. The usage of setdiff() may be more desirable in this situation.
-#| include: false
-
-year_max <- data %>% 
-  filter(!survey_year == 9) %>%
-  group_by(survey_year, species) %>%
-  summarise(max_count = max(count))
-
-community <- as.matrix(unclass(xtabs(max_count ~ survey_year + species,
-                                     data = year_max)))
-
-nmds <- metaMDS(community,autotransform = F,distance = "bray",engine = "monoMDS",
-                 k = 2,weakties = T,model = "global",maxit = 300,try = 40,
-                 trymax = 100,trace = F)
-
-nmds_site_scores <- as.data.frame(scores(nmds)$sites) %>% 
-  rownames_to_column(var = "survey_year") %>% 
-  mutate(survey_year = as.numeric(survey_year)) %>% 
-  arrange(survey_year) %>% 
-  mutate(
-    xend = lead(NMDS1),
-    yend = lead(NMDS2))
-
-ggplot() + 
-  geom_point(data = nmds_site_scores,
-                      aes(x = NMDS1,
-                          y = NMDS2,
-                          color = survey_year),
-             size = 3) + 
-  geom_segment(data = nmds_site_scores,
-               aes(x = NMDS1,
-                   y = NMDS2,
-                   xend = xend,
-                   yend = yend,
-                   color = survey_year),
-                   arrow = arrow(length = unit(0.25,"cm"))) + 
-  annotate("text",
-           x = -0.2,
-           y = 0.15,
-           label = paste("2D stress =",
-                         round(nmds$stress,3))) + 
-  scale_color_viridis_c(option = "C",
-                        alpha = 0.8,
-                        end = 0.95) + 
-  theme_light() + 
-  labs(title = "Maximum Species Abundance by Survey Year NMDS",
-       color = "Survey Year") + 
-  theme(plot.title = element_text(hjust = 0.5))
-
-```
-
-
-
-```{r}
-#| include: false
-#| # TODO- this chunk was a rough attempt at creating an NMDS based on presence-absence (really presence vs. non-detection) of species rather than abundance.
-
-nmds_binary <- metaMDS(community,autotransform = T, distance = "jaccard",engine = "monoMDS",
-                 k = 2,weakties = T,model = "global",maxit = 300,try = 40,
-                 trymax = 100,trace = F)
-
-nmds_site_scores_binary <- as.data.frame(scores(nmds_binary)$sites) %>% 
-  rownames_to_column(var = "survey_year") %>% 
-  mutate(survey_year = as.numeric(survey_year)) %>% 
-  arrange(survey_year) %>% 
-  mutate(
-    xend = lead(NMDS1),
-    yend = lead(NMDS2))
-
-ggplot() + 
-  geom_point(data = nmds_site_scores_binary,
-                      aes(x = NMDS1,
-                          y = NMDS2,
-                          color = survey_year),
-             size = 3) + 
-  geom_segment(data = nmds_site_scores_binary,
-               aes(x = NMDS1,
-                   y = NMDS2,
-                   xend = xend,
-                   yend = yend,
-                   color = survey_year),
-                   arrow = arrow(length = unit(0.25,"cm"))) + 
-  annotate("text",
-           x = -0.2,
-           y = 0.15,
-           label = paste("2D stress =",
-                         round(nmds_binary$stress,3))) + 
-  scale_color_viridis_c(option = "C",
-                        alpha = 0.8,
-                        end = 0.95) + 
-  theme_light() + 
-  labs(title = "NMDS based on Jaccard distance (presence/absence)",
-       color = "Survey Year") + 
-  theme(plot.title = element_text(hjust = 0.5))
-```
-
-
-```{r wright-ueda et al paper methods replication}
-
-##### template #################################################################
-
-species <- 'CASJ'
-U <- 0.007 # component of prior
-distribution <- 'nbinomial' # distribution either poisson or nbinomial
-# only use nbinomial when poisson is overdispersed
-
-speciescol <- paste0('n.',species)
-MyData <- na.exclude(df[, c(speciescol, # specifying variables to include
-                            "Census_Area", "Day_of_year", "Date", 'Year',
-                            'ID',
-                            "Observer1")])
-names(MyData)[1] <- 'Abundance'
-bspecies <- MyData[,1] # only speciescol variable
-
-hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05))) # prior
-inla.setOption(scale.model.default = TRUE)
-
-I1 <- inla(Abundance ~ f(Year, model = "rw1", hyper = hyper.prec) + # first order walk
-             f(Day_of_year, model = "rw2", hyper = hyper.prec) + # second order walk
-             f(Census_Area, model = "iid") + # random effect
-             f(Observer1, model = "iid"), # random effect
-           control.predictor = list(compute = TRUE, 
-                                    quantiles = c("0.025", "0.975")),
-           control.compute = list(dic = TRUE,
-                                  waic = TRUE),
-           family = distribution,
-           data = MyData)
-
-################################################################################
-
-survey_path <- here("data","aggregated","Matt_Vinh","survey-level_2026-02-18.rds")
-df <- read_rds(survey_path)
-
-species <- 'Killdeer'
-U <- 0.001 # larger makes trend for both ggplots more apparent
-# smaller makes trend of first ggplot undetectable, less prominent for second ggplot
-distribution <- 'poisson' # poisson seems better than nbinomial, however have not tested overdispersion
-
-MyData <- na.exclude(df[, c(species,
-                            "survey_id",
-                            "day_of_survey_year",
-                            "observation_date",
-                            "survey_year")])
-names(MyData)[1] <- 'Abundance'
-bspecies <- MyData[,1]
-
-hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05)))
-inla.setOption(scale.model.default = TRUE)
-
-I1 <- inla(Abundance ~ f(survey_year, model = "rw1", hyper = hyper.prec) + 
-             f(day_of_survey_year, model = "rw2", hyper = hyper.prec),
-           control.predictor = list(compute = TRUE, 
-                                    quantiles = c("0.025", "0.975")),
-           control.compute = list(dic = TRUE,
-                                  waic = TRUE),
-           family = distribution,
-           data = MyData)
-
-
-#### Model Validation ####
-MyData$Fitted <- I1$summary.fitted.values[,'mean']
-# Plot trend for year
-Yearsm <- I1$summary.random$survey_year
-ggplot() +
-  xlab("Year") + ylab("Trend") +
-  geom_line(data = Yearsm, aes(x = ID, y = mean)) +
-  geom_ribbon(data = Yearsm, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  theme_bw() +
-  theme(axis.text.y = element_text(size = 8)) +
-  theme(axis.text.x = element_text(size = 8)) +
-  theme(axis.title = element_text(size = 11)) +
-  ggtitle('Trend by Year') +
-  theme(plot.title = element_text(size = 15,
-                                  lineheight=.8, 
-                                  face="bold", 
-                                  hjust = 0.5)) +
-  # ylim(-0.5,0.5) +
-  ylim(min(Yearsm$`0.025quant`)-0.05,max(Yearsm$`0.975quant`)+0.05)
-
-
-### Dispersion ###
-mu <- I1$summary.fitted.values[, "mean"]
-theta <- I1$summary.hyperpar[1, "mean"]
-
-if(distribution == 'nbinomial'){
-  # Pearson residuals for negative binomial distribution
-  E1 <- (bspecies - mu) / sqrt(mu + mu^2 / theta) 
-}
-if(distribution == 'poisson'){
-  # Pearson residuals for poisson distribution
-  E1 <- (bspecies - mu) / sqrt(mu) 
-}
-if(distribution == 'gaussian'){
-  # Residuals for gaussian distribution
-  E1 <-  MyData$Abundance-MyData$Fitted
-}
-
-# Check for overdispersion
-N <- nrow(MyData)
-p <- nrow(I1$summary.fixed)
-Dispersion <- sum(E1^2) / (N - p)
-Dispersion
-I1$dic$dic
-
-# Day of Year Trends
-DayY <- I1$summary.random$day_of_survey_year
-ggplot() +
-  xlab("Year") + ylab("Trend") +
-  geom_line(data = DayY, aes(x = ID, y = mean)) +
-  geom_ribbon(data = DayY, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  theme_bw() +
-  theme(axis.text.y = element_text(size = 15)) +
-  theme(axis.text.x = element_text(size = 15)) +
-  theme(axis.title = element_text(size = 20))
-
-```
-
-
-
-Discussion
