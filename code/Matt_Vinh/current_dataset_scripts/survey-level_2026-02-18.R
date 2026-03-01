@@ -53,18 +53,38 @@ survey_level_data <- full_join(survey_info,
     ### assigning survey id from 1 to 96
     survey_id = 1:96,
     
-    ### calculating the day of the survey year
+    ### creating day of survey year variable
     temp_start = make_date(year(observation_date) - (month(observation_date) < 9),9,1),
-    day_of_survey_year = as.integer(observation_date - temp_start) + 1
+    day_of_survey_year = as.integer(observation_date - temp_start) + 1,
+    
+    ### creating day of year variable
+    day_of_year = as.integer(observation_date - as.Date(paste0(year(observation_date),"-01-01"))) + 1,
+    
+    ### combining the two existing water level variables as a new variable
+    slough_water_level = coalesce(water_level,
+                                  slough_water_elevation_ft)
   ) %>% 
   
-  ### reorder variables
+  ### variable manipulation
+  # reording desired variables
+  # removing temporary variables
+  # removing variables with no data
   select(c(survey_id,
-           day_of_survey_year,
            observation_date,
-           water_level:slough_water_elevation_ft,
+           day_of_year,
+           day_of_survey_year,
+           year,
+           survey_year,
+           season,
+           slough_water_level,
+           starting_time:weather_note,
            `Snowy Egret`:`Fox Sparrow`,
-           -temp_start))
+           -temp_start,
+           -water_level,
+           -slough_water_elevation_ft,
+           -ending_time,
+           -starting_wind_direction,
+           -c(ending_temp_f:weather_note)))
 
 
 ### visualize data types and missingness
