@@ -7,6 +7,7 @@ library(visdat)
 library(naniar)
 
 
+
 ##### data ----
 
 datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
@@ -38,8 +39,6 @@ vis_dat(survey_info)
 survey_missing_summary <- miss_var_summary(survey_info)
 
 
-#TODO- add day of year column using yday() function from lubridate
-
 species_wide <- data %>% 
   
   ### only including "species" category observations
@@ -54,6 +53,7 @@ species_wide <- data %>%
     id_cols = observation_date
   )
 
+
 survey_level_data <- full_join(survey_info,
                                species_wide,
                                by = "observation_date") %>% 
@@ -62,8 +62,8 @@ survey_level_data <- full_join(survey_info,
     
     ### assigning survey id from 1 to 96
     survey_id = 1:96,
-
-
+    
+    ### creating day of survey year variable
     temp_start = make_date(year(observation_date) - (month(observation_date) < 9),9,1),
     day_of_survey_year = as.integer(observation_date - temp_start) + 1,
     
@@ -108,7 +108,6 @@ missing_data_summary <- miss_var_summary(survey_level_data)
 
 rm(data,survey_info,species_wide)
 
-#TODO- remove columns with 100% missing values
 
 
 ##### saving ----
