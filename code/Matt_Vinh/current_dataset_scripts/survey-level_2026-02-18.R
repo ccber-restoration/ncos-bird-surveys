@@ -16,6 +16,9 @@ data <- read_rds(datapath)
 
 ##### data formatting ----
 
+# TODO- consider using relocate() upstream to reorder columns
+# TODO- FHJ to follow up on water level issue
+
 survey_info <- data %>% 
   
   ### removing observation-specific variables
@@ -28,7 +31,14 @@ survey_info <- data %>%
   
   ### keeping only one row per survey
   distinct(observation_date,
-           .keep_all = T)
+           .keep_all = T) 
+
+vis_dat(survey_info)
+
+survey_missing_summary <- miss_var_summary(survey_info)
+
+
+#TODO- add day of year column using yday() function from lubridate
 
 species_wide <- data %>% 
   
@@ -52,8 +62,12 @@ survey_level_data <- full_join(survey_info,
     
     ### assigning survey id from 1 to 96
     survey_id = 1:96,
+<<<<<<< HEAD
     
     ### creating day of survey year variable
+=======
+    ### calculating the day of the survey year
+>>>>>>> f87cd52ecf20e991bc5cd88c879881a7a8bc5dd1
     temp_start = make_date(year(observation_date) - (month(observation_date) < 9),9,1),
     day_of_survey_year = as.integer(observation_date - temp_start) + 1,
     
@@ -90,13 +104,15 @@ survey_level_data <- full_join(survey_info,
 ### visualize data types and missingness
 
 vis_dat(survey_level_data)
-miss_var_summary(survey_level_data)
+
+missing_data_summary <- miss_var_summary(survey_level_data)
 
 
 ### declutter
 
 rm(data,survey_info,species_wide)
 
+#TODO- remove columns with 100% missing values
 
 
 ##### saving ----
