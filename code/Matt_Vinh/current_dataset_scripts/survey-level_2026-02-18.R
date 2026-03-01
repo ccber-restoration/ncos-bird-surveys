@@ -62,12 +62,8 @@ survey_level_data <- full_join(survey_info,
     
     ### assigning survey id from 1 to 96
     survey_id = 1:96,
-<<<<<<< HEAD
-    
-    ### creating day of survey year variable
-=======
-    ### calculating the day of the survey year
->>>>>>> f87cd52ecf20e991bc5cd88c879881a7a8bc5dd1
+
+
     temp_start = make_date(year(observation_date) - (month(observation_date) < 9),9,1),
     day_of_survey_year = as.integer(observation_date - temp_start) + 1,
     
