@@ -14,9 +14,17 @@ library(here)
 library(tidyverse)
 library(vegan)
 library(INLA)
+library(knitr)
+library(DT)
 
-datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
-data <- readRDS(datapath)
+datapath <- here("data","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
+data <- read_rds(datapath)
+
+surveypath <- here("data","Matt_Vinh","survey-level_2026-03-01.rds")
+survey <- read_rds(surveypath)
+
+SBApath <- here("data","Matt_Vinh","SBA_hourly_precipitation_2026-03-01.rds")
+precip <- read_rds(SBApath)
 
 # This rds is not synced to github... you have to download it from Google Drive
 #It includes all ebird checklists for the NCOS hotspot... more filtering required
@@ -482,6 +490,98 @@ ggplot() +
 
 ```
 
+```{r survey intervals}
+
+intervals <- NA * (nrow(survey) - 1)
+for (i in 2:nrow(survey)){
+  intervals[i - 1] = survey$observation_date[i] - survey$observation_date[i - 1]
+}
+
+intervals_df <- data.frame(stat = names(summary(intervals)),
+                           value = as.numeric(summary(intervals)))
+x <- datatable(intervals_df)
+x
+
+```
+
+```{r analysis of precipitation and waterfowl}
+
+monthly_precip <- precip %>% 
+  group_by(survey_id) %>% 
+  summarise(precipitation = sum(p01m,
+                                na.rm = T))
+
+add_survey_id <- data %>% 
+  mutate(survey_id = year(observation_date) * 12 + month(observation_date)) %>% 
+  mutate(survey_id = as.integer(survey_id - min(survey_id) + 1))
+
+waterfowl_metrics1 <- add_survey_id %>% 
+  filter(general_type == "Waterfowl & Friends") %>% 
+  group_by(survey_id) %>% 
+  summarise(abundance = sum(count),
+            richness = length(unique(species)))
+
+# adding survey ids 48 and 60, which did not record any "waterfowl and friends"
+waterfowl_metrics2 <- rbind(waterfowl_metrics1,data.frame(survey_id = c(48,60),
+                                                          abundance = c(0,0),
+                                                          richness = c(0,0)))
+
+### abundance
+
+ggplot() + 
+  geom_line(data = waterfowl_metrics2,
+            aes(x = survey_id,
+                y = abundance,
+                color = "Abundance")) + 
+  geom_line(data = monthly_precip,
+            aes(x = survey_id,
+                y = precipitation,
+                color = "Precipitation")) + 
+  scale_color_manual(
+    values = c("Abundance" = "sienna4",
+               "Precipitation" = "mediumblue")) + 
+  theme_light() + 
+  labs(x = "Survey ID",
+       color = NULL) + 
+  scale_x_continuous(breaks = seq(0,96,
+                                  by = 12)) + 
+  scale_y_continuous(expand = c(0,0),
+                     limits = c(0,600),
+                     name = "Total Abundance",
+                     sec.axis = sec_axis(~ .,
+                                         name = "Total Precipitation (mm)")) + 
+  theme(legend.position = "bottom")
+
+### richness
+
+scaling_factor <- max(waterfowl_metrics2$richness,na.rm = T) / 
+  max(monthly_precip$precipitation,na.rm = T)
+
+ggplot() + 
+  geom_line(data = waterfowl_metrics2,
+            aes(x = survey_id,
+                y = richness,
+                color = "Richness")) + 
+  geom_line(data = monthly_precip,
+            aes(x = survey_id,
+                y = precipitation * scaling_factor,
+                color = "Precipitation")) + 
+  scale_color_manual(
+    values = c("Richness" = "sienna4",
+               "Precipitation" = "mediumblue")) + 
+  theme_light() + 
+  labs(x = "Survey ID",
+       color = NULL) + 
+  scale_x_continuous(breaks = seq(0,96,
+                                  by = 12)) + 
+  scale_y_continuous(expand = c(0,0),
+                     limits = c(0,20),
+                     name = "Species Richness",
+                     sec.axis = sec_axis(~ . / scaling_factor,
+                                         name = "Total Precipitation (mm)")) + 
+  theme(legend.position = "bottom")
+
+```
 
 
 Discussion
@@ -608,4 +708,3 @@ ggplot(richness_composite,
                      limit = c(0,100))
 
 ```
-
