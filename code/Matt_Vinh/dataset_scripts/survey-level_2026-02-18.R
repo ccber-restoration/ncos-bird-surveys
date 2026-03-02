@@ -10,7 +10,7 @@ library(naniar)
 
 ##### data ----
 
-datapath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
+datapath <- here("data","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
 data <- read_rds(datapath)
 
 
@@ -112,8 +112,8 @@ rm(data,survey_info,species_wide)
 
 ##### saving ----
 
-csv_path <- here("data","aggregated","Matt_Vinh","survey-level_2026-02-18.csv")
+csv_path <- here("data","Matt_Vinh","survey-level_2026-03-01.csv")
 write_csv(survey_level_data,csv_path)
 
-rds_path <- here("data","aggregated","Matt_Vinh","survey-level_2026-02-18.rds")
+rds_path <- here("data","Matt_Vinh","survey-level_2026-03-01.rds")
 saveRDS(survey_level_data,rds_path)
