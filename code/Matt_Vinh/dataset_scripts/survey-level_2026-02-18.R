@@ -1,0 +1,119 @@
+##### libraries ----
+
+library(here)
+library(tidyverse)
+library(janitor)
+library(visdat)
+library(naniar)
+
+
+
+##### data ----
+
+datapath <- here("data","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
+data <- read_rds(datapath)
+
+
+
+##### data formatting ----
+
+# TODO- consider using relocate() upstream to reorder columns
+# TODO- FHJ to follow up on water level issue
+
+survey_info <- data %>% 
+  
+  ### removing observation-specific variables
+  select(-c(objectid:observation_notes,
+            observers,
+            global_id:y,
+            direction_of_travel_a:standard_deviation_m,
+            e_bird_group:general_type,
+            category)) %>% 
+  
+  ### keeping only one row per survey
+  distinct(observation_date,
+           .keep_all = T) 
+
+vis_dat(survey_info)
+
+survey_missing_summary <- miss_var_summary(survey_info)
+
+
+species_wide <- data %>% 
+  
+  ### only including "species" category observations
+  filter(category == "species") %>% 
+  
+  ### giving each species a column filled with abundance per survey
+  pivot_wider(
+    names_from = species,
+    values_from = count,
+    values_fn = sum,
+    values_fill = 0,
+    id_cols = observation_date
+  )
+
+
+survey_level_data <- full_join(survey_info,
+                               species_wide,
+                               by = "observation_date") %>% 
+  arrange(-desc(observation_date)) %>% 
+  mutate(
+    
+    ### assigning survey id from 1 to 96
+    survey_id = 1:96,
+    
+    ### creating day of survey year variable
+    temp_start = make_date(year(observation_date) - (month(observation_date) < 9),9,1),
+    day_of_survey_year = as.integer(observation_date - temp_start) + 1,
+    
+    ### creating day of year variable
+    day_of_year = as.integer(observation_date - as.Date(paste0(year(observation_date),"-01-01"))) + 1,
+    
+    ### combining the two existing water level variables as a new variable
+    slough_water_level = coalesce(water_level,
+                                  slough_water_elevation_ft)
+  ) %>% 
+  
+  ### variable manipulation
+  # reording desired variables
+  # removing temporary variables
+  # removing variables with no data
+  select(c(survey_id,
+           observation_date,
+           day_of_year,
+           day_of_survey_year,
+           year,
+           survey_year,
+           season,
+           slough_water_level,
+           starting_time:weather_note,
+           `Snowy Egret`:`Fox Sparrow`,
+           -temp_start,
+           -water_level,
+           -slough_water_elevation_ft,
+           -ending_time,
+           -starting_wind_direction,
+           -c(ending_temp_f:weather_note)))
+
+
+### visualize data types and missingness
+
+vis_dat(survey_level_data)
+
+missing_data_summary <- miss_var_summary(survey_level_data)
+
+
+### declutter
+
+rm(data,survey_info,species_wide)
+
+
+
+##### saving ----
+
+csv_path <- here("data","Matt_Vinh","survey-level_2026-03-01.csv")
+write_csv(survey_level_data,csv_path)
+
+rds_path <- here("data","Matt_Vinh","survey-level_2026-03-01.rds")
+saveRDS(survey_level_data,rds_path)
