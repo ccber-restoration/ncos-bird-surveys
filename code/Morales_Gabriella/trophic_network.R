@@ -9,6 +9,9 @@ library(readxl)
 library(bipartite)
 library(igraph)
 
+#package for adding icons to networks
+library(rphylopic)
+
 
 links_path <- "data/aquatic_diets/NCOS_aquatic_trophic_links_2026-02-10.xlsx"
 
@@ -32,7 +35,7 @@ adj_matrix <- as_adjacency_matrix(trophic_network, sparse=FALSE)
 
 matrix_subset <- adj_matrix[birds, inverts]
 
-pdf(file = "figures/invert_network.pdf", width = 6, height = 9)
+png(file = "figures/invert_network.png", width = 600, height = 900, units = "px", res = 100)
 
 #continue filling out trophic links data
 #create draft network viz based on existing data
@@ -48,9 +51,9 @@ dev.off()
 fish_links_path <- "data/aquatic_diets/NCOS_piscivorous_trophic_links_2026-02-17.xlsx"
 
 #in network terminology this is an "edge list"
-fish_trophic_links <- read_xlsx(path = links_path, sheet = "trophic links") %>% 
-  select(c(bird_species, prey_taxon)) %>% 
-  relocate(prey_taxon, .before = bird_species) 
+fish_trophic_links <- read_xlsx(path = fish_links_path, sheet = "trophic links") %>% 
+  select(c(bird_species, prey_taxon))
+  #relocate(prey_taxon, .before = bird_species) 
 
 #create vector of bird names
 birds_fish_eating <- unique(fish_trophic_links$bird_species)
@@ -66,10 +69,47 @@ trophic_network_fish <- graph_from_edgelist(tl_matrix_fish, directed = FALSE)
 adj_matrix_fish <- as_adjacency_matrix(trophic_network_fish, sparse=FALSE)
 
 #subset matrix to avoid duplication
-matrix_subset_fish <- adj_matrix_fish[prey, birds_fish_eating]
+matrix_subset_fish <- adj_matrix_fish[birds_fish_eating, prey]
+
+
+png(file = "figures/trophic_network_fish_eating.png", width = 600, height = 800, units = "px", res = 100)
 
 #continue filling out trophic links data
 #create draft network viz based on existing data
-plotweb(web = matrix_subset_fish, text.rot = 90)
+plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE)
+
+dev.off()
+
+
+#add images to network attempt
+
+
+png(file = "figures/Food_Webs/trophic_network_fish_eating_phylopic.png", width = 600, height = 800, units = "px", res = 100)
+
+
+plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE)
+add_phylopic_base(name = "Mugil cephalus",
+                  x = -0.25, y = 0.53,
+                  width = 0.33,
+                  color = "black",
+                  verbose = TRUE)
+add_phylopic_base(name = "Procambarus clarkii",
+                  x = -0.25, y = 0.035,
+                  width = 0.29,
+                  color = "black",
+                  verbose = TRUE,
+                  angle = 90)
+add_phylopic_base(name = "Gnatholepis cauerensis",
+                  x = -0.25, y = 0.82,
+                  width = 0.3,
+                  color = "black",
+                  verbose = TRUE)
+add_phylopic_base(name = "Pseudacris maculata",
+                  x = -0.25, y = 0.3,
+                  width = 0.2,
+                  color = "black",
+                  verbose = TRUE)
+dev.off()
+
 
 
