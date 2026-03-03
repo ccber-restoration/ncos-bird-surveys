@@ -84,7 +84,9 @@ dev.off()
 #add images to network attempt
 
 
-png(file = "figures/Food_Webs/trophic_network_fish_eating_phylopic.png", width = 600, height = 800, units = "px", res = 100)
+#FHJ notes: also saved as pdf with same width and height (no units needed bc inches is default), no res argument
+
+png(file = "figures/Food_Webs/trophic_network_fish_eating_phylopic.png", width = 7, height = 7.5, units = "in", res = 200)
 
 
 plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE)
