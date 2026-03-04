@@ -3,3 +3,126 @@ title: "Wright-Ueda_simulations"
 format: html
 ---
 
+```{r setup}
+
+library(here)
+library(tidyverse)
+library(GGally)
+library(plotly)
+library(vegan)
+library(viridis) # color scheme
+library(zoo) # for rolling average
+library(roll) # for rolling sd
+library(car)
+library(lubridate)
+library(devtools) 
+library(geoR)
+library(INLA)
+
+jrbp_path <- here("data","JRBP_Bird_Transect_Data.csv")
+df <- read_csv(jrbp_path)
+
+```
+
+```{r running INLA models}
+
+### setting desired species and U values
+species_options <- c("CASJ","SPTO","CBCH","BEWR","RTHA")
+u_values <- c(0.005,0.0075,0.01,0.015,0.02,0.025,0.03)
+
+### initialization
+data <- list()
+species_data <- list()
+
+### determining distribution according to species
+distribution_function <- function(species){
+  if (species == "RTHA"){x = "poisson"}
+  else x = "nbinomial"
+  return(x)
+}
+
+### running and saving INLA models
+
+for (i in 1:length(species_options)){
+  for (j in 1:length(u_values)){
+    species <- species_options[i]
+    U <- u_values[j]
+    distribution <- distribution_function(species_options[i])
+
+    speciescol <- paste0('n.',species)
+    MyData <- na.exclude(df[, c(speciescol,
+                            "Census_Area", "Day_of_year", "Date", 'Year',
+                            'ID',
+                            "Observer1")])
+    names(MyData)[1] <- 'Abundance'
+    bspecies <- MyData[,1]
+
+    hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05)))
+    inla.setOption(scale.model.default = TRUE)
+
+    I1 <- inla(Abundance ~ f(Year, model = "rw1", hyper = hyper.prec) + 
+             f(Day_of_year, model = "rw2", hyper = hyper.prec) +
+             f(Census_Area, model = "iid") +
+             f(Observer1, model = "iid"),
+           control.predictor = list(compute = TRUE, 
+                                    quantiles = c("0.025", "0.975")),
+           control.compute = list(dic = TRUE,
+                                  waic = TRUE),
+           family = distribution,
+           data = MyData)
+    
+    MyData$Fitted <- I1$summary.fitted.values[,'mean']
+    
+    Yearsm <- I1$summary.random$Year
+    
+    model <- data.frame(species = species_options[i],
+                        U = u_values[j],
+                        ID = Yearsm$ID,
+                        mean = Yearsm$mean,
+                        quant1 = Yearsm$`0.025quant`,
+                        quant2 = Yearsm$`0.975quant`)
+    
+    species_data[[j]] <- model
+  }
+  data[[i]] <- species_data
+}
+
+```
+
+```{r}
+
+bound_data <- bind_rows(data)
+
+```
+
+```{r plotting INLA models}
+
+ggplot(bound_data,
+       aes(x = ID)) + 
+  xlab("Year") + ylab("Trend") + 
+  geom_line(data = bound_data,
+            aes(y = mean)) + 
+  geom_ribbon(aes(ymax = quant1, 
+                  ymin = quant2), 
+              alpha = 0.4) + 
+  geom_hline(yintercept = 0,
+             linetype = "dashed") + 
+  facet_grid(species ~ U) + 
+  theme_bw() + 
+  theme(axis.text.y = element_text(size = 8),
+        axis.text.x = element_text(size = 8,
+                                   angle = 45),
+        axis.title = element_text(size = 11),
+        ) + 
+  ggtitle('Trend by Year') + 
+  theme(plot.title = element_text(size = 15, 
+                                  lineheight = .8, 
+                                  face = "bold", 
+                                  hjust = 0.5)) + 
+  ylim(min(bound_data$quant1 - 0.05),
+       max(bound_data$quant2) + 0.05)
+
+
+
+```
+

@@ -502,6 +502,8 @@ intervals_df <- data.frame(stat = names(summary(intervals)),
 x <- datatable(intervals_df)
 x
 
+ggsave()
+
 ```
 
 ```{r analysis of precipitation and waterfowl}
