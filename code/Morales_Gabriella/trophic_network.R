@@ -88,30 +88,84 @@ dev.off()
 
 png(file = "figures/Food_Webs/trophic_network_fish_eating_phylopic.png", width = 7, height = 7.5, units = "in", res = 200)
 
-
 plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE)
 add_phylopic_base(name = "Mugil cephalus",
-                  x = -0.25, y = 0.53,
-                  width = 0.33,
+                  x = -0.18, y = 0.53,
+                  width = 0.2,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Procambarus clarkii",
-                  x = -0.25, y = 0.035,
-                  width = 0.29,
+                  x = -0.18, y = 0.035,
+                  width = 0.18,
                   color = "black",
                   verbose = TRUE,
                   angle = 90)
 add_phylopic_base(name = "Gnatholepis cauerensis",
-                  x = -0.25, y = 0.82,
-                  width = 0.3,
+                  x = -0.18, y = 0.82,
+                  width = 0.2,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Pseudacris maculata",
-                  x = -0.25, y = 0.3,
-                  width = 0.2,
+                  x = -0.18, y = 0.3,
+                  width = 0.13,
                   color = "black",
                   verbose = TRUE)
 dev.off()
 
+#make phylopic network for invert trophic network
+
+png(file = "figures/Food_Webs/invert_network_phylopic.png", width = 6, height = 8, units = "in", res = 200)
+
+plotweb(web = matrix_subset, text_size =1, horizontal = TRUE, mar = c(2, 0.82, 0.82, 0.42))
+add_phylopic_base(name = "Cypris", #Ostracoda image 6
+                  x = -0.15, y = 0.93,
+                  width = 0.11,
+                  color = "black",
+                  verbose = TRUE)
+add_phylopic_base(name = "Corixidae", 
+                  x = -0.15, y = 0.785,
+                  width = 0.13,
+                  color = "black",
+                  verbose = TRUE)
+add_phylopic_base(name = "Clunio marinus", #Chironomidae image 5
+                  x = -0.15, y = 0.595,
+                  width = 0.13,
+                  color = "black",
+                  verbose = TRUE)
+add_phylopic_base(name = "Lumbricina", #Oligochaeta image 3
+                  x = -0.16, y = 0.43,
+                  width = 0.25,
+                  color = "black",
+                  verbose = TRUE,
+                  angle = 90)
+add_phylopic_base(name = "Copepoda", 
+                  x = -0.15, y = 0.3,
+                  width = 0.07,
+                  color = "black",
+                  verbose = TRUE)
+add_phylopic_base(name = "Ephydroidea", #Ephydridae broader family
+                  x = -0.15, y = 0.205,
+                  width = 0.12,
+                  color = "black",
+                  verbose = TRUE)
+add_phylopic_base(name = "Daphnia", #Cladocera image 1
+                  x = -0.15, y = 0.1,
+                  width = 0.07,
+                  color = "black",
+                  verbose = TRUE)
+add_phylopic_base(name = "Caenorhabditis elegans", #Nematode image 4Ceratopogonidae
+                  x = -0.15, y = 0.03,
+                  width = 0.14,
+                  color = "black",
+                  verbose = TRUE,
+                  angle = 90)
+add_phylopic_base(name = "Ceratopogonidae",
+                  x = -0.15, y = -0.03,
+                  width = 0.095,
+                  color = "black",
+                  verbose = TRUE)
+
+
+dev.off()
 
 
