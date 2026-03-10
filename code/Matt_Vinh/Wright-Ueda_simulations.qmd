@@ -22,9 +22,12 @@ library(INLA)
 jrbp_path <- here("data","JRBP_Bird_Transect_Data.csv")
 df <- read_csv(jrbp_path)
 
+ccber_path <- here("data","Matt_Vinh","survey-level_2026-03-01.rds")
+data <- read_rds(ccber_path)
+
 ```
 
-```{r running INLA models}
+```{r running INLA models with jrbp data}
 
 ### setting desired species and U values
 species_options <- c("CASJ","SPTO","CBCH","BEWR","RTHA")
@@ -87,15 +90,11 @@ for (i in 1:length(species_options)){
   data[[i]] <- species_data
 }
 
-```
-
-```{r}
-
 bound_data <- bind_rows(data)
 
 ```
 
-```{r plotting INLA models}
+```{r plotting jrbp INLA models}
 
 ggplot(bound_data,
        aes(x = ID)) + 
@@ -108,6 +107,94 @@ ggplot(bound_data,
   geom_hline(yintercept = 0,
              linetype = "dashed") + 
   facet_grid(species ~ U) + 
+  theme_bw() + 
+  theme(axis.text.y = element_text(size = 8),
+        axis.text.x = element_text(size = 8,
+                                   angle = 45),
+        axis.title = element_text(size = 11),
+        ) + 
+  ggtitle('Trend by Year') + 
+  theme(plot.title = element_text(size = 15, 
+                                  lineheight = .8, 
+                                  face = "bold", 
+                                  hjust = 0.5)) + 
+  ylim(min(bound_data$quant1 - 0.05),
+       max(bound_data$quant2) + 0.05)
+
+
+
+```
+
+```{r running INLA models with ccber data}
+
+# testing first plot output with default U = 0.05
+
+### setting desired species
+species_options <- c("Killdeer","Common Yellowthroat","American Crow","Song Sparrow","Northern Shoveler","Least Sandpiper","Gadwall","Semipalmated Plover","Red-shouldered Hawk")
+
+### initialization
+df <- list()
+species_data <- list()
+
+### running and saving INLA models with a default of U = 0.05
+
+for (i in 1:length(species_options)){
+    species <- species_options[i]
+    U <- 0.05
+    distribution <- "poisson"
+
+    speciescol <- species
+    MyData <- na.exclude(data[, c(speciescol,
+                                  "day_of_survey_year",
+                                  "observation_date",
+                                  'year',
+                                  'survey_id')])
+    names(MyData)[1] <- 'Abundance'
+    bspecies <- MyData[,1]
+
+    hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05)))
+    inla.setOption(scale.model.default = TRUE)
+
+    I1 <- inla(Abundance ~ f(year, model = "rw1", hyper = hyper.prec) + 
+             f(day_of_survey_year, model = "rw2", hyper = hyper.prec),
+           control.predictor = list(compute = TRUE, 
+                                    quantiles = c("0.025", "0.975")),
+           control.compute = list(dic = TRUE,
+                                  waic = TRUE),
+           family = distribution,
+           data = MyData)
+    
+    MyData$Fitted <- I1$summary.fitted.values[,'mean']
+    
+    Yearsm <- I1$summary.random$year
+    
+    model <- data.frame(species = species_options[i],
+                        U = U,
+                        ID = Yearsm$ID,
+                        mean = Yearsm$mean,
+                        quant1 = Yearsm$`0.025quant`,
+                        quant2 = Yearsm$`0.975quant`)
+    
+  df[[i]] <- model
+}
+
+bound_data <- bind_rows(df)
+
+```
+
+```{r plotting ccber INLA test models}
+
+ggplot(bound_data,
+       aes(x = ID)) + 
+  xlab("Year") + ylab("Trend") + 
+  geom_line(data = bound_data,
+            aes(y = mean)) + 
+  geom_ribbon(aes(ymax = quant1, 
+                  ymin = quant2), 
+              alpha = 0.4) + 
+  geom_hline(yintercept = 0,
+             linetype = "dashed") + 
+  facet_wrap(~ species) + 
   theme_bw() + 
   theme(axis.text.y = element_text(size = 8),
         axis.text.x = element_text(size = 8,
