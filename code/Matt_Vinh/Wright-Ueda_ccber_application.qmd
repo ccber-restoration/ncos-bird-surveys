@@ -130,15 +130,26 @@ ignore above ###################################################################
 
 ```{r running INLA models with ccber data}
 
-### setting desired species
+### setting desired NCOS species
 
 species_options <- c("Killdeer","Common Yellowthroat","American Crow","Song Sparrow","Northern Shoveler","Least Sandpiper","Gadwall","Semipalmated Plover","Red-shouldered Hawk")
 
 
 ### initialization
 
-df <- list()
-species_data <- list()
+yearsm_list <- list()
+dayY_list <- list()
+myData_list <- list()
+magdf_list <- list()
+E1_list <- list()
+dispersion_list <- list()
+DIC_list <- list()
+variogram1_list <- list()
+variogram2_list <- list()
+year_marg_list <- list()
+percent_change_list <- list()
+percent_change_intervals_list <- list()
+
 breaks <- seq(0.5, 20.5, length = 20)
 breaks2 <- seq(0.5, 364.5, length = 365)
 
@@ -174,12 +185,14 @@ for (i in 1:length(species_options)){
            family = distribution,
            data = MyData)
     
-  ### saving data
+  ### calculations and saving data
     
     MyData$Fitted <- I1$summary.fitted.values[,'mean']
     
+    # trend for year
     Yearsm <- I1$summary.random$year
     
+    # calculating residuals
     mu <- MyData$Fitted
     theta <- I1$summary.hyperpar[1, "mean"]
     
@@ -195,30 +208,23 @@ for (i in 1:length(species_options)){
       # Residuals for gaussian distribution
       E1 <-  MyData$Abundance-MyData$Fitted
     }
-    names(E1)[1] <- "Residuals" # changing the name of E1 to Residuals
-    # not sure why the default name for the values is Abundance, but that is wrong
+    names(E1)[1] <- "Residuals"
     
     
     ### Check for overdispersion
     
     N <- nrow(MyData)
     p <- nrow(I1$summary.fixed)
-    Dispersion <- sum(E1^2) / (N - p) # comparing variance to mean
-    # N - p: residual degrees of freedom
-    Dispersion
-    # under 1 = underdispersed
-    # over 1 = overdispersed
-    I1$dic$dic # lower DIC is better
+    Dispersion <- sum(E1^2) / (N - p)
     
     
     ### Day of Year Trends
+    
     DayY <- I1$summary.random$Day_of_year
-  
     MyData$Residuals <- E1$Residuals
     
     
     ### variograms
-    # nearly flat line near 1 indicates low autocorrelation
     
     # Variogram for checking for temporal autocorrelation by year 
     MyData$E1 <- E1
@@ -226,12 +232,11 @@ for (i in 1:length(species_options)){
     V1 <- variog(coords = MyData[, c("Year", "Zeros")], data = MyData$E1, breaks = breaks)
     
     # Variogram for checking for temporal autocorrelation by data of year
-    V1 <- variog(coords = MyData[, c("Day_of_year", "Zeros")], data = MyData$E1, breaks = breaks2)
+    V2 <- variog(coords = MyData[, c("Day_of_year", "Zeros")], data = MyData$E1, breaks = breaks2)
     
     
     ### Extract the posterior marginal distributions for Year random walk
     year.marg <- I1$marginals.random$Year 
-    year.marg[[32]]
     
     
     ### Create dataframe for storing data
@@ -253,23 +258,61 @@ for (i in 1:length(species_options)){
       Magdf$upper.cri95[i] <- Magdf$percent.change.mean[i] + (Magdf$percent.change.cri95[i])
     }
     
-    ### Mean percent change since start of survey
-    Magdf$percent.change.mean[32] 
     
-    ### 95% CRI for percent change since start of survey
-    Magdf$percent.change.cri95[32]
+    ### saving data
     
-    model <- data.frame(species = species_options[i],
-                        U = U,
-                        ID = Yearsm$ID,
-                        mean = Yearsm$mean,
-                        quant1 = Yearsm$`0.025quant`,
-                        quant2 = Yearsm$`0.975quant`)
+    yearsm_individual <- data.frame(species = species_options[i],
+                                    ID = Yearsm$ID,
+                                    mean = Yearsm$mean,
+                                    quant0.025 = Yearsm$`0.025quant`,
+                                    quant0.975 = Yearsm$`0.975quant`)
     
-  df[[i]] <- model
+    dayY_individual <- data.frame(species = species_options[i],
+                                  ID = DayY$ID,
+                                  mean = DayY$mean,
+                                  quant0.025 = DayY$`0.025quant`,
+                                  quant0.975 = DayY$`0.975quant`)
+    
+    myData_individual <- data.frame(species = species_options[i],
+                                    abundance = MyData$Abundance,
+                                    day_of_year = MyData$Day_of_year,
+                                    date = MyData$Date,
+                                    year = MyData$Year,
+                                    fitted = MyData$Fitted,
+                                    residuals = MyData$Residuals,
+                                    E1 = MyData$E1)
+    
+    magdf_individual <- data.frame(species = species_options[i],
+                                   year = Magdf$Year,
+                                   change = Magdf$percent.change.mean,
+                                   lower = Magdf$lower.cri95,
+                                   upper = Magdf$upper.cri95)
+    
+  # data frames
+  yearsm_list[[i]] <- yearsm_individual
+  dayY_list[[i]] <- dayY_individual
+  myData_list[[i]] <- myData_individual
+  magdf_list[[i]] <- magdf_individual
+  
+  # model residuals
+  E1_list[[i]] <- E1$Residuals
+  
+  # dispersion and dic
+  dispersion_list[[i]] <- Dispersion
+  DIC_list[[i]] <- I1$dic$dic
+  
+  # variogram data
+  variogram1_list[[i]] <- V1
+  variogram2_list[[i]] <- V2
+  
+  # posterior marginal distribution for year random walk
+  year_marg_list[[i]] <- year.marg[[32]]
+  
+  # percent change since survey start mean and 95% confidence interval
+  percent_change_list[[i]] <- Magdf$percent.change.mean[32]
+  percent_change_intervals_list[[i]] <- Magdf$percent.change.cri95[32]
+  
 }
-
-bound_data <- bind_rows(df)
 
 ```
 
