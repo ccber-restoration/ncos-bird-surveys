@@ -1,0 +1,332 @@
+---
+title: "Wright-Ueda_scratchwork"
+format: html
+---
+
+```{r setup}
+
+library(here)
+library(tidyverse)
+library(GGally)
+library(plotly)
+library(vegan)
+library(viridis) # color scheme
+library(zoo) # for rolling average
+library(roll) # for rolling sd
+library(car)
+library(lubridate)
+library(devtools) 
+library(geoR)
+library(INLA)
+library(car)
+
+jrbp_path <- here("data","JRBP_Bird_Transect_Data.csv")
+df <- read_csv(jrbp_path) %>% 
+  mutate(Date = as.Date(Date,
+                        format = "%m/%d/%y"))
+
+```
+
+script note-taking
+
+```{r}
+
+##### species and its model ####################################################
+
+species <- 'CASJ'
+U <- 0.007 # component of prior
+# larger makes trend for both ggplots more apparent
+# smaller makes trend of first ggplot undetectable, less prominent for second ggplot
+distribution <- 'nbinomial' # distribution either poisson or nbinomial
+# only use nbinomial when poisson is overdispersed
+
+speciescol <- paste0('n.',species)
+MyData <- na.exclude(df[, c(speciescol, # specifying variables to include
+                            "Census_Area", "Day_of_year", "Date", 'Year',
+                            'ID',
+                            "Observer1")])
+names(MyData)[1] <- 'Abundance'
+bspecies <- MyData[,1] # only speciescol variable
+
+hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05))) # prior
+### hyper precision \ hyper parameters control prior
+# pc.prec: penalized complexity priors, helps avoid overdispersion or over-fitting
+# specifically, U and 0.05: P(sigma > 0.007) = 0.05 represents complexity criteria
+# U range: 0.000125 to 1
+# only expects random walk standard deviation to exceed 0.007 at 5% frequency
+inla.setOption(scale.model.default = TRUE) #?
+
+I1 <- inla(Abundance ~ f(Year, model = "rw1", hyper = hyper.prec) + # first order walk
+             f(Day_of_year, model = "rw2", hyper = hyper.prec) + # second order walk
+             # variables with suspected data correlation are assigned to random effects
+             f(Census_Area, model = "iid") + # random effect
+             f(Observer1, model = "iid"), # random effect
+           # variables that impact temporal autocorrelation, where t is affected by t - 1,
+           # are assigned to random walks
+           control.predictor = list(compute = TRUE, 
+                                    quantiles = c("0.025", "0.975")),
+           control.compute = list(dic = TRUE,
+                                  waic = TRUE),
+           ### dic: deviance information criterion
+           # - quantifies predictive fit, penalizes model complexity
+           # - adjacent to AIC but for bayesian statistics
+           ### waic: watanabe-akaike or widely-applicable information criterion
+           # -  balances model fit and complexity, estimates out-of-sample predictive performance
+           family = distribution,
+           data = MyData)
+
+################################################################################
+
+##### modeling values and visualizations #######################################
+
+#### Model Validation ####
+MyData$Fitted <- I1$summary.fitted.values[,'mean']
+### Plot trend for year
+Yearsm <- I1$summary.random$Year
+ggplot() +
+  xlab("Year") + ylab("Trend") +
+  geom_line(data = Yearsm, aes(x = ID, y = mean)) +
+  geom_ribbon(data = Yearsm, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_bw() +
+  theme(axis.text.y = element_text(size = 8)) +
+  theme(axis.text.x = element_text(size = 8)) +
+  theme(axis.title = element_text(size = 11)) +
+  ggtitle('Trend by Year') +
+  theme(plot.title = element_text(size = 15,
+                                  lineheight=.8, 
+                                  face="bold", 
+                                  hjust = 0.5)) +
+  # ylim(-0.5,0.5) +
+  ylim(min(Yearsm$`0.025quant`)-0.05,max(Yearsm$`0.975quant`)+0.05)
+
+
+
+### Dispersion ###
+
+# used in determining residuals by distribution
+mu <- I1$summary.fitted.values[, "mean"] # mean of "fitted values"
+# mu also assigned to MyData$Fitted
+theta <- I1$summary.hyperpar[1, "mean"] # "size for the nbinomial observations (1/overdispersion)"
+
+if(distribution == 'nbinomial'){
+  # Pearson residuals for negative binomial distribution
+  E1 <- (bspecies - mu) / sqrt(mu + mu^2 / theta) 
+}
+if(distribution == 'poisson'){
+  # Pearson residuals for poisson distribution
+  E1 <- (bspecies - mu) / sqrt(mu) 
+}
+if(distribution == 'gaussian'){
+  # Residuals for gaussian distribution
+  E1 <-  MyData$Abundance-MyData$Fitted
+}
+names(E1)[1] <- "Residuals" # changing the name of E1 to Residuals
+# not sure why the default name for the values is Abundance, but that is wrong
+
+
+
+### Check for overdispersion
+
+N <- nrow(MyData)
+p <- nrow(I1$summary.fixed)
+Dispersion <- sum(E1^2) / (N - p) # comparing variance to mean
+# N - p: residual degrees of freedom
+Dispersion
+# under 1 = underdispersed
+# over 1 = overdispersed
+I1$dic$dic # lower DIC is better
+
+
+
+### Day of Year Trends
+
+DayY <- I1$summary.random$Day_of_year
+ggplot() +
+  xlab("Year") + ylab("Trend") +
+  geom_line(data = DayY, aes(x = ID, y = mean)) +
+  geom_ribbon(data = DayY, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  theme_bw() +
+  theme(axis.text.y = element_text(size = 15)) +
+  theme(axis.text.x = element_text(size = 15)) +
+  theme(axis.title = element_text(size = 20))
+
+MyData$Residuals <- E1$Residuals
+ggplot(data = MyData) +
+  geom_point(aes(x = Date,y = Residuals)) + # added because geom_smooth not working
+  geom_smooth(aes(x = Date ,y = Residuals), # not working with any method, not sure why
+              span = 0.2, colour = 'blue',  
+              method = 'loess') 
+# looking for residual patterns
+
+
+
+### Variogram for checking for temporal autocorrelation by year 
+# nearly flat line near 1 indicates low autocorrelation
+breaks <- seq(0.5, 20.5, length = 20)
+MyData$E1 <- E1
+MyData$Zeros <- rep(0, nrow(MyData))
+V1 <- variog(coords = MyData[, c("Year", "Zeros")], data = MyData$E1, breaks = breaks)
+plot(V1, type = "b", 
+     xlab = "Time difference (years)", ylab = "Sample Variogram",
+     col = 1, pch = 16, cex = 1.5)
+
+
+
+### Variogram for checking for temporal autocorrelation by data of year
+# same interpretation as first variogram
+breaks2 <- seq(0.5, 364.5, length = 365)
+V1 <- variog(coords = MyData[, c("Day_of_year", "Zeros")], data = MyData$E1, breaks = breaks2)
+plot(V1, type = "b", 
+     xlab = "Time difference (day of year)", ylab = "Sample Variogram",
+     col = 1, pch = 16, cex = 1.5, ylim = c(0,2))
+
+
+
+### Plot Residuals vs. fitted values and covariates
+
+plot(E1$Residuals ~ MyData$Fitted) # Residuals vs fitted values
+# looking for adherence to 0 line with minor variability
+qqPlot(E1$Residuals)
+# looking for points within theoretical line bounds
+# determines whether or not residuals are distributed normally
+hist(E1$Residuals) # histogram of residuals
+plot(E1$Residuals ~ MyData$Abundance, data = MyData) 
+plot(MyData$Fitted ~ MyData$Abundance, asp= 1, data = MyData)
+plot(MyData$Fitted ~ MyData$Abundance, data = MyData)
+
+plot(E1$Residuals ~ Year, data = MyData)
+plot(E1$Residuals ~ Day_of_year, data = MyData)
+
+
+
+### comparing recorded abundance to model fitted values
+# adding geom_point to the appropriate ggplots below since geom_smooth is still not working
+
+ggplot(data = MyData) +
+  geom_point(aes(x = Date,y = Abundance)) + 
+  geom_smooth(aes(x = Date ,y = Abundance), 
+              span = 0.2, colour = 'blue',  
+              method = 'loess') 
+ggplot(data = MyData) +
+  geom_point(aes(x = Date,y = Abundance),color = "blue") + 
+  geom_smooth(aes(x = Date ,y = Abundance), 
+              span = 0.2, colour = 'blue',  
+              method = 'loess') +
+  geom_point(aes(x = Date,y = Fitted),color = "orange") + 
+  geom_smooth(aes(x = Date ,y = Fitted), 
+              span = 0.2, colour = 'black',  
+              method = 'loess') 
+ggplot(data = MyData) +
+  geom_point(aes(x = Date,y = Fitted)) + 
+  geom_smooth(aes(x = Date ,y = Fitted), 
+              span = 0.2, colour = 'black',  
+              method = 'loess') + 
+  ggtitle('Species Abundance') +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  ylab('Fitted abundance per transect')
+
+ggplot(data = MyData) +
+  geom_point(aes(x = Date,y = Fitted), colour = 'blue', alpha = 1/10) +
+  geom_point(aes(x = Date,y = Abundance), colour = 'red', alpha = 1/10) +
+  ylim(c(0,20))
+
+ggplot(data = MyData) +
+  geom_point(aes(x = Day_of_year,y = Abundance),color = "blue") + 
+  geom_smooth(aes(x = Day_of_year ,y = Abundance), # this geom_smooth works?
+              span = 0.2, colour = 'blue',  
+              method = 'loess') 
+ggplot(data = MyData) +
+  geom_point(aes(x = Day_of_year,y = Fitted),color = "blue") + 
+  geom_point(aes(x = Day_of_year ,y = Abundance), colour = 'red', alpha = 1/10) +
+  geom_smooth(aes(x = Day_of_year ,y = Fitted), # and this geom_smooth works
+              span = 0.2, colour = 'blue',  
+              method = 'loess')
+
+
+
+##### only for random effects ##################################################
+
+# Plot random effects for survey point
+point.r <- I1$summary.random$Census_Area
+ggplot(data = point.r) +
+  geom_pointrange(aes(x = ID, y = mean, ymin = `0.025quant`, ymax = `0.975quant`)) +
+  geom_hline(aes(yintercept = 0)) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  xlab("Point") +
+  ylab("Smoother")
+
+# Plot random effects for observer 
+obs.r <- I1$summary.random$Observer1
+obs.r$ID <- as.factor(obs.r$ID)
+obs.counts.surveys <- table(df$Observer1)
+obs.order <- as.data.frame(obs.counts.surveys)
+colnames(obs.order) <- c("ID",'count')
+
+obs.r <- obs.order %>%
+  left_join(obs.r, by = "ID")
+
+# Make the plot
+ggplot(data = obs.r ) +
+  geom_pointrange(aes(x = reorder(ID, -count), y = mean, ymin = `0.025quant`, ymax = `0.975quant`)) +
+  geom_hline(aes(yintercept = 0)) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  xlab("Observer") +
+  ylab("Smoother") +
+  coord_flip()  +
+  theme(axis.text.y = element_text(size = 5)) +
+  theme(axis.text.x = element_text(size = 7))
+
+################################################################################
+
+#### Percent Change in Abundance ####
+
+### Extract the posterior marginal distributions for Year random walk
+year.marg <- I1$marginals.random$Year 
+year.marg[[32]]
+
+
+
+### Create dataframe for storing data
+Magdf <- data.frame(Year = seq(from = 1989, to = 2020, by = 1))
+for(i in 1:32) { 
+  # Transform the posterior marginal distribution for current year so that it is not in log scale
+  tmarg <- inla.tmarginal(exp, year.marg[[i]]) 
+  # Calculate mean value for year i
+  Magdf$mean[i] <- mean(tmarg[,1]) 
+  # Calculate 95% CRI for year i's estimate
+  Magdf$cri95[i] <- mean(inla.qmarginal(0.5, tmarg) - inla.qmarginal(0.025, tmarg), 
+                         inla.qmarginal(0.975, tmarg) - inla.qmarginal(0.5, tmarg))
+  # Calculate mean percent change current year vs initial
+  Magdf$percent.change.mean[i] <- 100 * (Magdf$mean[i] - Magdf$mean[1]) / Magdf$mean[1] 
+  # Calculate variance in percent change using 95% CRIs and variance estimation method 
+  Magdf$percent.change.cri95[i] <- Magdf$mean[i] / Magdf$mean[1] *
+    sqrt((Magdf$cri95[i]^2 / Magdf$mean[i]^2) + (Magdf$cri95[1]^2 / Magdf$mean[1]^2)) * 100
+  Magdf$lower.cri95[i] <- Magdf$percent.change.mean[i] - (Magdf$percent.change.cri95[i])
+  Magdf$upper.cri95[i] <- Magdf$percent.change.mean[i] + (Magdf$percent.change.cri95[i])
+}
+
+
+
+# Mean percent change since start of survey
+Magdf$percent.change.mean[32] 
+
+# 95% CRI for percent change since start of survey
+Magdf$percent.change.cri95[32]
+
+# Both of the above values were recorded in the Species Organization Dryad File
+# for every species.
+
+
+
+### Plot percent change since 1999 and 95% CRIs for all years
+ggplot() +
+  xlab("Year") +
+  ylab("Percent change in abundance since 1989") +
+  geom_line(data = Magdf, aes(x = Year, y = percent.change.mean), color = "black") +
+  geom_ribbon(data = Magdf, aes(x = Year, ymin = lower.cri95, ymax = upper.cri95), alpha = 0.3) +
+  xlim(1989,2020) # constrain the x axis so that the starting year is not showing
+
+```
+
