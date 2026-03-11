@@ -357,6 +357,8 @@ ggplot() +
 
 species <- 'CASJ'
 U <- 0.007 # component of prior
+# larger makes trend for both ggplots more apparent
+# smaller makes trend of first ggplot undetectable, less prominent for second ggplot
 distribution <- 'nbinomial' # distribution either poisson or nbinomial
 # only use nbinomial when poisson is overdispersed
 
@@ -404,8 +406,7 @@ survey_path <- here("data","aggregated","Matt_Vinh","survey-level_2026-02-18.rds
 df <- read_rds(survey_path)
 
 species <- 'Killdeer'
-U <- 0.05 # larger makes trend for both ggplots more apparent
-# smaller makes trend of first ggplot undetectable, less prominent for second ggplot
+U <- 0.05
 distribution <- 'poisson' # poisson seems better than nbinomial, however have not tested overdispersion
 
 MyData <- na.exclude(df[, c(species,
@@ -503,6 +504,18 @@ x <- datatable(intervals_df)
 x
 
 ggsave()
+
+```
+
+```{r bird presence during surveys}
+
+species_presence <- data %>% 
+  filter(category == "species") %>% 
+  group_by(species) %>% 
+  summarise(num_surveys = n_distinct(observation_date)) %>% 
+  arrange(desc(num_surveys))
+
+datatable(species_presence)
 
 ```
 
