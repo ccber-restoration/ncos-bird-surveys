@@ -129,6 +129,7 @@ ignore above ###################################################################
 
 
 ```{r running INLA models with ccber data}
+#| message: false
 
 ### setting desired NCOS species
 
@@ -142,13 +143,13 @@ dayY_list <- list()
 myData_list <- list()
 magdf_list <- list()
 E1_list <- list()
-dispersion_list <- list()
-DIC_list <- list()
-variogram1_list <- list()
-variogram2_list <- list()
+dispersion_vector <- vector()
+DIC_vector <- vector()
+v1_list <- list()
+v2_list <- list()
 year_marg_list <- list()
-percent_change_list <- list()
-percent_change_intervals_list <- list()
+percent_change_vector <- vector()
+percent_change_intervals_vector <- vector()
 
 breaks <- seq(0.5, 20.5, length = 20)
 breaks2 <- seq(0.5, 364.5, length = 365)
@@ -168,7 +169,7 @@ for (i in 1:length(species_options)){
     MyData <- na.exclude(data[, c(speciescol,
                                   "day_of_survey_year",
                                   "observation_date",
-                                  'year',
+                                  'survey_year',
                                   'survey_id')])
     names(MyData)[1] <- 'Abundance'
     bspecies <- MyData[,1]
@@ -176,7 +177,7 @@ for (i in 1:length(species_options)){
     hyper.prec <- list(theta = list(prior = "pc.prec", param = c(U, 0.05)))
     inla.setOption(scale.model.default = TRUE)
 
-    I1 <- inla(Abundance ~ f(year, model = "rw1", hyper = hyper.prec) + 
+    I1 <- inla(Abundance ~ f(survey_year, model = "rw1", hyper = hyper.prec) + 
              f(day_of_survey_year, model = "rw2", hyper = hyper.prec),
            control.predictor = list(compute = TRUE, 
                                     quantiles = c("0.025", "0.975")),
@@ -190,7 +191,7 @@ for (i in 1:length(species_options)){
     MyData$Fitted <- I1$summary.fitted.values[,'mean']
     
     # trend for year
-    Yearsm <- I1$summary.random$year
+    Yearsm <- I1$summary.random$survey_year
     
     # calculating residuals
     mu <- MyData$Fitted
@@ -220,42 +221,43 @@ for (i in 1:length(species_options)){
     
     ### Day of Year Trends
     
-    DayY <- I1$summary.random$Day_of_year
+    DayY <- I1$summary.random$day_of_survey_year
     MyData$Residuals <- E1$Residuals
     
     
     ### variograms
     
     # Variogram for checking for temporal autocorrelation by year 
-    MyData$E1 <- E1
+    temp <- E1$Residuals
+    MyData$E1 <- temp
     MyData$Zeros <- rep(0, nrow(MyData))
-    V1 <- variog(coords = MyData[, c("Year", "Zeros")], data = MyData$E1, breaks = breaks)
+    V1 <- variog(coords = MyData[, c("survey_year", "Zeros")], data = MyData$E1, breaks = breaks)
     
     # Variogram for checking for temporal autocorrelation by data of year
-    V2 <- variog(coords = MyData[, c("Day_of_year", "Zeros")], data = MyData$E1, breaks = breaks2)
+    V2 <- variog(coords = MyData[, c("day_of_survey_year", "Zeros")], data = MyData$E1, breaks = breaks2)
     
     
     ### Extract the posterior marginal distributions for Year random walk
-    year.marg <- I1$marginals.random$Year 
+    year.marg <- I1$marginals.random$survey_year 
     
     
     ### Create dataframe for storing data
     Magdf <- data.frame(Year = seq(from = 1989, to = 2020, by = 1))
-    for(i in 1:32) { 
+    for(j in 1:8) { 
       # Transform the posterior marginal distribution for current year so that it is not in log scale
-      tmarg <- inla.tmarginal(exp, year.marg[[i]]) 
+      tmarg <- inla.tmarginal(exp, year.marg[[j]]) 
       # Calculate mean value for year i
-      Magdf$mean[i] <- mean(tmarg[,1]) 
+      Magdf$mean[j] <- mean(tmarg[,1]) 
       # Calculate 95% CRI for year i's estimate
-      Magdf$cri95[i] <- mean(inla.qmarginal(0.5, tmarg) - inla.qmarginal(0.025, tmarg), 
+      Magdf$cri95[j] <- mean(inla.qmarginal(0.5, tmarg) - inla.qmarginal(0.025, tmarg), 
                              inla.qmarginal(0.975, tmarg) - inla.qmarginal(0.5, tmarg))
       # Calculate mean percent change current year vs initial
-      Magdf$percent.change.mean[i] <- 100 * (Magdf$mean[i] - Magdf$mean[1]) / Magdf$mean[1] 
+      Magdf$percent.change.mean[j] <- 100 * (Magdf$mean[j] - Magdf$mean[1]) / Magdf$mean[1] 
       # Calculate variance in percent change using 95% CRIs and variance estimation method 
-      Magdf$percent.change.cri95[i] <- Magdf$mean[i] / Magdf$mean[1] *
-        sqrt((Magdf$cri95[i]^2 / Magdf$mean[i]^2) + (Magdf$cri95[1]^2 / Magdf$mean[1]^2)) * 100
-      Magdf$lower.cri95[i] <- Magdf$percent.change.mean[i] - (Magdf$percent.change.cri95[i])
-      Magdf$upper.cri95[i] <- Magdf$percent.change.mean[i] + (Magdf$percent.change.cri95[i])
+      Magdf$percent.change.cri95[j] <- Magdf$mean[j] / Magdf$mean[1] *
+        sqrt((Magdf$cri95[j]^2 / Magdf$mean[j]^2) + (Magdf$cri95[1]^2 / Magdf$mean[1]^2)) * 100
+      Magdf$lower.cri95[j] <- Magdf$percent.change.mean[j] - (Magdf$percent.change.cri95[j])
+      Magdf$upper.cri95[j] <- Magdf$percent.change.mean[j] + (Magdf$percent.change.cri95[j])
     }
     
     
@@ -275,9 +277,9 @@ for (i in 1:length(species_options)){
     
     myData_individual <- data.frame(species = species_options[i],
                                     abundance = MyData$Abundance,
-                                    day_of_year = MyData$Day_of_year,
-                                    date = MyData$Date,
-                                    year = MyData$Year,
+                                    day_of_year = MyData$day_of_survey_year,
+                                    date = MyData$observation_date,
+                                    year = MyData$survey_year,
                                     fitted = MyData$Fitted,
                                     residuals = MyData$Residuals,
                                     E1 = MyData$E1)
@@ -288,6 +290,17 @@ for (i in 1:length(species_options)){
                                    lower = Magdf$lower.cri95,
                                    upper = Magdf$upper.cri95)
     
+    E1_individual <- data.frame(species = species_options[i],
+                                residuals = E1$Residuals)
+    
+    v1_individual <- data.frame(species = species_options[i],
+                                u = V1$u,
+                                v = V1$v)
+    
+    v2_individual <- data.frame(species = species_options[i],
+                                u = V2$u,
+                                v = V2$v)
+    
   # data frames
   yearsm_list[[i]] <- yearsm_individual
   dayY_list[[i]] <- dayY_individual
@@ -295,24 +308,43 @@ for (i in 1:length(species_options)){
   magdf_list[[i]] <- magdf_individual
   
   # model residuals
-  E1_list[[i]] <- E1$Residuals
+  E1_list[[i]] <- E1_individual
   
   # dispersion and dic
-  dispersion_list[[i]] <- Dispersion
-  DIC_list[[i]] <- I1$dic$dic
+  dispersion_vector[i] <- Dispersion
+  DIC_vector[i] <- I1$dic$dic
   
-  # variogram data
-  variogram1_list[[i]] <- V1
-  variogram2_list[[i]] <- V2
+  # variograms
+  v1_list[[i]] <- v1_individual
+  v2_list[[i]] <- v2_individual
   
   # posterior marginal distribution for year random walk
-  year_marg_list[[i]] <- year.marg[[32]]
+  year_marg_list[[i]] <- year.marg[[8]]
   
   # percent change since survey start mean and 95% confidence interval
-  percent_change_list[[i]] <- Magdf$percent.change.mean[32]
-  percent_change_intervals_list[[i]] <- Magdf$percent.change.cri95[32]
+  percent_change_vector[[i]] <- Magdf$percent.change.mean[8]
+  percent_change_intervals_vector[[i]] <- Magdf$percent.change.cri95[8]
   
 }
+
+### binding data frame rows
+
+yearsm_bound <- bind_rows(yearsm_list)
+dayY_bound <- bind_rows(dayY_list)
+myData_bound <- bind_rows(myData_list)
+magdf_bound <- bind_rows(magdf_list)
+E1_bound <- bind_rows(E1_list)
+v1_bound <- bind_rows(v1_list)
+v2_bound <- bind_rows(v2_list)
+
+dispersion_data <- data.frame(species = species_options,
+                              dispersion = dispersion_vector)
+DIC_data <- data.frame(species = species_options,
+                       DIC = DIC_vector)
+percent_change_data <- data.frame(species = species_options,
+                                  mean = percent_change_vector)
+percent_change_intervals_data <- data.frame(species = species_options,
+                                            interval = percent_change_intervals_vector)
 
 ```
 
@@ -320,9 +352,10 @@ for (i in 1:length(species_options)){
 
 ggplot() +
   xlab("Year") + ylab("Trend") +
-  geom_line(data = Yearsm, aes(x = ID, y = mean)) +
-  geom_ribbon(data = Yearsm, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
+  geom_line(data = yearsm_bound, aes(x = ID, y = mean)) +
+  geom_ribbon(data = yearsm_bound, aes(x = ID, ymax = quant0.025, ymin = quant0.975), alpha = 0.4) +
   geom_hline(yintercept = 0, linetype = "dashed") +
+  facet_wrap(~ species) + 
   theme_bw() +
   theme(axis.text.y = element_text(size = 8)) +
   theme(axis.text.x = element_text(size = 8)) +
@@ -333,42 +366,56 @@ ggplot() +
                                   face="bold", 
                                   hjust = 0.5)) +
   # ylim(-0.5,0.5) +
-  ylim(min(Yearsm$`0.025quant`)-0.05,max(Yearsm$`0.975quant`)+0.05)
+  ylim(min(yearsm_bound$quant0.025)-0.05,max(yearsm_bound$quant0.975)+0.05)
 
 
 
 ggplot() +
-  xlab("Year") + ylab("Trend") +
-  geom_line(data = DayY, aes(x = ID, y = mean)) +
-  geom_ribbon(data = DayY, aes(x = ID, ymax = `0.025quant`, ymin = `0.975quant`), alpha = 0.4) +
+  xlab("Day") + ylab("Trend") +
+  geom_line(data = dayY_bound, aes(x = ID, y = mean)) +
+  geom_ribbon(data = dayY_bound, aes(x = ID, ymax = quant0.025, ymin = quant0.975), alpha = 0.4) +
   geom_hline(yintercept = 0, linetype = "dashed") +
+  facet_wrap(~ species) + 
   theme_bw() +
-  theme(axis.text.y = element_text(size = 15)) +
-  theme(axis.text.x = element_text(size = 15)) +
-  theme(axis.title = element_text(size = 20))
+  ggtitle('Trend by Day of Survey Year') +
+  theme(axis.text.y = element_text(size = 8)) +
+  theme(axis.text.x = element_text(size = 8)) +
+  theme(axis.title = element_text(size = 11)) + 
+  theme(plot.title = element_text(size = 15,
+                                  lineheight=.8, 
+                                  face="bold", 
+                                  hjust = 0.5))
 
 
 
-ggplot(data = MyData) +
-  geom_point(aes(x = Date,y = Residuals)) + # added because geom_smooth not working
-  geom_smooth(aes(x = Date ,y = Residuals), # not working with any method, not sure why
+ggplot(data = myData_bound) +
+  geom_point(aes(x = date,y = residuals)) + # added because geom_smooth not working
+  geom_smooth(aes(x = date ,y = residuals), # not working with any method, not sure why
               span = 0.2, colour = 'blue',  
               method = 'loess') 
 # looking for residual patterns
 
 # Variogram for checking for temporal autocorrelation by year 
-# nearly flat line near 1 indicates low autocorrelation
-plot(V1, type = "b", 
-     xlab = "Time difference (years)", ylab = "Sample Variogram",
-     col = 1, pch = 16, cex = 1.5)
+ggplot(data = v1_bound,aes(x = u,y = v)) + 
+  geom_point() + 
+  geom_line() + 
+  facet_wrap(~ species) + 
+  labs(x = "Time Difference (Years)",
+       y = "Sample Variogram")
 
 # Variogram for checking for temporal autocorrelation by data of year
-plot(V1, type = "b", 
-     xlab = "Time difference (day of year)", ylab = "Sample Variogram",
-     col = 1, pch = 16, cex = 1.5, ylim = c(0,2))
+ggplot(data = v2_bound,aes(x = u,y = v)) + 
+  geom_point() + 
+  geom_line() + 
+  facet_wrap(~ species) + 
+  labs(x = "Time Difference (Day of Year)",
+       y = "Sample Variogram")
 
 # Plot Residuals vs. fitted values and covariates
 plot(E1$Residuals ~ MyData$Fitted) # Residuals vs fitted values
+
+ggplot(data = E1_bound,aes(x = E1_bound$residuals,y = myData_bound$fitted)) + 
+  geom_point()
 # looking for adherence to 0 line with minor variability
 qqPlot(E1$Residuals)
 # looking for points within theoretical line bounds
