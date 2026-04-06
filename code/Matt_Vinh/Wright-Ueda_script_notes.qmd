@@ -321,6 +321,7 @@ Magdf$percent.change.cri95[32]
 
 
 ### Plot percent change since 1999 and 95% CRIs for all years
+# not able to make output meaningful visualization
 ggplot() +
   xlab("Year") +
   ylab("Percent change in abundance since 1989") +
