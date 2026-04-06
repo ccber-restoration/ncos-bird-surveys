@@ -723,3 +723,16 @@ ggplot(richness_composite,
                      limit = c(0,100))
 
 ```
+
+```{r visualizaing U values from wright-ueda}
+
+u_path <- here("data","Matt_Vinh","wright-ueda_u_values.csv")
+u_data <- read_csv(u_path,
+                   col_names = F)
+
+ggplot(u_data,
+       aes(x = X1)) + 
+  geom_histogram()
+
+```
+
