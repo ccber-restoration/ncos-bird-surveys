@@ -35,10 +35,11 @@ script note-taking
 
 species <- 'CASJ'
 U <- 0.007 # component of prior
-# larger makes trend for both ggplots more apparent
+# larger makes trend for first two ggplots more apparent
 # smaller makes trend of first ggplot undetectable, less prominent for second ggplot
 distribution <- 'nbinomial' # distribution either poisson or nbinomial
 # only use nbinomial when poisson is overdispersed
+# also one species with gaussian
 
 speciescol <- paste0('n.',species)
 MyData <- na.exclude(df[, c(speciescol, # specifying variables to include
