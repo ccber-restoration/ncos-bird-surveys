@@ -568,7 +568,7 @@ Using these visualizations and statistics and another modification of the Julien
 # sample first test: c(0.0005, 0.005, 0.015, 0.05, 0.15, 0.5)
 # c(0.5, 0.6, 0.7, 0.8, 0.9, 1)
 # c(0.1, 0.15, 0.2, 0.25, 0.3, 0.4)
-u_options <- c(0.005, 0.0075, 0.01, 0.0125, 0.015, 0.0175, 0.02, 0.0225, 0.025)
+u_options <- c(0.05,0.1,0.15,0.2,0.3,0.4)
 
 
 
@@ -956,9 +956,8 @@ ggplot(data = myData_bound) +
   theme(plot.title = element_text(hjust = 0.5))
 
 ggplot(data = myData_bound) +
-  geom_point(aes(x = date,y = fitted), colour = 'orange', alpha = 1/10) +
-  geom_point(aes(x = date,y = abundance), colour = 'blue', alpha = 1/10) +
-  ylim(c(0,20)) + 
+  geom_point(aes(x = date,y = fitted), colour = 'orange', alpha = 5/10) +
+  geom_point(aes(x = date,y = abundance), colour = 'blue', alpha = 5/10) +
   facet_wrap(~ u_value) + 
   labs(title = "Overlay of Abundance vs Date (Blue) and Fitted Abundance vs Date (Orange)") + 
   theme(plot.title = element_text(hjust = 0.5))
@@ -1014,7 +1013,7 @@ ggplot() +
   geom_line(data = magdf_bound, aes(x = year, y = change), color = "black") +
   geom_ribbon(data = magdf_bound, aes(x = year, ymin = lower, ymax = upper), alpha = 0.3) +
   xlim(2017,2025) +
-  facet_wrap(~ u_value) + 
+  facet_wrap(~ u_value, scales = "free_y") + 
   ggtitle("Percent change in Abundance Since 2017") + 
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -1291,7 +1290,7 @@ ggplot() +
   geom_line(data = magdf_bound, aes(x = year, y = change), color = "black") +
   geom_ribbon(data = magdf_bound, aes(x = year, ymin = lower, ymax = upper), alpha = 0.3) +
   xlim(2017,2025) +
-  facet_wrap(~ species)
+  facet_wrap(~ species,scales = "free_y")
 ```
 
 ```{r example species variogram}
@@ -1299,7 +1298,7 @@ ggplot() +
 ggplot(data = v1_bound,aes(x = u,y = v)) + 
   geom_point() + 
   geom_line() + 
-  facet_wrap(~ species) + 
+  facet_wrap(~ species, scales = "free_y") + 
   labs(x = "Time Difference (Survey Years)",
        y = "Sample Variogram")
 ```
@@ -1312,7 +1311,7 @@ ggplot(data = myData_bound) +
   geom_smooth(aes(x = day_of_year ,y = fitted),
               span = 0.2, colour = 'blue',  
               method = 'loess') + 
-  facet_wrap(~ species) + 
+  facet_wrap(~ species, scales = "free_y") + 
   ggtitle("Overlay of Fitted Abundance vs Day of Year (Blue) 
        and Abundance vs Day of Year (Red)") + 
   theme(plot.title = element_text(hjust = 0.5))
