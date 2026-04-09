@@ -16,8 +16,8 @@ library(rphylopic)
 
  # read in abundances of focal species (invert-eaters) ----
   
-  # abundances (total count) for "waterfowl & friends" & shorebird species
-  # note that we dropped some of these because they mostly eat plants...
+# abundances (total count) for "waterfowl & friends" & shorebird species
+# note that we dropped some of these because they mostly eat plants...
 duck_shorebird_abundance <- read_csv(file = "data/aquatic_diets/aquatic_focal_species.csv")
 
 # abundance for aquatic bird groups that eat fish (gulls & herons)
@@ -49,7 +49,7 @@ inverts <- unique(trophic_links$invert_taxon)
 birds_invert_abundance <- bird_abundance %>% 
   filter(species %in% birds)
 
-# TODO check- these might need need to be put in the same order as in birds vector (i.e., same order as they appear in the network)
+# TODO check: these might need need to be put in the same order as in birds vector (i.e., same order as they appear in the network)
 
 ## create matrix for invert network ----
 tl_matrix <- trophic_links %>% 
@@ -117,32 +117,29 @@ dev.off()
 
 # piscivorous network ----
 
-# FIXME- Gabriella to update, using new version of bipartite plotweb() AND saving directly to pdf
-
+## load trophic links data ----
 fish_links_path <- "data/aquatic_diets/NCOS_piscivorous_trophic_links_2026-02-17.xlsx"
 
-#in network terminology this is an "edge list"
+# in network terminology this is an "edge list"
 fish_trophic_links <- read_xlsx(path = fish_links_path, sheet = "trophic links") %>% 
   select(c(bird_species, prey_taxon))
   #relocate(prey_taxon, .before = bird_species) 
 
-#create vector of bird names
+# create vector of bird names
 birds_fish_eating <- unique(fish_trophic_links$bird_species)
+
+#create vector of (fish/frog/crayfish) prey names
 prey <- unique(fish_trophic_links$prey_taxon)
 
 #filter bird abundance dataframe to only include species within the vert network 
 birds_vert_abundance <- bird_abundance %>% 
   filter(species %in% birds_fish_eating)
-#only has 17, expecting 20...
+#only has 19, expecting 20...
 
 
 #check which are missing...
 setdiff(birds_fish_eating, birds_vert_abundance$species)
-# TODO- for Francis- sort out BCNH, SBGU, RBME
-
-#two of these are just inconsistent spellings... easy to resolve
-# need to figure track down rb-merganser abundance...
-
+# TODO- for Francis- sort out RBME
 
 tl_matrix_fish <- fish_trophic_links %>% 
   as.matrix()
@@ -178,6 +175,8 @@ link_colors[, colnames(matrix_subset_fish) == "Amphibia"][
 link_colors[, colnames(matrix_subset_fish) == "Procambarus clarkii"][
   matrix_subset_fish[, colnames(matrix_subset_fish) == "Procambarus clarkii"] > 0] <- "#e76f51"
 
+
+## save to file (png) ----
 png(file = "figures/trophic_network_fish_eating.png", width = 600, height = 800, units = "px", res = 100)
 
 plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE, link_color = link_colors)
@@ -186,7 +185,7 @@ plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE, link_color 
 dev.off()
 
 
-#add images to network attempt
+# add images to network attempt
 
 
 #FHJ notes: also saved as pdf with same width and height (no units needed bc inches is default), no res argument
