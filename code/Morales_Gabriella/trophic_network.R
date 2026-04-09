@@ -1,7 +1,7 @@
 #this script is for visualizing potential trophic links between aquatic invertebrates and birds at NCOS
 # trophic links were compiled by Gabriella primarily using Birds of the World
 
-#load packages
+# 1. load packages ----
 library(tidyverse)
 library(readxl)
 
@@ -12,7 +12,24 @@ library(igraph)
 #package for adding icons to networks
 library(rphylopic)
 
+# 2. create full list of focal species, with abundances
 
+ # read in abundances of focal species (invert-eaters) ----
+  
+  # abundances (total count) for "waterfowl & friends" & shorebird species
+  # note that we dropped some of these because they mostly eat plants...
+duck_shorebird_abundance <- read_csv(file = "data/aquatic_diets/aquatic_focal_species.csv")
+
+# abundance for aquatic bird groups that eat fish (gulls & herons)
+#also includes cormorant & kingfisher
+gull_waders_abundance <-  read_csv(file = "data/aquatic_diets/piscivorous_focal_species.csv")
+
+# combine dataframes into single list of aquatic birds that eat inverts and/or fish/aquatic vertebrates
+bird_abundance <- bind_rows(duck_shorebird_abundance, gull_waders_abundance)
+
+rm(duck_shorebird_abundance, gull_waders_abundance)
+
+# 2. read in invert trophic link data ----
 links_path <- "data/aquatic_diets/NCOS_aquatic_trophic_links_2026-02-10.xlsx"
 
 #in network terminology this is an "edge list"
@@ -22,10 +39,19 @@ trophic_links <- read_xlsx(path = links_path, sheet = "trophic links") %>%
   filter(bird_species != "Whimbrel") %>% 
   filter(bird_species != "Hooded Merganser")
 
-#create vector of bird names
+
+# create vector of bird names in invert network
 birds <- unique(trophic_links$bird_species)
 inverts <- unique(trophic_links$invert_taxon)
 
+# filter bird abundance data to just species in invert network ---
+
+birds_invert_abundance <- bird_abundance %>% 
+  filter(species %in% birds)
+
+# TODO check- these might need need to be put in the same order as in birds vector (i.e., same order as they appear in the network)
+
+## create matrix for invert network ----
 tl_matrix <- trophic_links %>% 
   as.matrix()
 
@@ -87,6 +113,8 @@ plotweb(web = matrix_subset, text_size =1.1, horizontal = TRUE, link_color = lin
 dev.off()
 
 
+# ~~~~~~~~~~~~~~~~~ ----
+
 # piscivorous network ----
 
 # FIXME- Gabriella to update, using new version of bipartite plotweb() AND saving directly to pdf
@@ -101,6 +129,20 @@ fish_trophic_links <- read_xlsx(path = fish_links_path, sheet = "trophic links")
 #create vector of bird names
 birds_fish_eating <- unique(fish_trophic_links$bird_species)
 prey <- unique(fish_trophic_links$prey_taxon)
+
+#filter bird abundance dataframe to only include species within the vert network 
+birds_vert_abundance <- bird_abundance %>% 
+  filter(species %in% birds_fish_eating)
+#only has 17, expecting 20...
+
+
+#check which are missing...
+setdiff(birds_fish_eating, birds_vert_abundance$species)
+# TODO- for Francis- sort out BCNH, SBGU, RBME
+
+#two of these are just inconsistent spellings... easy to resolve
+# need to figure track down rb-merganser abundance...
+
 
 tl_matrix_fish <- fish_trophic_links %>% 
   as.matrix()
