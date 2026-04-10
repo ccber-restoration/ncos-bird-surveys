@@ -4,7 +4,7 @@ This subfolder is for a project compiling and visualizing _potential_ trophic ne
 
 Contacts: Francis Joyce and Gabriella Morales
 
-# List of files:
+# Data files:
 
 For the invertebrate-eating bird network:
 - **aquatic_focal_species.csv** [not a good filename] preliminary list of aquatic bird species recorded in NCOS bird surveys (with total count detected). Only includes "waterfowl & friends" and "shorebirds" groups. 
@@ -16,3 +16,6 @@ For the fish-eating bird network:
 - **NCOS_piscivorous_trophic_links_2026-02-17.xlsx**: contains trophic links between 4 focal taxa of larger prey items (fish, amphibians, an invasive crayfish) and bird species documented from North Campus Open Space monthly surveys that might be consuming those invertebrates. The bird taxa are primarily ducks (waterfowl & friends) and shorebirds. Trophic relationships were compiled from Birds of the World: https://birdsoftheworld.org/bow/home. This was downloaded as .xlsx from the working Google Sheet version.
 
 
+# Code:
+
+The code to produce network figures is in  /code/Morales_Gabriella/trophic_network.R
