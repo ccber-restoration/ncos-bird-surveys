@@ -1021,7 +1021,7 @@ ggplot() +
 
 ```
 
-```{r fitting models with ccber data, multiple species}
+```{r fitting models with ccber data, multiple sample species}
 #| message: false
 #| include: false
 
@@ -1501,6 +1501,273 @@ ggplot() +
 
 ```
 
+```{r fitting models with ccber data, >=49 sample}
+
+# obtaining all species observed in greater than half (48) of surveys (i.e., 49 or more)
+
+presence_path <- here("data","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
+observation_level <- read_rds(presence_path)
+
+species_presence <- observation_level %>% 
+  filter(category == "species") %>% 
+  group_by(species) %>% 
+  summarise(num_surveys = n_distinct(observation_date)) %>% 
+  arrange(desc(num_surveys))
+over_half <- species_presence %>% 
+  filter(num_surveys >= 49)
+
+
+
+### initialization
+
+yearsm_list <- list()
+dayY_list <- list()
+myData_list <- list()
+magdf_list <- list()
+E1_list <- list()
+dispersion_vector <- vector()
+DIC_vector <- vector()
+v1_list <- list()
+v2_list <- list()
+year_marg_list <- list()
+percent_change_vector <- vector()
+percent_change_intervals_vector <- vector()
+
+breaks <- seq(0.5, 20.5, length = 20)
+breaks2 <- seq(0.5, 364.5, length = 365)
+
+
+
+### inla models
+
+for (i in 1:length(over_half$species)){
+  
+  ### INLA model
+  
+    species <- over_half$species[i]
+    
+    if (species == "Common Yellowthroat"){U <- 1}
+    if (species == "Killdeer" | species == "Song Sparrow"){U <- 0.5}
+    if (species == "American Crow"){U <- 0.6}
+    if (species == "Northern Shoveler"){U <- 0.05}
+    if (species == "Least Sandpiper"){U <- 0.7}
+    if (species == "Gadwall" | species == "Semipalmated Plover"){U <- 0.3}
+    if (species == "Red-tailed Hawk"){U <- 0.01}
+    else {U <- 0.04} # median U value from julien-tyler paper
+    
+    if (species %in% c("Killdeer", "Song Sparrow", "American Crow", "Northern Shoveler",
+                       "Least Sandpiper", "Gadwall", "Red-tailed Hawk"))
+      {distribution <- "nbinomial"}
+    else {distribution <- "poisson"}
+
+    speciescol <- species
+    MyData <- na.exclude(data[, c(speciescol,
+                                  "day_of_survey_year",
+                                  "observation_date",
+                                  'survey_year',
+                                  'survey_id')])
+    names(MyData)[1] <- 'Abundance'
+    bspecies <- MyData[,1]
+
+    hyper.prec <- list(theta = list(prior = "pc.prec",
+                                    param = c(U, 0.05)))
+    inla.setOption(scale.model.default = TRUE)
+
+    I1 <- inla(Abundance ~ f(survey_year, model = "rw1", hyper = hyper.prec) + 
+             f(day_of_survey_year, model = "rw2", hyper = hyper.prec),
+           control.predictor = list(compute = TRUE, 
+                                    quantiles = c("0.025", "0.975")),
+           control.compute = list(dic = TRUE,
+                                  waic = TRUE),
+           family = distribution,
+           data = MyData)
+    
+  ### calculations and saving data
+    
+    MyData$Fitted <- I1$summary.fitted.values[,'mean']
+    
+    # trend for year
+    Yearsm <- I1$summary.random$survey_year
+    
+    # calculating residuals
+    mu <- MyData$Fitted
+    theta <- I1$summary.hyperpar[1, "mean"]
+    
+    if(distribution == 'nbinomial'){
+      # Pearson residuals for negative binomial distribution
+      E1 <- (bspecies - mu) / sqrt(mu + mu^2 / theta) 
+    }
+    if(distribution == 'poisson'){
+      # Pearson residuals for poisson distribution
+      E1 <- (bspecies - mu) / sqrt(mu) 
+    }
+    if(distribution == 'gaussian'){
+      # Residuals for gaussian distribution
+      E1 <-  MyData$Abundance-MyData$Fitted
+    }
+    names(E1)[1] <- "Residuals"
+    
+    
+    ### Check for overdispersion
+    
+    N <- nrow(MyData)
+    p <- nrow(I1$summary.fixed)
+    Dispersion <- sum(E1^2) / (N - p)
+    
+    
+    ### Day of Year Trends
+    
+    DayY <- I1$summary.random$day_of_survey_year
+    MyData$Residuals <- E1$Residuals
+    
+    
+    ### variograms
+    
+    # Variogram for checking for temporal autocorrelation by year 
+    temp <- E1$Residuals
+    MyData$E1 <- temp
+    MyData$Zeros <- rep(0, nrow(MyData))
+    V1 <- variog(coords = MyData[, c("survey_year", "Zeros")],
+                 data = MyData$E1,
+                 breaks = breaks)
+    
+    # Variogram for checking for temporal autocorrelation by data of year
+    V2 <- variog(coords = MyData[, c("day_of_survey_year", "Zeros")],
+                 data = MyData$E1,
+                 breaks = breaks2)
+    
+    
+    ### Extract the posterior marginal distributions for Year random walk
+    survey_year.marg <- I1$marginals.random$survey_year 
+    
+    
+    ### Create dataframe for storing data
+    Magdf <- data.frame(survey_year = seq(from = 1, to = 8, by = 1))
+    for(j in 1:8) { 
+      # Transform the posterior marginal distribution for current year so that it is not in log scale
+      tmarg <- inla.tmarginal(exp, survey_year.marg[[j]]) 
+      # Calculate mean value for year i
+      Magdf$mean[j] <- mean(tmarg[,1]) 
+      # Calculate 95% CRI for year i's estimate
+      Magdf$cri95[j] <- mean(inla.qmarginal(0.5, tmarg) - inla.qmarginal(0.025, tmarg), 
+                             inla.qmarginal(0.975, tmarg) - inla.qmarginal(0.5, tmarg))
+      # Calculate mean percent change current year vs initial
+      Magdf$percent.change.mean[j] <- 100 * (Magdf$mean[j] - Magdf$mean[1]) / Magdf$mean[1] 
+      # Calculate variance in percent change using 95% CRIs and variance estimation method 
+      Magdf$percent.change.cri95[j] <- Magdf$mean[j] / Magdf$mean[1] *
+        sqrt((Magdf$cri95[j]^2 / Magdf$mean[j]^2) + (Magdf$cri95[1]^2 / Magdf$mean[1]^2)) * 100
+      Magdf$lower.cri95[j] <- Magdf$percent.change.mean[j] - (Magdf$percent.change.cri95[j])
+      Magdf$upper.cri95[j] <- Magdf$percent.change.mean[j] + (Magdf$percent.change.cri95[j])
+    }
+    
+    
+    ### saving data
+    
+    yearsm_individual <- data.frame(species = over_half$species[i],
+                                    ID = Yearsm$ID,
+                                    mean = Yearsm$mean,
+                                    quant0.025 = Yearsm$`0.025quant`,
+                                    quant0.975 = Yearsm$`0.975quant`)
+    
+    dayY_individual <- data.frame(species = over_half$species[i],
+                                  ID = DayY$ID,
+                                  mean = DayY$mean,
+                                  quant0.025 = DayY$`0.025quant`,
+                                  quant0.975 = DayY$`0.975quant`)
+    
+    myData_individual <- data.frame(species = over_half$species[i],
+                                    abundance = MyData$Abundance,
+                                    day_of_year = MyData$day_of_survey_year,
+                                    date = MyData$observation_date,
+                                    survey_year = MyData$survey_year,
+                                    fitted = MyData$Fitted,
+                                    residuals = MyData$Residuals,
+                                    E1 = MyData$E1)
+    
+    magdf_individual <- data.frame(species = over_half$species[i],
+                                   survey_year = Magdf$survey_year,
+                                   change = Magdf$percent.change.mean,
+                                   lower = Magdf$lower.cri95,
+                                   upper = Magdf$upper.cri95)
+    
+    E1_individual <- data.frame(species = over_half$species[i],
+                                residuals = E1$Residuals)
+    
+    v1_individual <- data.frame(species = over_half$species[i],
+                                u = V1$u,
+                                v = V1$v)
+    
+    v2_individual <- data.frame(species = over_half$species[i],
+                                u = V2$u,
+                                v = V2$v)
+    
+  # data frames
+  yearsm_list[[i]] <- yearsm_individual
+  dayY_list[[i]] <- dayY_individual
+  myData_list[[i]] <- myData_individual
+  magdf_list[[i]] <- magdf_individual
+  
+  # model residuals
+  E1_list[[i]] <- E1_individual
+  
+  # dispersion and dic
+  dispersion_vector[i] <- Dispersion
+  DIC_vector[i] <- I1$dic$dic
+  
+  # variograms
+  v1_list[[i]] <- v1_individual
+  v2_list[[i]] <- v2_individual
+  
+  # posterior marginal distribution for year random walk
+  year_marg_list[[i]] <- survey_year.marg[[8]]
+  
+  # percent change since survey start mean and 95% confidence interval
+  percent_change_vector[[i]] <- Magdf$percent.change.mean[8]
+  percent_change_intervals_vector[[i]] <- Magdf$percent.change.cri95[8]
+  
+}
+
+
+
+### binding data
+
+yearsm_bound <- bind_rows(yearsm_list)
+dayY_bound <- bind_rows(dayY_list)
+myData_bound <- bind_rows(myData_list)
+magdf_bound <- bind_rows(magdf_list)
+E1_bound <- bind_rows(E1_list)
+v1_bound <- bind_rows(v1_list)
+v2_bound <- bind_rows(v2_list)
+
+additional_data <- data.frame(species = over_half$species,
+                              dispersion = dispersion_vector,
+                              DIC = DIC_vector,
+                              mean = percent_change_vector,
+                              interval = percent_change_intervals_vector)
+
+
+
+### declutter
+
+rm("bspecies",
+   "DayY","dayY_individual","dayY_list",
+   "E1","E1_individual","E1_list",
+   "hyper.prec",
+   "I1",
+   "Magdf","magdf_individual","magdf_list",
+   "MyData","myData_individual","myData_list",
+   "tmarg",
+   "V1","v1_individual","v1_list",
+   "V2","v2_individual","v2_list",
+   "year_marg_list","survey_year.marg",
+   "Yearsm","yearsm_individual","yearsm_list")
+
+```
+
+
+
+## average annual trend visualization
+
 ```{r aat plot test}
 
 # calculations
@@ -1602,3 +1869,51 @@ ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) +
 
 ```
 
+```{r aat plot for ccber >= 49 sample species}
+
+# calculations
+
+magdf_restricted <- magdf_bound %>% filter(survey_year == 8)
+
+AAT <- data.frame(species = magdf_restricted$species,
+                  PTM_Average_Annual_Trend = NA,
+                  AAT_LowerCI = NA,
+                  AAT_UpperCI = NA,
+                  AAT_Credible_Interval = NA)
+
+mag <- magdf_restricted$change * 0.01
+AAT$PTM_Average_Annual_Trend <- ((1+mag)^(1/8)-1)*100 #PTM: population trend magnitude
+
+mag <- magdf_restricted$lower * 0.01
+AAT$AAT_LowerCI <- ((1+mag)^(1/8)-1)*100
+
+mag <- magdf_restricted$upper * 0.01
+AAT$AAT_UpperCI <- ((1+mag)^(1/8)-1)*100
+
+AAT$AAT_Credible_Interval <- (abs(AAT$AAT_LowerCI - AAT$PTM_Average_Annual_Trend) +         
+                              abs(AAT$AAT_UpperCI - AAT$PTM_Average_Annual_Trend))/2
+
+# modification
+
+limAAT <- AAT[!is.na(AAT$AAT_Credible_Interval), ]
+limAAT <- limAAT[order(-limAAT$PTM_Average_Annual_Trend), ]
+limAAT$species <- factor(limAAT$species,
+                         levels = unique(limAAT$species))
+
+# plotting
+
+ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) + 
+  geom_point(size=5) + 
+  geom_segment(aes(x=species, 
+                   xend=species, 
+                   y=AAT_LowerCI, 
+                   yend=AAT_UpperCI),
+               linewidth = 1) +
+  geom_hline(yintercept = c(0), linetype="dotted") +
+  xlab("Species") +
+  ylab("Annual Trend At Survey Year 8") +
+  coord_flip() + 
+  theme_classic()
+# trends match the "percent change in abundance" plots
+
+```
