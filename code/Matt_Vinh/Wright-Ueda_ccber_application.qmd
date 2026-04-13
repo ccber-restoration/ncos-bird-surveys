@@ -24,9 +24,11 @@ library(INLA)
 library(purrr)
 library(knitr)
 
+# JRBP data
 jrbp_path <- here("data","JRBP_Bird_Transect_Data.csv")
 df <- read_csv(jrbp_path)
 
+# CCBER data
 ccber_path <- here("data","Matt_Vinh","survey-level_2026-03-01.rds")
 data <- read_rds(ccber_path)
 
@@ -1284,13 +1286,27 @@ rm("bspecies",
 
 ```{r example species percent change}
 #| echo: false
-ggplot() +
-  xlab("Year") +
-  ylab("Percent change in abundance since 2017") +
-  geom_line(data = magdf_bound, aes(x = year, y = change), color = "black") +
-  geom_ribbon(data = magdf_bound, aes(x = year, ymin = lower, ymax = upper), alpha = 0.3) +
-  xlim(2017,2025) +
-  facet_wrap(~ species,scales = "free_y")
+plot1 <- ggplot() +
+  xlab("Survey Year") +
+  ylab("Percent Change in Abundance since 2017") +
+  ggtitle("Percent Change in Abundance since 2017 versus Survey Year by Species") + 
+  geom_line(data = magdf_bound, aes(x = survey_year, y = change), color = "black") +
+  geom_ribbon(data = magdf_bound, aes(x = survey_year, ymin = lower, ymax = upper), alpha = 0.3) +
+  geom_hline(yintercept = 0, linetype = "dashed") + 
+  facet_wrap(~ species,scales = "free_y") + 
+  scale_x_continuous(breaks = seq(1, 8, by = 1)) + 
+  theme_light() + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 13))
+
+ggsave(filename = paste0("Sample_CCBER_Species_PCA_",
+                         format(Sys.Date(), "%y-%m-%d"), ".pdf"),
+       plot1,
+       width = 6.67,
+       height = 5,
+       units = "in")
+
 ```
 
 ```{r example species variogram}
@@ -1498,6 +1514,30 @@ ggplot() +
   xlim(1,8) +
   facet_wrap(~ species,
              scales = "free_y")
+
+```
+
+```{r abundance vs survey year}
+
+abundance_year <- ggplot(myData_bound,
+       aes(x = survey_year,
+           y = abundance)) + 
+  geom_point() + 
+  facet_wrap(~ species) + 
+  theme_light() + 
+  labs(title = "Sample CCBER Species Abundance versus Survey Year",
+       x = "Survey Year",
+       y = "Abundance") + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 15))
+
+ggsave(filename = paste0("Sample_CCBER_Species_Abundance_",
+                         format(Sys.Date(), "%y-%m-%d"), ".pdf"),
+       abundance_year,
+       width = 200,
+       height = 140,
+       units = "mm")
 
 ```
 
@@ -1820,7 +1860,7 @@ ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) +
 
 ```
 
-```{r aat plot for ccber example species}
+```{r aat plot for ccber sample species}
 
 # calculations
 
@@ -1853,7 +1893,7 @@ limAAT$species <- factor(limAAT$species,
 
 # plotting
 
-ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) + 
+aat1 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) + 
   geom_point(size=5) + 
   geom_segment(aes(x=species, 
                    xend=species, 
@@ -1866,6 +1906,13 @@ ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) +
   coord_flip() + 
   theme_classic()
 # trends match the "percent change in abundance" plots
+
+ggsave(filename = paste0("Sample_CCBER_Species_AAT_",
+                         format(Sys.Date(), "%y-%m-%d"), ".pdf"),
+       aat1,
+       width = 6.67,
+       height = 5,
+       units = "in")
 
 ```
 
@@ -1902,7 +1949,7 @@ limAAT$species <- factor(limAAT$species,
 
 # plotting
 
-ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) + 
+aat2 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) + 
   geom_point(size=5) + 
   geom_segment(aes(x=species, 
                    xend=species, 
@@ -1911,9 +1958,16 @@ ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) +
                linewidth = 1) +
   geom_hline(yintercept = c(0), linetype="dotted") +
   xlab("Species") +
-  ylab("Annual Trend At Survey Year 8") +
+  ylab("Annual Trend at Survey Year 8") +
   coord_flip() + 
   theme_classic()
 # trends match the "percent change in abundance" plots
+
+ggsave(filename = paste0("CCBER_Species_AAT_",
+                         format(Sys.Date(), "%y-%m-%d"), ".pdf"),
+       aat2,
+       width = 6.67,
+       height = 5,
+       units = "in")
 
 ```
