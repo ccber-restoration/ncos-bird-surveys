@@ -1910,8 +1910,8 @@ aat1 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) +
 ggsave(filename = paste0("Sample_CCBER_Species_AAT_",
                          format(Sys.Date(), "%y-%m-%d"), ".pdf"),
        aat1,
-       width = 6.67,
-       height = 5,
+       width = 13.33,
+       height = 10,
        units = "in")
 
 ```
