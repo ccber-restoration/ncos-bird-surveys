@@ -517,6 +517,9 @@ species_presence <- data %>%
 
 datatable(species_presence)
 
+over_half <- species_presence %>% 
+  filter(num_surveys >= 49)
+
 ```
 
 ```{r analysis of precipitation and waterfowl}
@@ -724,7 +727,7 @@ ggplot(richness_composite,
 
 ```
 
-```{r visualizaing U values from wright-ueda}
+```{r visualizing U values from wright-ueda}
 
 u_path <- here("data","Matt_Vinh","wright-ueda_u_values.csv")
 u_data <- read_csv(u_path,
@@ -733,6 +736,14 @@ u_data <- read_csv(u_path,
 ggplot(u_data,
        aes(x = X1)) + 
   geom_histogram()
+
+summary(u_data$X1)
+
+```
+
+```{r}
+
+
 
 ```
 
