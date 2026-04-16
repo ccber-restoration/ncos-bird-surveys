@@ -39,6 +39,20 @@ trophic_links <- read_xlsx(path = links_path, sheet = "trophic links") %>%
   filter(bird_species != "Whimbrel") %>% 
   filter(bird_species != "Hooded Merganser")
 
+# 3. read in invert abundance data ----
+invert_abundances <- read_csv(file= "data/aquatic_diets/invert_abundances.csv")
+
+#keep only log column and invert taxon names
+invert_abundances_log <- invert_abundances[, c("invert_taxon", "ln_count")]
+
+#Chironomidae spelled wrong
+invert_abundances_log$invert_taxon[
+  invert_abundances_log$invert_taxon == "Chironimidae"
+] <- "Chironomidae"
+
+#make vector of ln_count data
+invert_abundances_vector <- invert_abundances_log$ln_count
+names(invert_abundances_vector) <- invert_abundances_log$invert_taxon
 
 # create vector of bird names in invert network
 birds <- unique(trophic_links$bird_species)
@@ -49,7 +63,9 @@ inverts <- unique(trophic_links$invert_taxon)
 birds_invert_abundance <- bird_abundance %>% 
   filter(species %in% birds)
 
-# TODO check: these might need need to be put in the same order as in birds vector (i.e., same order as they appear in the network)
+#make vector of bird counts
+bird_invert_abundances_vector <- birds_invert_abundance$total_count
+names(bird_invert_abundances_vector) <- birds_invert_abundance$species
 
 ## create matrix for invert network ----
 tl_matrix <- trophic_links %>% 
@@ -64,6 +80,10 @@ matrix_subset <- adj_matrix[birds, inverts]
 link_colors1 <- matrix("gray80",
                        nrow = nrow(matrix_subset),
                        ncol = ncol(matrix_subset))
+
+#reorder abundances to match matrix
+invert_abundances_vector <- invert_abundances_vector[colnames(matrix_subset)]
+bird_invert_abundances_vector <- bird_invert_abundances_vector[rownames(matrix_subset)]
 
 # Assign colors by prey type
 
@@ -108,7 +128,8 @@ png(file = "figures/invert_network.png", width = 600, height = 900, units = "px"
 
 #continue filling out trophic links data
 #create draft network viz based on existing data
-plotweb(web = matrix_subset, text_size =1.1, horizontal = TRUE, link_color = link_colors1)
+plotweb(web = matrix_subset, text_size =0.8, horizontal = TRUE, link_color = link_colors1, 
+        higher_abundances = invert_abundances_vector, lower_abundances = bird_invert_abundances_vector)
 
 dev.off()
 
