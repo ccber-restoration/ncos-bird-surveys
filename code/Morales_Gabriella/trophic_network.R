@@ -29,6 +29,13 @@ bird_abundance <- bind_rows(duck_shorebird_abundance, gull_waders_abundance)
 
 rm(duck_shorebird_abundance, gull_waders_abundance)
 
+# add Red-breasted Merganser to bird_abundance
+red_breasted_merganser <- data.frame(species = "Red-breasted Merganser", general_type = "Waterfowl & Friends", total_count = 2)
+
+bird_abundance <- bind_rows(bird_abundance, red_breasted_merganser)
+
+rm(red_breasted_merganser)
+
 # 2. read in invert trophic link data ----
 links_path <- "data/aquatic_diets/NCOS_aquatic_trophic_links_2026-02-10.xlsx"
 
@@ -63,8 +70,11 @@ inverts <- unique(trophic_links$invert_taxon)
 birds_invert_abundance <- bird_abundance %>% 
   filter(species %in% birds)
 
+#attempt to scale bird species better by taking log of 'total_count'
+birds_invert_abundance$ln_count <- log(birds_invert_abundance$total_count)
+
 #make vector of bird counts
-bird_invert_abundances_vector <- birds_invert_abundance$total_count
+bird_invert_abundances_vector <- birds_invert_abundance$ln_count
 names(bird_invert_abundances_vector) <- birds_invert_abundance$species
 
 ## create matrix for invert network ----
@@ -128,7 +138,7 @@ png(file = "figures/invert_network.png", width = 600, height = 900, units = "px"
 
 #continue filling out trophic links data
 #create draft network viz based on existing data
-plotweb(web = matrix_subset, text_size =0.8, horizontal = TRUE, link_color = link_colors1, 
+plotweb(web = matrix_subset, text_size =0.9, horizontal = TRUE, link_color = link_colors1, 
         higher_abundances = invert_abundances_vector, lower_abundances = bird_invert_abundances_vector)
 
 dev.off()
@@ -155,13 +165,8 @@ prey <- unique(fish_trophic_links$prey_taxon)
 #filter bird abundance dataframe to only include species within the vert network 
 birds_vert_abundance <- bird_abundance %>% 
   filter(species %in% birds_fish_eating)
-#only has 19, expecting 20...
 
-
-#check which are missing...
-setdiff(birds_fish_eating, birds_vert_abundance$species)
-# TODO- for Francis- sort out RBME
-
+#create vert matrix
 tl_matrix_fish <- fish_trophic_links %>% 
   as.matrix()
 
@@ -173,6 +178,18 @@ adj_matrix_fish <- as_adjacency_matrix(trophic_network_fish, sparse=FALSE)
 
 #subset matrix to avoid duplication
 matrix_subset_fish <- adj_matrix_fish[birds_fish_eating, prey]
+
+# scale bird species better by taking log of 'total_count'
+birds_vert_abundance$ln_count <- log(birds_vert_abundance$total_count)
+
+#make vector of bird counts
+birds_vert_abundances_vector <- birds_vert_abundance$ln_count
+names(birds_vert_abundances_vector) <- birds_vert_abundance$species
+
+#reorder abundances to match matrix
+birds_vert_abundances_vector <- birds_vert_abundances_vector[rownames(matrix_subset_fish)]
+setdiff(rownames(matrix_subset_fish), names(birds_vert_abundances_vector))
+
 
 link_colors <- matrix("gray80",
                       nrow = nrow(matrix_subset_fish),
@@ -200,7 +217,8 @@ link_colors[, colnames(matrix_subset_fish) == "Procambarus clarkii"][
 ## save to file (png) ----
 png(file = "figures/trophic_network_fish_eating.png", width = 600, height = 800, units = "px", res = 100)
 
-plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE, link_color = link_colors)
+plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE, link_color = link_colors, 
+        lower_abundances = birds_vert_abundances_vector)
 
 
 dev.off()
@@ -211,28 +229,29 @@ dev.off()
 
 #FHJ notes: also saved as pdf with same width and height (no units needed bc inches is default), no res argument
 
-png(file = "figures/Food_Webs/trophic_network_fish_eating_phylopic.png", width = 7, height = 7.5, units = "in", res = 200)
+png(file = "figures/Food_Webs/trophic_network_fish_eating_phylopic.png", width = 7, height = 8, units = "in", res = 200)
 
-plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE, link_color = link_colors)
+plotweb(web = matrix_subset_fish, text_size =1, horizontal = TRUE, link_color = link_colors, 
+        lower_abundances = birds_vert_abundances_vector)
 add_phylopic_base(name = "Mugil cephalus",
-                  x = -0.18, y = 0.53,
-                  width = 0.2,
+                  x = -0.14, y = 0.53,
+                  width = 0.15,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Procambarus clarkii",
-                  x = -0.18, y = 0.035,
-                  width = 0.18,
+                  x = -0.14, y = 0.035,
+                  width = 0.12,
                   color = "black",
                   verbose = TRUE,
                   angle = 90)
 add_phylopic_base(name = "Gnatholepis cauerensis",
-                  x = -0.18, y = 0.82,
-                  width = 0.2,
+                  x = -0.14, y = 0.82,
+                  width = 0.15,
                   color = "black",
                   verbose = TRUE)
-add_phylopic_base(name = "Pseudacris maculata",
-                  x = -0.18, y = 0.3,
-                  width = 0.13,
+add_phylopic_base(name = "Lithobates blairi",
+                  x = -0.14, y = 0.3,
+                  width = 0.15,
                   color = "black",
                   verbose = TRUE)
 dev.off()
@@ -241,52 +260,53 @@ dev.off()
 
 png(file = "figures/Food_Webs/invert_network_phylopic.png", width = 6, height = 8, units = "in", res = 200)
 
-plotweb(web = matrix_subset, text_size =1, horizontal = TRUE, mar = c(2, 0.82, 0.82, 0.42), link_color = link_colors1)
+plotweb(web = matrix_subset, text_size =0.85, horizontal = TRUE, mar = c(2, 0.82, 0.82, 0.42), link_color = link_colors1,
+        higher_abundances = invert_abundances_vector, lower_abundances = bird_invert_abundances_vector)
 add_phylopic_base(name = "Cypris", #Ostracoda image 6
-                  x = -0.15, y = 0.93,
-                  width = 0.11,
+                  x = -0.12, y = 0.885,
+                  width = 0.098,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Corixidae", 
-                  x = -0.15, y = 0.785,
-                  width = 0.13,
+                  x = -0.12, y = 0.724,
+                  width = 0.105,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Clunio marinus", #Chironomidae image 5
-                  x = -0.15, y = 0.595,
-                  width = 0.13,
+                  x = -0.12, y = 0.613,
+                  width = 0.105,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Lumbricina", #Oligochaeta image 3
-                  x = -0.16, y = 0.43,
-                  width = 0.25,
+                  x = -0.13, y = 0.525,
+                  width = 0.22,
                   color = "black",
                   verbose = TRUE,
                   angle = 90)
 add_phylopic_base(name = "Copepoda", 
-                  x = -0.15, y = 0.3,
-                  width = 0.07,
+                  x = -0.12, y = 0.38,
+                  width = 0.06,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Ephydroidea", #Ephydridae broader family
-                  x = -0.15, y = 0.205,
-                  width = 0.12,
+                  x = -0.12, y = 0.282,
+                  width = 0.105,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Daphnia", #Cladocera image 1
-                  x = -0.15, y = 0.1,
+                  x = -0.12, y = 0.19,
                   width = 0.07,
                   color = "black",
                   verbose = TRUE)
-add_phylopic_base(name = "Caenorhabditis elegans", #Nematode image 4Ceratopogonidae
-                  x = -0.15, y = 0.03,
+add_phylopic_base(name = "Caenorhabditis elegans", #Nematode image 4
+                  x = -0.12, y = 0.07,
                   width = 0.14,
                   color = "black",
                   verbose = TRUE,
                   angle = 90)
 add_phylopic_base(name = "Ceratopogonidae",
-                  x = -0.15, y = -0.03,
-                  width = 0.095,
+                  x = -0.12, y = -0.02,
+                  width = 0.092,
                   color = "black",
                   verbose = TRUE)
 
