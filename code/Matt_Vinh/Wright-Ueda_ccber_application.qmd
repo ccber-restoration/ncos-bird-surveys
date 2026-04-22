@@ -1541,7 +1541,7 @@ ggsave(filename = paste0("Sample_CCBER_Species_Abundance_",
 
 ```
 
-```{r fitting models with ccber data, >=49 sample}
+```{r fitting models with ccber data, at least 1/3 frequency species}
 
 # obtaining all species observed in greater than half (48) of surveys (i.e., 49 or more)
 
@@ -1554,7 +1554,7 @@ species_presence <- observation_level %>%
   summarise(num_surveys = n_distinct(observation_date)) %>% 
   arrange(desc(num_surveys))
 over_half <- species_presence %>% 
-  filter(num_surveys >= 49)
+  filter(num_surveys >= 33)
 
 
 
@@ -1860,6 +1860,65 @@ ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) +
 
 ```
 
+```{r jrbp replication test}
+# using annual average instead of last year recorded
+
+# calculations
+
+magdf_mean <- magdf_bound %>% 
+  group_by(species) %>% 
+  summarise(
+    mean_change = mean(change),
+    mean_lower = mean(lower),
+    mean_upper = mean(upper)
+  )
+
+AAT <- data.frame(species = magdf_mean$species,
+                  PTM_Average_Annual_Trend = NA,
+                  AAT_LowerCI = NA,
+                  AAT_UpperCI = NA,
+                  AAT_Credible_Interval = NA)
+
+mag <- magdf_mean$mean_change * 0.01
+AAT$PTM_Average_Annual_Trend <- ((1+mag)^(1/31)-1)*100 #PTM: population trend magnitude
+
+mag <- magdf_mean$mean_lower * 0.01
+AAT$AAT_LowerCI <- ((1+mag)^(1/31)-1)*100
+
+mag <- magdf_mean$mean_upper * 0.01
+AAT$AAT_UpperCI <- ((1+mag)^(1/31)-1)*100
+
+AAT$AAT_Credible_Interval <- (abs(AAT$AAT_LowerCI - AAT$PTM_Average_Annual_Trend) +         
+                              abs(AAT$AAT_UpperCI - AAT$PTM_Average_Annual_Trend))/2
+
+# modification
+
+limAAT <- AAT[!is.na(AAT$AAT_Credible_Interval), ]
+limAAT <- limAAT[order(-limAAT$PTM_Average_Annual_Trend), ]
+limAAT$species <- factor(limAAT$species,
+                         levels = unique(limAAT$species))
+
+# plotting
+
+ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) + 
+  geom_point(size=5) + 
+  geom_segment(aes(x=species, 
+                   xend=species, 
+                   y=AAT_LowerCI, 
+                   yend=AAT_UpperCI),
+               linewidth = 1) +
+  geom_hline(yintercept = c(0), linetype="dotted") +
+  xlab("Species") +
+  ylab("Annual Trend (1989-2020)") +
+  theme(axis.title.y = element_text(size = 30, face = 'bold')) +
+  theme(axis.title.x = element_text(size = 30, face = 'bold')) +
+  theme(axis.text=element_text(size = 20, color = 'black')) +
+  coord_flip()
+
+# differes from AAT plot included in paper
+
+```
+
 ```{r aat plot for ccber sample species}
 
 # calculations
@@ -1873,13 +1932,13 @@ AAT <- data.frame(species = magdf_restricted$species,
                   AAT_Credible_Interval = NA)
 
 mag <- magdf_restricted$change * 0.01
-AAT$PTM_Average_Annual_Trend <- ((1+mag)^(1/8)-1)*100 #PTM: population trend magnitude
+AAT$PTM_Average_Annual_Trend <- ((1+mag)^(1/7)-1)*100 #PTM: population trend magnitude
 
 mag <- magdf_restricted$lower * 0.01
-AAT$AAT_LowerCI <- ((1+mag)^(1/8)-1)*100
+AAT$AAT_LowerCI <- ((1+mag)^(1/7)-1)*100
 
 mag <- magdf_restricted$upper * 0.01
-AAT$AAT_UpperCI <- ((1+mag)^(1/8)-1)*100
+AAT$AAT_UpperCI <- ((1+mag)^(1/7)-1)*100
 
 AAT$AAT_Credible_Interval <- (abs(AAT$AAT_LowerCI - AAT$PTM_Average_Annual_Trend) +         
                               abs(AAT$AAT_UpperCI - AAT$PTM_Average_Annual_Trend))/2
@@ -1907,7 +1966,7 @@ aat1 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) +
   theme_classic()
 # trends match the "percent change in abundance" plots
 
-ggsave(filename = paste0("Sample_CCBER_Species_AAT_",
+ggsave(filename = paste0("Sample_CCBER_Species_AAT_fixed_int_",
                          format(Sys.Date(), "%y-%m-%d"), ".pdf"),
        aat1,
        width = 13.33,
@@ -1916,7 +1975,7 @@ ggsave(filename = paste0("Sample_CCBER_Species_AAT_",
 
 ```
 
-```{r aat plot for ccber >= 49 sample species}
+```{r aat plot for ccber at least 1/3 frequency species}
 
 # calculations
 
@@ -1946,21 +2005,40 @@ limAAT <- AAT[!is.na(AAT$AAT_Credible_Interval), ]
 limAAT <- limAAT[order(-limAAT$PTM_Average_Annual_Trend), ]
 limAAT$species <- factor(limAAT$species,
                          levels = unique(limAAT$species))
+limAAT <- limAAT %>% 
+  mutate(
+    region = case_when(
+      AAT_LowerCI < 0 & AAT_UpperCI < 0 ~ "decrease",
+      AAT_LowerCI < 0 & AAT_UpperCI > 0 ~ "overlap",
+      AAT_LowerCI > 0 & AAT_UpperCI > 0 ~ "increase"
+    )
+  )
 
 # plotting
 
-aat2 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend)) + 
-  geom_point(size=5) + 
+colors <- c(
+  "decrease" <- "red",
+  "increase" <- "blue",
+  "overlap" <- "grey40"
+)
+
+aat2 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend,
+                           color = region)) + 
+  geom_point(size=1.5,
+             alpha = 0.75) + 
   geom_segment(aes(x=species, 
                    xend=species, 
-                   y=AAT_LowerCI, 
+                   y=AAT_LowerCI,
                    yend=AAT_UpperCI),
-               linewidth = 1) +
+               linewidth = 0.5) +
   geom_hline(yintercept = c(0), linetype="dotted") +
   xlab("Species") +
   ylab("Annual Trend at Survey Year 8") +
   coord_flip() + 
-  theme_classic()
+  theme_classic() + 
+  scale_color_manual(values = colors) + 
+  theme(legend.position = "none",
+        axis.text.y = element_text(size = 6))
 # trends match the "percent change in abundance" plots
 
 ggsave(filename = paste0("CCBER_Species_AAT_",
