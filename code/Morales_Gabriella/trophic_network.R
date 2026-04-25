@@ -144,6 +144,9 @@ plotweb(web = matrix_subset, text_size =0.9, horizontal = TRUE, link_color = lin
 dev.off()
 
 
+total_links <- sum(matrix_subset)
+chironomidae_links <- sum(matrix_subset[,"Chironomidae"])
+
 # ~~~~~~~~~~~~~~~~~ ----
 
 # piscivorous network ----
@@ -190,6 +193,8 @@ names(birds_vert_abundances_vector) <- birds_vert_abundance$species
 birds_vert_abundances_vector <- birds_vert_abundances_vector[rownames(matrix_subset_fish)]
 setdiff(rownames(matrix_subset_fish), names(birds_vert_abundances_vector))
 
+#rename 'procambarus clarkii' as crayfish
+colnames(matrix_subset_fish)[4] <- "crayfish"
 
 link_colors <- matrix("gray80",
                       nrow = nrow(matrix_subset_fish),
@@ -223,6 +228,8 @@ plotweb(web = matrix_subset_fish, text_size =1.1, horizontal = TRUE, link_color 
 
 dev.off()
 
+total_links <- sum(matrix_subset_fish) #47
+fish_links <- sum(matrix_subset_fish[,"small fish"])
 
 # add images to network attempt
 
@@ -234,23 +241,23 @@ png(file = "figures/Food_Webs/trophic_network_fish_eating_phylopic.png", width =
 plotweb(web = matrix_subset_fish, text_size =1, horizontal = TRUE, link_color = link_colors, 
         lower_abundances = birds_vert_abundances_vector)
 add_phylopic_base(name = "Mugil cephalus",
-                  x = -0.14, y = 0.53,
+                  x = -0.12, y = 0.53,
                   width = 0.15,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Procambarus clarkii",
-                  x = -0.14, y = 0.035,
-                  width = 0.12,
+                  x = -0.11, y = 0.035,
+                  width = 0.13,
                   color = "black",
                   verbose = TRUE,
                   angle = 90)
 add_phylopic_base(name = "Gnatholepis cauerensis",
-                  x = -0.14, y = 0.82,
+                  x = -0.12, y = 0.82,
                   width = 0.15,
                   color = "black",
                   verbose = TRUE)
 add_phylopic_base(name = "Lithobates blairi",
-                  x = -0.14, y = 0.3,
+                  x = -0.12, y = 0.3,
                   width = 0.15,
                   color = "black",
                   verbose = TRUE)
