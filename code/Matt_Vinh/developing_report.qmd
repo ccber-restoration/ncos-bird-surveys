@@ -16,6 +16,7 @@ library(vegan)
 library(INLA)
 library(knitr)
 library(DT)
+library(ggrepel)
 
 datapath <- here("data","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
 data <- read_rds(datapath)
@@ -741,9 +742,172 @@ summary(u_data$X1)
 
 ```
 
-```{r}
+```{r maximum survey count per survey year nmds}
+#| message: false
 
+# data formatting
 
+year_max <- data %>% 
+  group_by(species,survey_year) %>% 
+  summarise(max_count = max(count))
+top_species_pyear <- year_max %>% 
+  group_by(survey_year) %>% 
+  slice_max(order_by = max_count,n = 3)
+
+community2 <- xtabs(max_count ~ survey_year + species, data = year_max)
+community2 <- as.matrix(unclass(community2))
+
+# nmds calculation
+
+nmds2 <- metaMDS(community2,
+                 autotransform = F,
+                 distance = "bray",
+                 engine = "monoMDS",
+                 k = 2,
+                 weakties = T,
+                 model = "global",
+                 maxit = 300,
+                 try = 40,
+                 trymax = 100,
+                 trace = F)
+
+nmds2_site_scores <- as.data.frame(scores(nmds2)$sites) %>% 
+  rownames_to_column(var = "survey_year")
+nmds2_site_scores$survey_year <- as.numeric(nmds2_site_scores$survey_year)
+nmds2_site_scores <- nmds2_site_scores %>% 
+  arrange(survey_year) %>% 
+  mutate(xend = lead(NMDS1),yend = lead(NMDS2))
+
+nmds2_species_scores <- as.data.frame(scores(nmds2,"species"))
+nmds2_species_scores$species <- rownames(nmds2_species_scores)
+
+nmds2_species_scores_joined <- right_join(nmds2_species_scores, top_species_pyear) %>% 
+  distinct(species, .keep_all = T)
+nmds2_species_scores_joined$survey_year <- as.numeric(nmds2_species_scores_joined$survey_year)
+
+# visualization
+
+nmdsfigure2 <- ggplot() + 
+  geom_point(data = nmds2_site_scores,
+                      aes(x = NMDS1, y = NMDS2,
+                          color = survey_year),
+             size = 3) + 
+  geom_segment(data = nmds2_site_scores,
+               aes(x = NMDS1, y = NMDS2,
+                   xend = xend,
+                   yend = yend,
+                   color = survey_year),
+                   arrow = arrow(length = unit(0.25,"cm")),
+               size = 2) + 
+  geom_text_repel(data = nmds2_species_scores_joined,
+                  aes(x = NMDS1, y = NMDS2,
+                      label = species),
+                  max.overlaps = 500,size = 3) + 
+  annotate("text",
+           x = -0.275, y = 0.1,
+           label = paste("2D stress =", round(nmds2$stress,3))) + 
+  scale_color_viridis_c(option = "C",alpha = 0.8) + 
+  theme_light() + 
+  labs(title = "Maximum Species Abundance per Year NMDS",
+       color = "Survey Year") + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 15))
+
+# saving
+
+ggsave(paste0("Maximum_Species_Abundance_per_Survey_Year_NMDS_",
+              format(Sys.Date(), "%y-%m-%d"),
+              ".pdf"),
+       nmdsfigure2,
+       width = 9,
+       height = 8,
+       units = "in")
 
 ```
 
+```{r maximum survey count per survey year nmds}
+#| message: false
+#| warning: false
+
+# data formatting
+
+year_mean <- data %>% 
+  group_by(species,survey_year) %>% 
+  summarise(mean_count = mean(count))
+top_species_pyear <- year_mean %>% 
+  group_by(survey_year) %>% 
+  slice_max(order_by = mean_count,n = 3)
+
+community3 <- xtabs(mean_count ~ survey_year + species, data = year_mean)
+community3 <- as.matrix(unclass(community3))
+
+# nmds calculation
+
+nmds3 <- metaMDS(community3,
+                 autotransform = F,
+                 distance = "bray",
+                 engine = "monoMDS",
+                 k = 2,
+                 weakties = T,
+                 model = "global",
+                 maxit = 300,
+                 try = 40,
+                 trymax = 100,
+                 trace = F)
+
+nmds3_site_scores <- as.data.frame(scores(nmds3)$sites) %>% 
+  rownames_to_column(var = "survey_year")
+nmds3_site_scores$survey_year <- as.numeric(nmds3_site_scores$survey_year)
+nmds3_site_scores <- nmds3_site_scores %>% 
+  arrange(survey_year) %>% 
+  mutate(xend = lead(NMDS1),yend = lead(NMDS2))
+
+nmds3_species_scores <- as.data.frame(scores(nmds3,"species"))
+nmds3_species_scores$species <- rownames(nmds3_species_scores)
+
+nmds3_species_scores_joined <- right_join(nmds3_species_scores, top_species_pyear) %>% 
+  distinct(species, .keep_all = T)
+nmds3_species_scores_joined$survey_year <- as.numeric(nmds3_species_scores_joined$survey_year)
+
+# visualization
+
+nmdsfigure3 <- ggplot() + 
+  geom_point(data = nmds3_site_scores,
+                      aes(x = NMDS1, y = NMDS2,
+                          color = survey_year),
+             size = 3) + 
+  geom_segment(data = nmds3_site_scores,
+               aes(x = NMDS1, y = NMDS2,
+                   xend = xend,
+                   yend = yend,
+                   color = survey_year),
+                   arrow = arrow(length = unit(0.25,"cm"))) + 
+  geom_text_repel(data = nmds3_species_scores_joined,
+                  aes(x = NMDS1, y = NMDS2,
+                      label = species),
+                  max.overlaps = 500,size = 3) + 
+  annotate("text",
+           x = -0.2, y = 0.1,
+           label = paste("2D stress =", round(nmds3$stress,3))) + 
+  scale_color_viridis_c(option = "C",alpha = 0.8) + 
+  theme_light() + 
+  labs(title = "Mean Species Abundance per Year NMDS",
+       color = "Survey Year") + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 15)) + 
+  xlim(c(-0.3, 0.3)) + 
+  ylim(c(-0.2, 0.2))
+
+# saving
+
+ggsave(paste0("Mean_Species_Abundance_per_Survey_Year_NMDS_",
+              format(Sys.Date(), "%y-%m-%d"),
+              ".pdf"),
+       nmdsfigure3,
+       width = 9,
+       height = 8,
+       units = "in")
+
+```
