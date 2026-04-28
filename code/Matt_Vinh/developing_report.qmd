@@ -170,68 +170,86 @@ annual_reports <- read_csv(reports_path)
 
 # visualization
 
-ggplot() + 
+lines <- ggplot() + 
   geom_point(data = richness,
              aes(x = survey_year,
                  y = n),
-             color = "blue") + 
+             color = "blue",
+             size = 3) + 
   geom_line(data = richness,
              aes(x = survey_year,
                  y = n),
-             color = "blue") + 
+             color = "blue",
+            linewidth = 1.5) + 
   annotate("text",
            x = 7,
-           y = richness$n[richness$survey_year == 7] - 10,
+           y = richness$n[richness$survey_year == 7] - 11,
            label = "CCBER",
-           color = "blue") + 
+           color = "blue",
+           size = 7) + 
   geom_point(data = ebird_richness,
              aes(x = survey_year,
                  y = richness),
-             color = "red") + 
+             color = "red",
+             size = 3) + 
   geom_line(data = ebird_richness,
              aes(x = survey_year,
                  y = richness),
-             color = "red") + 
+             color = "red",
+            linetype = "dashed",
+            linewidth = 1.5) + 
   annotate("text",
            x = 7,
-           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 10,
+           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 11,
            label = "eBird",
-           color = "red") + 
+           color = "red",
+           size = 7) + 
   geom_point(data = richness_composite,
              aes(x = survey_year,
                  y = diff),
-             color = "purple") + 
+             color = "purple",
+             size = 3) + 
    geom_line(data = richness_composite,
              aes(x = survey_year,
                  y = diff),
-             color = "purple") + 
+             color = "purple",
+             linetype = "longdash",
+             linewidth = 1.5) + 
   annotate("text",
            x = 7,
-           y = richness_composite$diff[richness_composite$survey_year == 7] - 10,
+           y = richness_composite$diff[richness_composite$survey_year == 7] - 11,
            label = "eBird - CCBER",
-           color = "purple") + 
+           color = "purple",
+           size = 7) + 
   geom_point(data = annual_reports,
              aes(x = survey_year,
                  y = reported_richness),
-             color = "forestgreen") + 
+             color = "forestgreen",
+             size = 3) + 
   geom_line(data = annual_reports,
              aes(x = survey_year,
                  y = reported_richness),
-             color = "forestgreen") + 
+             color = "forestgreen",
+            linetype = "twodash",
+            linewidth = 1.5) + 
   annotate("text",
-           x = 7,
-           y = annual_reports$reported_richness[annual_reports$survey_year == 7] - 10,
+           x = 6,
+           y = annual_reports$reported_richness[annual_reports$survey_year == 7] - 11,
            label = "CCBER Annual Reports",
-           color = "forestgreen") + 
+           color = "forestgreen",
+           size = 7) + 
   theme_classic() + 
   labs(title = "Species Richness by Survey Year",
        x = "Survey Year",
        y = "Number of Species Detected") + 
-  theme(plot.title = element_text(hjust = 0.5,
+  theme(text = element_text(family = "")
+    plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 14),
-        axis.title.x = element_text(size = 13),
-        axis.title.y = element_text(size = 13),
+                                  size = 24),
+        axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 15),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 15),
         legend.position = "none") + 
   scale_x_continuous(breaks = seq(1,8,by = 1)) + 
   scale_y_continuous(expand = c(0,0),
@@ -276,14 +294,14 @@ ggplot(richness_joined,
 
 # saving
 
-ggsave(filename = paste0("Species_Richness_",
-                         format(Sys.Date(),
-                                "%y-%m-%d"),
-                         ".pdf"),
+ggsave(filename = paste0("NCOS_Species_Richness_Comparison_",
+                         format(Sys.Date(), "%y-%m-%d"),
+                         ".svg"),
        lines,
-       width = 200,
-       height = 140,
-       units = "mm")
+       dpi = 1000,
+       width = 9,
+       height = 6,
+       units = "in")
 
 ```
 
