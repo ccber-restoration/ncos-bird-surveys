@@ -170,7 +170,7 @@ annual_reports <- read_csv(reports_path)
 
 # visualization
 
-lines <- ggplot() + 
+ggplot() + 
   geom_point(data = richness,
              aes(x = survey_year,
                  y = n),
@@ -237,6 +237,42 @@ lines <- ggplot() +
   scale_y_continuous(expand = c(0,0),
                      breaks = seq(0,225, by = 50),
                      limits = c(0,225))
+
+temp1 <- richness %>% 
+  rename(richness = n) %>% 
+  mutate(category = "CCBER")
+temp2 <- ebird_richness %>% 
+  mutate(category = "eBird")
+temp3 <- richness_composite %>% 
+  select(c(1,4)) %>% 
+  rename(richness = diff) %>% 
+  mutate(category = "eBird_minus_CCBER")
+temp4 <- annual_reports %>% 
+  rename(richness = reported_richness) %>% 
+  mutate(category = "CCBER_Annual_Reports") %>% 
+  add_row(survey_year = 8, richness = 0, category = "CCBER_Annual_Reports")
+richness_joined <- rbind(rbind(rbind(temp1, temp2), temp3), temp4)
+
+ggplot(richness_joined,
+       aes(x = survey_year,
+           y = richness,
+           fill = category)) + 
+  geom_col(alpha = 0.8) + 
+  facet_wrap(~ category) + 
+  theme_classic() + 
+  labs(title = "Species Richness by Survey Year",
+       x = "Survey Year",
+       y = "Number of Species Detected") + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14),
+        axis.title.x = element_text(size = 13),
+        axis.title.y = element_text(size = 13),
+        legend.position = "none") + 
+  scale_fill_manual(values = c("CCBER" = "blue",
+                               "eBird" = "red",
+                               "eBird_minus_CCBER" = "purple",
+                               "CCBER_Annual_Reports" = "forestgreen"))
 
 # saving
 
@@ -791,35 +827,44 @@ nmdsfigure2 <- ggplot() +
   geom_point(data = nmds2_site_scores,
                       aes(x = NMDS1, y = NMDS2,
                           color = survey_year),
-             size = 3) + 
+             size = 5) + 
   geom_segment(data = nmds2_site_scores,
                aes(x = NMDS1, y = NMDS2,
                    xend = xend,
                    yend = yend,
                    color = survey_year),
-                   arrow = arrow(length = unit(0.25,"cm")),
-               size = 2) + 
+                   arrow = arrow(length = unit(0.35,"cm")),
+               size = 1.25) + 
   geom_text_repel(data = nmds2_species_scores_joined,
                   aes(x = NMDS1, y = NMDS2,
                       label = species),
-                  max.overlaps = 500,size = 3) + 
+                  max.overlaps = 500,size = 5.5) + 
   annotate("text",
            x = -0.275, y = 0.1,
-           label = paste("2D stress =", round(nmds2$stress,3))) + 
+           label = paste("2D stress =", round(nmds2$stress,3)),
+           size = 6) + 
   scale_color_viridis_c(option = "C",alpha = 0.8) + 
   theme_light() + 
   labs(title = "Maximum Species Abundance per Year NMDS",
        color = "Survey Year") + 
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 15))
+                                  size = 24),
+        axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 15),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 15),
+        legend.title = element_text(size = 20),
+        legend.text = element_text(size = 15),
+        legend.position = c(0.15, 0.15))
 
 # saving
 
 ggsave(paste0("Maximum_Species_Abundance_per_Survey_Year_NMDS_",
               format(Sys.Date(), "%y-%m-%d"),
-              ".pdf"),
+              ".svg"),
        nmdsfigure2,
+       dpi = 1000,
        width = 9,
        height = 8,
        units = "in")

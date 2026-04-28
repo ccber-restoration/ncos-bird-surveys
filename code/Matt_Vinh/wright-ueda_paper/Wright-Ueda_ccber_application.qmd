@@ -2024,28 +2024,38 @@ colors <- c(
 
 aat2 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend,
                            color = region)) + 
-  geom_point(size=1.5,
+  geom_point(size=3,
              alpha = 0.75) + 
   geom_segment(aes(x=species, 
                    xend=species, 
                    y=AAT_LowerCI,
                    yend=AAT_UpperCI),
-               linewidth = 0.5) +
+               linewidth = 1.5) +
   geom_hline(yintercept = c(0), linetype="dotted") +
+  ggtitle("Average Annual Trend per NCOS Species") + 
   xlab("Species") +
-  ylab("Annual Trend at Survey Year 8") +
+  ylab("Average Annual Trend (% change per Year)") +
   coord_flip() + 
   theme_classic() + 
   scale_color_manual(values = colors) + 
-  theme(legend.position = "none",
-        axis.text.y = element_text(size = 6))
+  theme(aspect.ratio = 1.5,
+        legend.position = "none",
+        plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 24),
+        axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 15),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 11))
 # trends match the "percent change in abundance" plots
 
 ggsave(filename = paste0("CCBER_Species_AAT_",
-                         format(Sys.Date(), "%y-%m-%d"), ".pdf"),
+                         format(Sys.Date(), "%y-%m-%d"),
+                         ".svg"),
        aat2,
-       width = 6.67,
-       height = 5,
+       dpi = 1000,
+       width = 9,
+       height = 13.5,
        units = "in")
 
 ```
