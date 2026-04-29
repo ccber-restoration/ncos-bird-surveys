@@ -2055,7 +2055,7 @@ ggsave(filename = paste0("CCBER_Species_AAT_",
        aat2,
        dpi = 1000,
        width = 9,
-       height = 13.5,
+       height = 11.5,
        units = "in")
 
 ```
