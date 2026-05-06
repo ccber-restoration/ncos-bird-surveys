@@ -308,54 +308,49 @@ ggsave(filename = paste0("NCOS_Species_Richness_Comparison_",
 
 ```{r line plot for poster}
 
-ggplot() + 
+lines2 <- ggplot() + 
   geom_point(data = richness,
              aes(x = survey_year,
                  y = n),
-             color = "blue",
+             color = "darkgreen",
              size = 3) + 
   geom_line(data = richness,
              aes(x = survey_year,
                  y = n),
-             color = "blue",
+             color = "darkgreen",
             linetype = "dashed",
             linewidth = 1.5) + 
   annotate("text",
            x = 7,
-           y = richness$n[richness$survey_year == 7] - 20,
-           label = "CCBER",
-           color = "blue",
+           y = richness$n[richness$survey_year == 7] - 25,
+           label = "Cheadle\nCenter",
+           color = "darkgreen",
            size = 7) + 
   geom_point(data = ebird_richness,
              aes(x = survey_year,
                  y = richness),
-             color = "red",
+             color = "saddlebrown",
              size = 3) + 
   geom_line(data = ebird_richness,
              aes(x = survey_year,
                  y = richness),
-             color = "red",
+             color = "saddlebrown",
             linetype = "longdash",
             linewidth = 1.5) + 
   annotate("text",
            x = 7,
            y = ebird_richness$richness[ebird_richness$survey_year == 7] - 20,
            label = "eBird",
-           color = "red",
+           color = "saddlebrown",
            size = 7) + 
   theme_classic() + 
-  labs(title = "Species Richness by Survey Year",
-       x = "Survey Year",
-       y = "Number of Species Detected") + 
-  theme(plot.title = element_text(hjust = 0.5,
-                                  face = "bold",
-                                  size = 24),
-        axis.title.x = element_text(size = 20),
+  labs(x = "Survey Year",
+       y = "Number of Species\nDetected") + 
+  theme(axis.title.x = element_text(size = 20),
         axis.text.x = element_text(size = 16),
         axis.title.y = element_text(size = 20),
         axis.text.y = element_text(size = 16),
-        legend.position = "none",
-        text = element_text(family = "Avenir")) + 
+        legend.position = "none") + 
   ylim(c(75, 200)) + 
   scale_x_continuous(breaks = seq(1, 8, by = 1))
 
@@ -917,7 +912,7 @@ nmdsfigure2 <- ggplot() +
                    yend = yend,
                    color = survey_year),
                    arrow = arrow(length = unit(0.35,"cm")),
-               size = 1.25) + 
+               linewidth = 1.25) + 
   geom_text_repel(data = nmds2_species_scores_joined,
                   aes(x = NMDS1, y = NMDS2,
                       label = species),
@@ -928,22 +923,18 @@ nmdsfigure2 <- ggplot() +
            size = 6) + 
   scale_color_viridis_c(option = "C",alpha = 0.8) + 
   theme_light() + 
-  labs(title = "Maximum Species Abundance per Year NMDS",
-       color = "Survey Year") + 
-  theme(plot.title = element_text(hjust = 0.5,
-                                  face = "bold",
-                                  size = 24),
-        axis.title.x = element_text(size = 20),
+  labs(color = "Survey Year") + 
+  theme(axis.title.x = element_text(size = 20),
         axis.text.x = element_text(size = 15),
         axis.title.y = element_text(size = 20),
         axis.text.y = element_text(size = 15),
-        legend.title = element_text(size = 20),
+        legend.title = element_text(size = 19),
         legend.text = element_text(size = 15),
         legend.position = c(0.15, 0.15))
 
 # saving
 
-ggsave(paste0("Maximum_Species_Abundance_per_Survey_Year_NMDS_",
+ggsave(paste0("Maximum_Species_Count_per_Survey_Year_NMDS_",
               format(Sys.Date(), "%y-%m-%d"),
               ".svg"),
        nmdsfigure2,
