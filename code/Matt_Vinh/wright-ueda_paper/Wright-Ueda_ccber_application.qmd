@@ -2022,7 +2022,8 @@ colors <- c(
   "overlap" <- "grey40"
 )
 
-aat2 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend,
+aat2 <- ggplot(limAAT %>% filter(region != "overlap"),
+               aes(x=species, y=PTM_Average_Annual_Trend,
                            color = region)) + 
   geom_point(size=3,
              alpha = 0.75) + 
@@ -2032,9 +2033,9 @@ aat2 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend,
                    yend=AAT_UpperCI),
                linewidth = 1.5) +
   geom_hline(yintercept = c(0), linetype="dotted") +
-  ggtitle("Average Annual Trend per NCOS Species") + 
+  ggtitle("Average Annual Trend per\nNCOS Species") + 
   xlab("Species") +
-  ylab("Average Annual Trend (% change per Year)") +
+  ylab("Average Annual Trend") +
   coord_flip() + 
   theme_classic() + 
   scale_color_manual(values = colors) + 
@@ -2044,18 +2045,18 @@ aat2 <- ggplot(limAAT, aes(x=species, y=PTM_Average_Annual_Trend,
                                   face = "bold",
                                   size = 24),
         axis.title.x = element_text(size = 20),
-        axis.text.x = element_text(size = 15),
+        axis.text.x = element_text(size = 16),
         axis.title.y = element_text(size = 20),
-        axis.text.y = element_text(size = 11))
+        axis.text.y = element_text(size = 16))
 # trends match the "percent change in abundance" plots
 
-ggsave(filename = paste0("CCBER_Species_AAT_",
+ggsave(filename = paste0("CCBER_Species_AAT_no_grey_",
                          format(Sys.Date(), "%y-%m-%d"),
                          ".svg"),
        aat2,
        dpi = 1000,
        width = 9,
-       height = 11.5,
+       height = 8,
        units = "in")
 
 ```
