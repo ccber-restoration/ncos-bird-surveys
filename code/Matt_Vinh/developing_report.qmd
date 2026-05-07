@@ -1030,3 +1030,44 @@ ggsave(paste0("Mean_Species_Abundance_per_Survey_Year_NMDS_",
        units = "in")
 
 ```
+
+```{r understanding aat species groups}
+
+# negative trend
+
+temp <- data %>% filter(species %in% c("Mourning Dove",
+                                       "Western Meadowlark",
+                                       "American Pipit",
+                                       "Western Sandpiper"))
+ggplot(temp,
+       aes(x = substrate)) + 
+  geom_bar() + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  labs(title = "negative abundance trend species")
+# most popular substrates: bare ground, herbaceous vegetation, mud
+
+# positive trend
+
+temp <- data %>% filter(species %in% c("Snowy Egret",
+                                       "Lesser Goldfinch",
+                                       "White-crowned Sparrow",
+                                       "Mallard",
+                                       "Black-necked Stilt",
+                                       "American Coot",
+                                       "Song Sparrow",
+                                       "Red-winged Blackbird",
+                                       "Blue-gray Gnatcatcher",
+                                       "Turkey Vulture",
+                                       "Bushtit",
+                                       "Common Yellowthroat",
+                                       "Black-crowned Night Heron",
+                                       "Savannah Sparrow"))
+ggplot(temp,
+       aes(x = substrate)) + 
+  geom_bar() + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  labs(title = "positive abundance trend species")
+# most popular substrates: shrubs, herbaceous vegetation, trees, water (floating)
+
+```
+
