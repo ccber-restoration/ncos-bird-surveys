@@ -318,7 +318,6 @@ lines2 <- ggplot() +
              aes(x = survey_year,
                  y = n),
              color = "darkgreen",
-            linetype = "dashed",
             linewidth = 1.5) + 
   annotate("text",
            x = 7,
@@ -335,7 +334,6 @@ lines2 <- ggplot() +
              aes(x = survey_year,
                  y = richness),
              color = "saddlebrown",
-            linetype = "longdash",
             linewidth = 1.5) + 
   annotate("text",
            x = 7,

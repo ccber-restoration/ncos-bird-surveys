@@ -43,7 +43,7 @@
 <circle cx='470.96' cy='163.30' r='3.56' style='stroke-width: 0.71; stroke: #006400; fill: #006400;' />
 <circle cx='543.96' cy='134.21' r='3.56' style='stroke-width: 0.71; stroke: #006400; fill: #006400;' />
 <circle cx='616.97' cy='147.90' r='3.56' style='stroke-width: 0.71; stroke: #006400; fill: #006400;' />
-<polyline points='105.94,187.25 178.94,146.19 251.95,144.48 324.95,170.14 397.96,156.45 470.96,163.30 543.96,134.21 616.97,147.90 ' style='stroke-width: 3.20; stroke: #006400; stroke-dasharray: 17.07,17.07; stroke-linecap: butt;' />
+<polyline points='105.94,187.25 178.94,146.19 251.95,144.48 324.95,170.14 397.96,156.45 470.96,163.30 543.96,134.21 616.97,147.90 ' style='stroke-width: 3.20; stroke: #006400; stroke-linecap: butt;' />
 <text x='543.96' y='169.77' text-anchor='middle' style='font-size: 19.92px;fill: #006400; font-family: "Arial";' textLength='74.19px' lengthAdjust='spacingAndGlyphs'>Cheadle</text>
 <text x='543.96' y='198.45' text-anchor='middle' style='font-size: 19.92px;fill: #006400; font-family: "Arial";' textLength='59.77px' lengthAdjust='spacingAndGlyphs'>Center</text>
 <circle cx='105.94' cy='149.61' r='3.56' style='stroke-width: 0.71; stroke: #8B4513; fill: #8B4513;' />
@@ -54,7 +54,7 @@
 <circle cx='470.96' cy='29.86' r='3.56' style='stroke-width: 0.71; stroke: #8B4513; fill: #8B4513;' />
 <circle cx='543.96' cy='24.73' r='3.56' style='stroke-width: 0.71; stroke: #8B4513; fill: #8B4513;' />
 <circle cx='616.97' cy='33.28' r='3.56' style='stroke-width: 0.71; stroke: #8B4513; fill: #8B4513;' />
-<polyline points='105.94,149.61 178.94,57.23 251.95,34.99 324.95,46.97 397.96,65.78 470.96,29.86 543.96,24.73 616.97,33.28 ' style='stroke-width: 3.20; stroke: #8B4513; stroke-dasharray: 29.88,12.80; stroke-linecap: butt;' />
+<polyline points='105.94,149.61 178.94,57.23 251.95,34.99 324.95,46.97 397.96,65.78 470.96,29.86 543.96,24.73 616.97,33.28 ' style='stroke-width: 3.20; stroke: #8B4513; stroke-linecap: butt;' />
 <text x='543.96' y='57.51' text-anchor='middle' style='font-size: 19.92px;fill: #8B4513; font-family: "Arial";' textLength='46.48px' lengthAdjust='spacingAndGlyphs'>eBird</text>
 </g>
 <g clip-path='url(#cpMC4wMHw2NDguMDB8MC4wMHwyODguMDA=)'>
