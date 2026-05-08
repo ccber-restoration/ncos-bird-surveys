@@ -339,7 +339,7 @@ lines2 <- ggplot() +
             linewidth = 1.5) + 
   annotate("text",
            x = 7,
-           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 20,
+           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 15,
            label = "eBird",
            color = "saddlebrown",
            size = 7) + 
@@ -350,7 +350,8 @@ lines2 <- ggplot() +
         axis.text.x = element_text(size = 16),
         axis.title.y = element_text(size = 20),
         axis.text.y = element_text(size = 16),
-        legend.position = "none") + 
+        legend.position = "none",
+        text = element_text(family = "Avenir LT Std")) + 
   ylim(c(75, 200)) + 
   scale_x_continuous(breaks = seq(1, 8, by = 1))
 
@@ -930,7 +931,8 @@ nmdsfigure2 <- ggplot() +
         axis.text.y = element_text(size = 15),
         legend.title = element_text(size = 19),
         legend.text = element_text(size = 15),
-        legend.position = c(0.15, 0.15))
+        legend.position = c(0.15, 0.15),
+        text = element_text(family = "Avenir LT Std"))
 
 # saving
 

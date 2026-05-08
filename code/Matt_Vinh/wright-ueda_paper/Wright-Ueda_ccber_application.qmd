@@ -23,6 +23,7 @@ library(geoR)
 library(INLA)
 library(purrr)
 library(knitr)
+library(systemfonts)
 
 # JRBP data
 jrbp_path <- here("data","JRBP_Bird_Transect_Data.csv")
@@ -2034,7 +2035,7 @@ aat2 <- ggplot(limAAT %>% filter(region != "overlap"),
                linewidth = 1.5) +
   geom_hline(yintercept = c(0), linetype="dotted") +
   xlab("Species") +
-  ylab("Average Annual Trend") +
+  ylab("Average Annual Trend (%/Year)") +
   coord_flip() + 
   theme_classic() + 
   scale_color_manual(values = colors) + 
@@ -2043,7 +2044,8 @@ aat2 <- ggplot(limAAT %>% filter(region != "overlap"),
         axis.title.x = element_text(size = 20),
         axis.text.x = element_text(size = 16),
         axis.title.y = element_text(size = 20),
-        axis.text.y = element_text(size = 16))
+        axis.text.y = element_text(size = 16),
+        text = element_text(family = "Avenir LT Std"))
 # trends match the "percent change in abundance" plots
 
 ggsave(filename = paste0("CCBER_Species_AAT_no_grey_",
