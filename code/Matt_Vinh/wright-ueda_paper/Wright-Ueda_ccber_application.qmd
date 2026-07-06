@@ -24,6 +24,7 @@ library(INLA)
 library(purrr)
 library(knitr)
 library(systemfonts)
+library(auk)
 
 # JRBP data
 jrbp_path <- here("data","JRBP_Bird_Transect_Data.csv")
