@@ -1,4 +1,7 @@
-# CCBER North Campus Open Space Bird Survey Data Exploration and Analysis by Matt Vinh
+# North Campus Open Space Bird Survey Data Exploration and Analysis
+### Cheadle Center | Matt Vinh
+
+-----------
 
 ## Current Work
 I am often working on bird survey data visualizations, exploring relationships and trends.
