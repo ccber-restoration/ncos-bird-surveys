@@ -17,7 +17,14 @@ Find this script within the `wright-ueda_paper` folder. It includes my replicati
 
 1. Download the [`INLA` package](https://www.r-inla.org/download/index.html).
 2. Obtain survey-level presence-absence data. Provided in the 'setup' chunk are two lines that load the most recently cleaned Cheadle Center survey-level data.
-3. todo tidy the script for improved navigation
+
+#### Running the script with Cheadle Center Data
+
+1. Install and/or load necessary libraries.
+2. Load provided Cheadle Center data.
+3. Run the `Fitting INLA models` chunk. This will fit one INLA model per Cheadle Center species.
+4. Run the `Calculating Average Annual Trend and Visualizing Results` chunk. This will calculate Average Annual Trends and plot the results.
+- For more details about the INLA model specifications and importance of the Average Annual Trend, see https://onlinelibrary.wiley.com/doi/full/10.1111/ibi.13280.
 
 **2.** `developing_report.qmd`
 
