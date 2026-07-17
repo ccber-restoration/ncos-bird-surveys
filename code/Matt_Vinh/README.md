@@ -1,19 +1,67 @@
-# CCBER North Campus Open Space Bird Survey Data Exploration and Analysis by Matt Vinh
+# North Campus Open Space Bird Survey Data Exploration and Analysis
+### Cheadle Center | [Matt Vinh](www.linkedin.com/in/matthew-vinh)
 
-## Current Work
-I am often working on bird survey data visualizations, exploring relationships and trends.
+---
 
-My work drives the ongoing development of an NCOS bird survey data analysis project.
+This branch contains all of the scripts and non-data outputs relevant to my exploration and analysis of Cheadle Center bird survey data for North Campus Open Space (NCOS) with R.
 
-## Archived Work
-Contains all files from previous meetings and work, organized by month.
+---
 
-## Current Dataset Aggregation Code
-Separates the most updated CCBER bird survey data aggregation R script from other archived work for ease of access.
+## Main Scripts
 
-## Figures
-- Time series
-- NMDS
-- Miscellaneous visualizations
+**1.** `Wright-Ueda_replication.qmd`
 
-test modification
+Find this script within the `wright-ueda_paper` folder. It includes my replication of the work of Wright-Ueda et al. in their paper [Mixed population trends inside a California protected area: Evidence from long-term community science monitoring](https://onlinelibrary.wiley.com/doi/full/10.1111/ibi.13280) using bird survey data collected with the Cheadle Center at NCOS.
+
+#### Requirements
+
+1. Download the [`INLA` package](https://www.r-inla.org/download/index.html).
+2. Obtain survey-level presence-absence data. Provided in the 'setup' chunk are two lines that load the most recently cleaned survey-level data collected by the Cheadle Center. Find more information about data in the _ section.
+3. todo tidy the script for improved navigation
+
+**2.** `developing_report.qmd`
+
+A work in progress that includes a multitude of visualizations. This script facilitates my ongoing work and is unorganized. While I do not recommend trying to run anything, all necessary data files should be in the `setup` chunk at the top. Different visualizations require different formats of data - although some notes exist on what is required to run certain chunks, you will likely have to interpret code yourself to determine the data needed for successful execution.
+
+---
+
+## Data
+
+Find data for use with the scripts above at https://github.com/ccber-restoration/ncos-bird-surveys/tree/main/data/Matt_Vinh.
+
+todo matt vinh data readme
+
+---
+
+## Other Branch Contents
+
+The remainder of the contents of this branch consist of folders for organization of my work. These are generally less important.
+
+1. `archived`
+
+Old scripts documenting my exploration and analysis of Cheadle Center data. Grouped by month and year.
+   
+2. `dataset_scripts`
+
+Scripts used to generate data found on the Matt Vinh data branch.
+
+Instructions:
+todo instructions
+
+3. `figures`
+
+Assorted figures generated during Cheadle Center data analysis.
+
+4. `gotelli_paper`
+
+Scratch scripts for the replication of the work of Gotelli et al. in their paper _
+
+to do flesh out details
+
+6. `URCA_poster_figures`
+
+Contains two figures used for my Spring 2026 Undergraduate Research and Creative Activities poster presentation. See https://escholarship.org/uc/item/9zz0r7s4 for more information about my poster.
+
+7. `wright-ueda_paper`
+
+Contains all my work completed for the replication of Wright-Ueda modelling.
