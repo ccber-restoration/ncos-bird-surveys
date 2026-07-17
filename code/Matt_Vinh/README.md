@@ -11,12 +11,12 @@ This branch contains all of the scripts and non-data outputs relevant to my expl
 
 **1.** `Wright-Ueda_replication.qmd`
 
-Find this script within the `wright-ueda_paper` folder. It includes my replication of the work of Wright-Ueda et al. in their paper [Mixed population trends inside a California protected area: Evidence from long-term community science monitoring](https://onlinelibrary.wiley.com/doi/full/10.1111/ibi.13280) using bird survey data collected with the Cheadle Center at NCOS.
+Find this script within the `wright-ueda_paper` folder. It includes my replication of the work of Wright-Ueda et al. in their paper [Mixed population trends inside a California protected area: Evidence from long-term community science monitoring](https://onlinelibrary.wiley.com/doi/full/10.1111/ibi.13280) using bird survey data collected with the Cheadle Center at NCOS and *(soon)* bird survey data sourced from Cornell eBird.
 
 #### Requirements
 
 1. Download the [`INLA` package](https://www.r-inla.org/download/index.html).
-2. Obtain survey-level presence-absence data. Provided in the 'setup' chunk are two lines that load the most recently cleaned survey-level data collected by the Cheadle Center. Find more information about data in the _ section.
+2. Obtain survey-level presence-absence data. Provided in the 'setup' chunk are two lines that load the most recently cleaned Cheadle Center survey-level data.
 3. todo tidy the script for improved navigation
 
 **2.** `developing_report.qmd`
@@ -28,8 +28,6 @@ A work in progress that includes a multitude of visualizations. This script faci
 ## Data
 
 Find data for use with the scripts above at https://github.com/ccber-restoration/ncos-bird-surveys/tree/main/data/Matt_Vinh.
-
-todo matt vinh data readme
 
 ---
 
@@ -60,8 +58,8 @@ to do flesh out details
 
 6. `URCA_poster_figures`
 
-Contains two figures used for my Spring 2026 Undergraduate Research and Creative Activities poster presentation. See https://escholarship.org/uc/item/9zz0r7s4 for more information about my poster.
+Contains figures used for my Spring 2026 Undergraduate Research and Creative Activities poster presentation. See https://escholarship.org/uc/item/9zz0r7s4 for more information about my poster.
 
 7. `wright-ueda_paper`
 
-Contains all my work completed for the replication of Wright-Ueda modelling.
+Contains all my work completed for the replication of Wright-Ueda modelling. See **Main Scripts** above for the most relevant contents.
