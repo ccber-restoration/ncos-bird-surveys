@@ -1,5 +1,6 @@
 # setup ----
 library(tidyverse)
+library(readxl)
 
 
 ## Notes on general approach:
@@ -26,6 +27,19 @@ library(tidyverse)
 # 2022 ----
 
 # 2023 ----
+
+pt_2023_01_24 <- read_xlsx("data/excel_summaries/2023/NCOS_Bird_Survey_Data_2023_01_24.xlsx")
+
+raw_2023_01_24 <- read_xlsx("data/excel_summaries/2023/NCOS_Bird_Survey_Data_2023_01_24.xlsx", sheet = "NCOS_Bird_Survey_Data_2023_01_2")
+
+# no NA values for species,
+# no observation notes
+
+pt_2023_02 <- read_xlsx("data/excel_summaries/2023/NCOS_Bird_Survey_Data_2023_02_28.xlsx")
+
+raw_2023_02 <- read_xlsx("data/excel_summaries/2023/NCOS_Bird_Survey_Data_2023_02_28.xlsx", sheet = "NCOS_Bird_Survey_Data_2023_02_2")
+
+#has one bittern observataion, 
 
 # 2024 ----
 
