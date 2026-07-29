@@ -129,7 +129,8 @@ png(file = "figures/invert_network.png", width = 600, height = 900, units = "px"
 #continue filling out trophic links data
 #create draft network viz based on existing data
 plotweb(web = matrix_subset, text_size =0.8, horizontal = TRUE, link_color = link_colors1, 
-        higher_abundances = invert_abundances_vector, lower_abundances = bird_invert_abundances_vector)
+        higher_abundances = invert_abundances_vector, lower_abundances = bird_invert_abundances_vector, 
+        adj.high = 1)
 
 dev.off()
 

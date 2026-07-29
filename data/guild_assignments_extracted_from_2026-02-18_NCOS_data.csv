@@ -1,0 +1,202 @@
+species,e_bird_group,general_type
+Snow Goose,Waterfowl,Waterfowl & Friends
+Ross's Goose,Waterfowl,Waterfowl & Friends
+Greater White-fronted Goose,Waterfowl,Waterfowl & Friends
+Cackling Goose,Waterfowl,NA
+Canada Goose,Waterfowl,Waterfowl & Friends
+Mute Swan,Waterfowl,Waterfowl & Friends
+Blue-winged Teal,Waterfowl,Waterfowl & Friends
+Cinnamon Teal,Waterfowl,Waterfowl & Friends
+Northern Shoveler,Waterfowl,Waterfowl & Friends
+Cinnamon Teal x Northern Shoveler (hybrid),Waterfowl,Waterfowl & Friends
+Gadwall,Waterfowl,Waterfowl & Friends
+American Wigeon,Waterfowl,Waterfowl & Friends
+Mallard,Waterfowl,Waterfowl & Friends
+Northern Pintail,Waterfowl,Waterfowl & Friends
+Green-winged Teal,Waterfowl,Waterfowl & Friends
+Canvasback,Waterfowl,Waterfowl & Friends
+Redhead,Waterfowl,Waterfowl & Friends
+Ring-necked Duck,Waterfowl,Waterfowl & Friends
+Bufflehead,Waterfowl,Waterfowl & Friends
+Hooded Merganser,Waterfowl,Waterfowl & Friends
+Red-breasted Merganser,Waterfowl,NA
+Ruddy Duck,Waterfowl,Waterfowl & Friends
+California Quail,"Grouse, Quail, and Allies",Seed & Fruit Eaters
+Eurasian Collared-Dove,Pigeons and Doves,Seed & Fruit Eaters
+Mourning Dove,Pigeons and Doves,Seed & Fruit Eaters
+Vaux's Swift,Swifts,Insectivores - Aerial
+White-throated Swift,Swifts,NA
+Black-chinned Hummingbird,Hummingbirds,Hummingbirds
+Anna's Hummingbird,Hummingbirds,Hummingbirds
+Rufous Hummingbird,Hummingbirds,Hummingbirds
+Allen's Hummingbird,Hummingbirds,Hummingbirds
+Rufous/Allen's Hummingbird,Hummingbirds,NA
+Selasphorus sp.,Hummingbirds,Hummingbirds
+Virginia Rail,"Rails, Gallinules, and Allies",Waterfowl & Friends
+Sora,"Rails, Gallinules, and Allies",Waterfowl & Friends
+American Coot,"Rails, Gallinules, and Allies",Waterfowl & Friends
+Black-necked Stilt,Shorebirds,Shorebirds
+American Avocet,Shorebirds,Shorebirds
+Black-bellied Plover,Shorebirds,NA
+Killdeer,Shorebirds,Shorebirds
+Semipalmated Plover,Shorebirds,Shorebirds
+Hudsonian Whimbrel,Shorebirds,Shorebirds
+Long-billed Curlew,Shorebirds,Shorebirds
+Marbled Godwit,Shorebirds,NA
+Short-billed Dowitcher,Shorebirds,NA
+Long-billed Dowitcher,Shorebirds,Shorebirds
+Short-billed/Long-billed Dowitcher,Shorebirds,NA
+Wilson's Snipe,Shorebirds,Shorebirds
+Wilson's Phalarope,Shorebirds,NA
+Red-necked Phalarope,Shorebirds,Shorebirds
+Spotted Sandpiper,Shorebirds,Shorebirds
+Solitary Sandpiper,Shorebirds,Shorebirds
+Lesser Yellowlegs,Shorebirds,Shorebirds
+Willet,Shorebirds,Shorebirds
+Greater Yellowlegs,Shorebirds,Shorebirds
+Sanderling,Shorebirds,Shorebirds
+Dunlin,Shorebirds,Shorebirds
+Least Sandpiper,Shorebirds,Shorebirds
+Pectoral Sandpiper,Shorebirds,Shorebirds
+Western Sandpiper,Shorebirds,Shorebirds
+Bonaparte's Gull,"Gulls, Terns, and Skimmers",NA
+Heermann's Gull,"Gulls, Terns, and Skimmers",NA
+Short-billed Gull,"Gulls, Terns, and Skimmers",Gulls & Terns
+Ring-billed Gull,"Gulls, Terns, and Skimmers",Gulls & Terns
+Western Gull,"Gulls, Terns, and Skimmers",Gulls & Terns
+California Gull,"Gulls, Terns, and Skimmers",Gulls & Terns
+Glaucous-winged Gull,"Gulls, Terns, and Skimmers",NA
+Caspian Tern,"Gulls, Terns, and Skimmers",Gulls & Terns
+Forster's Tern,"Gulls, Terns, and Skimmers",NA
+Pied-billed Grebe,Grebes,Waterfowl & Friends
+Eared Grebe,Grebes,Waterfowl & Friends
+Western Grebe,Grebes,Waterfowl & Friends
+Clark's Grebe,Grebes,Waterfowl & Friends
+Double-crested Cormorant,Cormorants and Anhingas,Cormorants
+White-faced Ibis,"Herons, Ibis, and Allies","Herons, Egrets, Ibis"
+American Bittern,"Herons, Ibis, and Allies",NA
+Black-crowned Night Heron,"Herons, Ibis, and Allies","Herons, Egrets, Ibis"
+Snowy Egret,"Herons, Ibis, and Allies","Herons, Egrets, Ibis"
+Green Heron,"Herons, Ibis, and Allies","Herons, Egrets, Ibis"
+Great Egret,"Herons, Ibis, and Allies","Herons, Egrets, Ibis"
+Great Blue Heron,"Herons, Ibis, and Allies","Herons, Egrets, Ibis"
+Turkey Vulture,"Vultures, Hawks, and Allies",Raptors
+Osprey,"Vultures, Hawks, and Allies",Raptors
+White-tailed Kite,"Vultures, Hawks, and Allies",Raptors
+Sharp-shinned Hawk,"Vultures, Hawks, and Allies",NA
+Cooper's Hawk,"Vultures, Hawks, and Allies",Raptors
+Northern Harrier,"Vultures, Hawks, and Allies",Raptors
+Red-shouldered Hawk,"Vultures, Hawks, and Allies",Raptors
+Red-tailed Hawk,"Vultures, Hawks, and Allies",Raptors
+Great Horned Owl,Owls,Raptors
+Burrowing Owl,Owls,Raptors
+Belted Kingfisher,Kingfishers,Kingfishers
+Acorn Woodpecker,Woodpeckers,Insectivores - Terrestrial
+Downy Woodpecker,Woodpeckers,Insectivores - Terrestrial
+Nuttall's Woodpecker,Woodpeckers,Insectivores - Terrestrial
+Hairy Woodpecker,Woodpeckers,Insectivores - Terrestrial
+Northern Flicker,Woodpeckers,Insectivores - Terrestrial
+American Kestrel,Falcons and Caracaras,Raptors
+Merlin,Falcons and Caracaras,Raptors
+Peregrine Falcon,Falcons and Caracaras,Raptors
+Western Wood-Pewee,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Willow Flycatcher,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Western Flycatcher,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Black Phoebe,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Say's Phoebe,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Ash-throated Flycatcher,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Tropical Kingbird,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Cassin's Kingbird,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Western Kingbird,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Hutton's Vireo,Vireos,NA
+Loggerhead Shrike,Shrikes,Raptors
+California Scrub-Jay,"Jays, Magpies, Crows, and Ravens",Omnivores
+American Crow,"Jays, Magpies, Crows, and Ravens",Omnivores
+Common Raven,"Jays, Magpies, Crows, and Ravens",Omnivores
+Chestnut-backed Chickadee,"Tits, Chickadees, and Titmice",NA
+Oak Titmouse,"Tits, Chickadees, and Titmice",Insectivores - Terrestrial
+Horned Lark,Larks,NA
+Tree Swallow,Martins and Swallows,Insectivores - Aerial
+Violet-green Swallow,Martins and Swallows,Insectivores - Aerial
+Northern Rough-winged Swallow,Martins and Swallows,Insectivores - Aerial
+Barn Swallow,Martins and Swallows,Insectivores - Aerial
+Cliff Swallow,Martins and Swallows,Insectivores - Aerial
+Bushtit,Penduline-Tits and Long-tailed Tits,Insectivores - Terrestrial
+Wrentit,"Parrotbills, Wrentit, and Allies",Insectivores - Terrestrial
+Ruby-crowned Kinglet,Kinglets,Insectivores - Terrestrial
+White-breasted Nuthatch,Nuthatches,Insectivores - Terrestrial
+Red-breasted Nuthatch,Nuthatches,Insectivores - Terrestrial
+Blue-gray Gnatcatcher,Gnatcatchers,Insectivores - Terrestrial
+Rock Wren,Wrens,Insectivores - Terrestrial
+Northern House Wren,Wrens,Insectivores - Terrestrial
+Marsh Wren,Wrens,Insectivores - Terrestrial
+Bewick's Wren,Wrens,Insectivores - Terrestrial
+European Starling,Starlings and Mynas,Insectivores - Terrestrial
+California Thrasher,"Catbirds, Mockingbirds, and Thrashers",Insectivores - Terrestrial
+Northern Mockingbird,"Catbirds, Mockingbirds, and Thrashers",Omnivores
+Western Bluebird,Thrushes,Insectivores - Terrestrial
+Mountain Bluebird,Thrushes,NA
+Hermit Thrush,Thrushes,Insectivores - Terrestrial
+American Robin,Thrushes,NA
+Cedar Waxwing,Waxwings,NA
+Scaly-breasted Munia,Estrildids,Seed & Fruit Eaters
+House Sparrow,Old World Sparrows,Omnivores
+American Pipit,Wagtails and Pipits,Insectivores - Terrestrial
+House Finch,"Finches, Euphonias, and Allies",Seed & Fruit Eaters
+Purple Finch,"Finches, Euphonias, and Allies",Seed & Fruit Eaters
+Lesser Goldfinch,"Finches, Euphonias, and Allies",Seed & Fruit Eaters
+American Goldfinch,"Finches, Euphonias, and Allies",Seed & Fruit Eaters
+Chipping Sparrow,New World Sparrows,Seed & Fruit Eaters
+Clay-colored Sparrow,New World Sparrows,Seed & Fruit Eaters
+Lark Sparrow,New World Sparrows,Seed & Fruit Eaters
+Fox Sparrow,New World Sparrows,Insectivores - Terrestrial
+Dark-eyed Junco,New World Sparrows,Seed & Fruit Eaters
+White-crowned Sparrow,New World Sparrows,Insectivores - Terrestrial
+Golden-crowned Sparrow,New World Sparrows,Insectivores - Terrestrial
+Savannah Sparrow,New World Sparrows,Insectivores - Terrestrial
+Song Sparrow,New World Sparrows,Insectivores - Terrestrial
+Lincoln's Sparrow,New World Sparrows,Insectivores - Terrestrial
+California Towhee,New World Sparrows,Omnivores
+Spotted Towhee,New World Sparrows,Omnivores
+Yellow-headed Blackbird,Blackbirds,Insectivores - Terrestrial
+Western Meadowlark,Blackbirds,Insectivores - Terrestrial
+Hooded Oriole,Blackbirds,Insectivores - Terrestrial
+Bullock's Oriole,Blackbirds,Insectivores - Terrestrial
+Red-winged Blackbird,Blackbirds,Insectivores - Terrestrial
+Brown-headed Cowbird,Blackbirds,Seed & Fruit Eaters
+Brewer's Blackbird,Blackbirds,Omnivores
+Great-tailed Grackle,Blackbirds,Insectivores - Terrestrial
+Orange-crowned Warbler,Wood-Warblers,Warblers
+Common Yellowthroat,Wood-Warblers,Warblers
+Northern Yellow Warbler,Wood-Warblers,Warblers
+Yellow-rumped Warbler,Wood-Warblers,Warblers
+Townsend's Warbler,Wood-Warblers,NA
+Wilson's Warbler,Wood-Warblers,NA
+Western Tanager,"Cardinals, Grosbeaks, and Allies",Insectivores - Terrestrial
+Black-headed Grosbeak,"Cardinals, Grosbeaks, and Allies",Seed & Fruit Eaters
+Blue Grosbeak,"Cardinals, Grosbeaks, and Allies",Seed & Fruit Eaters
+Lazuli Bunting,"Cardinals, Grosbeaks, and Allies",NA
+Rock Pigeon,Pigeons and Doves,Seed & Fruit Eaters
+Western Snowy Plover,NA,Shorebirds
+Unknown,NA,NA
+Savannah Sparrow (Belding's),New World Sparrows,Insectivores - Terrestrial
+Swinhoe's White-eye,NA,NA
+Yellow-crowned Night Heron,NA,NA
+American Barn Owl,NA,NA
+Falcon sp.,NA,NA
+Peep sp.,NA,Shorebirds
+Hummingbird sp.,NA,Hummingbirds
+Western Snowy Plover,Shorebirds,Shorebirds
+Cackling Goose (Aleutian),Waterfowl,Waterfowl & Friends
+Accipiter sp.,"Vultures, Hawks, and Allies",Raptors
+Peep sp.,Shorebirds,Shorebirds
+Dowitcher sp.,Shorebirds,Shorebirds
+Swallow sp.,Martins and Swallows,Insectivores - Aerial
+Swan sp.,Waterfowl,Waterfowl & Friends
+Kingbird sp.,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Goldfinch sp.,"Finches, Euphonias, and Allies",Seed & Fruit Eaters
+Hummingbird sp.,Hummingbirds,Hummingbirds
+Phoebe sp.,"Tyrant Flycatchers: Pewees, Kingbirds, and Allies",Insectivores - Aerial
+Sparrow sp.,New World Sparrows,Omnivores
+Sandpiper sp.,Shorebirds,Shorebirds
+Hawk sp.,"Vultures, Hawks, and Allies",Raptors
