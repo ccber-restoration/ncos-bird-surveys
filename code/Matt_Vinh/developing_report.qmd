@@ -16,6 +16,8 @@ library(vegan)
 library(INLA)
 library(knitr)
 library(DT)
+library(ggrepel)
+library(showtext)
 
 datapath <- here("data","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
 data <- read_rds(datapath)
@@ -173,55 +175,109 @@ lines <- ggplot() +
   geom_point(data = richness,
              aes(x = survey_year,
                  y = n),
-             color = "blue") + 
+             color = "blue",
+             size = 3) + 
   geom_line(data = richness,
              aes(x = survey_year,
                  y = n),
-             color = "blue") + 
+             color = "blue",
+            linewidth = 1.5) + 
   annotate("text",
            x = 7,
-           y = richness$n[richness$survey_year == 7] - 10,
+           y = richness$n[richness$survey_year == 7] - 11,
            label = "CCBER",
-           color = "blue") + 
+           color = "blue",
+           size = 7) + 
   geom_point(data = ebird_richness,
              aes(x = survey_year,
                  y = richness),
-             color = "red") + 
+             color = "red",
+             size = 3) + 
   geom_line(data = ebird_richness,
              aes(x = survey_year,
                  y = richness),
-             color = "red") + 
+             color = "red",
+            linetype = "dashed",
+            linewidth = 1.5) + 
   annotate("text",
            x = 7,
-           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 10,
+           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 11,
            label = "eBird",
-           color = "red") + 
+           color = "red",
+           size = 7) + 
   geom_point(data = richness_composite,
              aes(x = survey_year,
                  y = diff),
-             color = "purple") + 
+             color = "purple",
+             size = 3) + 
    geom_line(data = richness_composite,
              aes(x = survey_year,
                  y = diff),
-             color = "purple") + 
+             color = "purple",
+             linetype = "longdash",
+             linewidth = 1.5) + 
   annotate("text",
            x = 7,
-           y = richness_composite$diff[richness_composite$survey_year == 7] - 10,
+           y = richness_composite$diff[richness_composite$survey_year == 7] - 11,
            label = "eBird - CCBER",
-           color = "purple") + 
+           color = "purple",
+           size = 7) + 
   geom_point(data = annual_reports,
              aes(x = survey_year,
                  y = reported_richness),
-             color = "forestgreen") + 
+             color = "forestgreen",
+             size = 3) + 
   geom_line(data = annual_reports,
              aes(x = survey_year,
                  y = reported_richness),
-             color = "forestgreen") + 
+             color = "forestgreen",
+            linetype = "twodash",
+            linewidth = 1.5) + 
   annotate("text",
-           x = 7,
-           y = annual_reports$reported_richness[annual_reports$survey_year == 7] - 10,
+           x = 6,
+           y = annual_reports$reported_richness[annual_reports$survey_year == 7] - 11,
            label = "CCBER Annual Reports",
-           color = "forestgreen") + 
+           color = "forestgreen",
+           size = 7) + 
+  theme_classic() + 
+  labs(title = "Species Richness by Survey Year",
+       x = "Survey Year",
+       y = "Number of Species Detected") + 
+  theme(text = element_text(family = "")
+    plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 24),
+        axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 15),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 15),
+        legend.position = "none") + 
+  scale_x_continuous(breaks = seq(1,8,by = 1)) + 
+  scale_y_continuous(expand = c(0,0),
+                     breaks = seq(0,225, by = 50),
+                     limits = c(0,225))
+
+temp1 <- richness %>% 
+  rename(richness = n) %>% 
+  mutate(category = "CCBER")
+temp2 <- ebird_richness %>% 
+  mutate(category = "eBird")
+temp3 <- richness_composite %>% 
+  select(c(1,4)) %>% 
+  rename(richness = diff) %>% 
+  mutate(category = "eBird_minus_CCBER")
+temp4 <- annual_reports %>% 
+  rename(richness = reported_richness) %>% 
+  mutate(category = "CCBER_Annual_Reports") %>% 
+  add_row(survey_year = 8, richness = 0, category = "CCBER_Annual_Reports")
+richness_joined <- rbind(rbind(rbind(temp1, temp2), temp3), temp4)
+
+ggplot(richness_joined,
+       aes(x = survey_year,
+           y = richness,
+           fill = category)) + 
+  geom_col(alpha = 0.8) + 
+  facet_wrap(~ category) + 
   theme_classic() + 
   labs(title = "Species Richness by Survey Year",
        x = "Survey Year",
@@ -232,21 +288,79 @@ lines <- ggplot() +
         axis.title.x = element_text(size = 13),
         axis.title.y = element_text(size = 13),
         legend.position = "none") + 
-  scale_x_continuous(breaks = seq(1,8,by = 1)) + 
-  scale_y_continuous(expand = c(0,0),
-                     breaks = seq(0,225, by = 50),
-                     limits = c(0,225))
+  scale_fill_manual(values = c("CCBER" = "blue",
+                               "eBird" = "red",
+                               "eBird_minus_CCBER" = "purple",
+                               "CCBER_Annual_Reports" = "forestgreen"))
 
 # saving
 
-ggsave(filename = paste0("Species_Richness_",
-                         format(Sys.Date(),
-                                "%y-%m-%d"),
-                         ".pdf"),
+ggsave(filename = paste0("NCOS_Species_Richness_Comparison_",
+                         format(Sys.Date(), "%y-%m-%d"),
+                         ".svg"),
        lines,
-       width = 200,
-       height = 140,
-       units = "mm")
+       dpi = 1000,
+       width = 9,
+       height = 6,
+       units = "in")
+
+```
+
+```{r line plot for poster}
+
+lines2 <- ggplot() + 
+  geom_point(data = richness,
+             aes(x = survey_year,
+                 y = n),
+             color = "darkgreen",
+             size = 3) + 
+  geom_line(data = richness,
+             aes(x = survey_year,
+                 y = n),
+             color = "darkgreen",
+            linewidth = 1.5) + 
+  annotate("text",
+           x = 7,
+           y = richness$n[richness$survey_year == 7] - 25,
+           label = "Cheadle\nCenter",
+           color = "darkgreen",
+           size = 7) + 
+  geom_point(data = ebird_richness,
+             aes(x = survey_year,
+                 y = richness),
+             color = "saddlebrown",
+             size = 3) + 
+  geom_line(data = ebird_richness,
+             aes(x = survey_year,
+                 y = richness),
+             color = "saddlebrown",
+            linewidth = 1.5) + 
+  annotate("text",
+           x = 7,
+           y = ebird_richness$richness[ebird_richness$survey_year == 7] - 15,
+           label = "eBird",
+           color = "saddlebrown",
+           size = 7) + 
+  theme_classic() + 
+  labs(x = "Survey Year",
+       y = "Number of Species\nDetected") + 
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 16),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 16),
+        legend.position = "none",
+        text = element_text(family = "Avenir LT Std")) + 
+  ylim(c(75, 200)) + 
+  scale_x_continuous(breaks = seq(1, 8, by = 1))
+
+ggsave(filename = paste0("NCOS_Species_Richness_Comparison_poster_",
+                         format(Sys.Date(), "%y-%m-%d"),
+                         ".svg"),
+       lines2,
+       dpi = 1000,
+       width = 9,
+       height = 4,
+       units = "in")
 
 ```
 
@@ -741,9 +855,219 @@ summary(u_data$X1)
 
 ```
 
-```{r}
+```{r maximum survey count per survey year nmds}
+#| message: false
 
+# data formatting
 
+year_max <- data %>% 
+  group_by(species,survey_year) %>% 
+  summarise(max_count = max(count))
+top_species_pyear <- year_max %>% 
+  group_by(survey_year) %>% 
+  slice_max(order_by = max_count,n = 3)
+
+community2 <- xtabs(max_count ~ survey_year + species, data = year_max)
+community2 <- as.matrix(unclass(community2))
+
+# nmds calculation
+
+nmds2 <- metaMDS(community2,
+                 autotransform = F,
+                 distance = "bray",
+                 engine = "monoMDS",
+                 k = 2,
+                 weakties = T,
+                 model = "global",
+                 maxit = 300,
+                 try = 40,
+                 trymax = 100,
+                 trace = F)
+
+nmds2_site_scores <- as.data.frame(scores(nmds2)$sites) %>% 
+  rownames_to_column(var = "survey_year")
+nmds2_site_scores$survey_year <- as.numeric(nmds2_site_scores$survey_year)
+nmds2_site_scores <- nmds2_site_scores %>% 
+  arrange(survey_year) %>% 
+  mutate(xend = lead(NMDS1),yend = lead(NMDS2))
+
+nmds2_species_scores <- as.data.frame(scores(nmds2,"species"))
+nmds2_species_scores$species <- rownames(nmds2_species_scores)
+
+nmds2_species_scores_joined <- right_join(nmds2_species_scores, top_species_pyear) %>% 
+  distinct(species, .keep_all = T)
+nmds2_species_scores_joined$survey_year <- as.numeric(nmds2_species_scores_joined$survey_year)
+
+# visualization
+
+nmdsfigure2 <- ggplot() + 
+  geom_point(data = nmds2_site_scores,
+                      aes(x = NMDS1, y = NMDS2,
+                          color = survey_year),
+             size = 5) + 
+  geom_segment(data = nmds2_site_scores,
+               aes(x = NMDS1, y = NMDS2,
+                   xend = xend,
+                   yend = yend,
+                   color = survey_year),
+                   arrow = arrow(length = unit(0.35,"cm")),
+               linewidth = 1.25) + 
+  geom_text_repel(data = nmds2_species_scores_joined,
+                  aes(x = NMDS1, y = NMDS2,
+                      label = species),
+                  max.overlaps = 500,size = 5.5) + 
+  annotate("text",
+           x = -0.275, y = 0.1,
+           label = paste("2D stress =", round(nmds2$stress,3)),
+           size = 6) + 
+  scale_color_viridis_c(option = "C",alpha = 0.8) + 
+  theme_light() + 
+  labs(color = "Survey Year") + 
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 15),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 15),
+        legend.title = element_text(size = 19),
+        legend.text = element_text(size = 15),
+        legend.position = c(0.15, 0.15),
+        text = element_text(family = "Avenir LT Std"))
+
+# saving
+
+ggsave(paste0("Maximum_Species_Count_per_Survey_Year_NMDS_",
+              format(Sys.Date(), "%y-%m-%d"),
+              ".svg"),
+       nmdsfigure2,
+       dpi = 1000,
+       width = 9,
+       height = 8,
+       units = "in")
+
+```
+
+```{r maximum survey count per survey year nmds}
+#| message: false
+#| warning: false
+
+# data formatting
+
+year_mean <- data %>% 
+  group_by(species,survey_year) %>% 
+  summarise(mean_count = mean(count))
+top_species_pyear <- year_mean %>% 
+  group_by(survey_year) %>% 
+  slice_max(order_by = mean_count,n = 3)
+
+community3 <- xtabs(mean_count ~ survey_year + species, data = year_mean)
+community3 <- as.matrix(unclass(community3))
+
+# nmds calculation
+
+nmds3 <- metaMDS(community3,
+                 autotransform = F,
+                 distance = "bray",
+                 engine = "monoMDS",
+                 k = 2,
+                 weakties = T,
+                 model = "global",
+                 maxit = 300,
+                 try = 40,
+                 trymax = 100,
+                 trace = F)
+
+nmds3_site_scores <- as.data.frame(scores(nmds3)$sites) %>% 
+  rownames_to_column(var = "survey_year")
+nmds3_site_scores$survey_year <- as.numeric(nmds3_site_scores$survey_year)
+nmds3_site_scores <- nmds3_site_scores %>% 
+  arrange(survey_year) %>% 
+  mutate(xend = lead(NMDS1),yend = lead(NMDS2))
+
+nmds3_species_scores <- as.data.frame(scores(nmds3,"species"))
+nmds3_species_scores$species <- rownames(nmds3_species_scores)
+
+nmds3_species_scores_joined <- right_join(nmds3_species_scores, top_species_pyear) %>% 
+  distinct(species, .keep_all = T)
+nmds3_species_scores_joined$survey_year <- as.numeric(nmds3_species_scores_joined$survey_year)
+
+# visualization
+
+nmdsfigure3 <- ggplot() + 
+  geom_point(data = nmds3_site_scores,
+                      aes(x = NMDS1, y = NMDS2,
+                          color = survey_year),
+             size = 3) + 
+  geom_segment(data = nmds3_site_scores,
+               aes(x = NMDS1, y = NMDS2,
+                   xend = xend,
+                   yend = yend,
+                   color = survey_year),
+                   arrow = arrow(length = unit(0.25,"cm"))) + 
+  geom_text_repel(data = nmds3_species_scores_joined,
+                  aes(x = NMDS1, y = NMDS2,
+                      label = species),
+                  max.overlaps = 500,size = 3) + 
+  annotate("text",
+           x = -0.2, y = 0.1,
+           label = paste("2D stress =", round(nmds3$stress,3))) + 
+  scale_color_viridis_c(option = "C",alpha = 0.8) + 
+  theme_light() + 
+  labs(title = "Mean Species Abundance per Year NMDS",
+       color = "Survey Year") + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 15)) + 
+  xlim(c(-0.3, 0.3)) + 
+  ylim(c(-0.2, 0.2))
+
+# saving
+
+ggsave(paste0("Mean_Species_Abundance_per_Survey_Year_NMDS_",
+              format(Sys.Date(), "%y-%m-%d"),
+              ".pdf"),
+       nmdsfigure3,
+       width = 9,
+       height = 8,
+       units = "in")
+
+```
+
+```{r understanding aat species groups}
+
+# negative trend
+
+temp <- data %>% filter(species %in% c("Mourning Dove",
+                                       "Western Meadowlark",
+                                       "American Pipit",
+                                       "Western Sandpiper"))
+ggplot(temp,
+       aes(x = substrate)) + 
+  geom_bar() + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  labs(title = "negative abundance trend species")
+# most popular substrates: bare ground, herbaceous vegetation, mud
+
+# positive trend
+
+temp <- data %>% filter(species %in% c("Snowy Egret",
+                                       "Lesser Goldfinch",
+                                       "White-crowned Sparrow",
+                                       "Mallard",
+                                       "Black-necked Stilt",
+                                       "American Coot",
+                                       "Song Sparrow",
+                                       "Red-winged Blackbird",
+                                       "Blue-gray Gnatcatcher",
+                                       "Turkey Vulture",
+                                       "Bushtit",
+                                       "Common Yellowthroat",
+                                       "Black-crowned Night Heron",
+                                       "Savannah Sparrow"))
+ggplot(temp,
+       aes(x = substrate)) + 
+  geom_bar() + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  labs(title = "positive abundance trend species")
+# most popular substrates: shrubs, herbaceous vegetation, trees, water (floating)
 
 ```
 
