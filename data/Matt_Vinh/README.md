@@ -4,7 +4,7 @@
 
 ---
 
-This branch contains all of the data files I have created from raw Cheadle Center bird survey data. Timespan from 2017-09 to 2025-08. All files are available in .csv and .rds format.
+This branch contains all of the data files I have created from raw Cheadle Center bird survey data. Timespan: 2017-09-01 to 2025-08-31. All files are available in .csv and .rds format.
 
 ---
 
