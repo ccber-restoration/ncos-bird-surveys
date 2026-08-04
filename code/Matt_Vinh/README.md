@@ -9,9 +9,13 @@ This subdirectory contains all the scripts and non-data outputs relevant to my e
 
 ## Main Scripts
 
-**1.** bird_surveys_compilation_and_cleaning.R
+A script with an *italicized* title cannot be run as it exists currently.
 
-Find this script within the "dataset_scripts" folder. todo
+**1.** *bird_surveys_compilation_and_cleaning.R*
+
+This script can be found within the "dataset_scripts" folder. It compiles all of the bird surveys recorded in [Dryad](https://datadryad.org/dataset/doi:10.5061/dryad.bvq83bkhz) for NCOS, reads in .csv files and row binds them, cleans variable levels and species names and adds taxonomic data. This process yields all observation-level data recorded by Cheadle Center bird surveys between September 2017 and August 2025. The resulting data frame is saved as a .csv and an .rds for retention of data types.
+
+The script cannot be run currently because of an update to the link to Dryad data.
 
 **2.** Wright-Ueda_replication.qmd
 
@@ -65,9 +69,7 @@ Assorted figures generated during Cheadle Center data analysis.
 
 4. gotelli_paper
 
-Scratch scripts for the replication of the work of Gotelli et al. in their paper *name*.
-
-to do flesh out details
+Scratch scripts for the replication of the work of Gotelli et al. in their paper [Detecting Temporal Trends in Species  Assemblages with Bootstrapping Procedures and Hierarchical Models](https://pmc.ncbi.nlm.nih.gov/articles/PMC2981998/).
 
 6. URCA_poster_figures
 
