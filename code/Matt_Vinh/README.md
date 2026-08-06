@@ -78,9 +78,11 @@ Scratch scripts for the replication of the work of Gotelli et al. in their paper
 
 Contains figures used for my Spring 2026 Undergraduate Research and Creative Activities poster presentation. See https://escholarship.org/uc/item/9zz0r7s4 for more information about my poster.
 
-- "NCOS_Species_Richness_Comparison_poster_26-05-07.svg": The species richness line plots.
-- "Maximum_Species_Count_per_Survey_Year_NMDS_26-05-07.svg": The Non-Metric Multidimensional Scaling figure.
-- "CCBER_Species_AAT_no_grey_26-05-07.svg": The Wright-Ueda average annual trends figure.
+Figure | Description | Source |
+|---|---|---|
+| NCOS_Species_Richness_Comparison_poster_26-05-07.svg | Species richness line plot | [developing_report.qmd]([code/Matt_Vinh/developing_report.qmd](https://github.com/ccber-restoration/ncos-bird-surveys/blob/main/code/Matt_Vinh/developing_report.qmd)) |
+| Maximum_Species_Count_per_Survey_Year_NMDS_26-05-07.svg | Non-Metric Multidimensional Scaling plot | [developing_report.qmd]([code/Matt_Vinh/developing_report.qmd](https://github.com/ccber-restoration/ncos-bird-surveys/blob/main/code/Matt_Vinh/developing_report.qmd)) |
+| CCBER_Species_AAT_no_grey_26-05-07.svg | Wright-Ueda replicated "Average Annual Trend" estimates plot | [Wright-Ueda_replication.qmd](https://github.com/ccber-restoration/ncos-bird-surveys/blob/main/code/Matt_Vinh/wright-ueda_paper/Wright-Ueda_replication.qmd) |
 
 7. wright-ueda_paper
 
