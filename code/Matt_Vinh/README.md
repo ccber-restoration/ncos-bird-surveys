@@ -3,7 +3,7 @@
 
 ---
 
-This subdirectory contains all the scripts and non-data outputs relevant to my exploration and analysis of Cheadle Center bird survey data for North Campus Open Space (NCOS) with R.
+This subdirectory contains all the scripts and non-data outputs relevant to my exploration and analysis of [Cheadle Center](https://ccber.ucsb.edu/) bird survey data for North Campus Open Space (NCOS) with R.
 
 ---
 
@@ -68,7 +68,7 @@ todo instructions
 
 3. figures
 
-Assorted figures generated during Cheadle Center data analysis.
+Various figures generated during Cheadle Center data analysis.
 
 4. gotelli_paper
 
@@ -78,8 +78,9 @@ Scratch scripts for the replication of the work of Gotelli et al. in their paper
 
 Contains figures used for my Spring 2026 Undergraduate Research and Creative Activities poster presentation. See https://escholarship.org/uc/item/9zz0r7s4 for more information about my poster.
 
+- "NCOS_Species_Richness_Comparison_poster_26-05-07.svg": The species richness line plots.
 - "Maximum_Species_Count_per_Survey_Year_NMDS_26-05-07.svg": The Non-Metric Multidimensional Scaling figure.
-- "NCOS_Species_Richness_Comparison_poster_26-05-07.svg": The 
+- "CCBER_Species_AAT_no_grey_26-05-07.svg": The Wright-Ueda average annual trends figure.
 
 7. wright-ueda_paper
 
