@@ -522,10 +522,10 @@ rm(compiled_final)
 ##### writing .csv and .rds ----
 
 
-csvpath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-18.csv")
+csvpath <- here("data","Matt_Vinh","compiled_and_cleaned_2026-02-18.csv")
 write_csv(compiled_final_clean,csvpath)
 
-rdspath <- here("data","aggregated","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
+rdspath <- here("data","Matt_Vinh","compiled_and_cleaned_2026-02-18.rds")
 saveRDS(compiled_final_clean,rdspath)
 
 
