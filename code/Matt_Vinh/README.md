@@ -63,9 +63,6 @@ Old scripts documenting my exploration and analysis of Cheadle Center data. Grou
 
 Scripts used to generate data found in the "Matt_Vinh" data subdirectory.
 
-Instructions:
-todo instructions
-
 3. figures
 
 Various figures generated during Cheadle Center data analysis.
