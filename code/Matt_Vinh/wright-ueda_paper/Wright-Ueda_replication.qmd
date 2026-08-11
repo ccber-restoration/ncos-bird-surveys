@@ -29,6 +29,9 @@ library(INLA)
 library(purrr)
 library(knitr)
 library(systemfonts)
+library(ebirdst)
+library(tigris)
+library(sf)
 library(auk)
 
 
@@ -363,7 +366,7 @@ colors <- c(
   "overlap" <- "grey40"
 )
 
-aat2 <- ggplot(limAAT %>% filter(region != "overlap"),
+aat2 <- ggplot(limAAT,
                aes(x=species, y=PTM_Average_Annual_Trend,
                            color = region)) + 
   geom_point(size=3,
@@ -403,9 +406,47 @@ aat2 <- ggplot(limAAT %>% filter(region != "overlap"),
 
 
 
+# Comparing AAT trends to eBird Cornell 2022 trends
+
+```{r data comparison}
+
+trend_species <- over_half |> filter(species != "Northern House Wren" & species != "Gadwall")
+trends_two_thirds <- load_trends(trend_species$species)
+
+sb_county <- counties(state = "CA", cb = T) |> 
+  filter(NAME == "Santa Barbara")
+sf_points <- st_as_sf(
+  trends_two_thirds,
+  coords = c("longitude", "latitude"),
+  crs = 4326
+)
+sf_points <- st_transform(sf_points, st_crs(sb_county))
+in_sb <- st_within(sf_points, sb_county, sparse = F)[,1]
+
+sb_county_trends <- trends_two_thirds[in_sb,]
+
+sb_county_trends_mean <- sb_county_trends |> 
+  group_by(species_code) |> 
+  summarize(
+    n_species = n(),
+    trend = mean(abd_ppy),
+    trend_lower = mean(abd_ppy_lower),
+    trend_upper = mean(abd_ppy_upper),
+    .groups = "drop"
+  )
+
+ebird_names <- data.frame(common_name = ebird_species(trend_species$species,
+                                                      type = "common"),
+                          code = ebird_species(trend_species$species,
+                                               type = "code"))
+
+```
+
+
+
 # Past and Present Works in Progress
 
-### fitting inla models and result statistics
+### fitting inla models and obtaining associated statistics
 
 ```{r replicating model fitting for wright-ueda example species}
 #| message: false
