@@ -410,8 +410,12 @@ aat2 <- ggplot(limAAT,
 
 ```{r data comparison}
 
+# loading ebird trend data
+
 trend_species <- over_half |> filter(species != "Northern House Wren" & species != "Gadwall")
 trends_two_thirds <- load_trends(trend_species$species)
+
+# transforming data to sf to pinpoint santa barbara county
 
 sb_county <- counties(state = "CA", cb = T) |> 
   filter(NAME == "Santa Barbara")
@@ -425,20 +429,89 @@ in_sb <- st_within(sf_points, sb_county, sparse = F)[,1]
 
 sb_county_trends <- trends_two_thirds[in_sb,]
 
+# calculating trend estimates from trend data
+
 sb_county_trends_mean <- sb_county_trends |> 
   group_by(species_code) |> 
   summarize(
     n_species = n(),
-    trend = mean(abd_ppy),
-    trend_lower = mean(abd_ppy_lower),
-    trend_upper = mean(abd_ppy_upper),
+    ebird_trend = mean(abd_ppy),
+    ebird_trend_lower = mean(abd_ppy_lower),
+    ebird_trend_upper = mean(abd_ppy_upper),
     .groups = "drop"
   )
+
+# extracting common names for joining
 
 ebird_names <- data.frame(common_name = ebird_species(trend_species$species,
                                                       type = "common"),
                           code = ebird_species(trend_species$species,
                                                type = "code"))
+
+# adding common names to ebird trend estimates
+
+sb_county_trends_mean <- left_join(sb_county_trends_mean, ebird_names,
+                                   by = join_by(species_code == code))
+
+# joining cheadle center trend and ebird trend data
+
+comparison <- right_join(limAAT, sb_county_trends_mean,
+                         by = join_by(species == common_name)) |> 
+  mutate(
+    trend_difference = PTM_Average_Annual_Trend - ebird_trend,
+    upper_difference = AAT_UpperCI - ebird_trend_upper,
+    lower_difference = AAT_LowerCI - ebird_trend_lower
+  )
+
+comparison <- comparison |> mutate(
+  difference_region = case_when(
+    upper_difference < 0 & lower_difference < 0 ~ "decrease",
+    upper_difference > 0 & lower_difference < 0 ~ "overlap",
+    upper_difference > 0 & lower_difference > 0 ~ "increase"
+  )
+) |> arrange(-desc(trend_difference))
+
+# plotting both trends
+
+ggplot(comparison) +
+  geom_point(aes(x = fct_reorder(species, -trend_difference), y = PTM_Average_Annual_Trend),
+             size = 3, color = "gold1", alpha = 0.5) + 
+  geom_segment(aes(x = fct_reorder(species, -trend_difference),
+                   xend = fct_reorder(species, -trend_difference),
+                   y = AAT_LowerCI, yend = AAT_UpperCI),
+               linewidth = 1.5, color = "gold1", alpha = 0.5) + 
+  geom_point(aes(x = fct_reorder(species, -trend_difference), y = ebird_trend),
+             size = 3, color = "royalblue4", alpha = 0.5) + 
+  geom_segment(aes(x = fct_reorder(species, -trend_difference),
+                   xend = fct_reorder(species, -trend_difference),
+                   y = ebird_trend_lower, yend = ebird_trend_upper),
+               linewidth = 1.5, color = "royalblue4", alpha = 0.5) + 
+  geom_hline(yintercept = 0,
+             linetype = "dotted") + 
+  coord_flip() + 
+  labs(title = "Comparison of Cheadle Center and eBird Abundance Trends",
+       x = "Trend Estimate",
+       y = "Species") + 
+  theme_classic()
+
+# plotting trend difference
+
+ggplot(comparison,
+       aes(x = fct_reorder(species, -trend_difference), y = trend_difference,
+           color = difference_region)) + 
+  geom_point(size = 3) + 
+  geom_segment(aes(x = species, xend = species,
+                   y = lower_difference, yend = upper_difference),
+               linewidth = 1.5) + 
+  coord_flip() + 
+  geom_hline(yintercept = 0,
+             linetype = "dotted") + 
+  labs(title = "Difference Between Cheadle Center and eBird Abundance Trends",
+       x = "Difference",
+       y = "Species") + 
+  scale_color_manual(values = colors) + 
+  theme_classic() + 
+  theme(legend.position = "none")
 
 ```
 
