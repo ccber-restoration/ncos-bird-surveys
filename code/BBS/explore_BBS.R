@@ -50,6 +50,7 @@ table_2025 <- ncos_bbs_through_current_year |>
   # trim down columns
   select(family_common:`2025`)
 
+# format as gt table
 table_bbs_2025 <- gt(table_2025, groupname_col = "family_common") |> 
   tab_style(
     style = cell_text(weight = "bold"),
@@ -64,4 +65,28 @@ table_bbs_2025
 
 # save to Word doc
 gtsave(table_bbs_2025, "outputs_for_annual_monitoring_reports/year_8/Table_A3.2_BBS_only.docx")
+
+# alphabetical version ----
+table_2025_alphabetical <- ncos_bbs_through_current_year |> 
+  group_by(year, Common_Name) |> 
+  summarize(n_observations = n()) |> 
+  pivot_wider(id_cols = Common_Name, names_from = year, values_from = n_observations) |> 
+  left_join(ebird_taxonomy, by = join_by(Common_Name == common_name)) |> 
+  # sort taxonomically
+  arrange(Common_Name) |> 
+  # trim down columns
+  select(Common_Name:`2025`)
+
+# format as gt table
+table_bbs_2025_alphabetical <- gt(table_2025_alphabetical) |> 
+  sub_missing(missing_text = "") |> 
+  cols_label(
+    Common_Name = "Species common name"
+  )
+
+table_bbs_2025_alphabetical
+
+# save to Word doc
+gtsave(table_bbs_2025_alphabetical, "outputs_for_annual_monitoring_reports/year_8/Table_A3.2_BBS_only_alpha_for_checking.docx")
+
 
